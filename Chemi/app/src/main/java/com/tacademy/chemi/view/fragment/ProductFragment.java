@@ -65,10 +65,10 @@ public class ProductFragment extends Fragment {
 
         mChemicalFragments = new ArrayList<>();
         mChemicalFragmentTitles = new ArrayList<>();
-        addChemicalFragment(new ChemicalListFragment(), "성분");
-        addChemicalFragment(new ChemicalListFragment(), "리뷰");
-        addChemicalFragment(new ChemicalListFragment(), "공유");
-        addChemicalFragment(new ChemicalListFragment(), "추천");
+        addChemicalFragment(new CompositionListFragment(), "성분");
+        addChemicalFragment(new ReviewListFragment(), "리뷰");
+        addChemicalFragment(new ReviewListFragment(), "공유");
+        addChemicalFragment(new ReviewListFragment(), "추천");
     }
 
     @Nullable

@@ -27,7 +27,7 @@ public class ProductStorage {
 
         for (int i = 0; i < 100; i++) {
             Product product = new Product();
-            product.setTitle("title #" + i);
+            product.setTitle("product title #" + i);
             mProducts.add(product);
         }
     }
