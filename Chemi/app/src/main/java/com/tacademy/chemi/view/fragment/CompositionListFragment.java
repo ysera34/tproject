@@ -3,6 +3,7 @@ package com.tacademy.chemi.view.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -21,6 +22,8 @@ import java.util.List;
  * Created by yoon on 2016. 10. 19..
  */
 public class CompositionListFragment extends Fragment {
+
+    private static final String COMPOSITION_DETAILS = "CompositionDetails";
 
     private RecyclerView mCompositionRecyclerView;
     private CompositionAdapter mCompositionAdapter;
@@ -80,6 +83,11 @@ public class CompositionListFragment extends Fragment {
         @Override
         public void onClick(View v) {
             Toast.makeText(getActivity(), mComposition.getTitle(), Toast.LENGTH_SHORT).show();
+            FragmentManager manager = getFragmentManager();
+//            CompositionDialogFragment dialogFragment = new CompositionDialogFragment();
+            CompositionDialogFragment dialogFragment =
+                    CompositionDialogFragment.newInstance(mComposition.getId());
+            dialogFragment.show(manager, COMPOSITION_DETAILS);
         }
     }
 
