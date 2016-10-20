@@ -65,6 +65,7 @@ public class ProductFragment extends Fragment {
 
         mChemicalFragments = new ArrayList<>();
         mChemicalFragmentTitles = new ArrayList<>();
+
         addChemicalFragment(new CompositionListFragment(), "성분");
         addChemicalFragment(new ReviewListFragment(), "리뷰");
         addChemicalFragment(new ReviewListFragment(), "공유");
@@ -76,12 +77,14 @@ public class ProductFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater,
                              @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
 //        return super.onCreateView(inflater, container, savedInstanceState);
+
         View view = inflater.inflate(R.layout.fragment_product, container, false);
 
         mTitleTextView = (TextView) view.findViewById(R.id.product_title);
         mTitleTextView.setText(mProduct.getTitle());
 
         mViewPager = (ViewPager) view.findViewById(R.id.chemical_components_viewpager);
+        mViewPager.setOffscreenPageLimit(3);
         FragmentManager fm = getChildFragmentManager();
         mViewPager.setAdapter(new FragmentPagerAdapter(fm) {
 
@@ -116,6 +119,11 @@ public class ProductFragment extends Fragment {
 //        setupTabIcons();
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
     private void addChemicalFragment(Fragment fragment, String title) {

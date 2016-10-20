@@ -41,6 +41,12 @@ public class CompositionListFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateUI();
+    }
+
     private void updateUI() {
         CompositionStorage compositionStorage = CompositionStorage.get(getActivity());
         List<Composition> compositions = compositionStorage.getCompositions();
