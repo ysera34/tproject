@@ -18,6 +18,7 @@
             android:id="@+id/list_item_product_image"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:transitionName="transition_product_image"
             android:layout_gravity="center"
             android:src="@mipmap/ic_launcher" />
 

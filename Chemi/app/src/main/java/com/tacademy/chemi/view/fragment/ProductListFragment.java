@@ -104,5 +104,6 @@ public class ProductListFragment extends Fragment {
         public int getItemCount() {
             return mProducts.size();
         }
+
     }
 }

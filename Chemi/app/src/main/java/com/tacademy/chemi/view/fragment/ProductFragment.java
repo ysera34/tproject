@@ -1,5 +1,6 @@
 package com.tacademy.chemi.view.fragment;
 
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
@@ -14,9 +15,11 @@ import android.support.v4.view.ViewPager;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ImageSpan;
+import android.transition.TransitionInflater;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.tacademy.chemi.R;
@@ -33,9 +36,12 @@ import java.util.UUID;
 public class ProductFragment extends Fragment {
 
     private static final String ARG_PRODUCT_ID = "product_id";
+    private static final String ARG_TRANSITION_NAME = "transition_name";
+    private static final String ARG_IMAGE_REF_ID = "ARG_IMAGE_REF_ID";
 
     private Product mProduct;
     private TextView mTitleTextView;
+    private ImageView mProductImageView;
 
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
@@ -51,11 +57,18 @@ public class ProductFragment extends Fragment {
     };
 
 
-    public static ProductFragment newInstance(UUID productId) {
+    public static ProductFragment newInstance(UUID productId, Context context,
+                                              String transitionName, int imageRefId) {
         Bundle args = new Bundle();
         args.putSerializable(ARG_PRODUCT_ID, productId);
 
+        args.putString(ARG_TRANSITION_NAME, transitionName);
+        args.putInt(ARG_IMAGE_REF_ID, imageRefId);
+
         ProductFragment fragment = new ProductFragment();
+        fragment.setSharedElementEnterTransition(TransitionInflater.from(context)
+                .inflateTransition(R.transition.change_image_transform));
+
         fragment.setArguments(args);
         return fragment;
     }
@@ -85,6 +98,10 @@ public class ProductFragment extends Fragment {
 
         mTitleTextView = (TextView) view.findViewById(R.id.product_title);
         mTitleTextView.setText(mProduct.getTitle());
+
+        mProductImageView = (ImageView) view.findViewById(R.id.list_item_product_image);
+        mProductImageView.setTransitionName(getArguments().getString(ARG_TRANSITION_NAME));
+        mProductImageView.setImageResource(getArguments().getInt(ARG_IMAGE_REF_ID));
 
         mViewPager = (ViewPager) view.findViewById(R.id.chemical_components_viewpager);
         mViewPager.setOffscreenPageLimit(3);

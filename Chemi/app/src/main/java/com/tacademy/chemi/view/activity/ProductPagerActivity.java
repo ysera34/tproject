@@ -51,7 +51,8 @@ public class ProductPagerActivity extends AppBaseActivity {
             @Override
             public Fragment getItem(int position) {
                 Product product = mProducts.get(position);
-                return ProductFragment.newInstance(product.getId());
+                return ProductFragment.newInstance(product.getId(), getApplicationContext(),
+                        "transition_product_image", R.mipmap.ic_launcher);
             }
 
             @Override
