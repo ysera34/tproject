@@ -1,5 +1,6 @@
 package com.tacademy.chemilayout.view.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 import com.tacademy.chemilayout.R;
 import com.tacademy.chemilayout.model.Product;
 import com.tacademy.chemilayout.model.ProductStorage;
+import com.tacademy.chemilayout.view.activity.ProductActivity;
 
 import java.util.List;
 
@@ -40,12 +42,22 @@ public class ProductListFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateUI();
+    }
+
     private void updateUI() {
         ProductStorage productStorage = ProductStorage.get(getActivity());
         List<Product> products = productStorage.getProducts();
 
-        mProductAdapter = new ProductAdapter(products);
-        mProductRecyclerView.setAdapter(mProductAdapter);
+        if (mProductAdapter == null) {
+            mProductAdapter = new ProductAdapter(products);
+            mProductRecyclerView.setAdapter(mProductAdapter);
+        } else {
+            mProductAdapter.notifyDataSetChanged();
+        }
 
     }
 
@@ -71,6 +83,10 @@ public class ProductListFragment extends Fragment {
         public void onClick(View v) {
             Toast.makeText(getActivity(),
                     mProduct.getName() + " selected", Toast.LENGTH_SHORT).show();
+
+//            Intent intent = new Intent(getActivity(), ProductActivity.class);
+            Intent intent = ProductActivity.newIntent(getActivity(), mProduct.getId());
+            startActivity(intent);
         }
     }
 

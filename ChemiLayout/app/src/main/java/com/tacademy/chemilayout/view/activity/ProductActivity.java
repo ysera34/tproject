@@ -1,42 +1,95 @@
 package com.tacademy.chemilayout.view.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
+import android.view.View;
 
 import com.tacademy.chemilayout.R;
+import com.tacademy.chemilayout.model.Product;
+import com.tacademy.chemilayout.model.ProductStorage;
 import com.tacademy.chemilayout.view.fragment.ProductFragment;
 
-public class ProductActivity extends ProductFragmentActivity {
+import java.util.UUID;
+
+public class ProductActivity extends ProductFragmentActivity
+        implements View.OnClickListener {
+
+    private static final String EXTRA_PRODUCT_ID =
+            "com.tacademy.chemi.product_id";
 
     private CollapsingToolbarLayout collapsingToolbarLayout;
+    private FloatingActionButton mFloatingActionButton;
+
+    private Product mProduct;
+
+    public static Intent newIntent(Context packageContext, UUID productId) {
+        Intent intent = new Intent(packageContext, ProductActivity.class);
+        intent.putExtra(EXTRA_PRODUCT_ID, productId);
+        return intent;
+    }
 
     @Override
     protected Fragment createFragment() {
-        return new ProductFragment();
+//        return new ProductFragment();
+        UUID productId = (UUID) getIntent()
+                .getSerializableExtra(EXTRA_PRODUCT_ID);
+        return ProductFragment.newInstance(productId);
     }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        UUID productId = (UUID) getIntent()
+                .getSerializableExtra(EXTRA_PRODUCT_ID);
+        mProduct = ProductStorage.get(getApplicationContext()).getProduct(productId);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        collapsingToolbarLayout.setTitle("hello");
+        collapsingToolbarLayout.setTitle(mProduct.getName());
+
+        mFloatingActionButton = (FloatingActionButton) findViewById(R.id.product_detail_fab);
+        mFloatingActionButton.setImageResource(R.drawable.ic_favorite_border_white_24dp);
+        mFloatingActionButton.setOnClickListener(this);
+
 
     //        dynamicToolbarColor();
     //        toolbarTextAppernce();
 
+    }
+
+    private boolean favoriteProduct = false;
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.product_detail_fab:
+                if (!favoriteProduct) {
+                    Snackbar.make(v, "즐겨찾기에 추가되었습니다.", Snackbar.LENGTH_SHORT).show();
+                    favoriteProduct = true;
+                    mFloatingActionButton.setImageResource(R.drawable.ic_favorite_white_24dp);
+                } else {
+                    Snackbar.make(v, "즐겨찾기에서 해제되었습니다.", Snackbar.LENGTH_SHORT).show();
+                    favoriteProduct = false;
+                    mFloatingActionButton.setImageResource(R.drawable.ic_favorite_border_white_24dp);
+                }
+                break;
+        }
     }
 
     @Override
