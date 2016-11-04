@@ -15,7 +15,13 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".view.activity.ProductActivity" />
+        <activity android:name=".view.activity.ProductActivity"
+            android:parentActivityName="com.tacademy.chemilayout.view.activity.ProductListActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.tacademy.chemilayout.view.activity.ProductListActivity"/>
+        </activity>
+        <activity android:name=".view.activity.ProductPagerActivity" />
     </application>
 
 </manifest>

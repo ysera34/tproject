@@ -21,14 +21,13 @@ public abstract class ProductFragmentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_product);
 
         FragmentManager fragmentManager = getSupportFragmentManager();
-        Fragment fragment = fragmentManager.findFragmentById(R.id.fragment_container);
+        Fragment fragment = fragmentManager.findFragmentById(R.id.fragment_product_container);
 
         if (fragment == null) {
             fragment = createFragment();
             fragmentManager.beginTransaction()
-                    .add(R.id.fragment_container, fragment)
+                    .add(R.id.fragment_product_container, fragment)
                     .commit();
         }
     }
 }
-

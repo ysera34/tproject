@@ -10,11 +10,14 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.graphics.Palette;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.tacademy.chemilayout.R;
 import com.tacademy.chemilayout.model.Product;
@@ -23,7 +26,7 @@ import com.tacademy.chemilayout.view.fragment.ProductFragment;
 
 import java.util.UUID;
 
-public class ProductActivity extends ProductFragmentActivity
+public class ProductActivity extends AppCompatActivity
         implements View.OnClickListener {
 
     private static final String EXTRA_PRODUCT_ID =
@@ -31,6 +34,7 @@ public class ProductActivity extends ProductFragmentActivity
 
     private CollapsingToolbarLayout collapsingToolbarLayout;
     private FloatingActionButton mFloatingActionButton;
+    private ImageView mProductImageView;
 
     private Product mProduct;
 
@@ -40,7 +44,6 @@ public class ProductActivity extends ProductFragmentActivity
         return intent;
     }
 
-    @Override
     protected Fragment createFragment() {
 //        return new ProductFragment();
         UUID productId = (UUID) getIntent()
@@ -51,6 +54,17 @@ public class ProductActivity extends ProductFragmentActivity
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_product);
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        Fragment fragment = fragmentManager.findFragmentById(R.id.fragment_product_container);
+
+        if (fragment == null) {
+            fragment = createFragment();
+            fragmentManager.beginTransaction()
+                    .add(R.id.fragment_product_container, fragment)
+                    .commit();
+        }
 
         UUID productId = (UUID) getIntent()
                 .getSerializableExtra(EXTRA_PRODUCT_ID);
@@ -67,6 +81,8 @@ public class ProductActivity extends ProductFragmentActivity
         mFloatingActionButton.setImageResource(R.drawable.ic_favorite_border_white_24dp);
         mFloatingActionButton.setOnClickListener(this);
 
+        mProductImageView = (ImageView) findViewById(R.id.toolbar_product_image);
+        mProductImageView.setImageResource(mProduct.getImageResId());
 
     //        dynamicToolbarColor();
     //        toolbarTextAppernce();
@@ -101,7 +117,7 @@ public class ProductActivity extends ProductFragmentActivity
 
     private void dynamicToolbarColor() {
 
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.sample);
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.sample01);
         Palette.from(bitmap).generate(new Palette.PaletteAsyncListener() {
 
             @Override

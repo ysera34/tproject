@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -65,6 +66,7 @@ public class ProductListFragment extends Fragment {
             implements View.OnClickListener {
 
         private TextView mTitleTextView;
+        private ImageView mProductImageView;
         private Product mProduct;
 
         public ProductHolder(View itemView) {
@@ -72,11 +74,13 @@ public class ProductListFragment extends Fragment {
             itemView.setOnClickListener(this);
 
             mTitleTextView = (TextView) itemView.findViewById(R.id.list_item_product_name);
+            mProductImageView = (ImageView) itemView.findViewById(R.id.list_item_product_image);
         }
 
         public void bindProduct(Product product) {
             mProduct = product;
             mTitleTextView.setText(mProduct.getName());
+            mProductImageView.setImageResource(mProduct.getImageResId());
         }
 
         @Override
@@ -86,6 +90,7 @@ public class ProductListFragment extends Fragment {
 
 //            Intent intent = new Intent(getActivity(), ProductActivity.class);
             Intent intent = ProductActivity.newIntent(getActivity(), mProduct.getId());
+//            Intent intent = ProductPagerActivity.newIntent(getActivity(), mProduct.getId());
             startActivity(intent);
         }
     }

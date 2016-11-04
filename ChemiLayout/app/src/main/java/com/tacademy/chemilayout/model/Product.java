@@ -17,6 +17,7 @@ public class Product {
     private String mUse;
     private ArrayList<Integer> mChemicals;
     private String imagePath;
+    private int imageResId;
 
     public Product() {
         mId = UUID.randomUUID();
@@ -92,5 +93,13 @@ public class Product {
 
     public void setImagePath(String imagePath) {
         this.imagePath = imagePath;
+    }
+
+    public int getImageResId() {
+        return imageResId;
+    }
+
+    public void setImageResId(int imageResId) {
+        this.imageResId = imageResId;
     }
 }
