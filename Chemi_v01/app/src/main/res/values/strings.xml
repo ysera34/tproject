@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Chemi</string>
+    <string name="product_brand_logo">브랜드로고</string>
+    <string name="product_rating_average"> / 5</string>
+    <string name="product_price">원</string>
+
+    <string name="chemical_fragment_title">성분</string>
+    <string name="review_fragment_title">리뷰</string>
 </resources>
