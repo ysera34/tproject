@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">케미</string>
+
+    <string name="action_settings">설정</string>
+    <string name="action_search">검색</string>
+    <string name="drawer_open">열림</string>
+    <string name="drawer_close">닫힘</string>
+
+    <string name="nav_item_custom_search">맞춤검색</string>
+    <string name="nav_item_contents">컨텐츠</string>
+    <string name="nav_item_favorite_storage">보관함</string>
+    <string name="nav_item_reviews">작성한 리뷰 관리</string>
+    <string name="nav_item_analyze_request">제품 분석 요청</string>
+    <string name="nav_item_notifications">공지사항</string>
+    <string name="nav_item_faq">자주 묻는 질문</string>
+    <string name="nav_item_settings">설정</string>
+    <string name="nav_item_login">로그인</string>
+    <string name="nav_item_logout">로그아웃</string>
+
+    <!-- navigation drawer item labels  -->
+    <string-array name="nav_drawer_labels">
+        <item>@string/nav_item_custom_search</item>
+        <item>@string/nav_item_contents</item>
+        <item>@string/nav_item_favorite_storage</item>
+        <item>@string/nav_item_reviews</item>
+        <item>@string/nav_item_notifications</item>
+        <item>@string/nav_item_faq</item>
+        <item>@string/nav_item_settings</item>
+        <item>@string/nav_item_login</item>
+    </string-array>
+
+    <string name="title_custom_search">맞춤검색 타이틀</string>
+    <string name="title_contents">컨텐츠 타이틀</string>
+    <string name="title_favorite_storage">보관함 타이틀</string>
+    <string name="title_reviews">작성한 리뷰 관리 타이틀</string>
+    <string name="title_notifications">공지사항 타이틀</string>
+    <string name="title_faq">자주 묻는 질문 타이틀</string>
+    <string name="title_settings">설정 타이틀</string>
+</resources>
