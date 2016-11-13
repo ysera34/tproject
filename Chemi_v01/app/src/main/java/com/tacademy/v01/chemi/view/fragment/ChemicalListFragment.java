@@ -31,7 +31,6 @@ public class ChemicalListFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mChemicals = new ArrayList<>();
-
     }
 
     @Nullable

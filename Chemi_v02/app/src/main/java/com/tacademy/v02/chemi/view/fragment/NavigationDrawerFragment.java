@@ -74,19 +74,19 @@ public class NavigationDrawerFragment extends Fragment {
         mNavigationRecyclerView.setAdapter(mNavigationDrawerAdapter);
 
 
-//        mNavigationRecyclerView.addOnItemTouchListener(
-//                new RecyclerTouchListener(getActivity(), recyclerView, new ClickListener() {
-//            @Override
-//            public void onClick(View view, int position) {
-//                drawerListener.onDrawerItemSelected(view, position);
-//                mDrawerLayout.closeDrawer(containerView);
-//            }
-//
-//            @Override
-//            public void onLongClick(View view, int position) {
-//
-//            }
-//        }));
+        mNavigationRecyclerView.addOnItemTouchListener(
+                new RecyclerTouchListener(getActivity(), mNavigationRecyclerView, new ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                drawerListener.onDrawerItemSelected(view, position);
+                mDrawerLayout.closeDrawer(mNavigationContainerView);
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));
 
         return view;
     }
@@ -189,10 +189,11 @@ public class NavigationDrawerFragment extends Fragment {
         private GestureDetector mGestureDetector;
         private ClickListener mClickListener;
 
-        public RecyclerTouchListener(Context context,
-                                     final RecyclerView recyclerView, final ClickListener clickListener) {
+        public RecyclerTouchListener(Context context, final RecyclerView recyclerView,
+                                     final ClickListener clickListener) {
             mClickListener = clickListener;
-            mGestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
+            mGestureDetector = new GestureDetector(
+                    context, new GestureDetector.SimpleOnGestureListener() {
                 @Override
                 public boolean onSingleTapUp(MotionEvent e) {
                     return true;

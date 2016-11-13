@@ -6,26 +6,32 @@
         android:title="@string/action_search"
         android:orderInCategory="100"
         android:icon="@drawable/ic_search_48dp"
-        app:showAsAction="always" />
+        app:showAsAction="always"
+        app:actionViewClass="android.support.v7.widget.SearchView"/>
 
     <item
         android:id="@+id/action_search2"
         android:title="@string/action_search"
         android:orderInCategory="100"
         android:icon="@drawable/ic_search_36dp"
-        app:showAsAction="always" />
+        app:showAsAction="always"
+        android:actionViewClass="android.support.v7.widget.SearchView"/>
 
     <item
         android:id="@+id/action_search3"
         android:title="@string/action_search"
         android:orderInCategory="100"
         android:icon="@drawable/ic_search_24dp"
-        app:showAsAction="always" />
+        app:showAsAction="always"
+        android:actionViewClass="android.support.v7.widget.SearchView"/>
+
 
     <item
         android:id="@+id/action_search4"
         android:title="@string/action_search"
         android:orderInCategory="100"
         android:icon="@drawable/ic_search_18dp"
-        app:showAsAction="always" />
+        app:showAsAction="always"
+        android:actionViewClass="android.support.v7.widget.SearchView"/>
+
 </menu>

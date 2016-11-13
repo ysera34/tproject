@@ -38,4 +38,7 @@
     <string name="title_settings">Settings</string>
     <string name="title_login">LOGIN</string>
 
+    <string name="search_hint">search here</string>
+    <string name="search_result">search result</string>
+
 </resources>

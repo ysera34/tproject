@@ -65,6 +65,4 @@ public class ProductPagerActivity extends AppBaseActivity {
             }
         }
     }
-
-
 }
