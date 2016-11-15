@@ -1,6 +1,5 @@
 package com.tacademy.v04.chemi.view.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -18,8 +17,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.tacademy.v04.chemi.R;
-import com.tacademy.v04.chemi.view.activity.content.ContentListActivity;
-import com.tacademy.v04.chemi.view.activity.product.SearchActivity;
 import com.tacademy.v04.chemi.view.fragment.navigation.ArchiveFragment;
 import com.tacademy.v04.chemi.view.fragment.navigation.ConfigureFragment;
 import com.tacademy.v04.chemi.view.fragment.navigation.FAQFragment;
@@ -89,7 +86,9 @@ public class AppNavigationActivity extends AppBaseActivity implements
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.menu_toolbar, menu);
+//        MenuItem searchItem = menu.findItem(R.id.action_search);
+//        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         return true;
     }
 
@@ -101,9 +100,9 @@ public class AppNavigationActivity extends AppBaseActivity implements
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
+        if (id == R.id.action_search) {
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -117,12 +116,6 @@ public class AppNavigationActivity extends AppBaseActivity implements
         Fragment fragment = null;
         if (id == R.id.nav_main) {
             fragment = MainFragment.newInstance();
-        } else if (id == R.id.nav_custom_search) {
-            startActivity(new Intent(AppNavigationActivity.this, SearchActivity.class));
-            mDrawerLayout.closeDrawers();
-        } else if (id == R.id.nav_content) {
-            startActivity(new Intent(AppNavigationActivity.this, ContentListActivity.class));
-            mDrawerLayout.closeDrawers();
         } else if (id == R.id.nav_archive) {
             fragment = ArchiveFragment.newInstance();
         } else if (id == R.id.nav_reviews) {
@@ -135,9 +128,15 @@ public class AppNavigationActivity extends AppBaseActivity implements
             fragment = FAQFragment.newInstance();
         } else if (id == R.id.nav_settings) {
             fragment = ConfigureFragment.newInstance();
-        } else if (id == R.id.nav_login) {
-
         }
+
+//        else if (id == R.id.nav_custom_search) {
+//            startActivity(new Intent(AppNavigationActivity.this, SearchActivity.class));
+//            mDrawerLayout.closeDrawers();
+//        } else if (id == R.id.nav_content) {
+//            startActivity(new Intent(AppNavigationActivity.this, ContentListActivity.class));
+//            mDrawerLayout.closeDrawers();
+//        }
 
         FragmentManager fm = getSupportFragmentManager();
 //        Fragment mFragment = fm.findFragmentById(R.id.fragment_container);
