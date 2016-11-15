@@ -24,28 +24,31 @@
         <item>@string/nav_item_contents</item>
         <item>@string/nav_item_archive</item>
         <item>@string/nav_item_reviews</item>
+        <item>@string/nav_item_analyze_request</item>
         <item>@string/nav_item_notifications</item>
         <item>@string/nav_item_faq</item>
         <item>@string/nav_item_settings</item>
         <item>@string/nav_item_login</item>
     </string-array>
 
+    <string name="fragment_title_main">Main</string>
     <string name="fragment_title_custom_search">Custom Search</string>
     <string name="fragment_title_contents">Contents</string>
     <string name="fragment_title_archive">Archive</string>
     <string name="fragment_title_reviews">Reviews</string>
+    <string name="fragment_title_analyze_request">Request to Analyze</string>
     <string name="fragment_title_notifications">Notifications</string>
     <string name="fragment_title_faq">FAQ</string>
     <string name="fragment_title_settings">Settings</string>
     <string name="fragment_title_login">LOGIN</string>
 
+
+
+
     <string name="search_hint">search here</string>
     <string name="search_result">search result</string>
     <string name="title_activity_main">MainActivity</string>
-
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
+    <string name="title_activity_search">SearchActivity</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

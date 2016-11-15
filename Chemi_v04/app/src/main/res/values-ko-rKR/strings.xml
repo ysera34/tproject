@@ -24,16 +24,19 @@
         <item>@string/nav_item_contents</item>
         <item>@string/nav_item_archive</item>
         <item>@string/nav_item_reviews</item>
+        <item>@string/nav_item_analyze_request</item>
         <item>@string/nav_item_notifications</item>
         <item>@string/nav_item_faq</item>
         <item>@string/nav_item_settings</item>
         <item>@string/nav_item_login</item>
     </string-array>
 
+    <string name="fragment_title_main">메인</string>
     <string name="fragment_title_custom_search">맞춤검색 타이틀</string>
     <string name="fragment_title_contents">컨텐츠 타이틀</string>
     <string name="fragment_title_archive">보관함 타이틀</string>
     <string name="fragment_title_reviews">작성한 리뷰 관리 타이틀</string>
+    <string name="fragment_title_analyze_request">제품 분석 요청 타이틀</string>
     <string name="fragment_title_notifications">공지사항 타이틀</string>
     <string name="fragment_title_faq">자주 묻는 질문 타이틀</string>
     <string name="fragment_title_settings">설정 타이틀</string>

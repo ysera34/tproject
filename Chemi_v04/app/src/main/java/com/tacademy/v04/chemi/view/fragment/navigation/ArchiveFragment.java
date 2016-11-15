@@ -17,6 +17,9 @@ import com.tacademy.v04.chemi.R;
 
 public class ArchiveFragment extends Fragment {
 
+    public ArchiveFragment() {
+    }
+
     public static ArchiveFragment newInstance() {
 
         ArchiveFragment fragment = new ArchiveFragment();
