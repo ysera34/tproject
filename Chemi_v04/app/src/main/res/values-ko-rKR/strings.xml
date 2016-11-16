@@ -41,6 +41,8 @@
     <string name="fragment_title_faq">자주 묻는 질문</string>
     <string name="fragment_title_settings">설정</string>
 
+    <string name="title_activity_product">제품 상세</string>
+
     <string name="search_hint">상품 검색</string>
     <string name="show_all_product_button_text">전체보기</string>
     <string name="product_list_total">전체 %s개</string>

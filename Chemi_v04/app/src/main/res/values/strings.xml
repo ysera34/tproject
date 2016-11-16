@@ -49,6 +49,7 @@
     <string name="search_result">search result</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_search">SearchActivity</string>
+    <string name="title_activity_product">Product Details</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -59,4 +60,5 @@
     <string name="product_list_total">total : %s</string>
     <string name="product_detail_chemical_list_name">Chemical</string>
     <string name="product_detail_review_list_name">Review</string>
+
 </resources>

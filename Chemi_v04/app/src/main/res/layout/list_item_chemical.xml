@@ -10,8 +10,8 @@
         android:id="@+id/list_item_chemical_card_view"
         android:layout_gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_margin="4dp"
+        android:layout_height="60dp"
+        android:layout_margin="5dp"
         card_view:cardCornerRadius="2dp"
         card_view:contentPadding="3dp">
 
@@ -23,11 +23,13 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:gravity="center_vertical">
                 <TextView
                     android:id="@+id/list_item_chemical_title_ko"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingBottom="4dp"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     tools:text="chemical_title"/>

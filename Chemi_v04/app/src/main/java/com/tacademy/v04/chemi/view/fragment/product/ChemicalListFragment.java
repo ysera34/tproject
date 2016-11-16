@@ -122,6 +122,7 @@ public class ChemicalListFragment extends Fragment {
             super(itemView);
             itemView.setOnClickListener(this);
 
+
             mChemicalTitleKoTextView = (TextView) itemView.findViewById(R.id.list_item_chemical_title_ko);
         }
 
@@ -132,8 +133,8 @@ public class ChemicalListFragment extends Fragment {
 
         @Override
         public void onClick(View view) {
-            Toast.makeText(getActivity(), mChemical.getNameKo(),
-                    Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), mChemical.getNameKo(), Toast.LENGTH_SHORT).show();
+            view.setBackgroundColor(getResources().getColor(R.color.chemical_card_view_clicked_color));
 
             FragmentManager manager = getFragmentManager();
             ChemicalDialogFragment dialogFragment =
