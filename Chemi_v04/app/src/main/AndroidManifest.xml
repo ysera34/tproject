@@ -14,6 +14,18 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
+        <!--<activity-->
+            <!--android:name=".view.activity.AppNavigationActivity"-->
+            <!--android:screenOrientation="portrait"-->
+            <!--android:theme="@style/AppTheme.NoActionBar"-->
+            <!--android:launchMode="singleTop">-->
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.SEARCH" />-->
+            <!--</intent-filter>-->
+            <!--<meta-data-->
+                <!--android:name="android.app.searchable"-->
+                <!--android:resource="@xml/searchable" />-->
+        <!--</activity>-->
         <activity
             android:name=".view.activity.MainActivity"
             android:screenOrientation="portrait"
@@ -27,12 +39,23 @@
         <activity
             android:name=".view.activity.product.SearchActivity"
             android:screenOrientation="portrait"
+            android:theme="@style/SearchActivityTheme.NoActionBar"
+            android:parentActivityName=".view.activity.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.activity.MainActivity"/>
+        </activity>
+        <activity
+            android:name=".view.activity.product.CustomSearchActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
             android:name=".view.activity.product.ProductListActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
+            <!--<meta-data android:name="android.app.default_searchable"-->
+                       <!--android:value=".view.activity.AppNavigationActivity"/>-->
         </activity>
         <activity
             android:name=".view.activity.product.ProductActivity"

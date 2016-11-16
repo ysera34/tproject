@@ -27,7 +27,7 @@ public class ProductStorage {
          */
         for (int i = 0; i < 100; i++) {
             Product product = new Product();
-            product.setName("product product name: " + i);
+            product.setName("product name: " + i);
             product.setImageResId(R.mipmap.ic_launcher);
             mProducts.add(product);
         }

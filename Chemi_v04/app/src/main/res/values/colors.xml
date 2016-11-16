@@ -2,7 +2,20 @@
 <resources>
     <color name="colorPrimary">#a4ca5a</color>
     <color name="colorPrimaryDark">#6c9805</color>
-    <color name="colorAccent">#e91e63</color>
+    <color name="colorAccent">#FDEA3B</color>
+    <!--<color name="colorAccent">#e91e63</color>-->
+
+    <color name="colorPrimary_searchActivity">#dedede</color>
+    <color name="colorPrimaryDark_searchActivity">#9b9b9b</color>
+    <color name="colorAccent_searchActivity">#FB8C00</color>
+    <color name="searchActivity_editText_textColorHint">#9b9b9b</color>
+    <color name="colorArrow">#9b9b9b</color>
 
     <color name="colorBorder">#c2939393</color>
+
+    <color name="tabLayout_unselected_text_color">#9E9E9E</color>
+    <color name="tabLayout_selected_text_color">#757575</color>
+
+    <color name="dark_gray">#535357</color>
+    <color name="magnesium">#B6B6B7</color>
 </resources>

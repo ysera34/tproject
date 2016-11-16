@@ -13,8 +13,30 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="SearchActivityTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary_searchActivity</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent_searchActivity</item>
+    </style>
+
+    <style name="SearchActivityTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+    <style name="SearchToolbarStyle" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <!-- Customize color of navigation drawer icon and back arrow -->
+        <item name="colorControlNormal">@color/colorArrow</item>
+    </style>
+
+    <style name="ProductDetailTabLayoutTheme" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="colorPrimary">@android:color/white</item>
+        <item name="colorAccent">@color/colorPrimary</item>
+    </style>
 
 </resources>

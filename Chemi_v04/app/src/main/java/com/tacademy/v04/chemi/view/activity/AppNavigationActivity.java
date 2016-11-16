@@ -15,8 +15,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.tacademy.v04.chemi.R;
+import com.tacademy.v04.chemi.view.activity.product.SearchActivity;
 import com.tacademy.v04.chemi.view.fragment.navigation.ArchiveFragment;
 import com.tacademy.v04.chemi.view.fragment.navigation.ConfigureFragment;
 import com.tacademy.v04.chemi.view.fragment.navigation.FAQFragment;
@@ -30,13 +33,16 @@ import com.tacademy.v04.chemi.view.fragment.navigation.ReviewLogFragment;
  */
 
 public class AppNavigationActivity extends AppBaseActivity implements
-        NavigationView.OnNavigationItemSelectedListener {
+        NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     protected Toolbar mToolbar;
     protected DrawerLayout mDrawerLayout;
     protected NavigationView mNavigationView;
     protected Handler mPendingHandler;
     protected static Fragment containerFragment;
+    protected View mNavigationHeader;
+    protected Button mNavigationCustomSearchButton;
+    protected Button mNavigationContentButton;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -63,6 +69,13 @@ public class AppNavigationActivity extends AppBaseActivity implements
         mNavigationView = (NavigationView) findViewById(R.id.nav_view);
         mNavigationView.setNavigationItemSelectedListener(this);
 
+        mNavigationHeader = mNavigationView.getHeaderView(0);
+        mNavigationCustomSearchButton = (Button) mNavigationHeader.findViewById(R.id.nav_header_custom_search_button);
+        mNavigationCustomSearchButton.setOnClickListener(this);
+
+        mNavigationContentButton = (Button) mNavigationHeader.findViewById(R.id.nav_header_content_button);
+        mNavigationContentButton.setOnClickListener(this);
+
 //        FragmentManager fm = getSupportFragmentManager();
 //        containerFragment = fm.findFragmentById(R.id.fragment_container);
 //
@@ -88,8 +101,39 @@ public class AppNavigationActivity extends AppBaseActivity implements
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_toolbar, menu);
 //        MenuItem searchItem = menu.findItem(R.id.action_search);
+        // Get the SearchView and set the searchable configuration
+//        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
 //        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+//        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+//
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                // Text has changed, apply filtering?
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                // Perform the final search
+//                return false;
+//            }
+//        });
         return true;
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.nav_header_custom_search_button :
+                Toast.makeText(getApplicationContext(), "nav_header_custom_search_button",
+                        Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.nav_header_content_button :
+                Toast.makeText(getApplicationContext(), "nav_header_content_button",
+                        Toast.LENGTH_SHORT).show();
+                break;
+        }
     }
 
     @Override
@@ -101,6 +145,7 @@ public class AppNavigationActivity extends AppBaseActivity implements
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_search) {
+            startActivity(SearchActivity.newIntent(getApplicationContext()));
             return true;
         }
 
@@ -131,7 +176,7 @@ public class AppNavigationActivity extends AppBaseActivity implements
         }
 
 //        else if (id == R.id.nav_custom_search) {
-//            startActivity(new Intent(AppNavigationActivity.this, SearchActivity.class));
+//            startActivity(new Intent(AppNavigationActivity.this, CustomSearchActivity.class));
 //            mDrawerLayout.closeDrawers();
 //        } else if (id == R.id.nav_content) {
 //            startActivity(new Intent(AppNavigationActivity.this, ContentListActivity.class));
@@ -148,7 +193,6 @@ public class AppNavigationActivity extends AppBaseActivity implements
                     .replace(R.id.fragment_container, containerFragment)
                     .commit();
         }
-
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerLayout.closeDrawer(GravityCompat.START);

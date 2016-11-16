@@ -40,4 +40,10 @@
     <string name="fragment_title_notifications">공지사항 타이틀</string>
     <string name="fragment_title_faq">자주 묻는 질문 타이틀</string>
     <string name="fragment_title_settings">설정 타이틀</string>
+
+    <string name="search_hint">상품 검색</string>
+    <string name="show_all_product_button_text">전체보기</string>
+    <string name="product_list_total">전체 %s개</string>
+    <string name="product_detail_chemical_list_name">성  분</string>
+    <string name="product_detail_review_list_name">리  뷰</string>
 </resources>

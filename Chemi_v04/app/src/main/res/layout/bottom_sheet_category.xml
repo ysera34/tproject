@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/bottom_sheet_category_height"
+    app:layout_behavior="@string/bottom_sheet_behavior"
+    app:behavior_hideable="true">
+
+    <TextView
+        android:id="@+id/bottom_sheet_text"
+        android:text="bottom sheet text view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/bottom_sheet_button"
+        android:text="bottom sheet button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/bottom_sheet_text"
+        android:layout_alignParentStart="true"/>
+
+</RelativeLayout>

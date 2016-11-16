@@ -1,25 +1,18 @@
 package com.tacademy.v04.chemi.view.activity.product;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 
 import com.tacademy.v04.chemi.R;
 import com.tacademy.v04.chemi.view.activity.AppNavigationActivity;
-import com.tacademy.v04.chemi.view.fragment.product.ProductListFragment;
+import com.tacademy.v04.chemi.view.fragment.product.CustomSearchFragment;
 
 /**
  * Created by yoon on 2016. 11. 14..
  */
 
-public class ProductListActivity extends AppNavigationActivity {
-
-    public static Intent newIntent(Context packageContext) {
-        Intent intent = new Intent(packageContext, ProductListActivity.class);
-        return intent;
-    }
+public class CustomSearchActivity extends AppNavigationActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,7 +22,7 @@ public class ProductListActivity extends AppNavigationActivity {
         AppNavigationActivity.containerFragment = fm.findFragmentById(R.id.fragment_container);
 
         if (containerFragment == null) {
-            containerFragment = ProductListFragment.newInstance();
+            containerFragment = CustomSearchFragment.newInstance();
             fm.beginTransaction()
                     .add(R.id.fragment_container, containerFragment)
                     .commit();

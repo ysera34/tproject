@@ -10,7 +10,7 @@ import com.tacademy.v04.chemi.view.fragment.navigation.MainFragment;
  * Created by yoon on 2016. 11. 15..
  */
 
-public class MainActivity extends AppNavigationActivity  {
+public class MainActivity extends AppNavigationActivity {
 
 //    protected Toolbar mToolbar;
 //    protected DrawerLayout mDrawerLayout;
@@ -52,8 +52,8 @@ public class MainActivity extends AppNavigationActivity  {
                     .add(R.id.fragment_container, containerFragment)
                     .commit();
         }
-    }
 
+    }
     /*
     @Override
     public void onBackPressed() {
@@ -98,7 +98,7 @@ public class MainActivity extends AppNavigationActivity  {
         } else if (id == R.id.nav_custom_search) {
             fragment = CustomSearchFragment.newInstance();
         } else if (id == R.id.nav_content) {
-//            startActivity(new Intent(MainActivity.this, SearchActivity.class));
+//            startActivity(new Intent(MainActivity.this, CustomSearchActivity.class));
 //            mDrawerLayout.closeDrawers();
         } else if (id == R.id.nav_archive) {
             fragment = ArchiveFragment.newInstance();
