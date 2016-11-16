@@ -161,18 +161,25 @@ public class AppNavigationActivity extends AppBaseActivity implements
         Fragment fragment = null;
         if (id == R.id.nav_main) {
             fragment = MainFragment.newInstance();
+            mToolbar.setTitle(getString(R.string.fragment_title_main));
         } else if (id == R.id.nav_archive) {
             fragment = ArchiveFragment.newInstance();
+            mToolbar.setTitle(getString(R.string.fragment_title_archive));
         } else if (id == R.id.nav_reviews) {
             fragment = ReviewLogFragment.newInstance();
+            mToolbar.setTitle(getString(R.string.fragment_title_reviews));
         } else if (id == R.id.nav_item_analyze_request) {
             fragment = RequestChemicalFragment.newInstance();
+            mToolbar.setTitle(getString(R.string.fragment_title_analyze_request));
         } else if (id == R.id.nav_notifications) {
             fragment = NoticeFragment.newInstance();
+            mToolbar.setTitle(getString(R.string.fragment_title_notifications));
         } else if (id == R.id.nav_faq) {
             fragment = FAQFragment.newInstance();
+            mToolbar.setTitle(getString(R.string.fragment_title_faq));
         } else if (id == R.id.nav_settings) {
             fragment = ConfigureFragment.newInstance();
+            mToolbar.setTitle(getString(R.string.fragment_title_settings));
         }
 
 //        else if (id == R.id.nav_custom_search) {

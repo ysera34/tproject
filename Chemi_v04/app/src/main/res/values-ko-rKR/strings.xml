@@ -32,14 +32,14 @@
     </string-array>
 
     <string name="fragment_title_main">메인</string>
-    <string name="fragment_title_custom_search">맞춤검색 타이틀</string>
-    <string name="fragment_title_contents">컨텐츠 타이틀</string>
-    <string name="fragment_title_archive">보관함 타이틀</string>
-    <string name="fragment_title_reviews">작성한 리뷰 관리 타이틀</string>
-    <string name="fragment_title_analyze_request">제품 분석 요청 타이틀</string>
-    <string name="fragment_title_notifications">공지사항 타이틀</string>
-    <string name="fragment_title_faq">자주 묻는 질문 타이틀</string>
-    <string name="fragment_title_settings">설정 타이틀</string>
+    <string name="fragment_title_custom_search">맞춤검색</string>
+    <string name="fragment_title_contents">컨텐츠</string>
+    <string name="fragment_title_archive">보관함</string>
+    <string name="fragment_title_reviews">작성한 리뷰 관리</string>
+    <string name="fragment_title_analyze_request">제품 분석 요청</string>
+    <string name="fragment_title_notifications">공지사항</string>
+    <string name="fragment_title_faq">자주 묻는 질문</string>
+    <string name="fragment_title_settings">설정</string>
 
     <string name="search_hint">상품 검색</string>
     <string name="show_all_product_button_text">전체보기</string>
