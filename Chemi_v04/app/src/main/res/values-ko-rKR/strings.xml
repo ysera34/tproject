@@ -46,6 +46,19 @@
     <string name="search_hint">상품 검색</string>
     <string name="show_all_product_button_text">전체보기</string>
     <string name="product_list_total">전체 %s개</string>
+    <string name="product_list_total_prefix">전체 </string>
+    <string name="product_list_total_suffix">개</string>
     <string name="product_detail_chemical_list_name">성  분</string>
     <string name="product_detail_review_list_name">리  뷰</string>
+
+    <string name="product_list_sort_review_total">리뷰 많은 순</string>
+    <string name="product_list_sort_review_rating_avg">평점 순</string>
+    <string name="product_list_sort_latest_release">최신 출시 순</string>
+
+    <string-array name="product_list_sort_way">
+        <item>@string/product_list_sort_review_total</item>
+        <item>@string/product_list_sort_review_rating_avg</item>
+        <item>@string/product_list_sort_latest_release</item>
+    </string-array>
+
 </resources>

@@ -19,5 +19,6 @@
     <dimen name="navigation_drawer_width">240dp</dimen>
 
     <dimen name="bottom_sheet_category_height">500dp</dimen>
+    <dimen name="bottom_sheet_product_sort_height">127dp</dimen>
 
 </resources>
