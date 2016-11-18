@@ -19,6 +19,7 @@ import com.tacademy.v04.chemi.R;
 import com.tacademy.v04.chemi.model.Product;
 import com.tacademy.v04.chemi.model.ProductStorage;
 import com.tacademy.v04.chemi.view.activity.product.ProductActivity;
+import com.tacademy.v04.chemi.view.activity.product.ProductListActivity;
 
 import java.util.List;
 
@@ -28,9 +29,12 @@ import java.util.List;
 
 public class ProductListFragment extends Fragment implements View.OnClickListener{
 
+    private static final String ARG_CATEGORY_ID = "category_id";
+
     private RecyclerView mProductRecyclerView;
     private ProductAdapter mProductAdapter;
     private List<Product> mProducts;
+    private int mCategoryId;
 
     private TextView mProductTotalTextView;
     private View mProductSortView;
@@ -48,11 +52,27 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
         return fragment;
     }
 
+    public static ProductListFragment newInstance(int categoryId) {
+        Bundle args = new Bundle();
+        args.putSerializable(ARG_CATEGORY_ID, categoryId);
+
+        ProductListFragment fragment = new ProductListFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ProductStorage productStorage = ProductStorage.get(getActivity());
-        mProducts = productStorage.getProducts();
+        mCategoryId = getArguments().getInt(ARG_CATEGORY_ID, ProductListActivity.CATEGORY_DEFAULT_VALUE);
+
+        if (mCategoryId != ProductListActivity.CATEGORY_DEFAULT_VALUE) {
+            mProducts = productStorage.getCategoryProducts(mCategoryId);
+        } else {
+            mProducts = productStorage.getProducts();
+        }
+
     }
 
     @Nullable

@@ -12,6 +12,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -31,7 +32,11 @@ public class SearchActivity extends AppBaseActivity
 
     private Toolbar mToolbar;
     private EditText mSearchProductEditText;
+//    private CoordinatorLayout mSearchCoordinatorLayout;
     private BottomSheetDialog mCategoryBottomSheetDialog;
+    private View mBottomSheetView;
+    private Button[] mCategorySectionButtonArray;
+    private Button mCategorySectionButton;
 
     public static Intent newIntent(Context packageContext) {
         Intent intent = new Intent(packageContext, SearchActivity.class);
@@ -69,11 +74,13 @@ public class SearchActivity extends AppBaseActivity
         (findViewById(R.id.category_fab)).setOnClickListener(this);
 
         // bottom_sheet
-        mCategoryBottomSheetDialog = new BottomSheetDialog(SearchActivity.this);
-        View mBottomSheetView = getLayoutInflater()
-                .inflate(R.layout.bottom_sheet_category, null);
-        mCategoryBottomSheetDialog.setContentView(mBottomSheetView);
-        (mBottomSheetView.findViewById(R.id.bottom_sheet_button)).setOnClickListener(this);
+//        mCategoryBottomSheetDialog = new BottomSheetDialog(SearchActivity.this);
+//        mBottomSheetView = getLayoutInflater()
+//                .inflate(R.layout.bottom_sheet_category, null);
+//        mCategoryBottomSheetDialog.setContentView(mBottomSheetView);
+//        (mBottomSheetView.findViewById(R.id.bottom_sheet_button)).setOnClickListener(this);
+        mCategorySectionButtonArray = new Button[21];
+
 
         // search fragment
         FragmentManager fm = getSupportFragmentManager();
@@ -91,11 +98,28 @@ public class SearchActivity extends AppBaseActivity
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.category_fab :
+                mCategoryBottomSheetDialog = new BottomSheetDialog(SearchActivity.this);
+                View mBottomSheetView = getLayoutInflater()
+                        .inflate(R.layout.bottom_sheet_category, null);
+                mCategoryBottomSheetDialog.setContentView(mBottomSheetView);
+                (mBottomSheetView.findViewById(R.id.bottom_sheet_button)).setOnClickListener(this);
+                (mBottomSheetView.findViewById(R.id.bottom_sheet_category_section11)).setOnClickListener(this);
+                (mBottomSheetView.findViewById(R.id.bottom_sheet_category_section12)).setOnClickListener(this);
                 mCategoryBottomSheetDialog.show();
                 break;
             case R.id.bottom_sheet_button :
                 Toast.makeText(SearchActivity.this, "bottom sheet button test",
                         Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.bottom_sheet_category_section11 :
+                Toast.makeText(SearchActivity.this, "bottom_sheet_category_section11",
+                        Toast.LENGTH_SHORT).show();
+                startActivity(ProductListActivity.newIntent(getApplicationContext(), 11));
+                break;
+            case R.id.bottom_sheet_category_section12 :
+                Toast.makeText(SearchActivity.this, "bottom_sheet_category_section12",
+                        Toast.LENGTH_SHORT).show();
+                startActivity(ProductListActivity.newIntent(getApplicationContext(), 12));
                 break;
         }
     }

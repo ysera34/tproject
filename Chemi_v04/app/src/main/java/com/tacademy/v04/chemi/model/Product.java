@@ -12,6 +12,7 @@ public class Product {
 
     private UUID mId;
     private int mProductId;
+    private int mCategoryId;
     private String mMaker;
     private String mBrand;
     private String mName;
@@ -43,6 +44,14 @@ public class Product {
 
     public void setProductId(int productId) {
         mProductId = productId;
+    }
+
+    public int getCategoryId() {
+        return mCategoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        mCategoryId = categoryId;
     }
 
     public String getMaker() {

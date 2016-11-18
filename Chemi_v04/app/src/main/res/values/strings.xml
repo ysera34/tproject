@@ -67,6 +67,16 @@
     <string name="product_list_total_default">0</string>
     <string name="product_popular_list_name">Popular</string>
     <string name="product_latest_list_name">Latest</string>
+    <string name="nav_header_user_symptom">%1$s / %2$s / %3$s</string>
+    <string name="user_nickname">user_nickname</string>
+    <string name="category_title">category title</string>
+    <string name="category_section1">Laundry</string>
+    <string name="category_section2">Kitchen</string>
+    <string name="category_section3">Living</string>
+    <string name="category_section4">Air Freshener</string>
+    <string name="category_section5">Baby Products</string>
+    <string name="category_section6">Female Products</string>
+    <string name="category_section7">et cetera</string>
 
     <string-array name="product_list_sort_way">
         <item>@string/product_list_sort_review_total</item>

@@ -8,6 +8,7 @@ import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -16,6 +17,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tacademy.v04.chemi.R;
@@ -25,7 +28,6 @@ import com.tacademy.v04.chemi.view.activity.product.SearchActivity;
 import com.tacademy.v04.chemi.view.fragment.navigation.ArchiveFragment;
 import com.tacademy.v04.chemi.view.fragment.navigation.ConfigureFragment;
 import com.tacademy.v04.chemi.view.fragment.navigation.FAQFragment;
-import com.tacademy.v04.chemi.view.fragment.navigation.MainFragment;
 import com.tacademy.v04.chemi.view.fragment.navigation.NoticeFragment;
 import com.tacademy.v04.chemi.view.fragment.navigation.RequestChemicalFragment;
 import com.tacademy.v04.chemi.view.fragment.navigation.ReviewLogFragment;
@@ -45,6 +47,9 @@ public class AppNavigationActivity extends AppBaseActivity implements
     protected Handler mPendingHandler;
     protected Fragment containerFragment;
     protected View mNavigationHeader;
+    protected ImageView mNavigationHeaderUserImageView;
+    protected TextView mNavigationHeaderNicknameTextView;
+    protected TextView mNavigationHeaderSymptomTextView;
     protected Button mNavigationCustomSearchButton;
     protected Button mNavigationContentButton;
 
@@ -71,9 +76,25 @@ public class AppNavigationActivity extends AppBaseActivity implements
         toggle.syncState();
 
         mNavigationView = (NavigationView) findViewById(R.id.nav_view);
+        mNavigationView.setItemBackground(
+                ContextCompat.getDrawable(AppNavigationActivity.this, R.color.colorWhiteBackground));
         mNavigationView.setNavigationItemSelectedListener(this);
 
         mNavigationHeader = mNavigationView.getHeaderView(0);
+
+        mNavigationHeaderUserImageView = (ImageView)
+                mNavigationHeader.findViewById(R.id.nav_header_user_image_view);
+//        mNavigationHeaderUserImageView.setImageResource(R.drawable.ic_arrow_upward_24dp);
+
+        mNavigationHeaderNicknameTextView = (TextView)
+                mNavigationHeader.findViewById(R.id.nav_header_nickname_text_view);
+        mNavigationHeaderNicknameTextView.setText("Yujeong");
+        mNavigationHeaderSymptomTextView = (TextView)
+                mNavigationHeader.findViewById(R.id.nav_header_user_symptom_text_view);
+        String mHeaderSymptomText = getString(R.string.nav_header_user_symptom,
+                "여성", "40대", "자녀있음");
+        mNavigationHeaderSymptomTextView.setText(mHeaderSymptomText);
+
         mNavigationCustomSearchButton = (Button)
                 mNavigationHeader.findViewById(R.id.nav_header_custom_search_button);
         mNavigationCustomSearchButton.setOnClickListener(this);
@@ -150,10 +171,11 @@ public class AppNavigationActivity extends AppBaseActivity implements
         int id = item.getItemId();
 
         Fragment fragment = null;
-        if (id == R.id.nav_main) {
-            fragment = MainFragment.newInstance();
-            mToolbar.setTitle(R.string.fragment_title_main);
-        } else if (id == R.id.nav_archive) {
+//        if (id == R.id.nav_main) {
+//            fragment = MainFragment.newInstance();
+//            mToolbar.setTitle(R.string.fragment_title_main);
+//        } else
+        if (id == R.id.nav_archive) {
             fragment = ArchiveFragment.newInstance();
             mToolbar.setTitle(R.string.fragment_title_archive);
         } else if (id == R.id.nav_reviews) {

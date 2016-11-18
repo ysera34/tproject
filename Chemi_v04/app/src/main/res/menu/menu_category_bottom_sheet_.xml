@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_archive"
+            android:icon="@drawable/ic_archive_white_48dp"
+            android:title="@string/nav_item_archive" />
+        <item
+            android:id="@+id/nav_reviews"
+            android:icon="@drawable/ic_archive_white_48dp"
+            android:title="@string/nav_item_reviews" />
+        <item
+            android:id="@+id/nav_item_analyze_request"
+            android:icon="@drawable/ic_archive_white_48dp"
+            android:title="@string/nav_item_analyze_request" />
+    </group>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_notifications"
+            android:icon="@drawable/ic_archive_white_48dp"
+            android:title="@string/nav_item_notifications" />
+        <item
+            android:id="@+id/nav_faq"
+            android:icon="@drawable/ic_archive_white_48dp"
+            android:title="@string/nav_item_faq" />
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_archive_white_48dp"
+            android:title="@string/nav_item_settings" />
+    </group>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_archive1"
+            android:icon="@drawable/ic_archive_white_48dp"
+            android:title="@string/nav_item_archive" />
+        <item
+            android:id="@+id/nav_reviews1"
+            android:icon="@drawable/ic_archive_white_48dp"
+            android:title="@string/nav_item_reviews" />
+        <item
+            android:id="@+id/nav_item_analyze_request1"
+            android:icon="@drawable/ic_archive_white_48dp"
+            android:title="@string/nav_item_analyze_request" />
+    </group>
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_notifications1"
+            android:icon="@drawable/ic_archive_white_48dp"
+            android:title="@string/nav_item_notifications" />
+        <item
+            android:id="@+id/nav_faq1"
+            android:icon="@drawable/ic_archive_white_48dp"
+            android:title="@string/nav_item_faq" />
+        <item
+            android:id="@+id/nav_settings1"
+            android:icon="@drawable/ic_archive_white_48dp"
+            android:title="@string/nav_item_settings" />
+    </group>
+
+</menu>

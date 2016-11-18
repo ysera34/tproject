@@ -62,6 +62,16 @@
     <string name="product_list_total_default">0</string>
     <string name="product_popular_list_name">인기 검색어</string>
     <string name="product_latest_list_name">최근 검색어</string>
+    <string name="nav_header_user_symptom">%1$s / %2$s / %3$s</string>
+    <string name="user_nickname">사용자 닉네임</string>
+    <string name="category_title">카테고리</string>
+    <string name="category_section1">세탁</string>
+    <string name="category_section2">주방</string>
+    <string name="category_section3">욕실</string>
+    <string name="category_section4">방향 / 청정</string>
+    <string name="category_section5">유아 / 아동</string>
+    <string name="category_section6">여성</string>
+    <string name="category_section7">기타</string>
 
     <string-array name="product_list_sort_way">
         <item>@string/product_list_sort_review_total</item>

@@ -31,7 +31,7 @@
                     android:layout_height="wrap_content"
                     android:paddingBottom="4dp"
                     android:textSize="20sp"
-                    android:textStyle="bold"
+                    android:textStyle="normal"
                     tools:text="chemical_title"/>
 
                 <TextView

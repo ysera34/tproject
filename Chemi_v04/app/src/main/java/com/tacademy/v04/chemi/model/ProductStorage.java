@@ -29,6 +29,7 @@ public class ProductStorage {
             Product product = new Product();
             product.setName("product name: " + i);
             product.setImageResId(R.mipmap.ic_launcher);
+            product.setCategoryId((i%2 == 0) ? 11 : 12 );
             mProducts.add(product);
         }
     }
@@ -51,5 +52,17 @@ public class ProductStorage {
             }
         }
         return null;
+    }
+
+    public ArrayList<Product> getCategoryProducts(int categoryId) {
+
+        ArrayList<Product> products = new ArrayList<>();
+
+        for (Product product : mProducts) {
+            if (product.getCategoryId()==categoryId) {
+                products.add(product);
+            }
+        }
+        return products;
     }
 }
