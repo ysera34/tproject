@@ -18,7 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tacademy.v04.chemi.R;
-import com.tacademy.v04.chemi.common.OnDataPass;
+import com.tacademy.v04.chemi.common.OnPassDataListener;
 import com.tacademy.v04.chemi.model.Search;
 import com.tacademy.v04.chemi.model.SearchStorage;
 
@@ -156,17 +156,17 @@ public class SearchPopularListFragment extends Fragment {
         @Override
         public void onClick(View view) {
             Toast.makeText(getActivity(), mSearch.getSearchWord(), Toast.LENGTH_SHORT).show();
-            mOnDataPasser.onStringDataPass(mSearch.getSearchWord());
+            mOnPassDataListener.onStringDataPass(mSearch.getSearchWord());
 
         }
     }
 
-    OnDataPass mOnDataPasser;
+    OnPassDataListener mOnPassDataListener;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        mOnDataPasser = (OnDataPass) context;
+        mOnPassDataListener = (OnPassDataListener) context;
     }
 
     public class SeparatorDecoration extends RecyclerView.ItemDecoration {

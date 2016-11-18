@@ -16,7 +16,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.tacademy.v04.chemi.R;
-import com.tacademy.v04.chemi.common.OnDataPass;
+import com.tacademy.v04.chemi.common.OnPassDataListener;
 import com.tacademy.v04.chemi.view.activity.AppBaseActivity;
 import com.tacademy.v04.chemi.view.fragment.product.SearchFragment;
 
@@ -25,7 +25,7 @@ import com.tacademy.v04.chemi.view.fragment.product.SearchFragment;
  */
 
 public class SearchActivity extends AppBaseActivity
-        implements View.OnClickListener, OnDataPass {
+        implements View.OnClickListener, OnPassDataListener {
 
     private static final String TAG = SearchActivity.class.getSimpleName();
 
