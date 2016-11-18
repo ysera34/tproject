@@ -34,7 +34,7 @@ public class Search {
     }
 
     public void setRatingNumber(int ratingNumber) {
-        mRatingNumber = ratingNumber;
+        mRatingNumber = ratingNumber + 1;
     }
 
     public String getSearchWord() {

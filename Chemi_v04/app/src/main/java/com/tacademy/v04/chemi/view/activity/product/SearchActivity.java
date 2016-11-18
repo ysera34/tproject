@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.tacademy.v04.chemi.R;
+import com.tacademy.v04.chemi.common.OnDataPass;
 import com.tacademy.v04.chemi.view.activity.AppBaseActivity;
 import com.tacademy.v04.chemi.view.fragment.product.SearchFragment;
 
@@ -23,7 +24,8 @@ import com.tacademy.v04.chemi.view.fragment.product.SearchFragment;
  * Created by yoon on 2016. 11. 15..
  */
 
-public class SearchActivity extends AppBaseActivity implements View.OnClickListener {
+public class SearchActivity extends AppBaseActivity
+        implements View.OnClickListener, OnDataPass {
 
     private static final String TAG = SearchActivity.class.getSimpleName();
 
@@ -96,5 +98,10 @@ public class SearchActivity extends AppBaseActivity implements View.OnClickListe
                         Toast.LENGTH_SHORT).show();
                 break;
         }
+    }
+
+    @Override
+    public void onStringDataPass(String data) {
+        mSearchProductEditText.setText(data);
     }
 }
