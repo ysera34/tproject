@@ -12,16 +12,14 @@
         android:layout_height="match_parent"
         android:gravity="center_vertical"
         android:textSize="17sp"
-        android:layout_marginEnd="16dp"
-        android:text="1"/>
+        android:layout_marginEnd="16dp"/>
 
     <TextView
-        android:id="@+id/list_item_search_word"
+        android:id="@+id/list_item_popular_search_word"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:gravity="center_vertical"
-        android:textSize="17sp"
-        android:text="옥시크린"/>
+        android:textSize="17sp"/>
 
     <TextView
         android:layout_width="0dp"
@@ -35,13 +33,12 @@
         android:layout_gravity="center_vertical"
         android:src="@drawable/ic_arrow_upward_24dp"
         android:layout_marginEnd="3dp"/>
-    
+
     <TextView
         android:id="@+id/list_item_search_popular_variation_value"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:gravity="center_vertical"
-        android:textSize="17sp"
-        android:text="3"/>
+        android:textSize="17sp"/>
 
 </LinearLayout>

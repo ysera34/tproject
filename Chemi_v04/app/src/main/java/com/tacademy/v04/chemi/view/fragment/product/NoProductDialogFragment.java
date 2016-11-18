@@ -51,8 +51,7 @@ public class NoProductDialogFragment extends DialogFragment {
 
         getDialog().setCancelable(false);
         getDialog().setCanceledOnTouchOutside(false);
-        getDialog().setOnKeyListener(new DialogInterface.OnKeyListener()
-        {
+        getDialog().setOnKeyListener(new DialogInterface.OnKeyListener() {
             @Override
             public boolean onKey(android.content.DialogInterface dialog,
                                  int keyCode,android.view.KeyEvent event) {

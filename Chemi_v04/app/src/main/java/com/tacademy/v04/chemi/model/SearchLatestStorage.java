@@ -10,14 +10,14 @@ import java.util.UUID;
  * Created by yoon on 2016. 11. 18..
  */
 
-public class SearchStorage {
+public class SearchLatestStorage {
 
-    private static SearchStorage sSearchStorage;
+    private static SearchLatestStorage sSearchStorage;
     private Context mAppContext;
 
     private ArrayList<Search> mSearches;
 
-    private SearchStorage(Context appContext) {
+    private SearchLatestStorage(Context appContext) {
         mAppContext = appContext;
         mSearches = new ArrayList<>();
 
@@ -34,9 +34,9 @@ public class SearchStorage {
         }
     }
 
-    public static SearchStorage get(Context context) {
+    public static SearchLatestStorage get(Context context) {
         if (sSearchStorage == null) {
-            sSearchStorage = new SearchStorage(context.getApplicationContext());
+            sSearchStorage = new SearchLatestStorage(context.getApplicationContext());
         }
         return sSearchStorage;
     }
@@ -52,5 +52,15 @@ public class SearchStorage {
             }
         }
         return null;
+    }
+
+    public ArrayList<Search> removeSearch(Search search) {
+        for (Search s : mSearches) {
+            if (s.getId().equals(search.getId())) {
+                mSearches.remove(search);
+                break;
+            }
+        }
+        return mSearches;
     }
 }

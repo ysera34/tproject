@@ -47,7 +47,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
         mProductSearchFragmentsTitles = new ArrayList<>();
 
         addProductSearchFragment(SearchPopularListFragment.newInstance(), getString(R.string.product_popular_list_name));
-        addProductSearchFragment(ChemicalListFragment.newInstance(), getString(R.string.product_latest_list_name));
+        addProductSearchFragment(SearchLatestListFragment.newInstance(), getString(R.string.product_latest_list_name));
     }
 
     @Nullable

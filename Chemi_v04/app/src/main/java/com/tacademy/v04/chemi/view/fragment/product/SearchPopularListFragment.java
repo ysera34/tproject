@@ -1,15 +1,11 @@
 package com.tacademy.v04.chemi.view.fragment.product;
 
 import android.content.Context;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,8 +15,9 @@ import android.widget.Toast;
 
 import com.tacademy.v04.chemi.R;
 import com.tacademy.v04.chemi.common.OnPassDataListener;
+import com.tacademy.v04.chemi.common.SeparatorDecoration;
 import com.tacademy.v04.chemi.model.Search;
-import com.tacademy.v04.chemi.model.SearchStorage;
+import com.tacademy.v04.chemi.model.SearchPopularStorage;
 
 import java.util.List;
 
@@ -48,8 +45,8 @@ public class SearchPopularListFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SearchStorage searchStorage = SearchStorage.get(getActivity());
-        mSearches = searchStorage.getSearches();
+        SearchPopularStorage searchPopularStorage = SearchPopularStorage.get(getActivity());
+        mSearches = searchPopularStorage.getSearches();
     }
 
     @Nullable
@@ -138,7 +135,7 @@ public class SearchPopularListFragment extends Fragment {
             mSearchRatingNumberTextView = (TextView)
                     itemView.findViewById(R.id.list_item_search_popular_rating_number);
             mSearchWordTextView = (TextView)
-                    itemView.findViewById(R.id.list_item_search_word);
+                    itemView.findViewById(R.id.list_item_popular_search_word);
             mSearchVariationImageView = (ImageView)
                     itemView.findViewById(R.id.list_item_search_variation_state_image);
             mSearchVariationValueTextView = (TextView)
@@ -157,7 +154,6 @@ public class SearchPopularListFragment extends Fragment {
         public void onClick(View view) {
             Toast.makeText(getActivity(), mSearch.getSearchWord(), Toast.LENGTH_SHORT).show();
             mOnPassDataListener.onStringDataPass(mSearch.getSearchWord());
-
         }
     }
 
@@ -169,52 +165,4 @@ public class SearchPopularListFragment extends Fragment {
         mOnPassDataListener = (OnPassDataListener) context;
     }
 
-    public class SeparatorDecoration extends RecyclerView.ItemDecoration {
-
-        private final Paint mPaint;
-
-        public SeparatorDecoration(Context context, int color, float heightDp) {
-            mPaint = new Paint();
-            mPaint.setColor(color);
-            final float thickness = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                    heightDp, context.getResources().getDisplayMetrics());
-            mPaint.setStrokeWidth(thickness);
-        }
-
-        @Override
-        public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-            final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) view.getLayoutParams();
-
-            // we want to retrieve the position in the list
-            final int position = params.getViewAdapterPosition();
-
-            // and add a separator to any view but the last one
-            if (position < state.getItemCount()) {
-                outRect.set(0, 0, 0, (int) mPaint.getStrokeWidth()); // left, top, right, bottom
-            } else {
-                outRect.setEmpty(); // 0, 0, 0, 0
-            }
-        }
-
-        @Override
-        public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
-            // we set the stroke width before, so as to correctly draw the line we have to offset by width / 2
-            final int offset = (int) (mPaint.getStrokeWidth() / 2);
-
-            // this will iterate over every visible view
-            for (int i = 0; i < parent.getChildCount(); i++) {
-                // get the view
-                final View view = parent.getChildAt(i);
-                final RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) view.getLayoutParams();
-
-                // get the position
-                final int position = params.getViewAdapterPosition();
-
-                // and finally draw the separator
-                if (position < state.getItemCount()) {
-                    c.drawLine(view.getLeft(), view.getBottom() + offset, view.getRight(), view.getBottom() + offset, mPaint);
-                }
-            }
-        }
-    }
 }

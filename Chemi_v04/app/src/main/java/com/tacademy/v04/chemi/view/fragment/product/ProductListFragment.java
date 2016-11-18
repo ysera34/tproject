@@ -96,22 +96,6 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
         mProductSortView = view.findViewById(R.id.product_list_sort_button_view);
         mProductSortView.setOnClickListener(this);
 
-        // bottom_sheet_product_sort
-        mProductSortBottomSheetDialog = new BottomSheetDialog(getActivity());
-        View mSortBottomSheetView = getLayoutInflater(savedInstanceState)
-                .inflate(R.layout.bottom_sheet_product_sort, null);
-        mProductSortBottomSheetDialog.setContentView(mSortBottomSheetView);
-
-        mProductSortReviewButton = (ImageButton) mSortBottomSheetView
-                .findViewById(R.id.product_list_sort_review_image_button);
-        mProductSortReviewButton.setOnClickListener(this);
-        mProductSortAvgButton = (ImageButton) mSortBottomSheetView
-                .findViewById(R.id.product_list_sort_avg_image_button);
-        mProductSortAvgButton.setOnClickListener(this);
-        mProductSortLatestButton = (ImageButton) mSortBottomSheetView
-                .findViewById(R.id.product_list_sort_latest_image_button);
-        mProductSortLatestButton.setOnClickListener(this);
-
         mProductRecyclerView = (RecyclerView) view.findViewById(R.id.product_recycler_view);
         mProductRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -140,6 +124,21 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.product_list_sort_button_view :
+                // bottom_sheet_product_sort
+                mProductSortBottomSheetDialog = new BottomSheetDialog(getActivity());
+                View mSortBottomSheetView = getLayoutInflater(getArguments())
+                        .inflate(R.layout.bottom_sheet_product_sort, null);
+                mProductSortBottomSheetDialog.setContentView(mSortBottomSheetView);
+
+                mProductSortReviewButton = (ImageButton) mSortBottomSheetView
+                        .findViewById(R.id.product_list_sort_review_image_button);
+                mProductSortReviewButton.setOnClickListener(this);
+                mProductSortAvgButton = (ImageButton) mSortBottomSheetView
+                        .findViewById(R.id.product_list_sort_avg_image_button);
+                mProductSortAvgButton.setOnClickListener(this);
+                mProductSortLatestButton = (ImageButton) mSortBottomSheetView
+                        .findViewById(R.id.product_list_sort_latest_image_button);
+                mProductSortLatestButton.setOnClickListener(this);
                 mProductSortBottomSheetDialog.show();
                 break;
             case R.id.product_list_sort_review_image_button :
