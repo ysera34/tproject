@@ -92,7 +92,7 @@ public class SearchLatestListFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
-    private class LatestWordAdapter extends RecyclerView.Adapter<LatestWordHolder> {
+    private class LatestWordAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         private List<Search> mSearches;
 
@@ -101,22 +101,45 @@ public class SearchLatestListFragment extends Fragment {
         }
 
         @Override
-        public LatestWordHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
-            View view = layoutInflater
-                    .inflate(R.layout.list_item_search_latest, parent, false);
+            View view;
+            if (viewType == EMPTY_VIEW) {
+                view = layoutInflater.inflate(R.layout.view_empty_latest_search, parent,false);
+                return new EmptyViewHolder(view);
+            }
+            view = layoutInflater.inflate(R.layout.list_item_search_latest, parent, false);
             return new LatestWordHolder(view);
         }
 
         @Override
-        public void onBindViewHolder(LatestWordHolder holder, int position) {
-            Search search = mSearches.get(position);
-            holder.bindSearch(search);
+        public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+            if (holder instanceof LatestWordHolder) {
+                Search search = mSearches.get(position);
+                ((LatestWordHolder) holder).bindSearch(search);
+            }
         }
 
         @Override
         public int getItemCount() {
-            return mSearches.size();
+            return mSearches.size() > 0 ? mSearches.size() : 1;
+        }
+
+        @Override
+        public int getItemViewType(int position) {
+            if (mSearches.size() == 0) {
+                return EMPTY_VIEW;
+            }
+            return super.getItemViewType(position);
+        }
+    }
+
+    private static final int EMPTY_VIEW = -1;
+
+    private class EmptyViewHolder extends RecyclerView.ViewHolder {
+
+        public EmptyViewHolder(View itemView) {
+            super(itemView);
         }
     }
 
@@ -153,7 +176,8 @@ public class SearchLatestListFragment extends Fragment {
                     mOnPassDataListener.onStringDataPass(mSearch.getSearchWord());
                     break;
                 case R.id.list_item_clear_image_button :
-                    Toast.makeText(getActivity(), R.string.remove_search_word_info_message, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), R.string.remove_search_word_info_message,
+                            Toast.LENGTH_SHORT).show();
                     mSearches = searchLatestStorage.removeSearch(mSearch);
                     mLatestWordAdapter.notifyDataSetChanged();
                     break;

@@ -81,6 +81,7 @@
     <string name="product_list_no_exist">Do not exist product</string>
     <string name="return_to_search_activity">Return</string>
     <string name="remove_search_word_info_message">Your search history has been deleted.Your search history has been deleted.</string>
+    <string name="empty_latest_search_info">You have no recent searches.</string>
 
     <string-array name="product_list_sort_way">
         <item>@string/product_list_sort_review_total</item>
