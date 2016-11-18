@@ -46,6 +46,7 @@
     <string name="search_result">search result</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_search">SearchActivity</string>
+    <string name="title_activity_product_list">Products List</string>
     <string name="title_activity_product">Product Details</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -63,6 +64,9 @@
     <string name="product_list_sort_review_total">Reviews</string>
     <string name="product_list_sort_review_rating_avg">Ratings</string>
     <string name="product_list_sort_latest_release">Latest</string>
+    <string name="product_list_total_default">0</string>
+    <string name="product_popular_list_name">Popular</string>
+    <string name="product_latest_list_name">Latest</string>
 
     <string-array name="product_list_sort_way">
         <item>@string/product_list_sort_review_total</item>

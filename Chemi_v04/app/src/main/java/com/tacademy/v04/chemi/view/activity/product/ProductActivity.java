@@ -17,6 +17,7 @@ import com.tacademy.v04.chemi.R;
 import com.tacademy.v04.chemi.model.Product;
 import com.tacademy.v04.chemi.model.ProductStorage;
 import com.tacademy.v04.chemi.view.activity.AppBaseActivity;
+import com.tacademy.v04.chemi.view.activity.MainActivity;
 import com.tacademy.v04.chemi.view.fragment.product.ProductFragment;
 
 import java.util.UUID;
@@ -65,6 +66,7 @@ public class ProductActivity extends AppBaseActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mToolbar.setTitle(R.string.title_activity_product);
+        setTitle(R.string.title_activity_product);
 
         mCollapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         mCollapsingToolbarLayout.setTitle(mProduct.getName());
@@ -91,6 +93,8 @@ public class ProductActivity extends AppBaseActivity {
         if (id == R.id.action_search) {
             startActivity(SearchActivity.newIntent(getApplicationContext()));
             return true;
+        } else if (id == R.id.action_home) {
+            startActivity(MainActivity.newIntent(getApplicationContext()));
         }
 
         return super.onOptionsItemSelected(item);

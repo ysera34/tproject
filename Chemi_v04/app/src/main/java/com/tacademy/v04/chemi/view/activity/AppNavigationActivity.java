@@ -19,6 +19,8 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.tacademy.v04.chemi.R;
+import com.tacademy.v04.chemi.view.activity.content.ContentListActivity;
+import com.tacademy.v04.chemi.view.activity.product.CustomSearchActivity;
 import com.tacademy.v04.chemi.view.activity.product.SearchActivity;
 import com.tacademy.v04.chemi.view.fragment.navigation.ArchiveFragment;
 import com.tacademy.v04.chemi.view.fragment.navigation.ConfigureFragment;
@@ -35,11 +37,13 @@ import com.tacademy.v04.chemi.view.fragment.navigation.ReviewLogFragment;
 public class AppNavigationActivity extends AppBaseActivity implements
         NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
+    private static final String TAG = AppNavigationActivity.class.getSimpleName();
+
     protected Toolbar mToolbar;
     protected DrawerLayout mDrawerLayout;
     protected NavigationView mNavigationView;
     protected Handler mPendingHandler;
-    protected static Fragment containerFragment;
+    protected Fragment containerFragment;
     protected View mNavigationHeader;
     protected Button mNavigationCustomSearchButton;
     protected Button mNavigationContentButton;
@@ -70,10 +74,12 @@ public class AppNavigationActivity extends AppBaseActivity implements
         mNavigationView.setNavigationItemSelectedListener(this);
 
         mNavigationHeader = mNavigationView.getHeaderView(0);
-        mNavigationCustomSearchButton = (Button) mNavigationHeader.findViewById(R.id.nav_header_custom_search_button);
+        mNavigationCustomSearchButton = (Button)
+                mNavigationHeader.findViewById(R.id.nav_header_custom_search_button);
         mNavigationCustomSearchButton.setOnClickListener(this);
 
-        mNavigationContentButton = (Button) mNavigationHeader.findViewById(R.id.nav_header_content_button);
+        mNavigationContentButton = (Button)
+                mNavigationHeader.findViewById(R.id.nav_header_content_button);
         mNavigationContentButton.setOnClickListener(this);
 
 //        FragmentManager fm = getSupportFragmentManager();
@@ -100,25 +106,6 @@ public class AppNavigationActivity extends AppBaseActivity implements
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_toolbar, menu);
-//        MenuItem searchItem = menu.findItem(R.id.action_search);
-        // Get the SearchView and set the searchable configuration
-//        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-//        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
-//        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-//
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                // Text has changed, apply filtering?
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                // Perform the final search
-//                return false;
-//            }
-//        });
         return true;
     }
 
@@ -128,25 +115,29 @@ public class AppNavigationActivity extends AppBaseActivity implements
             case R.id.nav_header_custom_search_button :
                 Toast.makeText(getApplicationContext(), "nav_header_custom_search_button",
                         Toast.LENGTH_SHORT).show();
+                startActivity(CustomSearchActivity.newIntent(getApplicationContext()));
+                mDrawerLayout.closeDrawers();
                 break;
             case R.id.nav_header_content_button :
                 Toast.makeText(getApplicationContext(), "nav_header_content_button",
                         Toast.LENGTH_SHORT).show();
+                startActivity(ContentListActivity.newIntent(getApplicationContext()));
+                mDrawerLayout.closeDrawers();
                 break;
         }
+
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_search) {
             startActivity(SearchActivity.newIntent(getApplicationContext()));
             return true;
+        } else if (id == R.id.action_home) {
+            startActivity(MainActivity.newIntent(getApplicationContext()));
         }
 
         return super.onOptionsItemSelected(item);
@@ -181,14 +172,6 @@ public class AppNavigationActivity extends AppBaseActivity implements
             fragment = ConfigureFragment.newInstance();
             mToolbar.setTitle(R.string.fragment_title_settings);
         }
-
-//        else if (id == R.id.nav_custom_search) {
-//            startActivity(new Intent(AppNavigationActivity.this, CustomSearchActivity.class));
-//            mDrawerLayout.closeDrawers();
-//        } else if (id == R.id.nav_content) {
-//            startActivity(new Intent(AppNavigationActivity.this, ContentListActivity.class));
-//            mDrawerLayout.closeDrawers();
-//        }
 
         FragmentManager fm = getSupportFragmentManager();
 //        Fragment mFragment = fm.findFragmentById(R.id.fragment_container);

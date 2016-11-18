@@ -1,39 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="@dimen/bottom_sheet_product_sort_height"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:paddingTop="58dp"
-    android:paddingStart="16dp"
-    android:paddingEnd="16dp"
-    android:paddingBottom="39dp"
+    android:orientation="vertical"
+    android:padding="16dp"
     app:layout_behavior="@string/bottom_sheet_behavior"
     app:behavior_hideable="true"
     android:background="@drawable/widget_square_border">
-    
-    <LinearLayout
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp">
+
+        <TextView
+            android:text="확  인"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="22dp">
 
         <ImageButton
             android:id="@+id/product_list_sort_review_image_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/sort_image_button_latest_release_unselected"/>
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:background="@drawable/sort_image_button_latest_release_unselected"/>
 
         <ImageButton
             android:id="@+id/product_list_sort_avg_image_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/sort_image_button_latest_release_unselected"/>
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/sort_image_button_latest_release_unselected"/>
 
         <ImageButton
             android:id="@+id/product_list_sort_latest_image_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/sort_image_button_latest_release_unselected"/>
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/sort_image_button_latest_release_unselected"/>
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>

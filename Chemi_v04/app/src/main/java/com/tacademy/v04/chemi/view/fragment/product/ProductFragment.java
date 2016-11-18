@@ -59,10 +59,8 @@ public class ProductFragment extends Fragment {
         mProductDetailListFragments = new ArrayList<>();
         mProductDetailFragmentsTitles = new ArrayList<>();
 
-        addProductDetailFragment(
-                new ChemicalListFragment(), getString(R.string.product_detail_chemical_list_name));
-        addProductDetailFragment(
-                new ReviewListFragment(), getString(R.string.product_detail_review_list_name));
+        addProductDetailFragment(ChemicalListFragment.newInstance(), getString(R.string.product_detail_chemical_list_name));
+        addProductDetailFragment(ReviewListFragment.newInstance(), getString(R.string.product_detail_review_list_name));
     }
 
     @Nullable

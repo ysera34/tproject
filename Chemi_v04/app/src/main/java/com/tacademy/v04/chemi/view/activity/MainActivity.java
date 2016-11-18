@@ -1,5 +1,7 @@
 package com.tacademy.v04.chemi.view.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 
@@ -12,11 +14,12 @@ import com.tacademy.v04.chemi.view.fragment.navigation.MainFragment;
 
 public class MainActivity extends AppNavigationActivity {
 
-//    protected Toolbar mToolbar;
-//    protected DrawerLayout mDrawerLayout;
-//    protected NavigationView mNavigationView;
-//    protected Handler mPendingHandler;
-//    protected Fragment containerFragment;
+    private static final String TAG = MainActivity.class.getSimpleName();
+
+    public static Intent newIntent(Context packageContext) {
+        Intent intent = new Intent(packageContext, MainActivity.class);
+        return intent;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +47,7 @@ public class MainActivity extends AppNavigationActivity {
 //        mNavigationView.setNavigationItemSelectedListener(this);
 
         FragmentManager fm = getSupportFragmentManager();
-        AppNavigationActivity.containerFragment = fm.findFragmentById(R.id.fragment_container);
+        containerFragment = fm.findFragmentById(R.id.fragment_container);
 
         if (containerFragment == null) {
             containerFragment = MainFragment.newInstance();

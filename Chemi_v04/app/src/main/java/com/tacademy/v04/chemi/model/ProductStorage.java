@@ -23,7 +23,7 @@ public class ProductStorage {
         mProducts = new ArrayList<>();
 
         /*
-        sample date
+        sample data
          */
         for (int i = 0; i < 100; i++) {
             Product product = new Product();

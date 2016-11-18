@@ -40,10 +40,15 @@
     <string name="fragment_title_notifications">공지사항</string>
     <string name="fragment_title_faq">자주 묻는 질문</string>
     <string name="fragment_title_settings">설정</string>
+    <string name="fragment_title_login">로그인</string>
 
+    <string name="search_result">검색 결과</string>
+    <string name="title_activity_main">메인</string>
+    <string name="title_activity_search">제품 검색</string>
+    <string name="title_activity_product_list">제품 목록</string>
     <string name="title_activity_product">제품 상세</string>
 
-    <string name="search_hint">상품 검색</string>
+    <string name="search_hint">상품명, 브랜드명으로 검색하세요</string>
     <string name="show_all_product_button_text">전체보기</string>
     <string name="product_list_total">전체 %s개</string>
     <string name="product_list_total_prefix">전체 </string>
@@ -54,6 +59,9 @@
     <string name="product_list_sort_review_total">리뷰 많은 순</string>
     <string name="product_list_sort_review_rating_avg">평점 순</string>
     <string name="product_list_sort_latest_release">최신 출시 순</string>
+    <string name="product_list_total_default">0</string>
+    <string name="product_popular_list_name">인기 검색어</string>
+    <string name="product_latest_list_name">최근 검색어</string>
 
     <string-array name="product_list_sort_way">
         <item>@string/product_list_sort_review_total</item>

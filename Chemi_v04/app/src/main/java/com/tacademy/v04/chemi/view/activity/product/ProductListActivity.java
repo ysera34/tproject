@@ -25,8 +25,10 @@ public class ProductListActivity extends AppNavigationActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setTitle(R.string.title_activity_product_list);
+
         FragmentManager fm = getSupportFragmentManager();
-        AppNavigationActivity.containerFragment = fm.findFragmentById(R.id.fragment_container);
+        containerFragment = fm.findFragmentById(R.id.fragment_container);
 
         if (containerFragment == null) {
             containerFragment = ProductListFragment.newInstance();

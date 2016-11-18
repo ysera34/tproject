@@ -63,25 +63,24 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
         View view = inflater.inflate(R.layout.fragment_product_list, container, false);
         mProductTotalTextView = (TextView) view.findViewById(R.id.product_list_total);
 
+        mProductSortView = view.findViewById(R.id.product_list_sort_button_view);
+        mProductSortView.setOnClickListener(this);
+
         // bottom_sheet_product_sort
         mProductSortBottomSheetDialog = new BottomSheetDialog(getActivity());
         View mSortBottomSheetView = getLayoutInflater(savedInstanceState)
                 .inflate(R.layout.bottom_sheet_product_sort, null);
         mProductSortBottomSheetDialog.setContentView(mSortBottomSheetView);
 
-        mProductSortView = view.findViewById(R.id.product_list_sort_button_view);
-        mProductSortView.setOnClickListener(this);
-
-        mProductSortReviewButton = (ImageButton) mProductSortView
+        mProductSortReviewButton = (ImageButton) mSortBottomSheetView
                 .findViewById(R.id.product_list_sort_review_image_button);
         mProductSortReviewButton.setOnClickListener(this);
-        mProductSortAvgButton = (ImageButton) mProductSortView
+        mProductSortAvgButton = (ImageButton) mSortBottomSheetView
                 .findViewById(R.id.product_list_sort_avg_image_button);
         mProductSortAvgButton.setOnClickListener(this);
-        mProductSortLatestButton = (ImageButton) mProductSortView
+        mProductSortLatestButton = (ImageButton) mSortBottomSheetView
                 .findViewById(R.id.product_list_sort_latest_image_button);
         mProductSortLatestButton.setOnClickListener(this);
-
 
         mProductRecyclerView = (RecyclerView) view.findViewById(R.id.product_recycler_view);
         mProductRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -125,7 +124,6 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
                 Toast.makeText(getActivity(), "product_list_sort_latest_image_button",
                         Toast.LENGTH_SHORT).show();
                 break;
-
         }
     }
 
@@ -133,7 +131,6 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mProductTotalTextView.setText(String.valueOf(mProducts.size()));
-
     }
 
     private class ProductAdapter extends RecyclerView.Adapter<ProductHolder> {
@@ -164,8 +161,7 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
         }
     }
 
-    private class ProductHolder extends RecyclerView.ViewHolder
-            implements View.OnClickListener {
+    private class ProductHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private Product mProduct;
         private TextView mTitleTextView;

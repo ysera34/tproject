@@ -21,7 +21,7 @@ public class ChemicalStorage {
         mChemicals = new ArrayList<>();
 
         /*
-        sample date
+        sample data
          */
         for (int i = 0; i < 30; i++) {
             Chemical chemical = new Chemical();

@@ -1,27 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical"
+              android:padding="16dp"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <TextView
+    <android.support.design.widget.TabLayout
+        android:id="@+id/product_search_tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="fragment_search"/>
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ProductDetailTabLayoutTheme"
+        android:layout_marginBottom="2dp"
+        app:tabGravity="fill"
+        app:tabMode="fixed"
+        app:tabIndicatorHeight="0dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:tabTextColor="@color/tabLayout_unselected_text_color"
+        app:tabSelectedTextColor="@color/tabLayout_selected_text_color" />
 
-    <TextView
+    <!--android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"-->
+    <!--app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"-->
+    <android.support.v4.view.ViewPager
+        android:id="@+id/product_search_view_pager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="인기검색어"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="최근검색어"/>
-
+        android:layout_height="380dp" />
+    <!--android:layout_height="match_parent"-->
     <Button
         android:id="@+id/product_show_all_button"
         android:text="@string/show_all_product_button_text"

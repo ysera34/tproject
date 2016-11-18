@@ -102,7 +102,7 @@ public class ChemicalListFragment extends Fragment {
         @Override
         public void onBindViewHolder(ChemicalHolder holder, int position) {
             Chemical chemical = mChemicals.get(position);
-            holder.bindChemicals(chemical);
+            holder.bindChemical(chemical);
         }
 
         @Override
@@ -117,16 +117,14 @@ public class ChemicalListFragment extends Fragment {
         private Chemical mChemical;
         private TextView mChemicalTitleKoTextView;
 
-
         public ChemicalHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
 
-
             mChemicalTitleKoTextView = (TextView) itemView.findViewById(R.id.list_item_chemical_title_ko);
         }
 
-        public void bindChemicals(Chemical chemical) {
+        public void bindChemical(Chemical chemical) {
             mChemical = chemical;
             mChemicalTitleKoTextView.setText(mChemical.getNameKo());
         }
