@@ -72,6 +72,9 @@
     <string name="category_section5">유아 / 아동</string>
     <string name="category_section6">여성</string>
     <string name="category_section7">기타</string>
+    <string name="product_list_category_no_exist">카테고리와 일치하는 상품이 존재하지 않습니다</string>
+    <string name="product_list_no_exist">검색하신 제품이 없습니다.</string>
+    <string name="return_to_search_activity">돌아가기</string>
 
     <string-array name="product_list_sort_way">
         <item>@string/product_list_sort_review_total</item>

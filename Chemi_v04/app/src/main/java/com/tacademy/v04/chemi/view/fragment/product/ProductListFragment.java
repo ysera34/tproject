@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +30,10 @@ import java.util.List;
  */
 
 public class ProductListFragment extends Fragment implements View.OnClickListener{
+
+    private static final String TAG = ProductListFragment.class.getSimpleName();
+
+    private static final String PRODUCT_NO_EXIST_INFO = "NoExistProduct";
 
     private static final String ARG_CATEGORY_ID = "category_id";
 
@@ -65,14 +71,18 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ProductStorage productStorage = ProductStorage.get(getActivity());
-        mCategoryId = getArguments().getInt(ARG_CATEGORY_ID, ProductListActivity.CATEGORY_DEFAULT_VALUE);
+        if (getArguments() != null) {
+            mCategoryId = getArguments().getInt(
+                    ARG_CATEGORY_ID, ProductListActivity.CATEGORY_DEFAULT_VALUE);
+        }
+        Log.d(TAG, "mCategoryId : " + mCategoryId);
 
-        if (mCategoryId != ProductListActivity.CATEGORY_DEFAULT_VALUE) {
+        // mCategoryId = 0;(initial) category_default = -1;
+        if (mCategoryId > 0) {
             mProducts = productStorage.getCategoryProducts(mCategoryId);
         } else {
             mProducts = productStorage.getProducts();
         }
-
     }
 
     @Nullable
@@ -151,6 +161,13 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mProductTotalTextView.setText(String.valueOf(mProducts.size()));
+
+        if (mCategoryId > 0 && mProducts.size() == 0) {
+            FragmentManager manager = getFragmentManager();
+            NoProductDialogFragment dialogFragment =
+                    NoProductDialogFragment.newInstance();
+            dialogFragment.show(manager, PRODUCT_NO_EXIST_INFO);
+        }
     }
 
     private class ProductAdapter extends RecyclerView.Adapter<ProductHolder> {

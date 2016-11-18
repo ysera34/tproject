@@ -23,7 +23,7 @@ import java.util.UUID;
 
 public class ChemicalDialogFragment extends DialogFragment {
 
-    private static final String ARG_CHEMICAL = "chemical";
+    private static final String ARG_CHEMICAL = "chemical_id";
 
     private Chemical mChemical;
     private TextView mTitleTextView;
@@ -60,7 +60,6 @@ public class ChemicalDialogFragment extends DialogFragment {
                         Toast.makeText(getActivity(),
                                 "수정 요청 하였습니다.", Toast.LENGTH_SHORT).show();
                     }
-                })
-                .create();
+                }).create();
     }
 }

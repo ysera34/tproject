@@ -12,7 +12,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -32,11 +31,7 @@ public class SearchActivity extends AppBaseActivity
 
     private Toolbar mToolbar;
     private EditText mSearchProductEditText;
-//    private CoordinatorLayout mSearchCoordinatorLayout;
     private BottomSheetDialog mCategoryBottomSheetDialog;
-    private View mBottomSheetView;
-    private Button[] mCategorySectionButtonArray;
-    private Button mCategorySectionButton;
 
     public static Intent newIntent(Context packageContext) {
         Intent intent = new Intent(packageContext, SearchActivity.class);
@@ -79,8 +74,6 @@ public class SearchActivity extends AppBaseActivity
 //                .inflate(R.layout.bottom_sheet_category, null);
 //        mCategoryBottomSheetDialog.setContentView(mBottomSheetView);
 //        (mBottomSheetView.findViewById(R.id.bottom_sheet_button)).setOnClickListener(this);
-        mCategorySectionButtonArray = new Button[21];
-
 
         // search fragment
         FragmentManager fm = getSupportFragmentManager();
@@ -105,6 +98,25 @@ public class SearchActivity extends AppBaseActivity
                 (mBottomSheetView.findViewById(R.id.bottom_sheet_button)).setOnClickListener(this);
                 (mBottomSheetView.findViewById(R.id.bottom_sheet_category_section11)).setOnClickListener(this);
                 (mBottomSheetView.findViewById(R.id.bottom_sheet_category_section12)).setOnClickListener(this);
+                (mBottomSheetView.findViewById(R.id.bottom_sheet_category_section13)).setOnClickListener(this);
+                (mBottomSheetView.findViewById(R.id.bottom_sheet_category_section21)).setOnClickListener(this);
+                (mBottomSheetView.findViewById(R.id.bottom_sheet_category_section22)).setOnClickListener(this);
+                (mBottomSheetView.findViewById(R.id.bottom_sheet_category_section23)).setOnClickListener(this);
+                (mBottomSheetView.findViewById(R.id.bottom_sheet_category_section31)).setOnClickListener(this);
+                (mBottomSheetView.findViewById(R.id.bottom_sheet_category_section32)).setOnClickListener(this);
+                (mBottomSheetView.findViewById(R.id.bottom_sheet_category_section33)).setOnClickListener(this);
+                (mBottomSheetView.findViewById(R.id.bottom_sheet_category_section41)).setOnClickListener(this);
+                (mBottomSheetView.findViewById(R.id.bottom_sheet_category_section42)).setOnClickListener(this);
+                (mBottomSheetView.findViewById(R.id.bottom_sheet_category_section43)).setOnClickListener(this);
+                (mBottomSheetView.findViewById(R.id.bottom_sheet_category_section51)).setOnClickListener(this);
+                (mBottomSheetView.findViewById(R.id.bottom_sheet_category_section52)).setOnClickListener(this);
+                (mBottomSheetView.findViewById(R.id.bottom_sheet_category_section53)).setOnClickListener(this);
+                (mBottomSheetView.findViewById(R.id.bottom_sheet_category_section61)).setOnClickListener(this);
+                (mBottomSheetView.findViewById(R.id.bottom_sheet_category_section62)).setOnClickListener(this);
+                (mBottomSheetView.findViewById(R.id.bottom_sheet_category_section63)).setOnClickListener(this);
+                (mBottomSheetView.findViewById(R.id.bottom_sheet_category_section71)).setOnClickListener(this);
+                (mBottomSheetView.findViewById(R.id.bottom_sheet_category_section72)).setOnClickListener(this);
+                (mBottomSheetView.findViewById(R.id.bottom_sheet_category_section73)).setOnClickListener(this);
                 mCategoryBottomSheetDialog.show();
                 break;
             case R.id.bottom_sheet_button :
@@ -120,6 +132,101 @@ public class SearchActivity extends AppBaseActivity
                 Toast.makeText(SearchActivity.this, "bottom_sheet_category_section12",
                         Toast.LENGTH_SHORT).show();
                 startActivity(ProductListActivity.newIntent(getApplicationContext(), 12));
+                break;
+            case R.id.bottom_sheet_category_section13 :
+                Toast.makeText(SearchActivity.this, "bottom_sheet_category_section13",
+                        Toast.LENGTH_SHORT).show();
+                startActivity(ProductListActivity.newIntent(getApplicationContext(), 13));
+                break;
+            case R.id.bottom_sheet_category_section21 :
+                Toast.makeText(SearchActivity.this, "bottom_sheet_category_section21",
+                        Toast.LENGTH_SHORT).show();
+                startActivity(ProductListActivity.newIntent(getApplicationContext(), 21));
+                break;
+            case R.id.bottom_sheet_category_section22 :
+                Toast.makeText(SearchActivity.this, "bottom_sheet_category_section22",
+                        Toast.LENGTH_SHORT).show();
+                startActivity(ProductListActivity.newIntent(getApplicationContext(), 22));
+                break;
+            case R.id.bottom_sheet_category_section23 :
+                Toast.makeText(SearchActivity.this, "bottom_sheet_category_section23",
+                        Toast.LENGTH_SHORT).show();
+                startActivity(ProductListActivity.newIntent(getApplicationContext(), 23));
+                break;
+            case R.id.bottom_sheet_category_section31 :
+                Toast.makeText(SearchActivity.this, "bottom_sheet_category_section31",
+                        Toast.LENGTH_SHORT).show();
+                startActivity(ProductListActivity.newIntent(getApplicationContext(), 31));
+                break;
+            case R.id.bottom_sheet_category_section32 :
+                Toast.makeText(SearchActivity.this, "bottom_sheet_category_section32",
+                        Toast.LENGTH_SHORT).show();
+                startActivity(ProductListActivity.newIntent(getApplicationContext(), 32));
+                break;
+            case R.id.bottom_sheet_category_section33 :
+                Toast.makeText(SearchActivity.this, "bottom_sheet_category_section33",
+                        Toast.LENGTH_SHORT).show();
+                startActivity(ProductListActivity.newIntent(getApplicationContext(), 33));
+                break;
+            case R.id.bottom_sheet_category_section41 :
+                Toast.makeText(SearchActivity.this, "bottom_sheet_category_section41",
+                        Toast.LENGTH_SHORT).show();
+                startActivity(ProductListActivity.newIntent(getApplicationContext(), 41));
+                break;
+            case R.id.bottom_sheet_category_section42 :
+                Toast.makeText(SearchActivity.this, "bottom_sheet_category_section42",
+                        Toast.LENGTH_SHORT).show();
+                startActivity(ProductListActivity.newIntent(getApplicationContext(), 42));
+                break;
+            case R.id.bottom_sheet_category_section43 :
+                Toast.makeText(SearchActivity.this, "bottom_sheet_category_section43",
+                        Toast.LENGTH_SHORT).show();
+                startActivity(ProductListActivity.newIntent(getApplicationContext(), 43));
+                break;
+            case R.id.bottom_sheet_category_section51 :
+                Toast.makeText(SearchActivity.this, "bottom_sheet_category_section51",
+                        Toast.LENGTH_SHORT).show();
+                startActivity(ProductListActivity.newIntent(getApplicationContext(), 51));
+                break;
+            case R.id.bottom_sheet_category_section52 :
+                Toast.makeText(SearchActivity.this, "bottom_sheet_category_section52",
+                        Toast.LENGTH_SHORT).show();
+                startActivity(ProductListActivity.newIntent(getApplicationContext(), 52));
+                break;
+            case R.id.bottom_sheet_category_section53 :
+                Toast.makeText(SearchActivity.this, "bottom_sheet_category_section53",
+                        Toast.LENGTH_SHORT).show();
+                startActivity(ProductListActivity.newIntent(getApplicationContext(), 53));
+                break;
+            case R.id.bottom_sheet_category_section61 :
+                Toast.makeText(SearchActivity.this, "bottom_sheet_category_section61",
+                        Toast.LENGTH_SHORT).show();
+                startActivity(ProductListActivity.newIntent(getApplicationContext(), 61));
+                break;
+            case R.id.bottom_sheet_category_section62 :
+                Toast.makeText(SearchActivity.this, "bottom_sheet_category_section62",
+                        Toast.LENGTH_SHORT).show();
+                startActivity(ProductListActivity.newIntent(getApplicationContext(), 62));
+                break;
+            case R.id.bottom_sheet_category_section63 :
+                Toast.makeText(SearchActivity.this, "bottom_sheet_category_section63",
+                        Toast.LENGTH_SHORT).show();
+                startActivity(ProductListActivity.newIntent(getApplicationContext(), 63));
+                break;
+            case R.id.bottom_sheet_category_section71 :
+                Toast.makeText(SearchActivity.this, "bottom_sheet_category_section71",
+                        Toast.LENGTH_SHORT).show();
+                startActivity(ProductListActivity.newIntent(getApplicationContext(), 71));
+                break;
+            case R.id.bottom_sheet_category_section72 :
+                Toast.makeText(SearchActivity.this, "bottom_sheet_category_section72",
+                        Toast.LENGTH_SHORT).show();
+                startActivity(ProductListActivity.newIntent(getApplicationContext(), 72));
+                break;
+            case R.id.bottom_sheet_category_section73 :
+                Toast.makeText(SearchActivity.this, "bottom_sheet_category_section73",
+                        Toast.LENGTH_SHORT).show();
+                startActivity(ProductListActivity.newIntent(getApplicationContext(), 73));
                 break;
         }
     }

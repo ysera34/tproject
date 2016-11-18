@@ -77,6 +77,9 @@
     <string name="category_section5">Baby Products</string>
     <string name="category_section6">Female Products</string>
     <string name="category_section7">et cetera</string>
+    <string name="product_list_category_no_exist">Not Exist</string>
+    <string name="product_list_no_exist">Do not exist product</string>
+    <string name="return_to_search_activity">Return</string>
 
     <string-array name="product_list_sort_way">
         <item>@string/product_list_sort_review_total</item>
