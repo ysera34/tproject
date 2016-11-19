@@ -27,7 +27,7 @@ public class SearchPopularStorage {
         for (int i = 0; i < 8; i++) {
             Search search = new Search();
             search.setRatingNumber(i);
-            search.setSearchWord("인기 검색어 English " + i);
+            search.setSearchWord("인기검색어English" + i);
             search.setVariationValue(new Random().nextInt(10));
             search.setVariationState(i%2 == 0);
             mSearches.add(search);

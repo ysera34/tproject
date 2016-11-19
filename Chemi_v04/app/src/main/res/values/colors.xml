@@ -9,6 +9,7 @@
     <color name="colorFont">#4a4a4a</color>
     <color name="colorFontEquivalent">#000000</color>
     <color name="colorFontRest">#9e9e9e</color>
+    <color name="colorTransparent">@android:color/transparent</color>
 
     <color name="colorPrimary_searchActivity">#dedede</color>
     <color name="colorPrimaryDark_searchActivity">#9b9b9b</color>
@@ -26,4 +27,12 @@
 
     <color name="chemical_card_view_clicked_color">#FB8C00</color>
     <color name="chemical_card_view_clicked_text_color">#B6B6B7</color>
+
+
+    <color name="colorWhiteFont">#ffffff</color>
+    <color name="chemical_composition_dangerous_status_name_font_color">#757575</color>
+    <color name="chemical_composition_dangerous_status1_color">#19b391</color>
+    <color name="chemical_composition_dangerous_status2_color">#f7cc47</color>
+    <color name="chemical_composition_dangerous_status3_color">#f06664</color>
+    <color name="chemical_composition_dangerous_status4_color">#d4d4d4</color>
 </resources>

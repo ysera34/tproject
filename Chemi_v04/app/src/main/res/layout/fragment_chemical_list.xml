@@ -1,13 +1,271 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/product_detail_chemical_recycler_view"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="3dp" />
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="16dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:orientation="vertical"
+            android:background="@color/colorWhiteBackground">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:text="@string/chemical_composition_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.7"
+                    android:layout_marginBottom="19dp"
+                    android:textSize="16sp"/>
+
+                <RelativeLayout
+                    android:id="@+id/list_chemical_state_expand_layout"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.3"
+                    android:layout_gravity="center_horizontal">
+
+                    <TextView
+                        android:id="@+id/list_chemical_state_expand_text"
+                        android:text="접기"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"/>
+
+                    <ImageButton
+                        android:id="@+id/list_chemical_state_expand_button"
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:src="@drawable/ic_keyboard_arrow_up_48dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="15dp"
+                        android:background="@color/colorWhiteBackground"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/chemical_dangerous_grade_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingBottom="16dp">
+
+                <RelativeLayout
+                    android:id="@+id/list_chemical_dangerous_grade1_layout"
+                    android:layout_width="70dp"
+                    android:layout_height="110dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp">
+
+                    <RelativeLayout
+                        android:id="@+id/chemical_dangerous_grade1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageButton
+                            android:id="@+id/chemical_dangerous_grade1_image_button"
+                            android:layout_width="match_parent"
+                            android:layout_height="80dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentStart="true"
+                            android:background="@color/chemical_composition_dangerous_status1_color"/>
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/chemical_dangerous_grade1_number_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="9개"
+                        android:textColor="@color/colorWhiteFont"
+                        android:textSize="21sp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignBottom="@+id/chemical_dangerous_grade1"/>
+
+                    <TextView
+                        android:text="낮은 위험도"
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="13sp"
+                        android:textColor="@color/chemical_composition_dangerous_status_name_font_color"
+                        android:layout_alignParentBottom="true"/>
+
+                    <!--android:layout_below="@+id/chemical_dangerous_grade1_image_button"-->
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/list_chemical_dangerous_grade2_layout"
+                    android:layout_width="70dp"
+                    android:layout_height="110dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp">
+
+                    <RelativeLayout
+                        android:id="@+id/chemical_dangerous_grade2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" >
+
+                        <ImageButton
+                            android:id="@+id/chemical_dangerous_grade2_image_button"
+                            android:layout_width="match_parent"
+                            android:layout_height="80dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentStart="true"
+                            android:background="@color/chemical_composition_dangerous_status2_color"/>
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/chemical_dangerous_grade2_number_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="2개"
+                        android:textColor="@color/colorWhiteFont"
+                        android:textSize="21sp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignBottom="@+id/chemical_dangerous_grade2"/>
+
+                    <TextView
+                        android:text="중간 위험도"
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="13sp"
+                        android:textColor="@color/chemical_composition_dangerous_status_name_font_color"
+                        android:layout_alignParentBottom="true"/>
+
+                    <!--android:layout_below="@+id/chemical_dangerous_grade1_image_button"-->
+                </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/list_chemical_dangerous_grade3_layout"
+                    android:layout_width="70dp"
+                    android:layout_height="110dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp">
+
+                    <RelativeLayout
+                        android:id="@+id/chemical_dangerous_grade3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" >
+
+                        <ImageButton
+                            android:id="@+id/chemical_dangerous_grade3_image_button"
+                            android:layout_width="match_parent"
+                            android:layout_height="80dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentStart="true"
+                            android:background="@color/chemical_composition_dangerous_status3_color"/>
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/chemical_dangerous_grade3_number_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="1개"
+                        android:textColor="@color/colorWhiteFont"
+                        android:textSize="21sp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignBottom="@+id/chemical_dangerous_grade3"/>
+
+                    <TextView
+                        android:text="높은 위험도"
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="13sp"
+                        android:textColor="@color/chemical_composition_dangerous_status_name_font_color"
+                        android:layout_alignParentBottom="true"/>
+
+                    <!--android:layout_below="@+id/chemical_dangerous_grade1_image_button"-->
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/list_chemical_dangerous_grade4_layout"
+                    android:layout_width="70dp"
+                    android:layout_height="110dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp">
+
+                    <RelativeLayout
+                        android:id="@+id/chemical_dangerous_grade4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" >
+
+                        <ImageButton
+                            android:id="@+id/chemical_dangerous_grade4_image_button"
+                            android:layout_width="match_parent"
+                            android:layout_height="80dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentStart="true"
+                            android:background="@color/chemical_composition_dangerous_status4_color"/>
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/chemical_dangerous_grade4_number_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="1개"
+                        android:textColor="@color/colorWhiteFont"
+                        android:textSize="21sp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignBottom="@+id/chemical_dangerous_grade4"/>
+
+                    <TextView
+                        android:text="등급 미정"
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="13sp"
+                        android:textColor="@color/chemical_composition_dangerous_status_name_font_color"
+                        android:layout_alignParentBottom="true"/>
+
+                    <!--android:layout_below="@+id/chemical_dangerous_grade1_image_button"-->
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="16dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/product_detail_chemical_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="3dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

@@ -16,7 +16,6 @@
         android:layout_marginBottom="2dp"
         app:tabGravity="fill"
         app:tabMode="fixed"
-        app:tabIndicatorHeight="0dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:tabTextColor="@color/tabLayout_unselected_text_color"
         app:tabSelectedTextColor="@color/tabLayout_selected_text_color" />

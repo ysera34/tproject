@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.tacademy.v04.chemi.R;
 import com.tacademy.v04.chemi.model.Product;
@@ -78,7 +79,7 @@ public class ProductActivity extends AppBaseActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 //        return super.onCreateOptionsMenu(menu);
-        getMenuInflater().inflate(R.menu.menu_product_toolbar, menu);
+        getMenuInflater().inflate(R.menu.menu_product_detail_toolbar, menu);
         return true;
     }
 
@@ -95,6 +96,13 @@ public class ProductActivity extends AppBaseActivity {
             return true;
         } else if (id == R.id.action_home) {
             startActivity(MainActivity.newIntent(getApplicationContext()));
+            return true;
+        } else if (id == R.id.action_archive) {
+            Toast.makeText(getApplicationContext(), "보관함에 추가되었습니다.", Toast.LENGTH_SHORT).show();
+            return true;
+        } else if (id == R.id.action_share) {
+            Toast.makeText(getApplicationContext(), "공유하겠습니당.", Toast.LENGTH_SHORT).show();
+            return true;
         }
 
         return super.onOptionsItemSelected(item);

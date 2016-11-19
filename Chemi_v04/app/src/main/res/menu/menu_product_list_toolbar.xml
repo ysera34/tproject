@@ -2,12 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item
-        android:id="@+id/action_search"
-        android:icon="@drawable/ic_search_white_24dp"
-        android:title="@string/action_search"
-        android:orderInCategory="100"
-        app:showAsAction="always" />
+
         <!--app:showAsAction="ifRoom|collapseActionView"-->
         <!--app:actionViewClass="android.support.v7.widget.SearchView"-->
 
@@ -15,6 +10,13 @@
         android:id="@+id/action_home"
         android:icon="@drawable/ic_home_white_24dp"
         android:title="@string/action_home"
+        android:orderInCategory="100"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/action_search"
+        android:icon="@drawable/ic_search_white_24dp"
+        android:title="@string/action_search"
         android:orderInCategory="100"
         app:showAsAction="always" />
 

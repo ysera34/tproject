@@ -10,7 +10,7 @@
         android:id="@+id/list_item_chemical_card_view"
         android:layout_gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="53dp"
         android:layout_margin="5dp"
         card_view:cardCornerRadius="2dp"
         card_view:contentPadding="3dp">
@@ -22,7 +22,8 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="0.7"
+                android:paddingStart="10dp"
                 android:orientation="vertical"
                 android:gravity="center_vertical">
                 <TextView
@@ -30,24 +31,33 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingBottom="4dp"
-                    android:textSize="20sp"
-                    android:textStyle="normal"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
                     tools:text="chemical_title"/>
 
                 <TextView
                     android:id="@+id/list_item_chemical_title_eng"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="15sp"
+                    android:textSize="14sp"
                     android:text="chemical_title_english"/>
 
             </LinearLayout>
 
             <ImageView
-                android:layout_width="30dp"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginEnd="5dp"
+                android:layout_weight="0.1"
                 android:src="@mipmap/ic_launcher"/>
+            
+            <TextView
+                android:gravity="center"
+                android:text="알러지"
+                android:textSize="14sp"
+                android:textColor="@color/chemical_composition_dangerous_status3_color"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.2"/>
 
         </LinearLayout>
 

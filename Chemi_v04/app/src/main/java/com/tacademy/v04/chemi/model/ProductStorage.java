@@ -27,7 +27,7 @@ public class ProductStorage {
          */
         for (int i = 0; i < 10; i++) {
             Product product = new Product();
-            product.setName("product name: " + i);
+            product.setName("productname:" + i);
             product.setImageResId(R.mipmap.ic_launcher);
             product.setCategoryId((i%2 == 0) ? 11 : 12 );
             mProducts.add(product);
@@ -35,7 +35,7 @@ public class ProductStorage {
 
         for (int i = 0; i < 10; i++) {
             Product product = new Product();
-            product.setName("라네즈 : " + i);
+            product.setName("라네즈:" + i);
             product.setImageResId(R.mipmap.ic_launcher);
             product.setCategoryId((i%2 == 0) ? 13 : 21 );
             mProducts.add(product);
@@ -43,7 +43,7 @@ public class ProductStorage {
 
         for (int i = 0; i < 10; i++) {
             Product product = new Product();
-            product.setName("앙블랑 : " + i);
+            product.setName("앙블랑:" + i);
             product.setImageResId(R.mipmap.ic_launcher);
             product.setCategoryId((i%2 == 0) ? 22 : 23 );
             mProducts.add(product);
@@ -51,7 +51,7 @@ public class ProductStorage {
 
         for (int i = 0; i < 10; i++) {
             Product product = new Product();
-            product.setName("비오템 : " + i);
+            product.setName("비오템:ㅋㅋㅋㅋㅋ" + i);
             product.setImageResId(R.mipmap.ic_launcher);
             product.setCategoryId((i%2 == 0) ? 22 : 23 );
             mProducts.add(product);

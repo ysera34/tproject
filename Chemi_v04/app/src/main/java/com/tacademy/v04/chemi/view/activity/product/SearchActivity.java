@@ -6,11 +6,14 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetDialog;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,11 +27,13 @@ import com.tacademy.v04.chemi.common.SeparatorDecoration;
 import com.tacademy.v04.chemi.model.Product;
 import com.tacademy.v04.chemi.model.ProductStorage;
 import com.tacademy.v04.chemi.view.activity.AppBaseActivity;
+import com.tacademy.v04.chemi.view.fragment.product.SearchFragment;
 
 import java.util.ArrayList;
 
 /**
  * Created by yoon on 2016. 11. 15..
+ * should update fragment transaction
  */
 
 public class SearchActivity extends AppBaseActivity
@@ -45,6 +50,8 @@ public class SearchActivity extends AppBaseActivity
     private ArrayList<Product> mProducts;
     private ProductStorage mProductStorage;
     private String queryString;
+
+    private Fragment mSearchFragmentContainer;
 
     public static Intent newIntent(Context packageContext) {
         Intent intent = new Intent(packageContext, SearchActivity.class);
@@ -69,11 +76,12 @@ public class SearchActivity extends AppBaseActivity
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//                Log.d(TAG, charSequence.toString());
+                Log.d(TAG, charSequence.toString());
+//                Toast.makeText(getApplicationContext(), charSequence.toString(), Toast.LENGTH_SHORT).show();
 //                mProducts = mProductStorage.getSearchProducts(charSequence.toString());
 //                updateUI(mProducts);
-                queryString = charSequence.toString();
-                new SearchTask().execute(queryString);
+//                queryString = charSequence.toString();
+//                new SearchTask().execute(queryString);
             }
 
             @Override
@@ -105,15 +113,15 @@ public class SearchActivity extends AppBaseActivity
 //        mSearchedResultRecyclerView.setAdapter(mResultAdapter);
 
         // search fragment
-//        FragmentManager fm = getSupportFragmentManager();
-//        Fragment mSearchFragmentContainer = fm.findFragmentById(R.id.fragment_search_container);
-//
-//        if (mSearchFragmentContainer == null) {
-//            mSearchFragmentContainer = SearchFragment.newInstance();
-//            fm.beginTransaction()
-//                    .add(R.id.fragment_search_container, mSearchFragmentContainer)
-//                    .commit();
-//        }
+        FragmentManager fm = getSupportFragmentManager();
+        mSearchFragmentContainer = fm.findFragmentById(R.id.fragment_search_container);
+
+        if (mSearchFragmentContainer == null) {
+            mSearchFragmentContainer = SearchFragment.newInstance();
+            fm.beginTransaction()
+                    .add(R.id.fragment_search_container, mSearchFragmentContainer)
+                    .commit();
+        }
     }
 
     private void updateUI(ArrayList<Product> products) {
@@ -289,9 +297,16 @@ public class SearchActivity extends AppBaseActivity
             View view;
             if (viewType == NO_RESULT_VIEW) {
                 view = layoutInflater.inflate(R.layout.view_no_result_search_framelayout, parent, false);
+                mSearchedResultRecyclerView.setVisibility(View.GONE);
                 return new NoResultHolder(view);
             }
             view = layoutInflater.inflate(R.layout.list_item_searched_result, parent, false);
+
+            Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment_search_container);
+            if(fragment != null)
+                getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+
+            mSearchedResultRecyclerView.setVisibility(View.VISIBLE);
             return new ResultHolder(view);
         }
 
@@ -324,15 +339,17 @@ public class SearchActivity extends AppBaseActivity
         public NoResultHolder(View itemView) {
             super(itemView);
 
-//            FragmentManager fm = getSupportFragmentManager();
-//            Fragment mSearchFragmentContainer = fm.findFragmentById(R.id.fragment_search_container);
-//
-//            if (mSearchFragmentContainer == null) {
-//                mSearchFragmentContainer = SearchFragment.newInstance();
-//                fm.beginTransaction()
-//                        .add(R.id.fragment_search_container, mSearchFragmentContainer)
-//                        .commit();
-//            }
+            FragmentManager fm = getSupportFragmentManager();
+            mSearchFragmentContainer = fm.findFragmentById(R.id.fragment_search_container);
+
+            if (mSearchFragmentContainer == null) {
+                mSearchFragmentContainer = SearchFragment.newInstance();
+                fm.beginTransaction()
+                        .remove(mSearchFragmentContainer)
+                        .add(R.id.fragment_search_container, mSearchFragmentContainer)
+                        .addToBackStack(null)
+                        .commit();
+            }
         }
     }
 
@@ -357,7 +374,6 @@ public class SearchActivity extends AppBaseActivity
 
             mEquivalentTextView.setText(equivalentStr);
             mRestTextView.setText(restStr);
-
         }
 
         @Override
@@ -383,9 +399,50 @@ public class SearchActivity extends AppBaseActivity
         protected void onPostExecute(ArrayList<Product> products) {
             super.onPostExecute(products);
             if (products != null) {
-                mResultAdapter = new SearchedResultAdapter(products);
-                mSearchedResultRecyclerView.setAdapter(mResultAdapter);
+                Log.w(TAG, String.valueOf(products.size()));
+                int productSize = products.size();
+                if (productSize > 0) {
+                    mResultAdapter = new SearchedResultAdapter(products);
+                    mSearchedResultRecyclerView.setAdapter(mResultAdapter);
+                } else {
+                    FragmentManager fm = getSupportFragmentManager();
+                    mSearchFragmentContainer = fm.findFragmentById(R.id.fragment_search_container);
+
+                    if (mSearchFragmentContainer != null) {
+                        mSearchFragmentContainer = SearchFragment.newInstance();
+                        fm.beginTransaction()
+                                .remove(mSearchFragmentContainer)
+                                .replace(R.id.fragment_search_container, mSearchFragmentContainer)
+//                                .add(R.id.fragment_search_container, mSearchFragmentContainer)
+                                .addToBackStack(null)
+                                .commit();
+                    } else {
+                        mSearchFragmentContainer = SearchFragment.newInstance();
+                        fm.beginTransaction()
+                                .remove(mSearchFragmentContainer)
+                                .replace(R.id.fragment_search_container, mSearchFragmentContainer)
+//                                .add(R.id.fragment_search_container, mSearchFragmentContainer)
+                                .addToBackStack(null)
+                                .commit();
+                    }
+                }
             }
+        }
+    }
+
+    @Override
+    public void onBackPressed(){
+        FragmentManager fm = getSupportFragmentManager();
+        if (fm.getBackStackEntryCount() > 0) {
+            fm.beginTransaction().remove(mSearchFragmentContainer)
+                    .addToBackStack(null)
+                    .commit();
+        } else {
+            super.onBackPressed();
+            mSearchFragmentContainer = SearchFragment.newInstance();
+            fm.beginTransaction()
+                    .add(R.id.fragment_search_container, mSearchFragmentContainer)
+                    .commit();
         }
     }
 }

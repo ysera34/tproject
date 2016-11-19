@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,13 +23,19 @@ import java.util.List;
  * Created by yoon on 2016. 11. 14..
  */
 
-public class ChemicalListFragment extends Fragment {
+public class ChemicalListFragment extends Fragment implements View.OnClickListener {
 
     private static final String CHEMICAL_DETAILS = "ChemicalDetails";
 
     private RecyclerView mChemicalRecyclerView;
     private ChemicalAdapter mChemicalAdapter;
     private List<Chemical> mChemicals;
+
+    private View mChemicalStateExpandLayout;
+    private View mChemicalDangerousGradeLayout;
+    private TextView mStateExpandTextView;
+    private ImageButton mStateExpandImageButton;
+    private boolean mChemicalDangerousGradeLayoutState = true;
 
     public ChemicalListFragment() {
     }
@@ -56,6 +63,12 @@ public class ChemicalListFragment extends Fragment {
         mChemicalRecyclerView = (RecyclerView) view.findViewById(R.id.product_detail_chemical_recycler_view);
         mChemicalRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        mChemicalStateExpandLayout = view.findViewById(R.id.list_chemical_state_expand_layout);
+        mChemicalStateExpandLayout.setOnClickListener(this);
+        mChemicalDangerousGradeLayout = view.findViewById(R.id.chemical_dangerous_grade_layout);
+        mStateExpandTextView = (TextView) view.findViewById(R.id.list_chemical_state_expand_text);
+        mStateExpandImageButton = (ImageButton) view.findViewById(R.id.list_chemical_state_expand_button);
+
         updateUI();
 
         return view;
@@ -81,6 +94,23 @@ public class ChemicalListFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.list_chemical_state_expand_layout :
+                if (mChemicalDangerousGradeLayoutState) {
+                    mChemicalDangerousGradeLayout.setVisibility(View.GONE);
+                    mStateExpandTextView.setText("통계보기");
+                    mChemicalDangerousGradeLayoutState = false;
+                } else {
+                    mChemicalDangerousGradeLayout.setVisibility(View.VISIBLE);
+                    mStateExpandTextView.setText("접기");
+                    mChemicalDangerousGradeLayoutState = true;
+                }
+            break;
+        }
     }
 
     private class ChemicalAdapter extends RecyclerView.Adapter<ChemicalHolder> {

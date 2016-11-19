@@ -3,6 +3,8 @@
 
     <string name="action_settings">설정</string>
     <string name="action_search">검색</string>
+    <string name="action_archive">보관함</string>
+    <string name="action_share">공유</string>
     <string name="drawer_open">열림</string>
     <string name="drawer_close">닫힘</string>
 
@@ -77,6 +79,7 @@
     <string name="return_to_search_activity">돌아가기</string>
     <string name="remove_search_word_info_message">검색기록이 삭제되었습니다.</string>
     <string name="empty_latest_search_info">최근 검색어 내역이 없습니다</string>
+    <string name="chemical_composition_title">성분 구성</string>
 
     <string-array name="product_list_sort_way">
         <item>@string/product_list_sort_review_total</item>
