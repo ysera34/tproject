@@ -10,14 +10,14 @@ import java.util.UUID;
  * Created by yoon on 2016. 11. 18..
  */
 
-public class SearchPopularStorage {
+public class SearchStorage {
 
-    private static SearchPopularStorage sSearchStorage;
+    private static SearchStorage sSearchStorage;
     private Context mAppContext;
 
     private ArrayList<Search> mSearches;
 
-    private SearchPopularStorage(Context appContext) {
+    private SearchStorage(Context appContext) {
         mAppContext = appContext;
         mSearches = new ArrayList<>();
 
@@ -27,16 +27,17 @@ public class SearchPopularStorage {
         for (int i = 0; i < 8; i++) {
             Search search = new Search();
             search.setRatingNumber(i);
-            search.setSearchWord("인기 검색어 English " + i);
+            search.setSearchWord("한글 English " + i);
             search.setVariationValue(new Random().nextInt(10));
             search.setVariationState(i%2 == 0);
             mSearches.add(search);
         }
+
     }
 
-    public static SearchPopularStorage get(Context context) {
+    public static SearchStorage get(Context context) {
         if (sSearchStorage == null) {
-            sSearchStorage = new SearchPopularStorage(context.getApplicationContext());
+            sSearchStorage = new SearchStorage(context.getApplicationContext());
         }
         return sSearchStorage;
     }

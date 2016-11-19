@@ -7,6 +7,8 @@
     <color name="colorWhiteBackground">#ffffff</color>
     <color name="colorBackground">#eeeeee</color>
     <color name="colorFont">#4a4a4a</color>
+    <color name="colorFontEquivalent">#000000</color>
+    <color name="colorFontRest">#9e9e9e</color>
 
     <color name="colorPrimary_searchActivity">#dedede</color>
     <color name="colorPrimaryDark_searchActivity">#9b9b9b</color>

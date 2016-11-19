@@ -5,20 +5,27 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetDialog;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tacademy.v04.chemi.R;
 import com.tacademy.v04.chemi.common.OnPassDataListener;
+import com.tacademy.v04.chemi.common.SeparatorDecoration;
+import com.tacademy.v04.chemi.model.Product;
+import com.tacademy.v04.chemi.model.ProductStorage;
 import com.tacademy.v04.chemi.view.activity.AppBaseActivity;
-import com.tacademy.v04.chemi.view.fragment.product.SearchFragment;
+
+import java.util.ArrayList;
 
 /**
  * Created by yoon on 2016. 11. 15..
@@ -32,6 +39,10 @@ public class SearchActivity extends AppBaseActivity
     private Toolbar mToolbar;
     private EditText mSearchProductEditText;
     private BottomSheetDialog mCategoryBottomSheetDialog;
+
+    private RecyclerView mSearchedResultRecyclerView;
+    private SearchedResultAdapter mResultAdapter;
+    private ArrayList<Product> mProducts;
 
     public static Intent newIntent(Context packageContext) {
         Intent intent = new Intent(packageContext, SearchActivity.class);
@@ -75,16 +86,27 @@ public class SearchActivity extends AppBaseActivity
 //        mCategoryBottomSheetDialog.setContentView(mBottomSheetView);
 //        (mBottomSheetView.findViewById(R.id.bottom_sheet_button)).setOnClickListener(this);
 
-        // search fragment
-        FragmentManager fm = getSupportFragmentManager();
-        Fragment mSearchFragmentContainer = fm.findFragmentById(R.id.fragment_search_container);
+        mSearchedResultRecyclerView = (RecyclerView) findViewById(R.id.searched_result_recycler_view);
+        mSearchedResultRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        SeparatorDecoration decoration =
+                new SeparatorDecoration(getApplicationContext(), android.R.color.transparent, 1.5f);
+        mSearchedResultRecyclerView.addItemDecoration(decoration);
+        ProductStorage productStorage = ProductStorage.get(getApplicationContext());
+        mProducts = productStorage.getSearchProducts("앙");
+        Log.d(TAG, String.valueOf(mProducts.size()));
+        mResultAdapter = new SearchedResultAdapter(mProducts);
+        mSearchedResultRecyclerView.setAdapter(mResultAdapter);
 
-        if (mSearchFragmentContainer == null) {
-            mSearchFragmentContainer = SearchFragment.newInstance();
-            fm.beginTransaction()
-                    .add(R.id.fragment_search_container, mSearchFragmentContainer)
-                    .commit();
-        }
+        // search fragment
+//        FragmentManager fm = getSupportFragmentManager();
+//        Fragment mSearchFragmentContainer = fm.findFragmentById(R.id.fragment_search_container);
+//
+//        if (mSearchFragmentContainer == null) {
+//            mSearchFragmentContainer = SearchFragment.newInstance();
+//            fm.beginTransaction()
+//                    .add(R.id.fragment_search_container, mSearchFragmentContainer)
+//                    .commit();
+//        }
     }
 
     @Override
@@ -234,5 +256,57 @@ public class SearchActivity extends AppBaseActivity
     @Override
     public void onStringDataPass(String data) {
         mSearchProductEditText.setText(data);
+    }
+
+    private class SearchedResultAdapter extends RecyclerView.Adapter<ResultHolder> {
+
+        private ArrayList<Product> mProducts;
+
+        public SearchedResultAdapter(ArrayList<Product> products) {
+            mProducts = products;
+        }
+
+        @Override
+        public ResultHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            LayoutInflater layoutInflater = LayoutInflater.from(getApplicationContext());
+            View view = layoutInflater.inflate(R.layout.list_item_searched_result, parent, false);
+            return new ResultHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(ResultHolder holder, int position) {
+            Product product = mProducts.get(position);
+            holder.bindProduct(product);
+        }
+
+        @Override
+        public int getItemCount() {
+            return mProducts.size();
+        }
+    }
+
+    private class ResultHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        private Product mProduct;
+        private TextView mEquivalentTextView;
+        private TextView mRestTextView;
+
+        public ResultHolder(View itemView) {
+            super(itemView);
+            itemView.setOnClickListener(this);
+
+            mEquivalentTextView = (TextView) itemView.findViewById(R.id.list_item_searched_equivalent_word);
+            mRestTextView = (TextView) itemView.findViewById(R.id.list_item_searched_rest_word);
+        }
+
+        public void bindProduct(Product product) {
+            mProduct = product;
+
+        }
+
+        @Override
+        public void onClick(View view) {
+
+        }
     }
 }

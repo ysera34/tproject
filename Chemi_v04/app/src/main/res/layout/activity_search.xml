@@ -36,12 +36,20 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <!--<include layout="@layout/content_main"/>-->
-    <FrameLayout
-        android:id="@+id/fragment_search_container"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/searched_result_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+        android:padding="16dp">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <!--<include layout="@layout/content_main"/>-->
+    <!--<FrameLayout-->
+        <!--android:id="@+id/fragment_search_container"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--app:layout_behavior="@string/appbar_scrolling_view_behavior"/>-->
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/category_fab"

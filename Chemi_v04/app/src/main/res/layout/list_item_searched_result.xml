@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white">
+
+    <TextView
+        android:id="@+id/list_item_searched_equivalent_word"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:text="앙블랑"
+        android:textColor="@color/colorFontEquivalent"
+        android:padding="16dp"
+        android:textSize="17sp"/>
+
+    <TextView
+        android:id="@+id/list_item_searched_rest_word"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:text="앙블랑"
+        android:textColor="@color/colorFontRest"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:textSize="17sp"/>
+
+
+</LinearLayout>

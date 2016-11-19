@@ -25,11 +25,35 @@ public class ProductStorage {
         /*
         sample data
          */
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 10; i++) {
             Product product = new Product();
             product.setName("product name: " + i);
             product.setImageResId(R.mipmap.ic_launcher);
             product.setCategoryId((i%2 == 0) ? 11 : 12 );
+            mProducts.add(product);
+        }
+
+        for (int i = 0; i < 10; i++) {
+            Product product = new Product();
+            product.setName("라네즈 : " + i);
+            product.setImageResId(R.mipmap.ic_launcher);
+            product.setCategoryId((i%2 == 0) ? 13 : 21 );
+            mProducts.add(product);
+        }
+
+        for (int i = 0; i < 10; i++) {
+            Product product = new Product();
+            product.setName("앙블랑 : " + i);
+            product.setImageResId(R.mipmap.ic_launcher);
+            product.setCategoryId((i%2 == 0) ? 22 : 23 );
+            mProducts.add(product);
+        }
+
+        for (int i = 0; i < 10; i++) {
+            Product product = new Product();
+            product.setName("비오템 : " + i);
+            product.setImageResId(R.mipmap.ic_launcher);
+            product.setCategoryId((i%2 == 0) ? 22 : 23 );
             mProducts.add(product);
         }
     }
@@ -52,6 +76,21 @@ public class ProductStorage {
             }
         }
         return null;
+    }
+
+    public ArrayList<Product> getSearchProducts(String searchQuery) {
+
+        ArrayList<Product> products = new ArrayList<>();
+        int searchQueryLength = searchQuery.length();
+        String searchingStr;
+
+        for (Product product : mProducts) {
+            searchingStr = product.getName().substring(0, searchQueryLength);
+            if (searchingStr.equals(searchQuery)) {
+                products.add(product);
+            }
+        }
+        return products;
     }
 
     public ArrayList<Product> getCategoryProducts(int categoryId) {
