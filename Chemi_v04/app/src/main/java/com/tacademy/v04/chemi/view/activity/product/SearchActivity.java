@@ -44,6 +44,7 @@ public class SearchActivity extends AppBaseActivity
     private SearchedResultAdapter mResultAdapter;
     private ArrayList<Product> mProducts;
     private ProductStorage mProductStorage;
+    private String queryString;
 
     public static Intent newIntent(Context packageContext) {
         Intent intent = new Intent(packageContext, SearchActivity.class);
@@ -71,7 +72,8 @@ public class SearchActivity extends AppBaseActivity
 //                Log.d(TAG, charSequence.toString());
 //                mProducts = mProductStorage.getSearchProducts(charSequence.toString());
 //                updateUI(mProducts);
-                new SearchTask().execute(charSequence.toString());
+                queryString = charSequence.toString();
+                new SearchTask().execute(queryString);
             }
 
             @Override
@@ -98,7 +100,7 @@ public class SearchActivity extends AppBaseActivity
         mSearchedResultRecyclerView.addItemDecoration(decoration);
         mProducts = new ArrayList<>();
         mProductStorage = ProductStorage.get(getApplicationContext());
-//        mProducts = mProductStorage.getSearchProducts("앙");
+//        mProducts = mProductStorage.getSearchProducts("query");
 //        mResultAdapter = new SearchedResultAdapter(mProducts);
 //        mSearchedResultRecyclerView.setAdapter(mResultAdapter);
 
@@ -112,7 +114,6 @@ public class SearchActivity extends AppBaseActivity
 //                    .add(R.id.fragment_search_container, mSearchFragmentContainer)
 //                    .commit();
 //        }
-
     }
 
     private void updateUI(ArrayList<Product> products) {
@@ -274,7 +275,7 @@ public class SearchActivity extends AppBaseActivity
         mSearchProductEditText.setText(data);
     }
 
-    private class SearchedResultAdapter extends RecyclerView.Adapter<ResultHolder> {
+    private class SearchedResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         private ArrayList<Product> mProducts;
 
@@ -283,21 +284,55 @@ public class SearchActivity extends AppBaseActivity
         }
 
         @Override
-        public ResultHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(getApplicationContext());
-            View view = layoutInflater.inflate(R.layout.list_item_searched_result, parent, false);
+            View view;
+            if (viewType == NO_RESULT_VIEW) {
+                view = layoutInflater.inflate(R.layout.view_no_result_search_framelayout, parent, false);
+                return new NoResultHolder(view);
+            }
+            view = layoutInflater.inflate(R.layout.list_item_searched_result, parent, false);
             return new ResultHolder(view);
         }
 
         @Override
-        public void onBindViewHolder(ResultHolder holder, int position) {
-            Product product = mProducts.get(position);
-            holder.bindProduct(product);
+        public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+            if (holder instanceof ResultHolder) {
+                Product product = mProducts.get(position);
+                ((ResultHolder) holder).bindProduct(product);
+            }
         }
 
         @Override
         public int getItemCount() {
-            return mProducts.size();
+            return mProducts.size() > 0 ? mProducts.size() : 1;
+        }
+
+        @Override
+        public int getItemViewType(int position) {
+            if (mProducts.size() == 0) {
+                return NO_RESULT_VIEW;
+            }
+            return super.getItemViewType(position);
+        }
+    }
+
+    private static final int NO_RESULT_VIEW = -1;
+
+    private class NoResultHolder extends RecyclerView.ViewHolder {
+
+        public NoResultHolder(View itemView) {
+            super(itemView);
+
+//            FragmentManager fm = getSupportFragmentManager();
+//            Fragment mSearchFragmentContainer = fm.findFragmentById(R.id.fragment_search_container);
+//
+//            if (mSearchFragmentContainer == null) {
+//                mSearchFragmentContainer = SearchFragment.newInstance();
+//                fm.beginTransaction()
+//                        .add(R.id.fragment_search_container, mSearchFragmentContainer)
+//                        .commit();
+//            }
         }
     }
 
@@ -317,8 +352,11 @@ public class SearchActivity extends AppBaseActivity
 
         public void bindProduct(Product product) {
             mProduct = product;
-            mEquivalentTextView.setText(mProduct.getName());
-            mRestTextView.setText(mProduct.getName());
+            String equivalentStr = queryString;
+            String restStr = mProduct.getName().substring(queryString.length());
+
+            mEquivalentTextView.setText(equivalentStr);
+            mRestTextView.setText(restStr);
 
         }
 
