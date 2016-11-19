@@ -84,13 +84,16 @@ public class ProductStorage {
         int searchQueryLength = searchQuery.length();
         String searchingStr;
 
-        for (Product product : mProducts) {
-            searchingStr = product.getName().substring(0, searchQueryLength);
-            if (searchingStr.equals(searchQuery)) {
-                products.add(product);
+        if (searchQueryLength != 0 ) {
+            for (Product product : mProducts) {
+                searchingStr = product.getName().substring(0, searchQueryLength);
+                if (searchingStr.equals(searchQuery)) {
+                    products.add(product);
+                }
             }
+            return products;
         }
-        return products;
+        return null;
     }
 
     public ArrayList<Product> getCategoryProducts(int categoryId) {

@@ -2,6 +2,7 @@ package com.tacademy.v04.chemi.view.activity.product;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetDialog;
@@ -10,7 +11,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,6 +43,7 @@ public class SearchActivity extends AppBaseActivity
     private RecyclerView mSearchedResultRecyclerView;
     private SearchedResultAdapter mResultAdapter;
     private ArrayList<Product> mProducts;
+    private ProductStorage mProductStorage;
 
     public static Intent newIntent(Context packageContext) {
         Intent intent = new Intent(packageContext, SearchActivity.class);
@@ -67,7 +68,10 @@ public class SearchActivity extends AppBaseActivity
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                Log.d(TAG, charSequence.toString());
+//                Log.d(TAG, charSequence.toString());
+//                mProducts = mProductStorage.getSearchProducts(charSequence.toString());
+//                updateUI(mProducts);
+                new SearchTask().execute(charSequence.toString());
             }
 
             @Override
@@ -86,16 +90,17 @@ public class SearchActivity extends AppBaseActivity
 //        mCategoryBottomSheetDialog.setContentView(mBottomSheetView);
 //        (mBottomSheetView.findViewById(R.id.bottom_sheet_button)).setOnClickListener(this);
 
+        // search edit_text auto completed
         mSearchedResultRecyclerView = (RecyclerView) findViewById(R.id.searched_result_recycler_view);
         mSearchedResultRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         SeparatorDecoration decoration =
                 new SeparatorDecoration(getApplicationContext(), android.R.color.transparent, 1.5f);
         mSearchedResultRecyclerView.addItemDecoration(decoration);
-        ProductStorage productStorage = ProductStorage.get(getApplicationContext());
-        mProducts = productStorage.getSearchProducts("앙");
-        Log.d(TAG, String.valueOf(mProducts.size()));
-        mResultAdapter = new SearchedResultAdapter(mProducts);
-        mSearchedResultRecyclerView.setAdapter(mResultAdapter);
+        mProducts = new ArrayList<>();
+        mProductStorage = ProductStorage.get(getApplicationContext());
+//        mProducts = mProductStorage.getSearchProducts("앙");
+//        mResultAdapter = new SearchedResultAdapter(mProducts);
+//        mSearchedResultRecyclerView.setAdapter(mResultAdapter);
 
         // search fragment
 //        FragmentManager fm = getSupportFragmentManager();
@@ -107,6 +112,17 @@ public class SearchActivity extends AppBaseActivity
 //                    .add(R.id.fragment_search_container, mSearchFragmentContainer)
 //                    .commit();
 //        }
+
+    }
+
+    private void updateUI(ArrayList<Product> products) {
+
+        if (mResultAdapter == null) {
+            mResultAdapter = new SearchedResultAdapter(products);
+            mSearchedResultRecyclerView.setAdapter(mResultAdapter);
+        } else {
+            mResultAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override
@@ -301,12 +317,37 @@ public class SearchActivity extends AppBaseActivity
 
         public void bindProduct(Product product) {
             mProduct = product;
+            mEquivalentTextView.setText(mProduct.getName());
+            mRestTextView.setText(mProduct.getName());
 
         }
 
         @Override
         public void onClick(View view) {
 
+        }
+    }
+
+    private class SearchTask extends AsyncTask<String, ArrayList<Product>, ArrayList<Product>> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            mProducts.clear();
+        }
+
+        @Override
+        protected ArrayList<Product> doInBackground(String... strings) {
+            return mProductStorage.getSearchProducts(strings[0]);
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<Product> products) {
+            super.onPostExecute(products);
+            if (products != null) {
+                mResultAdapter = new SearchedResultAdapter(products);
+                mSearchedResultRecyclerView.setAdapter(mResultAdapter);
+            }
         }
     }
 }

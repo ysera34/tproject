@@ -30,7 +30,9 @@
                 android:background="@android:color/transparent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center_vertical"/>
+                android:gravity="center_vertical"
+                android:maxLength="20"
+                android:singleLine="true"/>
 
         </android.support.v7.widget.Toolbar>
 
@@ -40,6 +42,7 @@
         android:id="@+id/searched_result_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/colorBackground"
         android:padding="16dp">
 
     </android.support.v7.widget.RecyclerView>
