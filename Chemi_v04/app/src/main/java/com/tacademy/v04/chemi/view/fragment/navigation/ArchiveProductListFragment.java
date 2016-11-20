@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.tacademy.v04.chemi.R;
 import com.tacademy.v04.chemi.model.Product;
@@ -23,13 +24,23 @@ import java.util.ArrayList;
  * ChildFragment of ArchiveFragment
  */
 
-public class ArchiveProductListFragment extends Fragment {
+public class ArchiveProductListFragment extends Fragment implements View.OnClickListener {
 
     private static final String ARCHIVE_PRODUCT = "ArchiveProduct";
 
     private RecyclerView mArchiveProductRecyclerView;
     private ArchiveProductAdapter mArchiveProductAdapter;
     private ArrayList<Product> mArchiveProducts;
+    private ArrayList<Product> mArchiveProductDeleteSelected;
+
+    private View mArchiveProductListHeaderA;
+    private View mArchiveProductListHeaderB;
+    private View mArchiveProductTotalSelectLayout;
+
+    private TextView mArchiveProductTotalTextView;
+    private TextView mArchiveProductEditTextView;
+    private TextView mArchiveProductDeleteTextView;
+    private TextView mArchiveProductCompleteTextView;
 
     public ArchiveProductListFragment() {
     }
@@ -46,6 +57,8 @@ public class ArchiveProductListFragment extends Fragment {
         ProductArchiveStorage productArchiveStorage = ProductArchiveStorage.get(getActivity());
         mArchiveProducts = productArchiveStorage.getArchiveProducts();
 
+        mArchiveProductDeleteSelected = productArchiveStorage.getArchiveDeleteSelectProducts();
+
     }
 
     @Nullable
@@ -54,6 +67,16 @@ public class ArchiveProductListFragment extends Fragment {
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 //        return super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_archive_product_list, container, false);
+        mArchiveProductListHeaderA = view.findViewById(R.id.archive_product_list_header_a);
+        mArchiveProductListHeaderB = view.findViewById(R.id.archive_product_list_header_b);
+        mArchiveProductTotalSelectLayout = view.findViewById(R.id.archive_product_list_total_select_layout);
+        mArchiveProductTotalSelectLayout.setOnClickListener(this);
+
+        mArchiveProductTotalTextView = (TextView) view.findViewById(R.id.archive_product_list_total);
+        mArchiveProductEditTextView = (TextView) view.findViewById(R.id.archive_product_list_edit_text_view);
+        mArchiveProductEditTextView.setOnClickListener(this);
+        mArchiveProductDeleteTextView = (TextView) view.findViewById(R.id.archive_product_list_delete_text_view);
+        mArchiveProductCompleteTextView = (TextView) view.findViewById(R.id.archive_product_list_complete_text_view);
 
         mArchiveProductRecyclerView = (RecyclerView) view.findViewById(R.id.archive_product_recycler_view);
         mArchiveProductRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -82,6 +105,35 @@ public class ArchiveProductListFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mArchiveProductTotalTextView.setText(String.valueOf(mArchiveProducts.size()));
+
+        if (mArchiveProductDeleteSelected.size() > 0) {
+            String deleteNumberStr = getString(R.string.archive_product_delete_number,
+                    String.valueOf(mArchiveProductDeleteSelected.size()));
+            mArchiveProductDeleteTextView.setText(getString(R.string.archive_product_list_delete_text) + deleteNumberStr);
+            mArchiveProductDeleteTextView.setTextColor(getResources().getColor(R.color.colorArchiveEditFont));
+            mArchiveProductCompleteTextView.setTextColor(getResources().getColor(R.color.colorArchiveEditFont));
+        }
+
+    }
+
+    private boolean mHeaderState = false;
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.archive_product_list_edit_text_view :
+                if (!mHeaderState) {
+                    mArchiveProductListHeaderA.setVisibility(View.GONE);
+                    mArchiveProductListHeaderB.setVisibility(View.VISIBLE);
+                }
+
+                break;
+            case R.id.archive_product_list_total_select_layout :
+                Toast.makeText(getActivity(), "보관함에 있는 상품을 전체 선택하였습니다.", Toast.LENGTH_SHORT).show();
+
+                break;
+        }
     }
 
     private class ArchiveProductAdapter extends RecyclerView.Adapter<ArchiveProductHolder> {
@@ -112,10 +164,12 @@ public class ArchiveProductListFragment extends Fragment {
         }
     }
 
-    private class ArchiveProductHolder extends RecyclerView.ViewHolder {
+    private class ArchiveProductHolder extends RecyclerView.ViewHolder
+            implements View.OnClickListener{
 
         private Product mProduct;
 
+        private ImageView mArchiveProductSelectImageView;
         private ImageView mArchiveProductImageView;
         private TextView mArchiveProductNameTextView;
         private RatingBar mArchiveProductRatingBar;
@@ -124,6 +178,9 @@ public class ArchiveProductListFragment extends Fragment {
         public ArchiveProductHolder(View itemView) {
             super(itemView);
 
+            mArchiveProductSelectImageView = (ImageView)
+                    itemView.findViewById(R.id.list_item_archive_product_select_image_view);
+            mArchiveProductSelectImageView.setOnClickListener(this);
             mArchiveProductImageView = (ImageView)
                     itemView.findViewById(R.id.list_item_archive_product_image);
             mArchiveProductNameTextView = (TextView)
@@ -137,6 +194,30 @@ public class ArchiveProductListFragment extends Fragment {
         public void bindArchiveProduct(Product product) {
             mProduct = product;
             mArchiveProductNameTextView.setText(mProduct.getName());
+            if (mProduct.isArchiveEditSelect()) {
+                mArchiveProductSelectImageView.setImageResource(R.drawable.ic_check_circle_check_24dp);
+            }
+
+        }
+
+        @Override
+        public void onClick(View view) {
+            switch (view.getId()) {
+                case R.id.list_item_archive_product_select_image_view :
+                    if (!mProduct.isArchiveEditSelect()) {
+                        mArchiveProductSelectImageView.setImageResource(R.drawable.ic_check_circle_check_24dp);
+                        mProduct.setArchiveEditSelect(true);
+                        Toast.makeText(getActivity(), mProduct.getName() + "이(가) 삭제 항목에 추가 되었습니다.",
+                                Toast.LENGTH_SHORT).show();
+                    } else {
+                        mArchiveProductSelectImageView.setImageResource(R.drawable.ic_check_circle_uncheck_24dp);
+                        mProduct.setArchiveEditSelect(false);
+                        Toast.makeText(getActivity(), mProduct.getName() + "이(가) 삭제 항목에서 해제 되었습니다.",
+                                Toast.LENGTH_SHORT).show();
+                    }
+
+                    break;
+            }
         }
     }
 }

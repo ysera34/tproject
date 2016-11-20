@@ -85,6 +85,9 @@
     <string name="chemical_composition_title">성분 구성</string>
     <string name="archive_product_tab_title">제품</string>
     <string name="archive_content_tab_title">컨텐츠</string>
+    <string name="archive_product_delete_number">(%s)</string>
+    <string name="archive_product_list_delete_text">삭제</string>
+    <string name="archive_product_list_complete_text">완료</string>
 
 
     <string-array name="product_list_sort_way">

@@ -90,7 +90,9 @@
     <string name="chemical_composition_title">Chemical Composition</string>
     <string name="archive_product_tab_title">Products</string>
     <string name="archive_content_tab_title">Contents</string>
-
+    <string name="archive_product_delete_number">(%s)</string>
+    <string name="archive_product_list_delete_text">Delete</string>
+    <string name="archive_product_list_complete_text">Complete</string>
 
     <string-array name="product_list_sort_way">
         <item>@string/product_list_sort_review_total</item>

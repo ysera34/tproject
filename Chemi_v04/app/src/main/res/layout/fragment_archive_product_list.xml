@@ -80,6 +80,7 @@
             <!--android:paddingTop="20dp"-->
             <!--android:paddingBottom="12dp"-->
             <LinearLayout
+                android:id="@+id/archive_product_list_total_select_layout"
                 android:layout_width="120dp"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
@@ -114,17 +115,16 @@
 
                 <TextView
                     android:id="@+id/archive_product_list_delete_text_view"
-                    android:text="삭제"
+                    android:text="@string/archive_product_list_delete_text"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:layout_weight="1">
-
+                    android:layout_weight="1"
+                    android:gravity="center">
                 </TextView>
 
                 <TextView
                     android:id="@+id/archive_product_list_complete_text_view"
-                    android:text="완료"
+                    android:text="@string/archive_product_list_complete_text"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:gravity="center"

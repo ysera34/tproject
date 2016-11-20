@@ -28,7 +28,7 @@
     <color name="chemical_card_view_clicked_color">#FB8C00</color>
     <color name="chemical_card_view_clicked_text_color">#B6B6B7</color>
 
-
+    <color name="colorArchiveEditFont">#FB8C00</color>
     <color name="colorWhiteFont">#ffffff</color>
     <color name="chemical_composition_dangerous_status_name_font_color">#757575</color>
     <color name="chemical_composition_dangerous_status1_color">#19b391</color>

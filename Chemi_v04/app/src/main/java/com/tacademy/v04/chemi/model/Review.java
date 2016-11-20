@@ -11,7 +11,7 @@ public class Review {
     private UUID mId;
     private UUID mUserId;
     private float mRatingValue;
-    private Boolean mPhotoCheck;
+    private boolean mPhotoCheck;
     private String mPositiveContent;
     private String mNegativeContent;
 
@@ -43,11 +43,11 @@ public class Review {
         mRatingValue = ratingValue;
     }
 
-    public Boolean getPhotoCheck() {
+    public boolean isPhotoCheck() {
         return mPhotoCheck;
     }
 
-    public void setPhotoCheck(Boolean photoCheck) {
+    public void setPhotoCheck(boolean photoCheck) {
         mPhotoCheck = photoCheck;
     }
 

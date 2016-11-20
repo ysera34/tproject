@@ -30,6 +30,7 @@ public class ProductArchiveStorage {
             product.setName("productname:" + i);
             product.setImageResId(R.mipmap.ic_launcher);
             product.setCategoryId((i%2 == 0) ? 11 : 12 );
+            product.setArchiveEditSelect(i%3 == 0);
             mProducts.add(product);
         }
 
@@ -76,6 +77,17 @@ public class ProductArchiveStorage {
             }
         }
         return null;
+    }
+
+    public ArrayList<Product> getArchiveDeleteSelectProducts() {
+        ArrayList<Product> products = new ArrayList<>();
+
+        for (Product product : mProducts) {
+            if (product.isArchiveEditSelect()) {
+                products.add(product);
+            }
+        }
+        return products;
     }
 
 //    public ArrayList<Product> getSearchArchiveProducts(String searchQuery) {
