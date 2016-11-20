@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
-        android:theme="@style/ProductDetailTabLayoutTheme"
+        android:theme="@style/ChemiTabLayoutTheme"
         app:tabGravity="fill"
         app:tabMode="fixed"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"

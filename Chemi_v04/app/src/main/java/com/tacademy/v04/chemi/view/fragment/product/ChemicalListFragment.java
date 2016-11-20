@@ -17,7 +17,7 @@ import com.tacademy.v04.chemi.R;
 import com.tacademy.v04.chemi.model.Chemical;
 import com.tacademy.v04.chemi.model.ChemicalStorage;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Created by yoon on 2016. 11. 14..
@@ -29,7 +29,7 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
 
     private RecyclerView mChemicalRecyclerView;
     private ChemicalAdapter mChemicalAdapter;
-    private List<Chemical> mChemicals;
+    private ArrayList<Chemical> mChemicals;
 
     private View mChemicalStateExpandLayout;
     private View mChemicalDangerousGradeLayout;
@@ -103,10 +103,12 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
                 if (mChemicalDangerousGradeLayoutState) {
                     mChemicalDangerousGradeLayout.setVisibility(View.GONE);
                     mStateExpandTextView.setText("통계보기");
+                    mStateExpandImageButton.setImageResource(R.drawable.ic_keyboard_arrow_down_48dp);
                     mChemicalDangerousGradeLayoutState = false;
                 } else {
                     mChemicalDangerousGradeLayout.setVisibility(View.VISIBLE);
                     mStateExpandTextView.setText("접기");
+                    mStateExpandImageButton.setImageResource(R.drawable.ic_keyboard_arrow_up_48dp);
                     mChemicalDangerousGradeLayoutState = true;
                 }
             break;
@@ -115,15 +117,15 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
 
     private class ChemicalAdapter extends RecyclerView.Adapter<ChemicalHolder> {
 
-        private List<Chemical> mChemicals;
+        private ArrayList<Chemical> mChemicals;
 
-        public ChemicalAdapter(List<Chemical> chemicals) {
+        public ChemicalAdapter(ArrayList<Chemical> chemicals) {
             mChemicals = chemicals;
         }
 
         @Override
         public ChemicalHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
+            LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
             View view = layoutInflater
                     .inflate(R.layout.list_item_chemical, parent, false);
             return new ChemicalHolder(view);

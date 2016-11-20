@@ -12,6 +12,7 @@
     <string name="nav_item_contents">컨텐츠</string>
     <string name="nav_item_archive">보관함</string>
     <string name="nav_item_reviews">작성한 리뷰 관리</string>
+    <string name="nav_item_custom_search_log">지난 맞춤 검색 기록</string>
     <string name="nav_item_analyze_request">제품 분석 요청</string>
     <string name="nav_item_notifications">공지사항</string>
     <string name="nav_item_faq">자주 묻는 질문</string>
@@ -26,6 +27,7 @@
         <item>@string/nav_item_contents</item>
         <item>@string/nav_item_archive</item>
         <item>@string/nav_item_reviews</item>
+        <item>@string/nav_item_custom_search_log</item>
         <item>@string/nav_item_analyze_request</item>
         <item>@string/nav_item_notifications</item>
         <item>@string/nav_item_faq</item>
@@ -38,6 +40,7 @@
     <string name="fragment_title_contents">컨텐츠</string>
     <string name="fragment_title_archive">보관함</string>
     <string name="fragment_title_reviews">작성한 리뷰 관리</string>
+    <string name="fragment_title_custom_search_log">지난 맞춤 검색 기록</string>
     <string name="fragment_title_analyze_request">제품 분석 요청</string>
     <string name="fragment_title_notifications">공지사항</string>
     <string name="fragment_title_faq">자주 묻는 질문</string>
@@ -80,6 +83,9 @@
     <string name="remove_search_word_info_message">검색기록이 삭제되었습니다.</string>
     <string name="empty_latest_search_info">최근 검색어 내역이 없습니다</string>
     <string name="chemical_composition_title">성분 구성</string>
+    <string name="archive_product_tab_title">제품</string>
+    <string name="archive_content_tab_title">컨텐츠</string>
+
 
     <string-array name="product_list_sort_way">
         <item>@string/product_list_sort_review_total</item>

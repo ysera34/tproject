@@ -19,7 +19,7 @@ import com.tacademy.v04.chemi.common.SeparatorDecoration;
 import com.tacademy.v04.chemi.model.Search;
 import com.tacademy.v04.chemi.model.SearchLatestStorage;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Created by yoon on 2016. 11. 18..
@@ -31,7 +31,7 @@ public class SearchLatestListFragment extends Fragment {
 
     private RecyclerView mSearchLatestRecyclerView;
     private LatestWordAdapter mLatestWordAdapter;
-    private List<Search> mSearches;
+    private ArrayList<Search> mSearches;
     private SearchLatestStorage searchLatestStorage;
 
     public SearchLatestListFragment() {
@@ -93,15 +93,15 @@ public class SearchLatestListFragment extends Fragment {
 
     private class LatestWordAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-        private List<Search> mSearches;
+        private ArrayList<Search> mSearches;
 
-        public LatestWordAdapter(List<Search> searches) {
+        public LatestWordAdapter(ArrayList<Search> searches) {
             mSearches = searches;
         }
 
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
+            LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
             View view;
             if (viewType == EMPTY_VIEW) {
                 view = layoutInflater.inflate(R.layout.view_empty_latest_search, parent,false);

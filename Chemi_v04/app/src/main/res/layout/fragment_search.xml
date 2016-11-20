@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
-        android:theme="@style/ProductDetailTabLayoutTheme"
+        android:theme="@style/ChemiTabLayoutTheme"
         android:layout_marginBottom="2dp"
         app:tabGravity="fill"
         app:tabMode="fixed"

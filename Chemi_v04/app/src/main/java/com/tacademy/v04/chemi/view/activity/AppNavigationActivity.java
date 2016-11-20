@@ -181,6 +181,9 @@ public class AppNavigationActivity extends AppBaseActivity implements
         } else if (id == R.id.nav_reviews) {
             fragment = ReviewLogFragment.newInstance();
             mToolbar.setTitle(R.string.fragment_title_reviews);
+        } else if (id == R.id.nav_custom_search_log) {
+            fragment = RequestChemicalFragment.newInstance();
+            mToolbar.setTitle(R.string.fragment_title_custom_search_log);
         } else if (id == R.id.nav_item_analyze_request) {
             fragment = RequestChemicalFragment.newInstance();
             mToolbar.setTitle(R.string.fragment_title_analyze_request);

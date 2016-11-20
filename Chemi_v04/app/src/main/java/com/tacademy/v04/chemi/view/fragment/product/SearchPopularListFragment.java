@@ -19,7 +19,7 @@ import com.tacademy.v04.chemi.common.SeparatorDecoration;
 import com.tacademy.v04.chemi.model.Search;
 import com.tacademy.v04.chemi.model.SearchPopularStorage;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Created by yoon on 2016. 11. 18..
@@ -31,7 +31,7 @@ public class SearchPopularListFragment extends Fragment {
 
     private RecyclerView mSearchPopularRecyclerView;
     private PopularWordAdapter mPopularWordAdapter;
-    private List<Search> mSearches;
+    private ArrayList<Search> mSearches;
 
     public SearchPopularListFragment() {
     }
@@ -92,15 +92,15 @@ public class SearchPopularListFragment extends Fragment {
 
     private class PopularWordAdapter extends RecyclerView.Adapter<PopularWordHolder> {
 
-        private List<Search> mSearches;
+        private ArrayList<Search> mSearches;
 
-        public PopularWordAdapter(List<Search> searches) {
+        public PopularWordAdapter(ArrayList<Search> searches) {
             mSearches = searches;
         }
 
         @Override
         public PopularWordHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
+            LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
             View view = layoutInflater
                     .inflate(R.layout.list_item_search_popular, parent, false);
             return new PopularWordHolder(view);

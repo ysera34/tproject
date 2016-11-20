@@ -23,7 +23,7 @@ import com.tacademy.v04.chemi.model.ProductStorage;
 import com.tacademy.v04.chemi.view.activity.product.ProductActivity;
 import com.tacademy.v04.chemi.view.activity.product.ProductListActivity;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Created by yoon on 2016. 11. 14..
@@ -39,7 +39,7 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
 
     private RecyclerView mProductRecyclerView;
     private ProductAdapter mProductAdapter;
-    private List<Product> mProducts;
+    private ArrayList<Product> mProducts;
     private int mCategoryId;
 
     private TextView mProductTotalTextView;
@@ -171,15 +171,15 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
 
     private class ProductAdapter extends RecyclerView.Adapter<ProductHolder> {
 
-        private List<Product> mProducts;
+        private ArrayList<Product> mProducts;
 
-        public ProductAdapter(List<Product> products) {
+        public ProductAdapter(ArrayList<Product> products) {
             mProducts = products;
         }
 
         @Override
         public ProductHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
+            LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
             View view = layoutInflater
                     .inflate(R.layout.list_item_product, parent, false);
             return new ProductHolder(view);

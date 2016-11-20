@@ -12,6 +12,7 @@
     <string name="nav_item_contents">Contents</string>
     <string name="nav_item_archive">Archive</string>
     <string name="nav_item_reviews">Reviews</string>
+    <string name="nav_item_custom_search_log">Custom Search Log</string>
     <string name="nav_item_analyze_request">Request to Analyze</string>
     <string name="nav_item_notifications">Notifications</string>
     <string name="nav_item_faq">FAQ</string>
@@ -26,6 +27,7 @@
         <item>@string/nav_item_contents</item>
         <item>@string/nav_item_archive</item>
         <item>@string/nav_item_reviews</item>
+        <item>@string/nav_item_custom_search_log</item>
         <item>@string/nav_item_analyze_request</item>
         <item>@string/nav_item_notifications</item>
         <item>@string/nav_item_faq</item>
@@ -38,6 +40,7 @@
     <string name="fragment_title_contents">Contents</string>
     <string name="fragment_title_archive">Archive</string>
     <string name="fragment_title_reviews">Reviews</string>
+    <string name="fragment_title_custom_search_log">Custom Search Log</string>
     <string name="fragment_title_analyze_request">Request to Analyze</string>
     <string name="fragment_title_notifications">Notifications</string>
     <string name="fragment_title_faq">FAQ</string>
@@ -85,6 +88,8 @@
     <string name="remove_search_word_info_message">Your search history has been deleted.\nYour search history has been deleted.</string>
     <string name="empty_latest_search_info">You have no recent searches.</string>
     <string name="chemical_composition_title">Chemical Composition</string>
+    <string name="archive_product_tab_title">Products</string>
+    <string name="archive_content_tab_title">Contents</string>
 
 
     <string-array name="product_list_sort_way">

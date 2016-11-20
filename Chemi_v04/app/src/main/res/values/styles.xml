@@ -34,9 +34,10 @@
         <item name="colorControlNormal">@color/colorArrow</item>
     </style>
 
-    <style name="ProductDetailTabLayoutTheme" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+    <style name="ChemiTabLayoutTheme" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="colorPrimary">@android:color/white</item>
         <item name="colorAccent">@color/colorPrimary</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
     <style name="NavigationTheme" parent="AppTheme">
