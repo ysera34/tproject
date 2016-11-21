@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#6c9805</color>
     <color name="colorAccent">#FDEA3B</color>
     <!--<color name="colorAccent">#e91e63</color>-->
+    <color name="colorWhiteTheme">#ffffff</color>
     <color name="colorWhiteBackground">#ffffff</color>
     <color name="colorBackground">#eeeeee</color>
     <color name="colorFont">#4a4a4a</color>
@@ -28,6 +29,7 @@
     <color name="chemical_card_view_clicked_color">#FB8C00</color>
     <color name="chemical_card_view_clicked_text_color">#B6B6B7</color>
 
+    <color name="colorPrimaryFont">#a4ca5a</color>
     <color name="colorArchiveEditFont">#FB8C00</color>
     <color name="colorWhiteFont">#ffffff</color>
     <color name="chemical_composition_dangerous_status_name_font_color">#757575</color>

@@ -15,7 +15,7 @@
         android:text="@string/category_title"
         android:gravity="center"
         android:textStyle="bold"
-        android:textSize="16sp"
+        android:textSize="20sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
@@ -33,27 +33,35 @@
             android:layout_height="wrap_content"
             android:text="@string/category_section1"
             android:textStyle="bold"
-            android:textSize="13sp"/>
+            android:textSize="16sp"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:layout_marginBottom="8dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:gravity="center">
 
             <Button
                 android:id="@+id/bottom_sheet_category_section11"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_bottom_sheet_category_section11"/>
 
             <Button
                 android:id="@+id/bottom_sheet_category_section12"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/selector_bottom_sheet_category_section12"/>
 
             <Button
                 android:id="@+id/bottom_sheet_category_section13"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_bottom_sheet_category_section13"/>
 
         </LinearLayout>
 
@@ -69,27 +77,35 @@
             android:layout_height="wrap_content"
             android:text="@string/category_section2"
             android:textStyle="bold"
-            android:textSize="13sp"/>
+            android:textSize="16sp"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:layout_marginBottom="8dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:gravity="center">
 
             <Button
                 android:id="@+id/bottom_sheet_category_section21"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_bottom_sheet_category_section21"/>
 
             <Button
                 android:id="@+id/bottom_sheet_category_section22"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/selector_bottom_sheet_category_section22"/>
 
             <Button
                 android:id="@+id/bottom_sheet_category_section23"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_bottom_sheet_category_section23"/>
 
         </LinearLayout>
 
@@ -105,27 +121,35 @@
             android:layout_height="wrap_content"
             android:text="@string/category_section3"
             android:textStyle="bold"
-            android:textSize="13sp"/>
+            android:textSize="16sp"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:layout_marginBottom="8dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:gravity="center">
 
             <Button
                 android:id="@+id/bottom_sheet_category_section31"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_bottom_sheet_category_section31"/>
 
             <Button
                 android:id="@+id/bottom_sheet_category_section32"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/selector_bottom_sheet_category_section32"/>
 
             <Button
                 android:id="@+id/bottom_sheet_category_section33"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_bottom_sheet_category_section33"/>
 
         </LinearLayout>
 
@@ -141,27 +165,35 @@
             android:layout_height="wrap_content"
             android:text="@string/category_section4"
             android:textStyle="bold"
-            android:textSize="13sp"/>
+            android:textSize="16sp"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:layout_marginBottom="8dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:gravity="center">
 
             <Button
                 android:id="@+id/bottom_sheet_category_section41"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_bottom_sheet_category_section41"/>
 
             <Button
                 android:id="@+id/bottom_sheet_category_section42"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/selector_bottom_sheet_category_section42"/>
 
             <Button
                 android:id="@+id/bottom_sheet_category_section43"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:visibility="invisible"/>
 
         </LinearLayout>
 
@@ -177,27 +209,35 @@
             android:layout_height="wrap_content"
             android:text="@string/category_section5"
             android:textStyle="bold"
-            android:textSize="13sp"/>
+            android:textSize="16sp"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:layout_marginBottom="8dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:gravity="center">
 
             <Button
                 android:id="@+id/bottom_sheet_category_section51"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_bottom_sheet_category_section51"/>
 
             <Button
                 android:id="@+id/bottom_sheet_category_section52"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/selector_bottom_sheet_category_section52"/>
 
             <Button
                 android:id="@+id/bottom_sheet_category_section53"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:visibility="invisible"/>
 
         </LinearLayout>
 
@@ -213,27 +253,35 @@
             android:layout_height="wrap_content"
             android:text="@string/category_section6"
             android:textStyle="bold"
-            android:textSize="13sp"/>
+            android:textSize="16sp"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:layout_marginBottom="8dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:gravity="center">
 
             <Button
                 android:id="@+id/bottom_sheet_category_section61"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_bottom_sheet_category_section61"/>
 
             <Button
                 android:id="@+id/bottom_sheet_category_section62"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/selector_bottom_sheet_category_section62"/>
 
             <Button
                 android:id="@+id/bottom_sheet_category_section63"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_bottom_sheet_category_section63"/>
 
         </LinearLayout>
 
@@ -249,27 +297,35 @@
             android:layout_height="wrap_content"
             android:text="@string/category_section7"
             android:textStyle="bold"
-            android:textSize="13sp"/>
+            android:textSize="16sp"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:layout_marginBottom="8dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:gravity="center">
 
             <Button
                 android:id="@+id/bottom_sheet_category_section71"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_bottom_sheet_category_section71"/>
 
             <Button
                 android:id="@+id/bottom_sheet_category_section72"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginEnd="5dp"
+                android:background="@drawable/selector_bottom_sheet_category_section72"/>
 
             <Button
                 android:id="@+id/bottom_sheet_category_section73"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:background="@drawable/selector_bottom_sheet_category_section73"/>
 
         </LinearLayout>
 

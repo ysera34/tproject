@@ -80,11 +80,9 @@
 
             <Button
                 android:id="@+id/nav_header_custom_search_button"
-                android:text="@string/nav_item_custom_search"
-                android:textColor="@color/colorPrimary"
                 android:layout_width="56dp"
                 android:layout_height="56dp"
-                android:background="@drawable/drawer_oval_button"/>
+                android:background="@drawable/ic_drawer_custom_search"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -107,11 +105,9 @@
 
             <Button
                 android:id="@+id/nav_header_content_button"
-                android:text="@string/nav_item_contents"
-                android:textColor="@color/colorPrimary"
                 android:layout_width="56dp"
                 android:layout_height="56dp"
-                android:background="@drawable/drawer_oval_button"/>
+                android:background="@drawable/ic_drawer_content"/>
 
             <TextView
                 android:layout_width="match_parent"

@@ -5,7 +5,11 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.ActionMode;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -16,6 +20,7 @@ import android.widget.Toast;
 import com.tacademy.v04.chemi.R;
 import com.tacademy.v04.chemi.model.Product;
 import com.tacademy.v04.chemi.model.ProductArchiveStorage;
+import com.tacademy.v04.chemi.view.activity.AppNavigationActivity;
 
 import java.util.ArrayList;
 
@@ -41,6 +46,8 @@ public class ArchiveProductListFragment extends Fragment implements View.OnClick
     private TextView mArchiveProductEditTextView;
     private TextView mArchiveProductDeleteTextView;
     private TextView mArchiveProductCompleteTextView;
+
+    private ActionMode mActionMode;
 
     public ArchiveProductListFragment() {
     }
@@ -136,6 +143,45 @@ public class ArchiveProductListFragment extends Fragment implements View.OnClick
         }
     }
 
+    private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
+
+        // Called when the action mode is created; startActionMode() was called
+        @Override
+        public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+            // Inflate a menu resource providing context menu items
+            MenuInflater inflater = mode.getMenuInflater();
+            inflater.inflate(R.menu.menu_navigation_drawer, menu);
+            return true;
+        }
+
+        // Called each time the action mode is shown. Always called after onCreateActionMode, but
+        // may be called multiple times if the mode is invalidated.
+        @Override
+        public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+            return false; // Return false if nothing is done
+        }
+
+        // Called when the user selects a contextual menu item
+        @Override
+        public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+            switch (item.getItemId()) {
+                case R.id.nav_archive:
+                    Toast.makeText(getActivity(), "ActionMode Success", Toast.LENGTH_SHORT).show();
+                    mode.finish(); // Action picked, so close the CAB
+                    return true;
+                default:
+                    return false;
+            }
+        }
+
+        // Called when the user exits the action mode
+        @Override
+        public void onDestroyActionMode(ActionMode mode) {
+            mActionMode = null;
+            ((AppNavigationActivity) getContext()).getSupportActionBar().show();
+        }
+    };
+
     private class ArchiveProductAdapter extends RecyclerView.Adapter<ArchiveProductHolder> {
 
         ArrayList<Product> mArchiveProducts;
@@ -177,6 +223,20 @@ public class ArchiveProductListFragment extends Fragment implements View.OnClick
 
         public ArchiveProductHolder(View itemView) {
             super(itemView);
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                // Called when the user long-clicks on someView
+                public boolean onLongClick(View view) {
+                    if (mActionMode != null) {
+                        return false;
+                    }
+
+                    ((AppNavigationActivity) getContext()).getSupportActionBar().hide();
+                    // Start the CAB using the ActionMode.Callback defined above
+                    mActionMode = getActivity().startActionMode(mActionModeCallback);
+                    view.setSelected(true);
+                    return true;
+                }
+            });
 
             mArchiveProductSelectImageView = (ImageView)
                     itemView.findViewById(R.id.list_item_archive_product_select_image_view);
@@ -203,6 +263,9 @@ public class ArchiveProductListFragment extends Fragment implements View.OnClick
         @Override
         public void onClick(View view) {
             switch (view.getId()) {
+                case R.id.list_item_archive_product_card_view :
+
+                    break;
                 case R.id.list_item_archive_product_select_image_view :
                     if (!mProduct.isArchiveEditSelect()) {
                         mArchiveProductSelectImageView.setImageResource(R.drawable.ic_check_circle_check_24dp);

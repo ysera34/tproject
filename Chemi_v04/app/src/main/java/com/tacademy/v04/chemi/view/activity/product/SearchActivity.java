@@ -171,6 +171,7 @@ public class SearchActivity extends AppBaseActivity
                         Toast.LENGTH_SHORT).show();
                 break;
             case R.id.bottom_sheet_category_section11 :
+
                 Toast.makeText(SearchActivity.this, "bottom_sheet_category_section11",
                         Toast.LENGTH_SHORT).show();
                 startActivity(ProductListActivity.newIntent(getApplicationContext(), 11));
@@ -432,6 +433,9 @@ public class SearchActivity extends AppBaseActivity
 
     @Override
     public void onBackPressed(){
+
+//        updateUI():
+
         FragmentManager fm = getSupportFragmentManager();
         if (fm.getBackStackEntryCount() > 0) {
             fm.beginTransaction().remove(mSearchFragmentContainer)

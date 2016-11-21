@@ -14,31 +14,31 @@
 
         <item
             android:id="@+id/nav_archive"
-            android:icon="@drawable/ic_archive_white_48dp"
+            android:icon="@drawable/ic_drawer_archive"
             android:title="@string/nav_item_archive" />
         <item
             android:id="@+id/nav_reviews"
-            android:icon="@drawable/ic_archive_white_48dp"
+            android:icon="@drawable/ic_drawer_reviews"
             android:title="@string/nav_item_reviews" />
         <item
             android:id="@+id/nav_custom_search_log"
-            android:icon="@drawable/ic_archive_white_48dp"
+            android:icon="@drawable/ic_drawer_custom_search_log"
             android:title="@string/nav_item_custom_search_log" />
         <item
             android:id="@+id/nav_item_analyze_request"
-            android:icon="@drawable/ic_archive_white_48dp"
+            android:icon="@drawable/ic_drawer_analyze_request"
             android:title="@string/nav_item_analyze_request" />
         <item
             android:id="@+id/nav_notifications"
-            android:icon="@drawable/ic_archive_white_48dp"
+            android:icon="@drawable/ic_drawer_notifications"
             android:title="@string/nav_item_notifications" />
         <item
             android:id="@+id/nav_faq"
-            android:icon="@drawable/ic_archive_white_48dp"
+            android:icon="@drawable/ic_drawer_faq"
             android:title="@string/nav_item_faq" />
         <item
             android:id="@+id/nav_settings"
-            android:icon="@drawable/ic_archive_white_48dp"
+            android:icon="@drawable/ic_drawer_settings"
             android:title="@string/nav_item_settings" />
         <!--<item-->
             <!--android:id="@+id/nav_main"-->

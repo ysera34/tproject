@@ -4,7 +4,7 @@
 
     <item
         android:id="@+id/action_search"
-        android:icon="@drawable/ic_search_white_24dp"
+        android:icon="@drawable/button_home_smaller"
         android:title="@string/action_search"
         android:orderInCategory="100"
         app:showAsAction="always" />
@@ -13,7 +13,7 @@
 
     <item
         android:id="@+id/action_home"
-        android:icon="@drawable/ic_home_white_24dp"
+        android:icon="@drawable/button_home_bigger"
         android:title="@string/action_home"
         android:orderInCategory="100"
         app:showAsAction="always" />

@@ -158,9 +158,11 @@ public class AppNavigationActivity extends AppBaseActivity implements
             startActivity(SearchActivity.newIntent(getApplicationContext()));
             return true;
         } else if (id == R.id.action_home) {
-            startActivity(MainActivity.newIntent(getApplicationContext()));
+            if (true) {
+                startActivity(MainActivity.newIntent(getApplicationContext()));
+            }
+            return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
