@@ -21,11 +21,12 @@
             android:layout_height="match_parent"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:contentScrim="?attr/colorPrimary"
-            app:expandedTitleTextAppearance="@style/expandedTitleTextAppearanceStyle"
             app:expandedTitleMarginStart="20dp"
             app:expandedTitleMarginEnd="30dp"
             android:background="@drawable/product_detail_collapse_toolbar_background"
             android:fitsSystemWindows="true">
+
+            <!--app:expandedTitleTextAppearance="@style/expandedTitleTextAppearanceStyle"-->
 
             <!--<ImageView-->
             <!--android:id="@+id/product_image"-->

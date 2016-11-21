@@ -70,7 +70,7 @@
                 <RelativeLayout
                     android:id="@+id/list_chemical_dangerous_grade1_layout"
                     android:layout_width="70dp"
-                    android:layout_height="110dp"
+                    android:layout_height="108dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp">
 
@@ -85,7 +85,7 @@
                             android:layout_height="80dp"
                             android:layout_alignParentTop="true"
                             android:layout_alignParentStart="true"
-                            android:background="@color/chemical_composition_dangerous_status1_color"/>
+                            android:background="@drawable/chemical_composition_dangerous_status1"/>
 
                     </RelativeLayout>
 
@@ -115,7 +115,7 @@
                 <RelativeLayout
                     android:id="@+id/list_chemical_dangerous_grade2_layout"
                     android:layout_width="70dp"
-                    android:layout_height="110dp"
+                    android:layout_height="108dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp">
 
@@ -130,7 +130,7 @@
                             android:layout_height="80dp"
                             android:layout_alignParentTop="true"
                             android:layout_alignParentStart="true"
-                            android:background="@color/chemical_composition_dangerous_status2_color"/>
+                            android:background="@drawable/chemical_composition_dangerous_status2"/>
 
                     </RelativeLayout>
 
@@ -159,7 +159,7 @@
                 <RelativeLayout
                     android:id="@+id/list_chemical_dangerous_grade3_layout"
                     android:layout_width="70dp"
-                    android:layout_height="110dp"
+                    android:layout_height="108dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp">
 
@@ -174,7 +174,7 @@
                             android:layout_height="80dp"
                             android:layout_alignParentTop="true"
                             android:layout_alignParentStart="true"
-                            android:background="@color/chemical_composition_dangerous_status3_color"/>
+                            android:background="@drawable/chemical_composition_dangerous_status3"/>
 
                     </RelativeLayout>
 
@@ -204,7 +204,7 @@
                 <RelativeLayout
                     android:id="@+id/list_chemical_dangerous_grade4_layout"
                     android:layout_width="70dp"
-                    android:layout_height="110dp"
+                    android:layout_height="108dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp">
 
@@ -219,7 +219,7 @@
                             android:layout_height="80dp"
                             android:layout_alignParentTop="true"
                             android:layout_alignParentStart="true"
-                            android:background="@color/chemical_composition_dangerous_status4_color"/>
+                            android:background="@drawable/chemical_composition_dangerous_status4"/>
 
                     </RelativeLayout>
 
@@ -256,13 +256,89 @@
 
         <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:background="@color/colorWhiteBackground">
+
+            <!--android:paddingTop="20dp"-->
+            <!--android:paddingBottom="12dp"-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp">
+
+                <TextView
+                    android:text="@string/chemical_composition_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:visibility="invisible"
+                    android:id="@+id/chemical_list_total_prefix"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/list_total_prefix"
+                    android:textSize="14sp"/>
+
+                <TextView
+                    android:visibility="invisible"
+                    android:id="@+id/chemical_list_total"
+                    android:text="@string/list_total_default"
+                    android:textSize="14sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:visibility="invisible"
+                    android:id="@+id/chemical_list_total_suffix"
+                    android:text="@string/list_total_suffix"
+                    android:textSize="14sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <LinearLayout
+                android:id="@+id/chemical_list_sort_button_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="16dp"
+                android:paddingBottom="16dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="3dp"
+                    android:src="@drawable/sort_image_button_status"/>
+
+                <TextView
+                    android:id="@+id/chemical_list_sort_status_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/chemical_list_sort_dangerous"
+                    android:textSize="14sp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/product_detail_chemical_recycler_view"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="3dp" />
+                android:layout_height="match_parent"/>
 
         </LinearLayout>
 

@@ -2,6 +2,7 @@ package com.tacademy.v04.chemi.view.fragment.product;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomSheetDialog;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,6 +39,12 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
     private ImageButton mStateExpandImageButton;
     private boolean mChemicalDangerousGradeLayoutState = true;
 
+    private TextView mChemicalTotalTextView;
+    private View mChemicalSortView;
+    private BottomSheetDialog mChemicalSortBottomSheetDialog;
+    private Button mChemicalSortDangerButton;
+    private Button mChemicalSortMarkButton;
+
     public ChemicalListFragment() {
     }
 
@@ -60,14 +68,20 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
 //        return super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_chemical_list, container, false);
 
-        mChemicalRecyclerView = (RecyclerView) view.findViewById(R.id.product_detail_chemical_recycler_view);
-        mChemicalRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
         mChemicalStateExpandLayout = view.findViewById(R.id.list_chemical_state_expand_layout);
         mChemicalStateExpandLayout.setOnClickListener(this);
         mChemicalDangerousGradeLayout = view.findViewById(R.id.chemical_dangerous_grade_layout);
         mStateExpandTextView = (TextView) view.findViewById(R.id.list_chemical_state_expand_text);
         mStateExpandImageButton = (ImageButton) view.findViewById(R.id.list_chemical_state_expand_button);
+
+        mChemicalTotalTextView = (TextView) view.findViewById(R.id.chemical_list_total);
+
+        mChemicalSortView = view.findViewById(R.id.chemical_list_sort_button_view);
+        mChemicalSortView.setOnClickListener(this);
+
+        mChemicalRecyclerView = (RecyclerView) view.findViewById(R.id.product_detail_chemical_recycler_view);
+        mChemicalRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
 
         updateUI();
 
@@ -99,6 +113,28 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.chemical_list_sort_button_view :
+                mChemicalSortBottomSheetDialog = new BottomSheetDialog(getActivity());
+                View mSortBottomSheetView = getLayoutInflater(getArguments())
+                        .inflate(R.layout.bottom_sheet_chemical_sort, null);
+                mChemicalSortBottomSheetDialog.setContentView(mSortBottomSheetView);
+
+                mChemicalSortDangerButton = (Button) mSortBottomSheetView
+                        .findViewById(R.id.bottom_sheet_chemical_filter_section1);
+                mChemicalSortDangerButton.setOnClickListener(this);
+                mChemicalSortMarkButton = (Button) mSortBottomSheetView
+                        .findViewById(R.id.bottom_sheet_chemical_filter_section2);
+                mChemicalSortMarkButton.setOnClickListener(this);
+                mChemicalSortBottomSheetDialog.show();
+                break;
+            case R.id.bottom_sheet_chemical_filter_section1:
+                Toast.makeText(getActivity(), "bottom_sheet_chemical_filter_section1",
+                        Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.bottom_sheet_chemical_filter_section2:
+                Toast.makeText(getActivity(), "bottom_sheet_chemical_filter_section2",
+                        Toast.LENGTH_SHORT).show();
+                break;
             case R.id.list_chemical_state_expand_layout :
                 if (mChemicalDangerousGradeLayoutState) {
                     mChemicalDangerousGradeLayout.setVisibility(View.GONE);
@@ -111,7 +147,7 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
                     mStateExpandImageButton.setImageResource(R.drawable.ic_keyboard_arrow_up_48dp);
                     mChemicalDangerousGradeLayoutState = true;
                 }
-            break;
+                break;
         }
     }
 

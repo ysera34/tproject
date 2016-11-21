@@ -6,71 +6,438 @@
               android:layout_height="match_parent">
 
     <LinearLayout
+        android:id="@+id/chemical_dialog_header_info_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="90dp"
         android:orientation="vertical"
-        android:padding="7dp"
+        android:paddingTop="16dp"
+        android:layout_gravity="center"
         android:background="@drawable/widget_bottom_border">
 
-        <TextView
-            android:id="@+id/chemical_dialog_title"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="17dp"
-            android:textStyle="bold"
-            tools:text="composition details"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="composition english name #1"/>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="end">
 
-        <TextView
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
+
+                <RelativeLayout
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp">
+
+                    <RelativeLayout
+                        android:id="@+id/chemical_dialog_dangerous_circle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" >
+
+                        <ImageView
+                            android:id="@+id/chemical_dialog_dangerous_grade_image"
+                            android:layout_width="match_parent"
+                            android:layout_height="80dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentStart="true"
+                            android:background="@drawable/ic_chemical_dangerous_indicator3"/>
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/chemical_dialog_dangerous_grade_number_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="7"
+                        android:textColor="@color/colorWhiteFont"
+                        android:textSize="14sp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignBottom="@+id/chemical_dialog_dangerous_circle"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="10dp"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:id="@+id/chemical_dialog_chemical_title_ko"
+                    android:text="프로필렌글라이콜"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="@color/chemical_dialog_name_font_color"
+                    android:layout_marginBottom="4dp"/>
+
+                <TextView
+                    android:id="@+id/chemical_dialog_chemical_title_eng"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="@color/chemical_dialog_name_font_color"
+                    android:text="Propylene Glycol"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="composition english name #2"/>
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/chemical_dialog_chemical_mix_purpose"
+                android:text="습윤제, 가습제, 점도감소제, 용제, 보습제"
+                android:textSize="13sp"
+                android:textColor="@color/chemical_dialog_mix_purpose_font_color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+
+
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="240dp"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:gravity="center"
+        android:paddingTop="4dp"
+        android:paddingBottom="6dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
         android:background="@drawable/widget_bottom_border">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="리스트뷰 공간"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="7dp"
-        android:paddingBottom="7dp"
-        android:orientation="vertical"
-        android:background="@drawable/widget_square_border">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
 
-        <Button
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/chemical_dialog_precaution1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_chemical_dialog_precaution_1_on"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:orientation="vertical"
+                android:gravity="center_vertical"
+                android:layout_marginStart="16dp">
+
+                <TextView
+                    android:id="@+id/chemical_dialog_body_title1"
+                    android:text="피부"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/chemical_dialog_precaution_on_name_font_color"
+                    android:gravity="bottom"/>
+
+                <TextView
+                    android:id="@+id/chemical_dialog_body_description1"
+                    android:text="피부를 통해 침투가 쉬워 심장, 간장, 폐, 뇌에\n5일 정도 머무르면서 혈액으로 발암물질을\n내보내는 것으로 알려져 있습니다."
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textColor="@color/chemical_dialog_precaution_description_font_color"
+                    android:gravity="top"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="관련 국내 사례"/>
-        <Button
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/chemical_dialog_precaution2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_chemical_dialog_precaution_2_on"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:orientation="vertical"
+                android:gravity="center_vertical"
+                android:layout_marginStart="16dp">
+
+                <TextView
+                    android:id="@+id/chemical_dialog_body_title2"
+                    android:text="안구"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/chemical_dialog_precaution_on_name_font_color"
+                    android:gravity="bottom"/>
+
+                <TextView
+                    android:id="@+id/chemical_dialog_body_description2"
+                    android:text="피부를 통해 침투가 쉬워 심장, 간장, 폐, 뇌에\n5일 정도 머무르면서 혈액으로 발암물질을\n내보내는 것으로 알려져 있습니다."
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textColor="@color/chemical_dialog_precaution_description_font_color"
+                    android:gravity="top"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="관련 해외 사례"/>
-        <Button
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/chemical_dialog_precaution3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_chemical_dialog_precaution_3_on"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:orientation="vertical"
+                android:gravity="center_vertical"
+                android:layout_marginStart="16dp">
+
+                <TextView
+                    android:id="@+id/chemical_dialog_body_title3"
+                    android:text="호흡기"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/chemical_dialog_precaution_on_name_font_color"
+                    android:gravity="bottom"/>
+
+                <TextView
+                    android:id="@+id/chemical_dialog_body_description3"
+                    android:text="피부를 통해 침투가 쉬워 심장, 간장, 폐, 뇌에\n5일 정도 머무르면서 혈액으로 발암물질을\n내보내는 것으로 알려져 있습니다."
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textColor="@color/chemical_dialog_precaution_description_font_color"
+                    android:gravity="top"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="해외 취급 규정"/>
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/chemical_dialog_precaution4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_chemical_dialog_precaution_4_off"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:orientation="vertical"
+                android:gravity="center_vertical"
+                android:layout_marginStart="16dp">
+
+                <TextView
+                    android:id="@+id/chemical_dialog_body_title4"
+                    android:text="구강"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/chemical_dialog_precaution_off_name_font_color"
+                    android:gravity="bottom"/>
+
+                <TextView
+                    android:id="@+id/chemical_dialog_body_description4"
+                    android:text="해당 사항 없음"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textColor="@color/chemical_dialog_precaution_description_font_color"
+                    android:gravity="top"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/chemical_dialog_precaution5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_chemical_dialog_precaution_5_on"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:orientation="vertical"
+                android:gravity="center_vertical"
+                android:layout_marginStart="16dp">
+
+                <TextView
+                    android:id="@+id/chemical_dialog_body_title5"
+                    android:text="내부장"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/chemical_dialog_precaution_on_name_font_color"
+                    android:gravity="bottom"/>
+
+                <TextView
+                    android:id="@+id/chemical_dialog_body_description5"
+                    android:text="피부를 통해 침투가 쉬워 심장, 간장, 폐, 뇌에\n5일 정도 머무르면서 혈액으로 발암물질을\n내보내는 것으로 알려져 있습니다."
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textColor="@color/chemical_dialog_precaution_description_font_color"
+                    android:gravity="top"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <ImageView
+                    android:id="@+id/chemical_dialog_precaution6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_chemical_dialog_precaution_6_on"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:orientation="vertical"
+                android:gravity="center_vertical"
+                android:layout_marginStart="16dp">
+
+                <TextView
+                    android:id="@+id/chemical_dialog_body_title6"
+                    android:text="유아아동"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/chemical_dialog_precaution_on_name_font_color"
+                    android:gravity="bottom"/>
+
+                <TextView
+                    android:id="@+id/chemical_dialog_body_description6"
+                    android:text="피부를 통해 침투가 쉬워 심장, 간장, 폐, 뇌에"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textColor="@color/chemical_dialog_precaution_description_font_color"
+                    android:gravity="top"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>

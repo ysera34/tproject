@@ -4,11 +4,11 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
 
         <!-- Custom White Theme -->
-        <item name="titleTextColor">@color/colorPrimary</item>
+        <!--<item name="titleTextColor">@color/colorPrimary</item>-->
         <!--<item name="subtitleTextColor">@color/colorWhiteFont</item>-->
 
     </style>
@@ -20,14 +20,13 @@
 
     <style name="expandedTitleTextAppearanceStyle" parent="android:Widget.TextView">
         <item name="android:textColor">@color/colorPrimaryFont</item>
-
     </style>
 
 
     <style name="SearchActivityTheme" parent="Theme.AppCompat.Light.DarkActionBar">
     <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary_searchActivity</item>
-        <item name="colorPrimaryDark">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent_searchActivity</item>
     </style>
 
@@ -48,8 +47,16 @@
     <style name="ChemiTabLayoutTheme" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="colorPrimary">@android:color/white</item>
         <item name="colorAccent">@color/colorPrimary</item>
-        <item name="android:textSize">16sp</item>
     </style>
+
+    <style name="ChemiTabLayoutTextStyle" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="android:textSize">17sp</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <!--<style name="ChemiTabLayoutTextAppearance" parent="android:Widget.TextView">-->
+        <!--<item name="android:textSize">17sp</item>-->
+    <!--</style>-->
 
     <style name="NavigationTheme" parent="AppTheme">
         <item name="android:textSize">14sp</item>

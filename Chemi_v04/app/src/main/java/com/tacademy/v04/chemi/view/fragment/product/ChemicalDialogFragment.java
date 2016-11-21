@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 import com.tacademy.v04.chemi.R;
 import com.tacademy.v04.chemi.model.Chemical;
-import com.tacademy.v04.chemi.model.ChemicalStorage;
 
 import java.util.UUID;
 
@@ -28,6 +27,12 @@ public class ChemicalDialogFragment extends DialogFragment {
     private Chemical mChemical;
     private TextView mTitleTextView;
 
+    public static ChemicalDialogFragment newInstance() {
+
+        ChemicalDialogFragment fragment = new ChemicalDialogFragment();
+        return fragment;
+    }
+
     public static ChemicalDialogFragment newInstance(UUID id) {
         Bundle args = new Bundle();
         args.putSerializable(ARG_CHEMICAL, id);
@@ -41,18 +46,18 @@ public class ChemicalDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 //        return super.onCreateDialog(savedInstanceState);
-        UUID id = (UUID) getArguments().getSerializable(ARG_CHEMICAL);
-        mChemical = ChemicalStorage.get(getActivity()).getChemical(id);
+//        UUID id = (UUID) getArguments().getSerializable(ARG_CHEMICAL);
+//        mChemical = ChemicalStorage.get(getActivity()).getChemical(id);
 
         View view = LayoutInflater.from(getActivity())
                 .inflate(R.layout.fragment_chemical_dialog, null);
 
-        mTitleTextView = (TextView) view.findViewById(R.id.chemical_dialog_title);
-        mTitleTextView.setText(mChemical.getNameKo());
+        mTitleTextView = (TextView) view.findViewById(R.id.chemical_dialog_chemical_title_ko);
+//        mTitleTextView.setText(mChemical.getNameKo());
 
         return new AlertDialog.Builder(getActivity())
                 .setView(view)
-                .setTitle("composition details")
+//                .setTitle("composition details")
                 .setPositiveButton(android.R.string.ok, null)
                 .setNeutralButton("수정 요청", new DialogInterface.OnClickListener() {
                     @Override

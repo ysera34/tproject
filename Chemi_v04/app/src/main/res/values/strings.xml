@@ -60,16 +60,17 @@
     <string name="action_example">Example action</string>
     <string name="action_home">Home</string>
     <string name="show_all_product_button_text">show product</string>
-    <string name="product_list_total">total : %s</string>
-    <string name="product_list_total_prefix">total : </string>
-    <string name="product_list_total_suffix"> </string>
+    <string name="list_total">total : %s</string>
+    <string name="list_total_prefix">total : </string>
+    <string name="list_total_suffix"> </string>
+    <string name="list_total_default">0</string>
     <string name="product_detail_chemical_list_name">Chemical</string>
     <string name="product_detail_review_list_name">Review</string>
 
     <string name="product_list_sort_review_total">Reviews</string>
     <string name="product_list_sort_review_rating_avg">Ratings</string>
     <string name="product_list_sort_latest_release">Latest</string>
-    <string name="product_list_total_default">0</string>
+
     <string name="product_popular_list_name">Popular</string>
     <string name="product_latest_list_name">Latest</string>
     <string name="nav_header_user_symptom">%1$s / %2$s / %3$s</string>
@@ -88,11 +89,14 @@
     <string name="remove_search_word_info_message">Your search history has been deleted.\nYour search history has been deleted.</string>
     <string name="empty_latest_search_info">You have no recent searches.</string>
     <string name="chemical_composition_title">Chemical Composition</string>
+    <string name="chemical_composition_info">Chemical Composition</string>
     <string name="archive_product_tab_title">Products</string>
     <string name="archive_content_tab_title">Contents</string>
     <string name="archive_product_delete_number">(%s)</string>
     <string name="archive_product_list_delete_text">Delete</string>
     <string name="archive_product_list_complete_text">Complete</string>
+    <string name="chemical_list_sort_dangerous">Dangerous</string>
+
 
     <string-array name="product_list_sort_way">
         <item>@string/product_list_sort_review_total</item>

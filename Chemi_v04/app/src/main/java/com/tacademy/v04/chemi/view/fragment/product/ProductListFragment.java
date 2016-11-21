@@ -12,7 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,9 +45,9 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
     private TextView mProductTotalTextView;
     private View mProductSortView;
     private BottomSheetDialog mProductSortBottomSheetDialog;
-    private ImageButton mProductSortReviewButton;
-    private ImageButton mProductSortAvgButton;
-    private ImageButton mProductSortLatestButton;
+    private Button mProductSortReviewButton;
+    private Button mProductSortAvgButton;
+    private Button mProductSortLatestButton;
 
     public ProductListFragment() {
     }
@@ -130,26 +130,26 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
                         .inflate(R.layout.bottom_sheet_product_sort, null);
                 mProductSortBottomSheetDialog.setContentView(mSortBottomSheetView);
 
-                mProductSortReviewButton = (ImageButton) mSortBottomSheetView
-                        .findViewById(R.id.product_list_sort_review_image_button);
+                mProductSortReviewButton = (Button) mSortBottomSheetView
+                        .findViewById(R.id.bottom_sheet_product_filter_section1);
                 mProductSortReviewButton.setOnClickListener(this);
-                mProductSortAvgButton = (ImageButton) mSortBottomSheetView
-                        .findViewById(R.id.product_list_sort_avg_image_button);
+                mProductSortAvgButton = (Button) mSortBottomSheetView
+                        .findViewById(R.id.bottom_sheet_product_filter_section2);
                 mProductSortAvgButton.setOnClickListener(this);
-                mProductSortLatestButton = (ImageButton) mSortBottomSheetView
-                        .findViewById(R.id.product_list_sort_latest_image_button);
+                mProductSortLatestButton = (Button) mSortBottomSheetView
+                        .findViewById(R.id.bottom_sheet_product_filter_section3);
                 mProductSortLatestButton.setOnClickListener(this);
                 mProductSortBottomSheetDialog.show();
                 break;
-            case R.id.product_list_sort_review_image_button :
+            case R.id.bottom_sheet_product_filter_section1 :
                 Toast.makeText(getActivity(), "product_list_sort_review_image_button",
                         Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.product_list_sort_avg_image_button :
+            case R.id.bottom_sheet_product_filter_section2 :
                 Toast.makeText(getActivity(), "product_list_sort_avg_image_button",
                         Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.product_list_sort_latest_image_button :
+            case R.id.bottom_sheet_product_filter_section3 :
                 Toast.makeText(getActivity(), "product_list_sort_latest_image_button",
                         Toast.LENGTH_SHORT).show();
                 break;

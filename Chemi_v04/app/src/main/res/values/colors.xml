@@ -37,4 +37,12 @@
     <color name="chemical_composition_dangerous_status2_color">#f7cc47</color>
     <color name="chemical_composition_dangerous_status3_color">#f06664</color>
     <color name="chemical_composition_dangerous_status4_color">#d4d4d4</color>
+
+    <color name="chemical_dialog_name_font_color">#000000</color>
+    <color name="chemical_dialog_mix_purpose_font_color">#757575</color>
+    <color name="chemical_dialog_precaution_on_name_font_color">#f06664</color>
+    <color name="chemical_dialog_precaution_off_name_font_color">#757575</color>
+    <color name="chemical_dialog_precaution_description_font_color">#757575</color>
+
+
 </resources>

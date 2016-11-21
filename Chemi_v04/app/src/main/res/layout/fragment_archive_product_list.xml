@@ -27,19 +27,19 @@
                     android:id="@+id/archive_product_list_total_prefix"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/product_list_total_prefix"
+                    android:text="@string/list_total_prefix"
                     android:textSize="14sp"/>
 
                 <TextView
                     android:id="@+id/archive_product_list_total"
-                    android:text="@string/product_list_total_default"
+                    android:text="@string/list_total_default"
                     android:textSize="14sp"
                     android:textColor="@color/colorPrimary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <TextView
                     android:id="@+id/archive_product_list_total_suffix"
-                    android:text="@string/product_list_total_suffix"
+                    android:text="@string/list_total_suffix"
                     android:textSize="14sp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>

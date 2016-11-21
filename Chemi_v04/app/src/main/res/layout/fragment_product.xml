@@ -12,6 +12,7 @@
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/ChemiTabLayoutTheme"
+        app:tabTextAppearance="@style/ChemiTabLayoutTextStyle"
         app:tabGravity="fill"
         app:tabMode="fixed"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
