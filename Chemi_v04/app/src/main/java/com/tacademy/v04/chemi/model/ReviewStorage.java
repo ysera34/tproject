@@ -33,8 +33,12 @@ public class ReviewStorage {
             review.setNegativeContent("좋지 아니한가~~~123EF 좋지 아니한가~~~123EF 좋지 아니한가~~~123EF 좋지 아니한가~~~123EF" +
                     "좋지 아니한가~~~123EF 좋지 아니한가~~~123EF 좋지 아니한가~~~123EF 좋지 아니한가~~~123EF" +
                     "좋지 아니한가~~~123EF 좋지 아니한가~~~123EF 좋지 아니한가~~~123EF 좋지 아니한가~~~123EF" + i);
-            review.setImageResIdArray(new int[]{R.drawable.sample1, R.drawable.sample2,
-                    R.drawable.sample3, R.drawable.sample4, R.drawable.sample5});
+            review.getImageResIdArray().add(R.drawable.sample1);
+            review.getImageResIdArray().add(R.drawable.sample2);
+            review.getImageResIdArray().add(R.drawable.sample3);
+            review.getImageResIdArray().add(R.drawable.sample4);
+            review.getImageResIdArray().add(R.drawable.sample5);
+
             mReviews.add(review);
         }
     }

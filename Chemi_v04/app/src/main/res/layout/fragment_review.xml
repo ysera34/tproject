@@ -137,7 +137,7 @@
                         android:id="@+id/review_card_detail_positive_content"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:maxLines="3"
+                        android:textSize="12sp"
                         android:padding="5dp"/>
 
                 </LinearLayout>
@@ -161,7 +161,6 @@
                         android:id="@+id/review_card_detail_negative_content"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:maxLines="3"
                         android:textSize="12sp"
                         android:padding="5dp"/>
 
@@ -174,14 +173,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <android.support.v4.view.ViewPager
-                    android:id="@+id/review_card_detail_image_view_pager"
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/review_card_detail_image_recycler_view"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:paddingStart="100dp"
-                    android:paddingEnd="80dp">
+                    android:layout_height="wrap_content">
 
-                </android.support.v4.view.ViewPager>
+                </android.support.v7.widget.RecyclerView>
 
 
             </LinearLayout>
