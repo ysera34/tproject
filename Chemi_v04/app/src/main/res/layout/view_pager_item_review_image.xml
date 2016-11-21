@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ImageView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/review_card_detail_image_view_pager_item_image"
+    android:layout_width="200dp"
+    android:layout_height="200dp"
+    android:paddingStart="20dp"
+    android:paddingEnd="20dp"
+    android:src="@drawable/unloaded_image_holder"/>

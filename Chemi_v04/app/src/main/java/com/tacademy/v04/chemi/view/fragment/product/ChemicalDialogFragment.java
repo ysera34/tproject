@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.tacademy.v04.chemi.R;
 import com.tacademy.v04.chemi.model.Chemical;
+import com.tacademy.v04.chemi.model.ChemicalStorage;
 
 import java.util.UUID;
 
@@ -46,8 +47,8 @@ public class ChemicalDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 //        return super.onCreateDialog(savedInstanceState);
-//        UUID id = (UUID) getArguments().getSerializable(ARG_CHEMICAL);
-//        mChemical = ChemicalStorage.get(getActivity()).getChemical(id);
+        UUID id = (UUID) getArguments().getSerializable(ARG_CHEMICAL);
+        mChemical = ChemicalStorage.get(getActivity()).getChemical(id);
 
         View view = LayoutInflater.from(getActivity())
                 .inflate(R.layout.fragment_chemical_dialog, null);
@@ -67,4 +68,6 @@ public class ChemicalDialogFragment extends DialogFragment {
                     }
                 }).create();
     }
+
+
 }

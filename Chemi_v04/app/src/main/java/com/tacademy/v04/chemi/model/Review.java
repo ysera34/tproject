@@ -1,5 +1,7 @@
 package com.tacademy.v04.chemi.model;
 
+import com.tacademy.v04.chemi.R;
+
 import java.util.UUID;
 
 /**
@@ -14,9 +16,11 @@ public class Review {
     private boolean mPhotoCheck;
     private String mPositiveContent;
     private String mNegativeContent;
+    private int[] mImageResIdArray;
 
     public Review() {
         mId = UUID.randomUUID();
+
     }
 
     public UUID getId() {
@@ -65,5 +69,13 @@ public class Review {
 
     public void setNegativeContent(String negativeContent) {
         mNegativeContent = negativeContent;
+    }
+
+    public int[] getImageResIdArray() {
+        return mImageResIdArray;
+    }
+
+    public void setImageResIdArray(int[] imageResIdArray) {
+        mImageResIdArray = imageResIdArray;
     }
 }

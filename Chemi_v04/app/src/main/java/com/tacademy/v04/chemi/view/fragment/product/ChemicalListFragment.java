@@ -82,7 +82,6 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
         mChemicalRecyclerView = (RecyclerView) view.findViewById(R.id.product_detail_chemical_recycler_view);
         mChemicalRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-
         updateUI();
 
         return view;
@@ -190,6 +189,7 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
             itemView.setOnClickListener(this);
 
             mChemicalTitleKoTextView = (TextView) itemView.findViewById(R.id.list_item_chemical_title_ko);
+            // setIsRecyclable(false);
         }
 
         public void bindChemical(Chemical chemical) {
@@ -200,7 +200,7 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
         @Override
         public void onClick(View view) {
             Toast.makeText(getActivity(), mChemical.getNameKo(), Toast.LENGTH_SHORT).show();
-            view.setBackgroundColor(getResources().getColor(R.color.chemical_card_view_clicked_color));
+            // view.setBackgroundColor(getResources().getColor(R.color.chemical_card_view_clicked_color));
 
             FragmentManager manager = getFragmentManager();
             ChemicalDialogFragment dialogFragment =

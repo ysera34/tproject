@@ -68,6 +68,15 @@
                 android:value=".view.activity.product.ProductListActivity"/>
         </activity>
         <activity
+            android:name=".view.activity.product.ReviewActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
+            <!--android:parentActivityName=".view.activity.product.ProductActivity">-->
+            <!--<meta-data-->
+                <!--android:name="android.support.PARENT_ACTIVITY"-->
+                <!--android:value=".view.activity.product.ProductActivity"/>-->
+        <!--</activity>-->
+        <activity
             android:name=".view.activity.content.ContentListActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">

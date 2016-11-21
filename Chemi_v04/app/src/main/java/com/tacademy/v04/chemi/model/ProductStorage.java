@@ -51,7 +51,7 @@ public class ProductStorage {
 
         for (int i = 0; i < 10; i++) {
             Product product = new Product();
-            product.setName("비오템:ㅋㅋㅋㅋㅋ" + i);
+            product.setName("비오템:" + i);
             product.setImageResId(R.mipmap.ic_launcher);
             product.setCategoryId((i%2 == 0) ? 22 : 23 );
             mProducts.add(product);

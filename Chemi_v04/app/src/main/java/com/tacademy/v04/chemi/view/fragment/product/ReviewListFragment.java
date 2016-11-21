@@ -1,5 +1,6 @@
 package com.tacademy.v04.chemi.view.fragment.product;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import com.tacademy.v04.chemi.R;
 import com.tacademy.v04.chemi.model.Review;
 import com.tacademy.v04.chemi.model.ReviewStorage;
+import com.tacademy.v04.chemi.view.activity.product.ReviewActivity;
 
 import java.util.ArrayList;
 
@@ -105,7 +107,8 @@ public class ReviewListFragment extends Fragment {
         }
     }
 
-    private class ReviewHolder extends RecyclerView.ViewHolder {
+    private class ReviewHolder extends RecyclerView.ViewHolder
+            implements View.OnClickListener{
 
         private Review mReview;
 
@@ -114,6 +117,7 @@ public class ReviewListFragment extends Fragment {
 
         public ReviewHolder(View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
 
             mReviewPositiveContent = (TextView) itemView.findViewById(R.id.review_card_positive_content);
             mReviewNegativeContent = (TextView) itemView.findViewById(R.id.review_card_negative_content);
@@ -123,6 +127,21 @@ public class ReviewListFragment extends Fragment {
             mReview = review;
             mReviewPositiveContent.setText(mReview.getPositiveContent());
             mReviewNegativeContent.setText(mReview.getNegativeContent());
+        }
+
+        @Override
+        public void onClick(View view) {
+
+//            FragmentManager fm = getChildFragmentManager();
+//            Fragment containerFragment = fm.findFragmentById(R.id.fragment_product_container);
+//
+//            fm.beginTransaction()
+//                    .addToBackStack(null)
+//                    .add(R.id.fragment_product_container, containerFragment)
+//                    .commit();
+
+            Intent intent = ReviewActivity.newIntent(getActivity(), mReview.getId());
+            startActivity(intent);
         }
     }
 }

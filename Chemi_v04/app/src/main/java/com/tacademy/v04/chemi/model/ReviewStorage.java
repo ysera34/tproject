@@ -2,6 +2,8 @@ package com.tacademy.v04.chemi.model;
 
 import android.content.Context;
 
+import com.tacademy.v04.chemi.R;
+
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -25,12 +27,14 @@ public class ReviewStorage {
          */
         for (int i = 0; i < 20; i++) {
             Review review = new Review();
-            review.setPositiveContent("좋아용~~~123EE 좋아용~~~123EE 좋아용~~~123EE 좋아용~~~123EE 좋아용~~~123EE " +
+            review.setPositiveContent(i + "좋아용~~~123EE 좋아용~~~123EE 좋아용~~~123EE 좋아용~~~123EE 좋아용~~~123EE " +
                     "좋아용~~~123EE 좋아용~~~123EE 좋아용~~~123EE 좋아용~~~123EE 좋아용~~~123EE" +
                     "좋아용~~~123EE 좋아용~~~123EE 좋아용~~~123EE 좋아용~~~123EE 좋아용~~~123EE" + i);
             review.setNegativeContent("좋지 아니한가~~~123EF 좋지 아니한가~~~123EF 좋지 아니한가~~~123EF 좋지 아니한가~~~123EF" +
                     "좋지 아니한가~~~123EF 좋지 아니한가~~~123EF 좋지 아니한가~~~123EF 좋지 아니한가~~~123EF" +
                     "좋지 아니한가~~~123EF 좋지 아니한가~~~123EF 좋지 아니한가~~~123EF 좋지 아니한가~~~123EF" + i);
+            review.setImageResIdArray(new int[]{R.drawable.sample1, R.drawable.sample2,
+                    R.drawable.sample3, R.drawable.sample4, R.drawable.sample5});
             mReviews.add(review);
         }
     }
