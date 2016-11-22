@@ -226,6 +226,7 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
             Intent intent = ProductActivity.newIntent(getActivity(), mProduct.getId());
 //            Intent intent = ProductPagerActivity.newIntent(getActivity(), mProduct.getId());
             startActivity(intent);
+//            startActivityForResult(intent, REQUEST_PRODUCT_ACTIVITY);
         }
     }
 }

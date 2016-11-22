@@ -52,6 +52,7 @@
     <string name="title_activity_search">제품 검색</string>
     <string name="title_activity_product_list">제품 목록</string>
     <string name="title_activity_product">제품 상세</string>
+    <string name="title_activity_review">리뷰</string>
 
     <string name="search_hint">상품명, 브랜드명으로 검색하세요</string>
     <string name="show_all_product_button_text">전체보기</string>
@@ -91,6 +92,7 @@
     <string name="archive_product_list_delete_text">삭제</string>
     <string name="archive_product_list_complete_text">완료</string>
     <string name="chemical_list_sort_dangerous">위험도 순</string>
+
 
 
     <string-array name="product_list_sort_way">

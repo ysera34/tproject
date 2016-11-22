@@ -53,6 +53,7 @@
     <string name="title_activity_search">SearchActivity</string>
     <string name="title_activity_product_list">Products List</string>
     <string name="title_activity_product">Product Details</string>
+    <string name="title_activity_review">Review</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -96,6 +97,7 @@
     <string name="archive_product_list_delete_text">Delete</string>
     <string name="archive_product_list_complete_text">Complete</string>
     <string name="chemical_list_sort_dangerous">Dangerous</string>
+
 
 
     <string-array name="product_list_sort_way">

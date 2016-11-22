@@ -54,7 +54,8 @@
         <activity
             android:name=".view.activity.product.ProductListActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:launchMode="singleTop">
             <!--<meta-data android:name="android.app.default_searchable"-->
                        <!--android:value=".view.activity.AppNavigationActivity"/>-->
         </activity>
@@ -62,6 +63,7 @@
             android:name=".view.activity.product.ProductActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
+            android:launchMode="singleTop"
             android:parentActivityName=".view.activity.product.ProductListActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -70,12 +72,13 @@
         <activity
             android:name=".view.activity.product.ReviewActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar"/>
-            <!--android:parentActivityName=".view.activity.product.ProductActivity">-->
-            <!--<meta-data-->
-                <!--android:name="android.support.PARENT_ACTIVITY"-->
-                <!--android:value=".view.activity.product.ProductActivity"/>-->
-        <!--</activity>-->
+            android:theme="@style/AppTheme.NoActionBar"
+            android:launchMode="singleTop"
+            android:parentActivityName=".view.activity.product.ProductActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.activity.product.ProductActivity"/>
+        </activity>
         <activity
             android:name=".view.activity.content.ContentListActivity"
             android:screenOrientation="portrait"
