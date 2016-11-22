@@ -128,7 +128,7 @@
                         android:layout_height="35dp"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="10dp"
-                        android:src="@drawable/ic_account_pink_circle_24dp"/>
+                        android:src="@drawable/ic_account_blue_circle_24dp"/>
 
                     <TextView
                         android:id="@+id/review_card_positive_content"
@@ -152,7 +152,7 @@
                         android:layout_height="35dp"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="10dp"
-                        android:src="@drawable/ic_account_blue_circle_24dp"/>
+                        android:src="@drawable/ic_account_pink_circle_24dp"/>
 
                     <TextView
                         android:id="@+id/review_card_negative_content"

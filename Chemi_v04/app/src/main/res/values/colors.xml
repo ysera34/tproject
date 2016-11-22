@@ -20,6 +20,7 @@
 
     <color name="colorBorder">#c2939393</color>
 
+
     <color name="tabLayout_unselected_text_color">#9E9E9E</color>
     <color name="tabLayout_selected_text_color">#a4ca5a</color>
 

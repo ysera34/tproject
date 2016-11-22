@@ -27,17 +27,11 @@ public class ReviewStorage {
          */
         for (int i = 0; i < 20; i++) {
             Review review = new Review();
-            review.setPositiveContent(i + "좋아용~~~123EE 좋아용~~~123EE 좋아용~~~123EE 좋아용~~~123EE 좋아용~~~123EE " +
-                    "좋아용~~~123EE 좋아용~~~123EE 좋아용~~~123EE 좋아용~~~123EE 좋아용~~~123EE" +
-                    "좋아용~~~123EE 좋아용~~~123EE 좋아용~~~123EE 좋아용~~~123EE 좋아용~~~123EE" + i);
-            review.setNegativeContent("좋지 아니한가~~~123EF 좋지 아니한가~~~123EF 좋지 아니한가~~~123EF 좋지 아니한가~~~123EF" +
-                    "좋지 아니한가~~~123EF 좋지 아니한가~~~123EF 좋지 아니한가~~~123EF 좋지 아니한가~~~123EF" +
-                    "좋지 아니한가~~~123EF 좋지 아니한가~~~123EF 좋지 아니한가~~~123EF 좋지 아니한가~~~123EF" + i);
-            review.getImageResIdArray().add(R.drawable.sample1);
-            review.getImageResIdArray().add(R.drawable.sample2);
-            review.getImageResIdArray().add(R.drawable.sample3);
-            review.getImageResIdArray().add(R.drawable.sample4);
-            review.getImageResIdArray().add(R.drawable.sample5);
+            review.setPositiveContent(i + "I have a working DrawerLayout with several elements within it. All elements inside the drawer are located within a RelativeLayout. The weird part is whenever the drawer is opened, the EditText receives focus automatically, and never looses it. I tried adding android:clickable=\"true\" attribute to the parent element (which is the RelativeLayout) to trick the focus issue but it does not help. Any ideas what is causing this behavior?");
+            review.setNegativeContent(i + "I have a working DrawerLayout with several elements within it. All elements inside the drawer are located within a RelativeLayout. The weird part is whenever the drawer is opened, the EditText receives focus automatically, and never looses it. I tried adding android:clickable=\"true\" attribute to the parent element (which is the RelativeLayout) to trick the focus issue but it does not help. Any ideas what is causing this behavior?I have a working DrawerLayout with several elements within it. All elements inside the drawer are located within a RelativeLayout. The weird part is whenever the drawer is opened, the EditText receives focus automatically, and never looses it. I tried adding android:clickable=\"true\" attribute to the parent element (which is the RelativeLayout) to trick the focus issue but it does not help. Any ideas what is causing this behavior?");
+            review.getImageResIdArray().add(R.drawable.review_sample01);
+            review.getImageResIdArray().add(R.drawable.review_sample02);
+            review.getImageResIdArray().add(R.drawable.review_sample03);
 
             mReviews.add(review);
         }

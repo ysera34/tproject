@@ -9,4 +9,13 @@ public class Common {
     public static final int REQUEST_PRODUCT_LIST_ACTIVITY = 201;
     public static final int REQUEST_PRODUCT_ACTIVITY = 202;
     public static final int REQUEST_REVIEW_ACTIVITY = 203;
+
+    public static final int REQUEST_NAVIGATION_ARCHIVE = 111;
+    public static final int REQUEST_NAVIGATION_REVIEW_LOG = 112;
+    public static final int REQUEST_NAVIGATION_CUSTOM_SEARCH_LOG = 113;
+    public static final int REQUEST_NAVIGATION_ANALYZE_REQUEST = 114;
+    public static final int REQUEST_NAVIGATION_NOTIFICATION = 115;
+    public static final int REQUEST_NAVIGATION_FAQ = 116;
+    public static final int REQUEST_NAVIGATION_SETTING = 117;
+
 }

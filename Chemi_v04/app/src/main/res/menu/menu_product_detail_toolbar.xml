@@ -8,21 +8,21 @@
 
     <item
         android:id="@+id/action_faq"
-        android:icon="@drawable/ic_toolbar_faq"
+        android:icon="@drawable/ic_faq"
         android:title="@string/action_search"
         android:orderInCategory="100"
         app:showAsAction="always" />
 
     <item
         android:id="@+id/action_archive"
-        android:icon="@drawable/ic_toolbar_archive"
+        android:icon="@drawable/ic_archive"
         android:title="@string/action_archive"
         android:orderInCategory="100"
         app:showAsAction="always" />
 
     <item
         android:id="@+id/action_share"
-        android:icon="@drawable/ic_toolbar_share"
+        android:icon="@drawable/ic_share"
         android:title="@string/action_share"
         android:orderInCategory="100"
         app:showAsAction="always" />

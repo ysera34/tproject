@@ -23,7 +23,6 @@
             app:contentScrim="?attr/colorPrimary"
             app:expandedTitleMarginStart="20dp"
             app:expandedTitleMarginEnd="30dp"
-            android:background="@drawable/product_detail_collapse_toolbar_background"
             android:fitsSystemWindows="true">
 
             <!--app:expandedTitleTextAppearance="@style/expandedTitleTextAppearanceStyle"-->

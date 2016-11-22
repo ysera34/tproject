@@ -180,7 +180,6 @@ public class SearchLatestListFragment extends Fragment {
                     mLatestWordAdapter.notifyDataSetChanged();
                     break;
             }
-
         }
     }
 

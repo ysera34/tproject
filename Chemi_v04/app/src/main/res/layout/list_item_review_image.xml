@@ -10,9 +10,10 @@
         android:layout_gravity="center"
         android:layout_width="140dp"
         android:layout_height="140dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
+        android:layout_margin="5dp"
         card_view:contentPadding="5dp">
+        <!--android:layout_marginTop="5dp"-->
+        <!--android:layout_marginBottom="5dp"-->
         <!--card_view:cardCornerRadius="2dp"-->
         <LinearLayout
             android:layout_width="match_parent"

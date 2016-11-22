@@ -18,9 +18,12 @@ import com.tacademy.v04.chemi.R;
 import com.tacademy.v04.chemi.model.Product;
 import com.tacademy.v04.chemi.model.ProductStorage;
 import com.tacademy.v04.chemi.view.activity.AppBaseActivity;
+import com.tacademy.v04.chemi.view.activity.MainActivity;
 import com.tacademy.v04.chemi.view.fragment.product.ProductFragment;
 
 import java.util.UUID;
+
+import static com.tacademy.v04.chemi.common.Common.REQUEST_NAVIGATION_FAQ;
 
 /**
  * Created by yoon on 2016. 11. 14..
@@ -92,6 +95,8 @@ public class ProductActivity extends AppBaseActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_faq) {
             Toast.makeText(getApplicationContext(), "자주 묻는 질문을 삼가하세요.", Toast.LENGTH_SHORT).show();
+            Intent intent = MainActivity.newIntent(getApplicationContext(), REQUEST_NAVIGATION_FAQ);
+            startActivity(intent);
             return true;
         } else if (id == R.id.action_archive) {
             Toast.makeText(getApplicationContext(), "보관함에 추가되었습니다.", Toast.LENGTH_SHORT).show();
