@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
+import android.view.View;
 
 import com.tacademy.v04.chemi.R;
 import com.tacademy.v04.chemi.view.activity.AppNavigationActivity;
@@ -37,6 +38,8 @@ public class ProductListActivity extends AppNavigationActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        mToolbarLogoImageView.setVisibility(View.GONE);
         setTitle(R.string.title_activity_product_list);
 
         mCategoryId = getIntent().getIntExtra(EXTRA_CATEGORY_ID, CATEGORY_DEFAULT_VALUE);

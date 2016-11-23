@@ -42,6 +42,7 @@ public class AppNavigationActivity extends AppBaseActivity implements
     private static final String TAG = AppNavigationActivity.class.getSimpleName();
 
     protected Toolbar mToolbar;
+    protected ImageView mToolbarLogoImageView;
     protected DrawerLayout mDrawerLayout;
     protected NavigationView mNavigationView;
     protected Handler mPendingHandler;
@@ -59,6 +60,9 @@ public class AppNavigationActivity extends AppBaseActivity implements
         setContentView(R.layout.activity_app_navigation);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        mToolbarLogoImageView = (ImageView) findViewById(R.id.main_toolbar_logo_image);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
