@@ -168,8 +168,11 @@ public class MainFragment extends Fragment
     public void onResume() {
         super.onResume();
         updateUI();
-        mHandler.sendEmptyMessage(0);
+        mSwipeThread = new Thread(mRunnable);
+        new Handler().postDelayed(mSwipeThread ,4000);
     }
+
+
 
     private void updateUI() {
 
@@ -186,6 +189,16 @@ public class MainFragment extends Fragment
         super.onViewCreated(view, savedInstanceState);
     }
 
+    private Thread mSwipeThread;
+
+    private Runnable mRunnable = new Runnable() {
+        @Override
+        public void run() {
+            Log.w("main fragment", "runnable alive..., please kill me.....");
+            mHandler.sendEmptyMessage(0);
+        }
+    };
+
     private Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
             sweepRightToLeft();
@@ -193,6 +206,17 @@ public class MainFragment extends Fragment
             mHandler.sendEmptyMessageDelayed(0, 4000);
         }
     };
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mHandler.removeMessages(0);
+        if (mSwipeThread != null) {
+            mSwipeThread.interrupt();
+            Log.w("main fragment", "mSwipeThread interrupt. i`m died, Thank you");
+        }
+
+    }
 
     @Override
     public void onClick(View view) {
@@ -205,12 +229,6 @@ public class MainFragment extends Fragment
 //                mMainImageSwitch.setImageResource(R.drawable.main_content_sample02);
 //                break;
         }
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        mHandler.removeMessages(0);
     }
 
     //if left to right sweep event on screen
