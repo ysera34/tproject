@@ -7,6 +7,8 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
 
+        <item name="android:windowBackground">@color/colorCustomBackground</item>
+        <item name="android:colorBackground">@color/colorCustomBackground</item>
         <!-- Custom White Theme -->
         <!--<item name="titleTextColor">@color/colorPrimary</item>-->
         <!--<item name="subtitleTextColor">@color/colorWhiteFont</item>-->
@@ -28,6 +30,9 @@
         <item name="colorPrimary">@color/colorPrimary_searchActivity</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent_searchActivity</item>
+
+        <item name="android:windowBackground">@color/colorCustomBackground</item>
+        <item name="android:colorBackground">@color/colorCustomBackground</item>
     </style>
 
     <style name="SearchActivityTheme.NoActionBar">

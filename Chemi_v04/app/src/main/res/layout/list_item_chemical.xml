@@ -15,7 +15,7 @@
         android:layout_marginBottom="1dp"
         card_view:cardCornerRadius="1dp"
         card_view:contentPadding="3dp"
-        card_view:cardElevation="0.5dp">
+        card_view:cardElevation="0.2dp">
 
         <!--android:layout_margin="5dp"-->
 
