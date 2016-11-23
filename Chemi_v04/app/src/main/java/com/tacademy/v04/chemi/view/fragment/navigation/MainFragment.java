@@ -42,6 +42,11 @@ public class MainFragment extends Fragment
     private int mBannerIndex;
     private int mBannerImageArray[];
 
+    Animation mImageAnimationLeftIn;
+    Animation mImageAnimationRightOut;
+    Animation mImageAnimationRightIn;
+    Animation mImageAnimationLeftOut;
+
     private RecyclerView mMainContentRecyclerView;
     private ContentAdapter mContentAdapter;
     private ArrayList<Content> mContents;
@@ -64,6 +69,10 @@ public class MainFragment extends Fragment
         mBannerImageArray = new int[]{R.drawable.banner_sample01, R.drawable.banner_sample02,
                 R.drawable.banner_sample03, R.drawable.banner_sample04, R.drawable.banner_sample05,};
 
+        mImageAnimationLeftIn = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_in_left);
+        mImageAnimationRightOut = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_out_right);
+        mImageAnimationRightIn = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_in_right);
+        mImageAnimationLeftOut = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_out_left);
     }
 
     @Nullable
@@ -72,19 +81,19 @@ public class MainFragment extends Fragment
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 //        return super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_main, container, false);
-//        mMainNestedScrollView = (NestedScrollView) view.findViewById(R.id.main_nested_scroller_view);
-//        mMainNestedScrollView.setFillViewport(true);
+        mMainNestedScrollView = (NestedScrollView) view.findViewById(R.id.main_nested_scroller_view);
         mMainImageSwitch = (ImageSwitcher) view.findViewById(R.id.main_image_switcher);
+
         mMainImageSwitch.setFactory(new ViewSwitcher.ViewFactory() {
             @Override
             public View makeView() {
-                ImageView myView = new ImageView(getActivity());
-                myView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-                myView.setLayoutParams(new
+                final ImageView mMainImageView = new ImageView(getActivity());
+                mMainImageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+                mMainImageView.setLayoutParams(new
                         ImageSwitcher.LayoutParams(ActionBar.LayoutParams.WRAP_CONTENT,
                         ActionBar.LayoutParams.WRAP_CONTENT));
-                myView.setImageResource(mBannerImageArray[mBannerIndex]);
-                myView.setOnTouchListener(new View.OnTouchListener() {
+                mMainImageView.setImageResource(mBannerImageArray[mBannerIndex]);
+                mMainImageView.setOnTouchListener(new View.OnTouchListener() {
                     @Override
                     public boolean onTouch(View view, MotionEvent motionEvent) {
                         switch (motionEvent.getAction()) {
@@ -99,39 +108,45 @@ public class MainFragment extends Fragment
 
                                 //if left to right sweep event on screen
                                 if (x1 < x2) {
-                                    Toast.makeText(getActivity(), "Left to Right Swap Performed", Toast.LENGTH_LONG).show();
+                                    // Toast.makeText(getActivity(), "Left to Right Swap Performed", Toast.LENGTH_SHORT).show();
+                                    mBannerIndex--;
+                                    if (mBannerIndex == -1) {
+                                        mBannerIndex = mBannerImageArray.length - 1;
+                                    }
+                                    mMainImageSwitch.setInAnimation(mImageAnimationLeftIn);
+                                    mMainImageSwitch.setOutAnimation(mImageAnimationRightOut);
+                                    mMainImageSwitch.setImageResource(mBannerImageArray[mBannerIndex]);
                                 }
 
                                 // if right to left sweep event on screen
                                 if (x1 > x2) {
-                                    Toast.makeText(getActivity(), "Right to Left Swap Performed", Toast.LENGTH_LONG).show();
+                                    // Toast.makeText(getActivity(), "Right to Left Swap Performed", Toast.LENGTH_SHORT).show();
+                                    mBannerIndex++;
+                                    if (mBannerIndex == mBannerImageArray.length) {
+                                        mBannerIndex = 0;
+                                    }
+                                    mMainImageSwitch.setInAnimation(mImageAnimationRightIn);
+                                    mMainImageSwitch.setOutAnimation(mImageAnimationLeftOut);
+                                    mMainImageSwitch.setImageResource(mBannerImageArray[mBannerIndex]);
                                 }
 
                                 // if UP to Down sweep event on screen
                                 if (y1 < y2) {
-                                    Toast.makeText(getActivity(), "UP to Down Swap Performed", Toast.LENGTH_LONG).show();
+                                     Toast.makeText(getActivity(), "UP to Down Swap Performed", Toast.LENGTH_SHORT).show();
                                 }
 
                                 //if Down to UP sweep event on screen
                                 if (y1 > y2) {
-                                    Toast.makeText(getActivity(), "Down to UP Swap Performed", Toast.LENGTH_LONG).show();
+                                     Toast.makeText(getActivity(), "Down to UP Swap Performed", Toast.LENGTH_SHORT).show();
                                 }
                                 break;
                             }
                         return true;
                         }
                     });
-                    return myView;
+                    return mMainImageView;
                 }
             });
-
-        // Declare the animations and initialize them
-        Animation in = AnimationUtils.loadAnimation(getActivity(),android.R.anim.slide_in_left);
-        Animation out = AnimationUtils.loadAnimation(getActivity(),android.R.anim.slide_out_right);
-
-        // set the animation type to imageSwitcher
-        mMainImageSwitch.setInAnimation(in);
-        mMainImageSwitch.setOutAnimation(out);
 
 //        mMainImageView = (ImageView) view.findViewById(R.id.main_image_view);
 
@@ -139,8 +154,8 @@ public class MainFragment extends Fragment
         mMainContentRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mMainContentRecyclerView.setNestedScrollingEnabled(false);
 
-        (view.findViewById(R.id.prev_button)).setOnClickListener(this);
-        (view.findViewById(R.id.next_button)).setOnClickListener(this);
+//        (view.findViewById(R.id.prev_button)).setOnClickListener(this);
+//        (view.findViewById(R.id.next_button)).setOnClickListener(this);
 
         return view;
     }
@@ -169,13 +184,13 @@ public class MainFragment extends Fragment
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.prev_button :
-                mMainImageSwitch.setImageResource(R.drawable.main_content_sample01);
-                break;
-
-            case R.id.next_button:
-                mMainImageSwitch.setImageResource(R.drawable.main_content_sample02);
-                break;
+//            case R.id.prev_button :
+//                mMainImageSwitch.setImageResource(R.drawable.main_content_sample01);
+//                break;
+//
+//            case R.id.next_button:
+//                mMainImageSwitch.setImageResource(R.drawable.main_content_sample02);
+//                break;
         }
     }
 
