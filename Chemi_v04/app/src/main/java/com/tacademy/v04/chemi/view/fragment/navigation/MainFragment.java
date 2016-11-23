@@ -1,12 +1,15 @@
 package com.tacademy.v04.chemi.view.fragment.navigation;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -16,7 +19,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
 import com.tacademy.v04.chemi.R;
@@ -30,7 +32,7 @@ import java.util.ArrayList;
  */
 
 public class MainFragment extends Fragment
-        implements View.OnClickListener, View.OnTouchListener {
+        implements View.OnClickListener {
 
     private NestedScrollView mMainNestedScrollView;
     private ImageSwitcher mMainImageSwitch;
@@ -109,35 +111,37 @@ public class MainFragment extends Fragment
                                 //if left to right sweep event on screen
                                 if (x1 < x2) {
                                     // Toast.makeText(getActivity(), "Left to Right Swap Performed", Toast.LENGTH_SHORT).show();
-                                    mBannerIndex--;
-                                    if (mBannerIndex == -1) {
-                                        mBannerIndex = mBannerImageArray.length - 1;
-                                    }
-                                    mMainImageSwitch.setInAnimation(mImageAnimationLeftIn);
-                                    mMainImageSwitch.setOutAnimation(mImageAnimationRightOut);
-                                    mMainImageSwitch.setImageResource(mBannerImageArray[mBannerIndex]);
+                                    sweepLeftToRight();
+//                                    mBannerIndex--;
+//                                    if (mBannerIndex == -1) {
+//                                        mBannerIndex = mBannerImageArray.length - 1;
+//                                    }
+//                                    mMainImageSwitch.setInAnimation(mImageAnimationLeftIn);
+//                                    mMainImageSwitch.setOutAnimation(mImageAnimationRightOut);
+//                                    mMainImageSwitch.setImageResource(mBannerImageArray[mBannerIndex]);
                                 }
 
                                 // if right to left sweep event on screen
                                 if (x1 > x2) {
                                     // Toast.makeText(getActivity(), "Right to Left Swap Performed", Toast.LENGTH_SHORT).show();
-                                    mBannerIndex++;
-                                    if (mBannerIndex == mBannerImageArray.length) {
-                                        mBannerIndex = 0;
-                                    }
-                                    mMainImageSwitch.setInAnimation(mImageAnimationRightIn);
-                                    mMainImageSwitch.setOutAnimation(mImageAnimationLeftOut);
-                                    mMainImageSwitch.setImageResource(mBannerImageArray[mBannerIndex]);
+                                    sweepRightToLeft();
+//                                    mBannerIndex++;
+//                                    if (mBannerIndex == mBannerImageArray.length) {
+//                                        mBannerIndex = 0;
+//                                    }
+//                                    mMainImageSwitch.setInAnimation(mImageAnimationRightIn);
+//                                    mMainImageSwitch.setOutAnimation(mImageAnimationLeftOut);
+//                                    mMainImageSwitch.setImageResource(mBannerImageArray[mBannerIndex]);
                                 }
 
                                 // if UP to Down sweep event on screen
                                 if (y1 < y2) {
-                                     Toast.makeText(getActivity(), "UP to Down Swap Performed", Toast.LENGTH_SHORT).show();
+                                     // Toast.makeText(getActivity(), "UP to Down Swap Performed", Toast.LENGTH_SHORT).show();
                                 }
 
                                 //if Down to UP sweep event on screen
                                 if (y1 > y2) {
-                                     Toast.makeText(getActivity(), "Down to UP Swap Performed", Toast.LENGTH_SHORT).show();
+                                     // Toast.makeText(getActivity(), "Down to UP Swap Performed", Toast.LENGTH_SHORT).show();
                                 }
                                 break;
                             }
@@ -164,6 +168,7 @@ public class MainFragment extends Fragment
     public void onResume() {
         super.onResume();
         updateUI();
+        mHandler.sendEmptyMessage(0);
     }
 
     private void updateUI() {
@@ -181,6 +186,14 @@ public class MainFragment extends Fragment
         super.onViewCreated(view, savedInstanceState);
     }
 
+    private Handler mHandler = new Handler() {
+        public void handleMessage(Message msg) {
+            sweepRightToLeft();
+            Log.w("main fragment", "handler alive..., please kill me.....");
+            mHandler.sendEmptyMessageDelayed(0, 4000);
+        }
+    };
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -195,45 +208,31 @@ public class MainFragment extends Fragment
     }
 
     @Override
-    public boolean onTouch(View view, MotionEvent motionEvent) {
-        if (view.getId() == R.id.main_image_switcher) {
-            switch (motionEvent.getAction()) {
-                // when user first touches the screen we get x and y coordinate
-                case MotionEvent.ACTION_DOWN :
-                    x1 = motionEvent.getX();
-                    y1 = motionEvent.getY();
-                    break;
-                case MotionEvent.ACTION_UP :
-                    x2 = motionEvent.getX();
-                    y2 = motionEvent.getY();
+    public void onPause() {
+        super.onPause();
+        mHandler.removeMessages(0);
+    }
 
-                    //if left to right sweep event on screen
-                    if (x1 < x2)
-                    {
-                        Toast.makeText(getActivity(), "Left to Right Swap Performed", Toast.LENGTH_LONG).show();
-                    }
+    //if left to right sweep event on screen
+    private void sweepLeftToRight() {
+        mBannerIndex--;
+        if (mBannerIndex == -1) {
+            mBannerIndex = mBannerImageArray.length - 1;
+        }
+        mMainImageSwitch.setInAnimation(mImageAnimationLeftIn);
+        mMainImageSwitch.setOutAnimation(mImageAnimationRightOut);
+        mMainImageSwitch.setImageResource(mBannerImageArray[mBannerIndex]);
+    }
 
-                    // if right to left sweep event on screen
-                    if (x1 > x2)
-                    {
-                        Toast.makeText(getActivity(), "Right to Left Swap Performed", Toast.LENGTH_LONG).show();
-                    }
-
-                    // if UP to Down sweep event on screen
-                    if (y1 < y2)
-                    {
-                        Toast.makeText(getActivity(), "UP to Down Swap Performed", Toast.LENGTH_LONG).show();
-                    }
-
-                    //if Down to UP sweep event on screen
-                    if (y1 > y2)
-                    {
-                        Toast.makeText(getActivity(), "Down to UP Swap Performed", Toast.LENGTH_LONG).show();
-                    }
-                    break;
-                }
-            }
-        return false;
+    // if right to left sweep event on screen
+    private void sweepRightToLeft() {
+        mBannerIndex++;
+        if (mBannerIndex == mBannerImageArray.length) {
+            mBannerIndex = 0;
+        }
+        mMainImageSwitch.setInAnimation(mImageAnimationRightIn);
+        mMainImageSwitch.setOutAnimation(mImageAnimationLeftOut);
+        mMainImageSwitch.setImageResource(mBannerImageArray[mBannerIndex]);
     }
 
     private class ContentAdapter extends RecyclerView.Adapter<ContentHolder> {
