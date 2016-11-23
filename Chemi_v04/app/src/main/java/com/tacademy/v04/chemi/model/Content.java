@@ -10,6 +10,7 @@ import java.util.UUID;
 public class Content {
 
     private UUID mId;
+    private int mImageId;
     private String mTitle;
     private String mDescription;
     private Date mPublishedDate;
@@ -25,6 +26,14 @@ public class Content {
 
     public void setId(UUID id) {
         mId = id;
+    }
+
+    public int getImageId() {
+        return mImageId;
+    }
+
+    public void setImageId(int imageId) {
+        mImageId = imageId;
     }
 
     public String getTitle() {

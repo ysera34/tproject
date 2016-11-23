@@ -3,8 +3,6 @@ package com.tacademy.v04.chemi.view.fragment.navigation;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,9 +13,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.tacademy.v04.chemi.R;
-import com.tacademy.v04.chemi.common.SeparatorDecoration;
 import com.tacademy.v04.chemi.model.Content;
-import com.tacademy.v04.chemi.model.ContentStorage;
+import com.tacademy.v04.chemi.model.ContentMainStorage;
 
 import java.util.ArrayList;
 
@@ -25,10 +22,9 @@ import java.util.ArrayList;
  * Created by yoon on 2016. 11. 14..
  */
 
-public class MainFragment extends Fragment implements ViewPager.OnPageChangeListener {
+public class MainFragment extends Fragment {
 
     private NestedScrollView mMainNestedScrollView;
-    private ViewPager mMainContentViewPager;
     private RecyclerView mMainContentRecyclerView;
     private ContentAdapter mContentAdapter;
     private ArrayList<Content> mContents;
@@ -45,8 +41,8 @@ public class MainFragment extends Fragment implements ViewPager.OnPageChangeList
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ContentStorage contentStorage = ContentStorage.get(getActivity());
-        mContents = contentStorage.getContents();
+        ContentMainStorage contentMainStorage = ContentMainStorage.get(getActivity());
+        mContents = contentMainStorage.getContents();
     }
 
     @Nullable
@@ -55,21 +51,16 @@ public class MainFragment extends Fragment implements ViewPager.OnPageChangeList
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 //        return super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_main, container, false);
-        mMainNestedScrollView = (NestedScrollView) view.findViewById(R.id.main_nested_scroller_view);
+//        mMainNestedScrollView = (NestedScrollView) view.findViewById(R.id.main_nested_scroller_view);
 //        mMainNestedScrollView.setFillViewport(true);
-        mMainContentViewPager = (ViewPager) view.findViewById(R.id.main_view_pager);
-        mMainContentViewPager.setAdapter(new ImagePagerAdapter());
-//        mMainContentViewPager.setPageMargin(-156);
-//        mMainContentViewPager.setOffscreenPageLimit(3);
-        mMainContentViewPager.setOnPageChangeListener(this);
 
         mMainContentRecyclerView = (RecyclerView) view.findViewById(R.id.main_recycler_view);
         mMainContentRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mMainContentRecyclerView.setNestedScrollingEnabled(false);
 
-        SeparatorDecoration decoration =
-                new SeparatorDecoration(getActivity(), android.R.color.transparent, 2.5f);
-        mMainContentRecyclerView.addItemDecoration(decoration);
+//        SeparatorDecoration decoration =
+//                new SeparatorDecoration(getActivity(), android.R.color.transparent, 2.5f);
+//        mMainContentRecyclerView.addItemDecoration(decoration);
 
         return view;
     }
@@ -128,99 +119,26 @@ public class MainFragment extends Fragment implements ViewPager.OnPageChangeList
         private Content mContent;
 
         private ImageView mContentImageView;
+        private ImageView mContentCategoryImageView;
         private TextView mContentTitleTextView;
         private TextView mContentDescriptionTextView;
 
         public ContentHolder(View itemView) {
             super(itemView);
 
-            mContentImageView = (ImageView) itemView.findViewById(R.id.list_item_content_main_content_image);
-            mContentTitleTextView = (TextView) itemView.findViewById(R.id.list_item_content_main_content_title);
-            mContentDescriptionTextView = (TextView) itemView.findViewById(R.id.list_item_content_main_content_description);
+            mContentImageView =
+                    (ImageView) itemView.findViewById(R.id.list_item_content_main_image_view);
+            mContentCategoryImageView =
+                    (ImageView) itemView.findViewById(R.id.list_item_content_main_content_category_image);
+            mContentTitleTextView =
+                    (TextView) itemView.findViewById(R.id.list_item_content_main_content_title);
+            mContentDescriptionTextView =
+                    (TextView) itemView.findViewById(R.id.list_item_content_main_content_description);
         }
 
         public void bindContent(Content content) {
             mContent = content;
-
+            mContentImageView.setImageResource(mContent.getImageId());
         }
-    }
-
-    private float MIN_SCALE = 1f - 1f / 7f;
-    private float MAX_SCALE = 1f;
-
-    private class ImagePagerAdapter extends PagerAdapter {
-
-        private boolean mIsDefaultItemSelected = false;
-
-        private int[] mCards = {
-                R.drawable.banner_sample01,
-                R.drawable.banner_sample02,
-                R.drawable.banner_sample03,
-                R.drawable.banner_sample04,
-                R.drawable.banner_sample05,};
-
-        @Override
-        public Object instantiateItem(ViewGroup container, int position) {
-            ImageView contentImageView = (ImageView)
-                    View.inflate(container.getContext(), R.layout.view_pager_item_main, null);
-            contentImageView.setImageDrawable(getResources().getDrawable(mCards[position]));
-            contentImageView.setTag(position);
-
-            if (!mIsDefaultItemSelected) {
-                contentImageView.setScaleX(MAX_SCALE);
-                contentImageView.setScaleY(MAX_SCALE);
-                mIsDefaultItemSelected = true;
-            } else {
-                contentImageView.setScaleX(MIN_SCALE);
-                contentImageView.setScaleY(MIN_SCALE);
-            }
-
-            container.addView(contentImageView);
-            return contentImageView;
-        }
-
-        @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
-            container.removeView((View) object);
-        }
-
-        @Override
-        public int getCount() {
-            return mCards.length;
-        }
-cd ..
-        @Override
-        public boolean isViewFromObject(View view, Object object) {
-            return view == object;
-        }
-    }
-
-    @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-        for (int i = 0; i < mMainContentViewPager.getChildCount(); i++) {
-            View cardView = mMainContentViewPager.getChildAt(i);
-            int itemPosition = (Integer) cardView.getTag();
-
-            if (itemPosition == position) {
-                cardView.setScaleX(MAX_SCALE - positionOffset / 7f);
-                cardView.setScaleY(MAX_SCALE - positionOffset / 7f);
-            }
-
-            if (itemPosition == (position + 1)) {
-                cardView.setScaleX(MIN_SCALE + positionOffset / 7f);
-                cardView.setScaleY(MIN_SCALE + positionOffset / 7f);
-            }
-        }
-    }
-
-    @Override
-    public void onPageSelected(int position) {
-
-    }
-
-    @Override
-    public void onPageScrollStateChanged(int state) {
-
     }
 }
