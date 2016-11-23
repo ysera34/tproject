@@ -2,10 +2,13 @@ package com.tacademy.v04.chemi.view.fragment.product;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -15,6 +18,7 @@ import com.tacademy.v04.chemi.R;
 import com.tacademy.v04.chemi.model.Chemical;
 import com.tacademy.v04.chemi.model.ChemicalStorage;
 
+import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -54,7 +58,7 @@ public class ChemicalDialogFragment extends DialogFragment {
                 .inflate(R.layout.fragment_chemical_dialog, null);
 
         mTitleTextView = (TextView) view.findViewById(R.id.chemical_dialog_chemical_title_ko);
-//        mTitleTextView.setText(mChemical.getNameKo());
+        mTitleTextView.setText(mChemical.getNameKo());
 
         return new AlertDialog.Builder(getActivity())
                 .setView(view)
@@ -65,9 +69,29 @@ public class ChemicalDialogFragment extends DialogFragment {
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(getActivity(),
                                 "수정 요청 하였습니다.", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(Intent.ACTION_SEND, Uri.fromParts(
+                                "mailto", "chemi.helper@gmail.com", null));
+//                        intent.setData(Uri.parse("mailto:chemi.helper@gmail.com"));
+                        intent.setType("text/plain");
+//                        intent.putExtra(Intent.EXTRA_EMAIL, "chemi.helper@gmail.com");
+                        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"chemi.helper@gmail.com"});
+                        intent.putExtra(Intent.EXTRA_TEXT, getChemicalReport());
+                        intent.putExtra(Intent.EXTRA_SUBJECT,
+                                getString(R.string.chemical_report_subject));
+                        intent = Intent.createChooser(intent, getString(R.string.send_report));
+                        startActivity(intent);
                     }
                 }).create();
     }
+
+    private String getChemicalReport() {
+
+        String dateFormat = "EEE, MMM dd";
+        String dateString = DateFormat.format(dateFormat, new Date()).toString();
+
+        return getString(R.string.chemical_report, mChemical.getNameKo(), dateString);
+    }
+
 
 
 }

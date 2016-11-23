@@ -97,7 +97,9 @@
     <string name="archive_product_list_delete_text">Delete</string>
     <string name="archive_product_list_complete_text">Complete</string>
     <string name="chemical_list_sort_dangerous">Dangerous</string>
-
+    <string name="chemical_report_subject">Request modification of chemical information</string>
+    <string name="send_report">send chemical report</string>
+    <string name="chemical_report">Request modification of %1$s information.\nDate Time : %2$s</string>
 
 
     <string-array name="product_list_sort_way">

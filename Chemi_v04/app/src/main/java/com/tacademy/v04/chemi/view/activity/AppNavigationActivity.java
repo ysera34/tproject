@@ -32,6 +32,8 @@ import com.tacademy.v04.chemi.view.fragment.navigation.NoticeFragment;
 import com.tacademy.v04.chemi.view.fragment.navigation.RequestChemicalFragment;
 import com.tacademy.v04.chemi.view.fragment.navigation.ReviewLogFragment;
 
+import static com.tacademy.v04.chemi.R.id.fab;
+
 /**
  * Created by yoon on 2016. 11. 15..
  */
@@ -45,6 +47,7 @@ public class AppNavigationActivity extends AppBaseActivity implements
     protected ImageView mToolbarLogoImageView;
     protected DrawerLayout mDrawerLayout;
     protected NavigationView mNavigationView;
+    protected FloatingActionButton mFloatingActionButton;
     protected Handler mPendingHandler;
     protected Fragment containerFragment;
     protected View mNavigationHeader;
@@ -64,8 +67,8 @@ public class AppNavigationActivity extends AppBaseActivity implements
 
         mToolbarLogoImageView = (ImageView) findViewById(R.id.main_toolbar_logo_image);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        mFloatingActionButton = (FloatingActionButton) findViewById(fab);
+        mFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -183,25 +186,25 @@ public class AppNavigationActivity extends AppBaseActivity implements
 //        } else
         if (id == R.id.nav_archive) {
             fragment = ArchiveFragment.newInstance();
-            mToolbar.setTitle(R.string.fragment_title_archive);
+//            mToolbar.setTitle(R.string.fragment_title_archive);
         } else if (id == R.id.nav_reviews) {
             fragment = ReviewLogFragment.newInstance();
-            mToolbar.setTitle(R.string.fragment_title_reviews);
+//            mToolbar.setTitle(R.string.fragment_title_reviews);
         } else if (id == R.id.nav_custom_search_log) {
             fragment = RequestChemicalFragment.newInstance();
-            mToolbar.setTitle(R.string.fragment_title_custom_search_log);
+//            mToolbar.setTitle(R.string.fragment_title_custom_search_log);
         } else if (id == R.id.nav_item_analyze_request) {
             fragment = RequestChemicalFragment.newInstance();
-            mToolbar.setTitle(R.string.fragment_title_analyze_request);
+//            mToolbar.setTitle(R.string.fragment_title_analyze_request);
         } else if (id == R.id.nav_notifications) {
             fragment = NoticeFragment.newInstance();
-            mToolbar.setTitle(R.string.fragment_title_notifications);
+//            mToolbar.setTitle(R.string.fragment_title_notifications);
         } else if (id == R.id.nav_faq) {
             fragment = FAQFragment.newInstance();
-            mToolbar.setTitle(R.string.fragment_title_faq);
+//            mToolbar.setTitle(R.string.fragment_title_faq);
         } else if (id == R.id.nav_settings) {
             fragment = ConfigureFragment.newInstance();
-            mToolbar.setTitle(R.string.fragment_title_settings);
+//            mToolbar.setTitle(R.string.fragment_title_settings);
         }
 
         FragmentManager fm = getSupportFragmentManager();

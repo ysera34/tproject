@@ -92,7 +92,9 @@
     <string name="archive_product_list_delete_text">삭제</string>
     <string name="archive_product_list_complete_text">완료</string>
     <string name="chemical_list_sort_dangerous">위험도 순</string>
-
+    <string name="chemical_report_subject">성분 정보의 수정을 요청합니다</string>
+    <string name="send_report">성분 정보 수정 보고서</string>
+    <string name="chemical_report">%1$s의 정보 수정을 요청합니다.\n일시 : %2$s</string>
 
 
     <string-array name="product_list_sort_way">

@@ -25,7 +25,7 @@ public class ChemicalStorage {
          */
         for (int i = 0; i < 30; i++) {
             Chemical chemical = new Chemical();
-            chemical.setNameKo("** chemical name **" + i);
+            chemical.setNameKo("프로필렌클라이콜" + i);
             mChemicals.add(chemical);
         }
     }

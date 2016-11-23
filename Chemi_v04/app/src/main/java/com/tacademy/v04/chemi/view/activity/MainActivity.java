@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.view.View;
 
 import com.tacademy.v04.chemi.R;
 import com.tacademy.v04.chemi.view.fragment.navigation.FAQFragment;
@@ -35,6 +36,8 @@ public class MainActivity extends AppNavigationActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mFloatingActionButton.setVisibility(View.INVISIBLE);
 
         FragmentManager fm = getSupportFragmentManager();
         containerFragment = fm.findFragmentById(R.id.fragment_container);
