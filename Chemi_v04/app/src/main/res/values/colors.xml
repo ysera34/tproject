@@ -12,6 +12,7 @@
     <color name="colorFontEquivalent">#000000</color>
     <color name="colorFontRest">#9e9e9e</color>
     <color name="colorTransparent">@android:color/transparent</color>
+    <color name="colorActionModeToolbar">#ffffff</color>
 
     <color name="colorPrimary_searchActivity">#dedede</color>
     <color name="colorPrimaryDark_searchActivity">#9b9b9b</color>
@@ -47,8 +48,7 @@
     <color name="chemical_dialog_precaution_description_font_color">#757575</color>
 
 
-    <color name="main_image_switcher_indicator_inactive_color">#77B6B6B6git status
-    </color>
+    <color name="main_image_switcher_indicator_inactive_color">#77B6B6B6</color>
     <color name="main_image_switcher_indicator_active_color">#77454545</color>
 
 </resources>

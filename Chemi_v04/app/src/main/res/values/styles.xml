@@ -9,10 +9,17 @@
 
         <item name="android:windowBackground">@color/colorCustomBackground</item>
         <item name="android:colorBackground">@color/colorCustomBackground</item>
+
+        <item name="actionModeBackground">@color/colorActionModeToolbar</item>
+
+        <item name="windowActionModeOverlay">true</item>
+        <item name="android:windowActionBarOverlay">false</item>
+        <item name="windowActionBarOverlay">false</item>
         <!-- Custom White Theme -->
         <!--<item name="titleTextColor">@color/colorPrimary</item>-->
         <!--<item name="subtitleTextColor">@color/colorWhiteFont</item>-->
 
+        <item name="android:actionModeCloseDrawable">@drawable/ic_arrow_left_green</item>
     </style>
 
     <style name="AppTheme.NoActionBar">

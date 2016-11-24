@@ -25,7 +25,6 @@ public class Product {
     private String mImagePath;
     private ArrayList<Chemical> mChemicals;
     private boolean mArchiveSelect;
-    private boolean mArchiveEditSelect;
 
     public Product() {
         mId = UUID.randomUUID();
@@ -152,11 +151,4 @@ public class Product {
         mArchiveSelect = archiveSelect;
     }
 
-    public boolean isArchiveEditSelect() {
-        return mArchiveEditSelect;
-    }
-
-    public void setArchiveEditSelect(boolean archiveEditSelect) {
-        mArchiveEditSelect = archiveEditSelect;
-    }
 }

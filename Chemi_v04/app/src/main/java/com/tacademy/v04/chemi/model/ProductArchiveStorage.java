@@ -30,7 +30,6 @@ public class ProductArchiveStorage {
             product.setName("productname:" + i);
             product.setImageResId(R.mipmap.ic_launcher);
             product.setCategoryId((i%2 == 0) ? 11 : 12 );
-            product.setArchiveEditSelect(i%3 == 0);
             mProducts.add(product);
         }
 
@@ -52,7 +51,7 @@ public class ProductArchiveStorage {
 //
 //        for (int i = 0; i < 10; i++) {
 //            Product product = new Product();
-//            product.setName("비오템:ㅋㅋㅋㅋㅋ" + i);
+//            product.setName("비오템:" + i);
 //            product.setImageResId(R.mipmap.ic_launcher);
 //            product.setCategoryId((i%2 == 0) ? 22 : 23 );
 //            mProducts.add(product);
@@ -79,15 +78,15 @@ public class ProductArchiveStorage {
         return null;
     }
 
-    public ArrayList<Product> getArchiveDeleteSelectProducts() {
-        ArrayList<Product> products = new ArrayList<>();
-
-        for (Product product : mProducts) {
-            if (product.isArchiveEditSelect()) {
-                products.add(product);
+    public void removeArchiveProducts(ArrayList<Product> products) {
+        for (Product product : products) {
+            for (Product product1 : mProducts) {
+                if (product.getId().equals(product1.getId())) {
+                    mProducts.remove(product1);
+                    break;
+                }
             }
         }
-        return products;
     }
 
 //    public ArrayList<Product> getSearchArchiveProducts(String searchQuery) {

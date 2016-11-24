@@ -43,6 +43,9 @@ public class MainFragment extends Fragment
     private LinearLayout mMainImageSwitcherIndicatorLayout;
     private TextView[] mIndicatorTextViews;
 
+    private int activeColor;
+    private int inactiveColor;
+
     private int mBannerIndex;
     private int mBannerImageArray[];
 
@@ -75,6 +78,10 @@ public class MainFragment extends Fragment
 
         mBannerImageArray = new int[]{R.drawable.banner_sample01, R.drawable.banner_sample02,
                 R.drawable.banner_sample03, R.drawable.banner_sample04, R.drawable.banner_sample05,};
+
+        activeColor = getResources().getColor(R.color.main_image_switcher_indicator_active_color);
+        inactiveColor = getResources().getColor(R.color.main_image_switcher_indicator_inactive_color);
+
 
         mImageAnimationLeftIn = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_in_left);
         mImageAnimationRightOut = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_out_right);
@@ -181,12 +188,15 @@ public class MainFragment extends Fragment
         return view;
     }
 
+    private Handler mPostHandler;
+
     @Override
     public void onResume() {
         super.onResume();
         updateUI();
         mSwipeThread = new Thread(mRunnable);
-        new Handler().postDelayed(mSwipeThread ,4000);
+        mPostHandler = new Handler();
+        mPostHandler.postDelayed(mSwipeThread ,4000);
     }
 
     private void updateUI() {
@@ -231,7 +241,6 @@ public class MainFragment extends Fragment
             mSwipeThread.interrupt();
             Log.w("main fragment", "mSwipeThread interrupt. i`m died, Thank you");
         }
-
     }
 
     @Override
@@ -271,13 +280,11 @@ public class MainFragment extends Fragment
 
     private void indicateSweepImage(int currentImage) {
 
-        int activeColor = getResources().getColor(R.color.main_image_switcher_indicator_active_color);
-        int inactiveColor = getResources().getColor(R.color.main_image_switcher_indicator_inactive_color);
-
         mMainImageSwitcherIndicatorLayout.removeAllViews();
         for (int i = 0; i < mBannerImageArray.length; i++) {
             mIndicatorTextViews[i] = new TextView(getActivity());
             mIndicatorTextViews[i].setText(Html.fromHtml("&#8226;"));
+            mIndicatorTextViews[i].setPadding(16, 0, 16, 0);
             mIndicatorTextViews[i].setTextSize(35);
             mIndicatorTextViews[i].setTextColor(inactiveColor);
             mMainImageSwitcherIndicatorLayout.addView(mIndicatorTextViews[i]);

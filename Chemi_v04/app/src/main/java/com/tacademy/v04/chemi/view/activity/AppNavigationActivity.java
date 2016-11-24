@@ -131,13 +131,6 @@ public class AppNavigationActivity extends AppBaseActivity implements
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_toolbar, menu);
-        return true;
-    }
-
-    @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.nav_header_custom_search_button :
@@ -154,6 +147,13 @@ public class AppNavigationActivity extends AppBaseActivity implements
                 break;
         }
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_toolbar, menu);
+        return true;
     }
 
     @Override

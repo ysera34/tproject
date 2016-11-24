@@ -10,6 +10,7 @@
         android:orientation="vertical">
 
         <LinearLayout
+            android:visibility="gone"
             android:id="@+id/archive_product_list_header_a"
             android:layout_width="match_parent"
             android:layout_height="48dp"
@@ -71,6 +72,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:visibility="gone"
             android:id="@+id/archive_product_list_header_b"
             android:layout_width="match_parent"
             android:layout_height="48dp"
