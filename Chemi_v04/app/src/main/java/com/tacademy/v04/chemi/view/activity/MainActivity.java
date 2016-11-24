@@ -46,7 +46,7 @@ public class MainActivity extends AppNavigationActivity {
         if (requestId > 0) {
             if (requestId == REQUEST_NAVIGATION_FAQ) {
                 containerFragment = FAQFragment.newInstance();
-                mToolbar.setTitle(R.string.fragment_title_faq);
+//                mToolbar.setTitle(R.string.fragment_title_faq);
                 fm.beginTransaction()
                         .add(R.id.fragment_container, containerFragment)
                         .commit();

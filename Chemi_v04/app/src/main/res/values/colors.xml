@@ -47,4 +47,8 @@
     <color name="chemical_dialog_precaution_description_font_color">#757575</color>
 
 
+    <color name="main_image_switcher_indicator_inactive_color">#77B6B6B6git status
+    </color>
+    <color name="main_image_switcher_indicator_active_color">#77454545</color>
+
 </resources>

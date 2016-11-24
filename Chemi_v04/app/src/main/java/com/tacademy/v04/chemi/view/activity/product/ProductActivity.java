@@ -68,8 +68,8 @@ public class ProductActivity extends AppBaseActivity {
         mToolbar = (Toolbar) findViewById(R.id.product_detail_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        mToolbar.setTitle(R.string.title_activity_product);
-        setTitle(R.string.title_activity_product);
+//        mToolbar.setTitle(R.string.title_activity_product);
+//        setTitle(R.string.title_activity_product);
 
         mCollapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         mCollapsingToolbarLayout.setTitle(mProduct.getName());

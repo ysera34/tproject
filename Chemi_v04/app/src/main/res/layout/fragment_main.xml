@@ -18,18 +18,36 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <ImageSwitcher
-                android:id="@+id/main_image_switcher"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="310dp">
-                <!--<ImageView-->
+
+                <ImageSwitcher
+                    android:id="@+id/main_image_switcher"
+                    android:layout_width="match_parent"
+                    android:layout_height="310dp">
+
+                    <!--<ImageView-->
                     <!--android:id="@+id/main_image_view"-->
                     <!--android:layout_width="match_parent"-->
                     <!--android:layout_height="match_parent"-->
                     <!--android:layout_gravity="center"-->
                     <!--android:scaleType="centerCrop"-->
                     <!--android:src="@drawable/unloaded_image_holder"/>-->
-            </ImageSwitcher>
+                </ImageSwitcher>
+
+                <LinearLayout
+                    android:id="@+id/main_image_switcher_indicator_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/main_image_switcher_indicator_height"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="@dimen/main_image_switcher_indicator_margin_bottom"
+                    android:gravity="center"
+                    android:orientation="horizontal"></LinearLayout>
+
+            </RelativeLayout>
+
+
 
             <!--<LinearLayout-->
                 <!--android:layout_width="match_parent"-->

@@ -9,6 +9,7 @@ import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -18,7 +19,9 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
 import com.tacademy.v04.chemi.R;
@@ -37,12 +40,14 @@ public class MainFragment extends Fragment
     private NestedScrollView mMainNestedScrollView;
     private ImageSwitcher mMainImageSwitch;
 //    private ImageView mMainImageView;
-
-    private float x1,x2;
-    private float y1, y2;
+    private LinearLayout mMainImageSwitcherIndicatorLayout;
+    private TextView[] mIndicatorTextViews;
 
     private int mBannerIndex;
     private int mBannerImageArray[];
+
+    private float x1,x2;
+    private float y1, y2;
 
     Animation mImageAnimationLeftIn;
     Animation mImageAnimationRightOut;
@@ -92,9 +97,15 @@ public class MainFragment extends Fragment
                 final ImageView mMainImageView = new ImageView(getActivity());
                 mMainImageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
                 mMainImageView.setLayoutParams(new
-                        ImageSwitcher.LayoutParams(ActionBar.LayoutParams.WRAP_CONTENT,
+                        ImageSwitcher.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT,
                         ActionBar.LayoutParams.WRAP_CONTENT));
                 mMainImageView.setImageResource(mBannerImageArray[mBannerIndex]);
+                mMainImageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(getActivity(), "해당 컨텐츠로 이동합니다.", Toast.LENGTH_SHORT).show();
+                    }
+                });
                 mMainImageView.setOnTouchListener(new View.OnTouchListener() {
                     @Override
                     public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -119,6 +130,7 @@ public class MainFragment extends Fragment
 //                                    mMainImageSwitch.setInAnimation(mImageAnimationLeftIn);
 //                                    mMainImageSwitch.setOutAnimation(mImageAnimationRightOut);
 //                                    mMainImageSwitch.setImageResource(mBannerImageArray[mBannerIndex]);
+                                    indicateSweepImage(mBannerIndex);
                                 }
 
                                 // if right to left sweep event on screen
@@ -132,6 +144,7 @@ public class MainFragment extends Fragment
 //                                    mMainImageSwitch.setInAnimation(mImageAnimationRightIn);
 //                                    mMainImageSwitch.setOutAnimation(mImageAnimationLeftOut);
 //                                    mMainImageSwitch.setImageResource(mBannerImageArray[mBannerIndex]);
+                                    indicateSweepImage(mBannerIndex);
                                 }
 
                                 // if UP to Down sweep event on screen
@@ -153,6 +166,10 @@ public class MainFragment extends Fragment
             });
 
 //        mMainImageView = (ImageView) view.findViewById(R.id.main_image_view);
+        mMainImageSwitcherIndicatorLayout =
+                (LinearLayout) view.findViewById(R.id.main_image_switcher_indicator_layout);
+        mIndicatorTextViews = new TextView[mBannerImageArray.length];
+        indicateSweepImage(0);
 
         mMainContentRecyclerView = (RecyclerView) view.findViewById(R.id.main_recycler_view);
         mMainContentRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -171,8 +188,6 @@ public class MainFragment extends Fragment
         mSwipeThread = new Thread(mRunnable);
         new Handler().postDelayed(mSwipeThread ,4000);
     }
-
-
 
     private void updateUI() {
 
@@ -202,6 +217,7 @@ public class MainFragment extends Fragment
     private Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
             sweepRightToLeft();
+            indicateSweepImage(mBannerIndex);
             Log.w("main fragment", "handler alive..., please kill me.....");
             mHandler.sendEmptyMessageDelayed(0, 4000);
         }
@@ -251,6 +267,24 @@ public class MainFragment extends Fragment
         mMainImageSwitch.setInAnimation(mImageAnimationRightIn);
         mMainImageSwitch.setOutAnimation(mImageAnimationLeftOut);
         mMainImageSwitch.setImageResource(mBannerImageArray[mBannerIndex]);
+    }
+
+    private void indicateSweepImage(int currentImage) {
+
+        int activeColor = getResources().getColor(R.color.main_image_switcher_indicator_active_color);
+        int inactiveColor = getResources().getColor(R.color.main_image_switcher_indicator_inactive_color);
+
+        mMainImageSwitcherIndicatorLayout.removeAllViews();
+        for (int i = 0; i < mBannerImageArray.length; i++) {
+            mIndicatorTextViews[i] = new TextView(getActivity());
+            mIndicatorTextViews[i].setText(Html.fromHtml("&#8226;"));
+            mIndicatorTextViews[i].setTextSize(35);
+            mIndicatorTextViews[i].setTextColor(inactiveColor);
+            mMainImageSwitcherIndicatorLayout.addView(mIndicatorTextViews[i]);
+        }
+
+        if (mIndicatorTextViews.length > 0)
+            mIndicatorTextViews[currentImage].setTextColor(activeColor);
     }
 
     private class ContentAdapter extends RecyclerView.Adapter<ContentHolder> {

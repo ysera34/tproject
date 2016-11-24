@@ -7,20 +7,15 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.tacademy.v04.chemi.R;
 import com.tacademy.v04.chemi.model.Product;
 import com.tacademy.v04.chemi.model.ProductArchiveStorage;
-import com.tacademy.v04.chemi.view.activity.AppNavigationActivity;
 
 import java.util.ArrayList;
 
@@ -36,7 +31,6 @@ public class ArchiveProductListFragment extends Fragment implements View.OnClick
     private RecyclerView mArchiveProductRecyclerView;
     private ArchiveProductAdapter mArchiveProductAdapter;
     private ArrayList<Product> mArchiveProducts;
-    private ArrayList<Product> mArchiveProductDeleteSelected;
 
     private View mArchiveProductListHeaderA;
     private View mArchiveProductListHeaderB;
@@ -63,8 +57,6 @@ public class ArchiveProductListFragment extends Fragment implements View.OnClick
         super.onCreate(savedInstanceState);
         ProductArchiveStorage productArchiveStorage = ProductArchiveStorage.get(getActivity());
         mArchiveProducts = productArchiveStorage.getArchiveProducts();
-
-        mArchiveProductDeleteSelected = productArchiveStorage.getArchiveDeleteSelectProducts();
 
     }
 
@@ -114,73 +106,36 @@ public class ArchiveProductListFragment extends Fragment implements View.OnClick
         super.onViewCreated(view, savedInstanceState);
         mArchiveProductTotalTextView.setText(String.valueOf(mArchiveProducts.size()));
 
-        if (mArchiveProductDeleteSelected.size() > 0) {
-            String deleteNumberStr = getString(R.string.archive_product_delete_number,
-                    String.valueOf(mArchiveProductDeleteSelected.size()));
-            mArchiveProductDeleteTextView.setText(getString(R.string.archive_product_list_delete_text) + deleteNumberStr);
-            mArchiveProductDeleteTextView.setTextColor(getResources().getColor(R.color.colorArchiveEditFont));
-            mArchiveProductCompleteTextView.setTextColor(getResources().getColor(R.color.colorArchiveEditFont));
-        }
+//        if (mArchiveProductDeleteSelected.size() > 0) {
+//            String deleteNumberStr = getString(R.string.archive_product_delete_number,
+//                    String.valueOf(mArchiveProductDeleteSelected.size()));
+//            mArchiveProductDeleteTextView.setText(getString(R.string.archive_product_list_delete_text) + deleteNumberStr);
+//            mArchiveProductDeleteTextView.setTextColor(getResources().getColor(R.color.colorArchiveEditFont));
+//            mArchiveProductCompleteTextView.setTextColor(getResources().getColor(R.color.colorArchiveEditFont));
+//        }
 
     }
 
-    private boolean mHeaderState = false;
+//    private boolean mHeaderState = false;
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.archive_product_list_edit_text_view :
-                if (!mHeaderState) {
-                    mArchiveProductListHeaderA.setVisibility(View.GONE);
-                    mArchiveProductListHeaderB.setVisibility(View.VISIBLE);
-                }
-
-                break;
-            case R.id.archive_product_list_total_select_layout :
-                Toast.makeText(getActivity(), "보관함에 있는 상품을 전체 선택하였습니다.", Toast.LENGTH_SHORT).show();
-
-                break;
+//            case R.id.archive_product_list_edit_text_view :
+//                if (!mHeaderState) {
+//                    mArchiveProductListHeaderA.setVisibility(View.GONE);
+//                    mArchiveProductListHeaderB.setVisibility(View.VISIBLE);
+//                }
+//
+//                break;
+//            case R.id.archive_product_list_total_select_layout :
+//                Toast.makeText(getActivity(), "보관함에 있는 상품을 전체 선택하였습니다.", Toast.LENGTH_SHORT).show();
+//
+//                break;
         }
     }
 
-    private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
 
-        // Called when the action mode is created; startActionMode() was called
-        @Override
-        public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-            // Inflate a menu resource providing context menu items
-            MenuInflater inflater = mode.getMenuInflater();
-            inflater.inflate(R.menu.menu_navigation_drawer, menu);
-            return true;
-        }
-
-        // Called each time the action mode is shown. Always called after onCreateActionMode, but
-        // may be called multiple times if the mode is invalidated.
-        @Override
-        public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-            return false; // Return false if nothing is done
-        }
-
-        // Called when the user selects a contextual menu item
-        @Override
-        public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.nav_archive:
-                    Toast.makeText(getActivity(), "ActionMode Success", Toast.LENGTH_SHORT).show();
-                    mode.finish(); // Action picked, so close the CAB
-                    return true;
-                default:
-                    return false;
-            }
-        }
-
-        // Called when the user exits the action mode
-        @Override
-        public void onDestroyActionMode(ActionMode mode) {
-            mActionMode = null;
-            ((AppNavigationActivity) getContext()).getSupportActionBar().show();
-        }
-    };
 
     private class ArchiveProductAdapter extends RecyclerView.Adapter<ArchiveProductHolder> {
 
@@ -223,20 +178,6 @@ public class ArchiveProductListFragment extends Fragment implements View.OnClick
 
         public ArchiveProductHolder(View itemView) {
             super(itemView);
-            itemView.setOnLongClickListener(new View.OnLongClickListener() {
-                // Called when the user long-clicks on someView
-                public boolean onLongClick(View view) {
-                    if (mActionMode != null) {
-                        return false;
-                    }
-
-                    ((AppNavigationActivity) getContext()).getSupportActionBar().hide();
-                    // Start the CAB using the ActionMode.Callback defined above
-                    mActionMode = getActivity().startActionMode(mActionModeCallback);
-                    view.setSelected(true);
-                    return true;
-                }
-            });
 
             mArchiveProductSelectImageView = (ImageView)
                     itemView.findViewById(R.id.list_item_archive_product_select_image_view);
@@ -254,9 +195,6 @@ public class ArchiveProductListFragment extends Fragment implements View.OnClick
         public void bindArchiveProduct(Product product) {
             mProduct = product;
             mArchiveProductNameTextView.setText(mProduct.getName());
-            if (mProduct.isArchiveEditSelect()) {
-                mArchiveProductSelectImageView.setImageResource(R.drawable.ic_check_circle_check_24dp);
-            }
 
         }
 
@@ -267,17 +205,6 @@ public class ArchiveProductListFragment extends Fragment implements View.OnClick
 
                     break;
                 case R.id.list_item_archive_product_select_image_view :
-                    if (!mProduct.isArchiveEditSelect()) {
-                        mArchiveProductSelectImageView.setImageResource(R.drawable.ic_check_circle_check_24dp);
-                        mProduct.setArchiveEditSelect(true);
-                        Toast.makeText(getActivity(), mProduct.getName() + "이(가) 삭제 항목에 추가 되었습니다.",
-                                Toast.LENGTH_SHORT).show();
-                    } else {
-                        mArchiveProductSelectImageView.setImageResource(R.drawable.ic_check_circle_uncheck_24dp);
-                        mProduct.setArchiveEditSelect(false);
-                        Toast.makeText(getActivity(), mProduct.getName() + "이(가) 삭제 항목에서 해제 되었습니다.",
-                                Toast.LENGTH_SHORT).show();
-                    }
 
                     break;
             }
