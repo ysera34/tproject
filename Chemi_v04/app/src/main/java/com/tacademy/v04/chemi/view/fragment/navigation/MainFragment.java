@@ -21,12 +21,12 @@ import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
 import com.tacademy.v04.chemi.R;
 import com.tacademy.v04.chemi.model.Content;
 import com.tacademy.v04.chemi.model.ContentMainStorage;
+import com.tacademy.v04.chemi.view.activity.MainActivity;
 
 import java.util.ArrayList;
 
@@ -42,6 +42,7 @@ public class MainFragment extends Fragment
 //    private ImageView mMainImageView;
     private LinearLayout mMainImageSwitcherIndicatorLayout;
     private TextView[] mIndicatorTextViews;
+    private MainActivity mMainActivity;
 
     private int activeColor;
     private int inactiveColor;
@@ -78,10 +79,10 @@ public class MainFragment extends Fragment
 
         mBannerImageArray = new int[]{R.drawable.banner_sample01, R.drawable.banner_sample02,
                 R.drawable.banner_sample03, R.drawable.banner_sample04, R.drawable.banner_sample05,};
+        mMainActivity = (MainActivity) getActivity();
 
         activeColor = getResources().getColor(R.color.main_image_switcher_indicator_active_color);
         inactiveColor = getResources().getColor(R.color.main_image_switcher_indicator_inactive_color);
-
 
         mImageAnimationLeftIn = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_in_left);
         mImageAnimationRightOut = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_out_right);
@@ -107,12 +108,12 @@ public class MainFragment extends Fragment
                         ImageSwitcher.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT,
                         ActionBar.LayoutParams.WRAP_CONTENT));
                 mMainImageView.setImageResource(mBannerImageArray[mBannerIndex]);
-                mMainImageView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Toast.makeText(getActivity(), "해당 컨텐츠로 이동합니다.", Toast.LENGTH_SHORT).show();
-                    }
-                });
+//                mMainImageView.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        Toast.makeText(getActivity(), "해당 컨텐츠로 이동합니다.", Toast.LENGTH_SHORT).show();
+//                    }
+//                });
                 mMainImageView.setOnTouchListener(new View.OnTouchListener() {
                     @Override
                     public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -188,15 +189,32 @@ public class MainFragment extends Fragment
         return view;
     }
 
-    private Handler mPostHandler;
+//    private Handler mPostHandler;
+    private Thread mTimerThread;
+    private Thread mSwipeThread;
 
     @Override
     public void onResume() {
         super.onResume();
         updateUI();
+
         mSwipeThread = new Thread(mRunnable);
-        mPostHandler = new Handler();
-        mPostHandler.postDelayed(mSwipeThread ,4000);
+
+        mTimerThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(4000);
+                } catch (InterruptedException e) {
+                    Log.w("main fragment", "mTimerThread InterruptedException. i`m died, Thank you");
+                }
+                mSwipeThread.start();
+            }
+        });
+        mTimerThread.start();
+
+//        mPostHandler = new Handler();
+//        mPostHandler.postDelayed(mSwipeThread ,4000);
     }
 
     private void updateUI() {
@@ -213,8 +231,6 @@ public class MainFragment extends Fragment
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
     }
-
-    private Thread mSwipeThread;
 
     private Runnable mRunnable = new Runnable() {
         @Override
@@ -240,6 +256,24 @@ public class MainFragment extends Fragment
         if (mSwipeThread != null) {
             mSwipeThread.interrupt();
             Log.w("main fragment", "mSwipeThread interrupt. i`m died, Thank you");
+        }
+        if (mTimerThread != null) {
+            mTimerThread.interrupt();
+            Log.w("main fragment", "mTimerThread interrupt. i`m died, Thank you");
+        }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mHandler.removeMessages(0);
+        if (mSwipeThread != null) {
+            mSwipeThread.interrupt();
+            Log.w("fragment onDestroyView", "mSwipeThread interrupt. i`m died, Thank you");
+        }
+        if (mTimerThread != null) {
+            mTimerThread.interrupt();
+            Log.w("fragment onDestroyView", "mTimerThread interrupt. i`m died, Thank you");
         }
     }
 

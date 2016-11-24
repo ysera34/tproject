@@ -58,7 +58,6 @@ public class ArchiveProductListFragment extends Fragment implements View.OnClick
         mProductArchiveStorage = ProductArchiveStorage.get(getActivity());
         mArchiveProducts = mProductArchiveStorage.getArchiveProducts();
         mCheckedArchiveProducts = new ArrayList<>();
-
     }
 
     @Nullable
@@ -127,7 +126,6 @@ public class ArchiveProductListFragment extends Fragment implements View.OnClick
             }
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
