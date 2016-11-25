@@ -59,4 +59,15 @@ public class Content {
     public void setPublishedDate(Date publishedDate) {
         mPublishedDate = publishedDate;
     }
+
+    @Override
+    public String toString() {
+        return "Content{" +
+                "mId=" + mId +
+                ", mImageId=" + mImageId +
+                ", mTitle='" + mTitle + '\'' +
+                ", mDescription='" + mDescription + '\'' +
+                ", mPublishedDate=" + mPublishedDate +
+                '}';
+    }
 }

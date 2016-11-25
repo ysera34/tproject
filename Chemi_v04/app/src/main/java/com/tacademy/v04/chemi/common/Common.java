@@ -18,6 +18,4 @@ public class Common {
     public static final int REQUEST_NAVIGATION_FAQ = 116;
     public static final int REQUEST_NAVIGATION_SETTING = 117;
 
-    public static final String URL = "http://52.78.226.188:3000/";
-
 }

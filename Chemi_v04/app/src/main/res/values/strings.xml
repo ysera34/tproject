@@ -108,4 +108,9 @@
         <item>@string/product_list_sort_latest_release</item>
     </string-array>
 
+
+    <!-- REQUEST -->
+    <!--<string name="request_product_id">%1$s</string>-->
+
+
 </resources>

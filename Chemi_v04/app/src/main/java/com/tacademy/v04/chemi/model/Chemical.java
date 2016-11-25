@@ -13,14 +13,15 @@ public class Chemical {
     private int mChemicalId;
     private String mNameKo;
     private String mNameEn;
+    private String mKeyword;
     private String mAbbr;
     private String mMix;
     private int mHazard;
-    private ArrayList<Symptom> mSymptoms;
+    private ArrayList<Effect> mEffects;
 
     public Chemical() {
         mId = UUID.randomUUID();
-        mSymptoms = new ArrayList<>();
+        mEffects = new ArrayList<>();
     }
 
     public UUID getId() {
@@ -55,6 +56,14 @@ public class Chemical {
         mNameEn = nameEn;
     }
 
+    public String getKeyword() {
+        return mKeyword;
+    }
+
+    public void setKeyword(String keyword) {
+        mKeyword = keyword;
+    }
+
     public String getAbbr() {
         return mAbbr;
     }
@@ -79,44 +88,26 @@ public class Chemical {
         mHazard = hazard;
     }
 
-    public ArrayList<Symptom> getSymptoms() {
-        return mSymptoms;
+    public ArrayList<Effect> getEffects() {
+        return mEffects;
     }
 
-    public void setSymptoms(ArrayList<Symptom> symptoms) {
-        mSymptoms = symptoms;
+    public void setEffects(ArrayList<Effect> effects) {
+        mEffects = effects;
     }
 
-    class Symptom {
-
-        private int mType;
-        private int mImageId;
-        private String mContent;
-
-        public int getType() {
-            return mType;
-        }
-
-        public void setType(int type) {
-            mType = type;
-        }
-
-        public int getImageId() {
-            return mImageId;
-        }
-
-        public void setImageId(int imageId) {
-            mImageId = imageId;
-        }
-
-        public String getContent() {
-            return mContent;
-        }
-
-        public void setContent(String content) {
-            mContent = content;
-        }
+    @Override
+    public String toString() {
+        return "Chemical{" +
+                "mId=" + mId +
+                ", mChemicalId=" + mChemicalId +
+                ", mNameKo='" + mNameKo + '\'' +
+                ", mNameEn='" + mNameEn + '\'' +
+                ", mKeyword='" + mKeyword + '\'' +
+                ", mAbbr='" + mAbbr + '\'' +
+                ", mMix='" + mMix + '\'' +
+                ", mHazard=" + mHazard +
+                ", mEffects=" + mEffects.toString() +
+                '}';
     }
-
-
 }

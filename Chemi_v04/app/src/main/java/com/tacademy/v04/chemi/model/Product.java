@@ -1,7 +1,6 @@
 package com.tacademy.v04.chemi.model;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -18,9 +17,9 @@ public class Product {
     private String mName;
     private String mType;
     private String mPurpose;
-    private float mRatingAvg;
+    private double mRatingAvg;
     private int mVotedNumber;
-    private Date mReleaseDate;
+    private String mReleaseDate;
     private int mImageResId;
     private String mImagePath;
     private ArrayList<Chemical> mChemicals;
@@ -95,11 +94,11 @@ public class Product {
         mPurpose = purpose;
     }
 
-    public float getRatingAvg() {
+    public double getRatingAvg() {
         return mRatingAvg;
     }
 
-    public void setRatingAvg(float ratingAvg) {
+    public void setRatingAvg(double ratingAvg) {
         mRatingAvg = ratingAvg;
     }
 
@@ -111,11 +110,11 @@ public class Product {
         mVotedNumber = votedNumber;
     }
 
-    public Date getReleaseDate() {
+    public String getReleaseDate() {
         return mReleaseDate;
     }
 
-    public void setReleaseDate(Date releaseDate) {
+    public void setReleaseDate(String releaseDate) {
         mReleaseDate = releaseDate;
     }
 
@@ -151,4 +150,24 @@ public class Product {
         mArchiveSelect = archiveSelect;
     }
 
+    @Override
+    public String toString() {
+        return "Product{" +
+                "mId=" + mId +
+                ", mProductId=" + mProductId +
+                ", mCategoryId=" + mCategoryId +
+                ", mMaker='" + mMaker + '\'' +
+                ", mBrand='" + mBrand + '\'' +
+                ", mName='" + mName + '\'' +
+                ", mType='" + mType + '\'' +
+                ", mPurpose='" + mPurpose + '\'' +
+                ", mRatingAvg=" + mRatingAvg +
+                ", mVotedNumber=" + mVotedNumber +
+                ", mReleaseDate='" + mReleaseDate + '\'' +
+                ", mImageResId=" + mImageResId +
+                ", mImagePath='" + mImagePath + '\'' +
+                ", mChemicals=" + mChemicals.toString() +
+                ", mArchiveSelect=" + mArchiveSelect +
+                '}';
+    }
 }

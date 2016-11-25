@@ -1,5 +1,6 @@
 package com.tacademy.chemi.view.activity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -67,5 +68,17 @@ public class ProductPagerActivity extends AppBaseActivity {
                 break;
             }
         }
+    }
+
+    private static ProgressDialog pDialog;
+
+    private static void showpDialog() {
+        if (!pDialog.isShowing())
+            pDialog.show();
+    }
+
+    private static void hidepDialog() {
+        if (pDialog.isShowing())
+            pDialog.dismiss();
     }
 }

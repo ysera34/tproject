@@ -3,7 +3,6 @@ package com.tacademy.chemi.model;
 import android.content.Context;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -13,13 +12,24 @@ public class ProductStorage {
 
     private static ProductStorage sProductStorage;
 
-    private List<Product> mProducts;
+    private ArrayList<Product> mProducts;
+
+    public static ProductStorage get() {
+        if (sProductStorage == null) {
+            sProductStorage = new ProductStorage();
+        }
+        return sProductStorage;
+    }
 
     public static ProductStorage get(Context context) {
         if (sProductStorage == null) {
             sProductStorage = new ProductStorage(context);
         }
         return sProductStorage;
+    }
+
+    public ProductStorage() {
+        mProducts = new ArrayList<>();
     }
 
     public ProductStorage(Context context) {
@@ -32,7 +42,11 @@ public class ProductStorage {
         }
     }
 
-    public List<Product> getProducts() {
+    public void setProducts(ArrayList<Product> products) {
+        mProducts = products;
+    }
+
+    public ArrayList<Product> getProducts() {
         return mProducts;
     }
 

@@ -18,6 +18,9 @@ public class ProductStorage {
 
     private ArrayList<Product> mProducts;
 
+    private ProductStorage() {
+    }
+
     private ProductStorage(Context appContext) {
         mAppContext = appContext;
         mProducts = new ArrayList<>();
