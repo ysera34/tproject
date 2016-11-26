@@ -2,8 +2,6 @@ package com.tacademy.v04.chemi.model;
 
 import android.content.Context;
 
-import com.tacademy.v04.chemi.R;
-
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -27,7 +25,7 @@ public class ProductStorage {
 
         /*
         sample data
-         */
+
         for (int i = 0; i < 10; i++) {
             Product product = new Product();
             product.setName("productname:" + i);
@@ -59,6 +57,7 @@ public class ProductStorage {
             product.setCategoryId((i%2 == 0) ? 22 : 23 );
             mProducts.add(product);
         }
+         */
     }
 
     public static ProductStorage get(Context context) {

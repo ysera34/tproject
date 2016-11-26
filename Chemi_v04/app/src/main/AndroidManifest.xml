@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.tacademy.v04.chemi">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".common.MyApplication"
         android:allowBackup="true"

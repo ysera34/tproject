@@ -79,7 +79,7 @@ public class Parser {
                         product.setMaker(productObject.getString(MAKER));
                         product.setBrand(productObject.getString(BRAND));
                         product.setName(productObject.getString(NAME));
-                        product.setRatingAvg(productObject.getDouble(RATING));
+//                        product.setRatingAvg(productObject.getDouble(RATING));
                         product.setVotedNumber(productObject.getInt(RATING_COUNT));
                         product.setImagePath(productObject.getString(IMAGE_PATH));
                         products.add(product);

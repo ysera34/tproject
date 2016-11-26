@@ -1,5 +1,6 @@
 package com.tacademy.v04.chemi.view.fragment.product;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,11 +18,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.tacademy.v04.chemi.R;
+import com.tacademy.v04.chemi.common.network.NetworkConfig;
+import com.tacademy.v04.chemi.common.network.Parser;
 import com.tacademy.v04.chemi.model.Product;
 import com.tacademy.v04.chemi.model.ProductStorage;
 import com.tacademy.v04.chemi.view.activity.product.ProductActivity;
 import com.tacademy.v04.chemi.view.activity.product.ProductListActivity;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -71,6 +81,9 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ProductStorage productStorage = ProductStorage.get(getActivity());
+        getData();
+
+
         if (getArguments() != null) {
             mCategoryId = getArguments().getInt(
                     ARG_CATEGORY_ID, ProductListActivity.CATEGORY_DEFAULT_VALUE);
@@ -99,7 +112,7 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
         mProductRecyclerView = (RecyclerView) view.findViewById(R.id.product_recycler_view);
         mProductRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        updateUI();
+//        updateUI();
 
         return view;
     }
@@ -107,7 +120,7 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
     @Override
     public void onResume() {
         super.onResume();
-        updateUI();
+//        updateUI();
     }
 
     private void updateUI() {
@@ -167,6 +180,39 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
                     NoProductDialogFragment.newInstance();
             dialogFragment.show(manager, PRODUCT_NO_EXIST_INFO);
         }
+    }
+
+    //This method will get data from the web api
+    private void getData(){
+        //Showing a progress dialog
+        final ProgressDialog loading =
+                ProgressDialog.show(getActivity(),"Loading Data", "Please wait...",false,false);
+
+        //Creating a json array request
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(NetworkConfig.URL_HOST + NetworkConfig.Product.PATH,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        //Dismissing progress dialog
+                        loading.dismiss();
+
+                        //calling method to parse json array
+                        mProducts = Parser.parseProductList(response);
+                        updateUI();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.w(TAG, "onErrorResponse : " + error.toString());
+                    }
+                });
+
+        //Creating request queue
+        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
+
+        //Adding request to the queue
+        requestQueue.add(jsonObjectRequest);
     }
 
     private class ProductAdapter extends RecyclerView.Adapter<ProductHolder> {
