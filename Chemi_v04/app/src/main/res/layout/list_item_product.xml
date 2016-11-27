@@ -88,11 +88,11 @@
                         android:textStyle="normal"/>
 
                     <TextView
+                        android:id="@+id/list_item_product_review_rating_count"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
                         android:layout_marginStart="10dp"
-                        android:text="(1,300명)"
                         android:textSize="14sp"
                         android:textStyle="normal"/>
 

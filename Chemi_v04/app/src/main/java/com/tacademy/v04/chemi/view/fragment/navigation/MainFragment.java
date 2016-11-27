@@ -39,6 +39,8 @@ public class MainFragment extends Fragment
 
     private static final String TAG = MainFragment.class.getSimpleName();
 
+    private Thread mSwipeThread;
+
     private NestedScrollView mMainNestedScrollView;
     private ImageSwitcher mMainImageSwitch;
 //    private ImageView mMainImageView;
@@ -191,10 +193,6 @@ public class MainFragment extends Fragment
         return view;
     }
 
-//    private Handler mPostHandler;
-//    private Thread mTimerThread;
-    private Thread mSwipeThread;
-
     @Override
     public void onResume() {
         super.onResume();
@@ -202,21 +200,6 @@ public class MainFragment extends Fragment
 
         mSwipeThread = new Thread(mRunnable);
         mSwipeThread.start();
-//        mTimerThread = new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                try {
-//                    Thread.sleep(4000);
-//                } catch (InterruptedException e) {
-//                    Log.w("main fragment", "mTimerThread InterruptedException. i`m died, Thank you");
-//                }
-//                mSwipeThread.start();
-//            }
-//        });
-//        mTimerThread.start();
-
-//        mPostHandler = new Handler();
-//        mPostHandler.postDelayed(mSwipeThread ,4000);
     }
 
     private void updateUI() {
@@ -263,10 +246,6 @@ public class MainFragment extends Fragment
             mSwipeThread.interrupt();
             Log.w(TAG + " onPause", "mSwipeThread interrupt. i`m died, Thank you");
         }
-//        if (mTimerThread != null) {
-//            mTimerThread.interrupt();
-//            Log.w("main fragment", "mTimerThread interrupt. i`m died, Thank you");
-//        }
     }
 
     @Override
@@ -287,10 +266,6 @@ public class MainFragment extends Fragment
             mSwipeThread.interrupt();
             Log.w(TAG + " onDestroyView", "mSwipeThread interrupt. i`m died, Thank you");
         }
-//        if (mTimerThread != null) {
-//            mTimerThread.interrupt();
-//            Log.w("fragment onDestroyView", "mTimerThread interrupt. i`m died, Thank you");
-//        }
     }
 
     @Override

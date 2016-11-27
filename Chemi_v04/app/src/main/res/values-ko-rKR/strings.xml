@@ -95,7 +95,9 @@
     <string name="chemical_report_subject">성분 정보의 수정을 요청합니다</string>
     <string name="send_report">성분 정보 수정 보고서</string>
     <string name="chemical_report">%1$s의 정보 수정을 요청합니다.\n일시 : %2$s</string>
-
+    <string name="request_loading_data">데이터를 가져오고 있습니다</string>
+    <string name="load_please_wait">잠시만 기다려주세요...</string>
+    <string name="list_item_product_review_rating_count">(%s명)</string>
 
     <string-array name="product_list_sort_way">
         <item>@string/product_list_sort_review_total</item>

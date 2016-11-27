@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -18,22 +17,23 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.tacademy.v04.chemi.R;
-import com.tacademy.v04.chemi.common.network.NetworkConfig;
 import com.tacademy.v04.chemi.common.network.Parser;
 import com.tacademy.v04.chemi.model.Product;
 import com.tacademy.v04.chemi.model.ProductStorage;
 import com.tacademy.v04.chemi.view.activity.product.ProductActivity;
-import com.tacademy.v04.chemi.view.activity.product.ProductListActivity;
 
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+
+import static com.tacademy.v04.chemi.common.Common.CATEGORY_DEFAULT_VALUE;
+import static com.tacademy.v04.chemi.common.network.NetworkConfig.Product.PATH;
+import static com.tacademy.v04.chemi.common.network.NetworkConfig.URL_HOST;
 
 /**
  * Created by yoon on 2016. 11. 14..
@@ -47,6 +47,7 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
 
     private static final String ARG_CATEGORY_ID = "category_id";
 
+    private ProductStorage mProductStorage;
     private RecyclerView mProductRecyclerView;
     private ProductAdapter mProductAdapter;
     private ArrayList<Product> mProducts;
@@ -58,9 +59,6 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
     private Button mProductSortReviewButton;
     private Button mProductSortAvgButton;
     private Button mProductSortLatestButton;
-
-    public ProductListFragment() {
-    }
 
     public static ProductListFragment newInstance() {
 
@@ -77,24 +75,27 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
         return fragment;
     }
 
+    public ProductListFragment() {
+        mProductStorage = ProductStorage.get(getActivity());
+        mProducts = mProductStorage.getProducts();
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ProductStorage productStorage = ProductStorage.get(getActivity());
-        getData();
-
+        setRetainInstance(true);
 
         if (getArguments() != null) {
             mCategoryId = getArguments().getInt(
-                    ARG_CATEGORY_ID, ProductListActivity.CATEGORY_DEFAULT_VALUE);
-        }
-        Log.d(TAG, "mCategoryId : " + mCategoryId);
+                    ARG_CATEGORY_ID, CATEGORY_DEFAULT_VALUE);
+            Log.d(TAG, "mCategoryId : " + mCategoryId);
 
-        // mCategoryId = 0;(initial) category_default = -1;
-        if (mCategoryId > 0) {
-            mProducts = productStorage.getCategoryProducts(mCategoryId);
-        } else {
-            mProducts = productStorage.getProducts();
+            // mCategoryId = 0;(initial) category_default = -1;
+//            if (mCategoryId > 0) {
+//                mProducts = mProductStorage.getCategoryProducts(mCategoryId);
+//            } else {
+//                mProducts = mProductStorage.getProducts();
+//            }
         }
     }
 
@@ -112,7 +113,8 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
         mProductRecyclerView = (RecyclerView) view.findViewById(R.id.product_recycler_view);
         mProductRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-//        updateUI();
+        mProductAdapter = new ProductAdapter(mProducts);
+        mProductRecyclerView.setAdapter(mProductAdapter);
 
         return view;
     }
@@ -120,17 +122,36 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
     @Override
     public void onResume() {
         super.onResume();
-//        updateUI();
+        requestJsonObject();
+        requestJsonObject();
     }
 
-    private void updateUI() {
+    private void setupAdapter() {
+        if (isAdded()) {
+            int productSize = mProducts.size();
+            Log.i(TAG, "mProducts.size() : " + mProducts.size());
 
-        if (mProductAdapter == null) {
-            mProductAdapter = new ProductAdapter(mProducts);
-            mProductRecyclerView.setAdapter(mProductAdapter);
-        } else {
-            mProductAdapter.notifyDataSetChanged();
+            if (mProductAdapter == null) {
+                mProductAdapter = new ProductAdapter(mProducts);
+                mProductRecyclerView.setAdapter(mProductAdapter);
+            } else {
+                mProductAdapter.addItems(mProducts);
+                mProductAdapter.notifyDataSetChanged();
+                mProductTotalTextView.setText(String.valueOf(mProducts.size()));
+            }
         }
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+//        if (mCategoryId > 0 && mProducts.size() == 0) {
+//            FragmentManager manager = getFragmentManager();
+//            NoProductDialogFragment dialogFragment =
+//                    NoProductDialogFragment.newInstance();
+//            dialogFragment.show(manager, PRODUCT_NO_EXIST_INFO);
+//        }
     }
 
     @Override
@@ -169,36 +190,25 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
         }
     }
 
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        mProductTotalTextView.setText(String.valueOf(mProducts.size()));
+    int i = 0;
 
-        if (mCategoryId > 0 && mProducts.size() == 0) {
-            FragmentManager manager = getFragmentManager();
-            NoProductDialogFragment dialogFragment =
-                    NoProductDialogFragment.newInstance();
-            dialogFragment.show(manager, PRODUCT_NO_EXIST_INFO);
-        }
-    }
+    private void requestJsonObject() {
 
-    //This method will get data from the web api
-    private void getData(){
-        //Showing a progress dialog
-        final ProgressDialog loading =
-                ProgressDialog.show(getActivity(),"Loading Data", "Please wait...",false,false);
+        final ProgressDialog pDialog =
+                ProgressDialog.show(getActivity(), getString(R.string.request_loading_data),
+                        getString(R.string.load_please_wait), false, false);
 
-        //Creating a json array request
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(NetworkConfig.URL_HOST + NetworkConfig.Product.PATH,
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(URL_HOST + PATH,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        //Dismissing progress dialog
-                        loading.dismiss();
+                        pDialog.dismiss();
+                        // validations?
+                        mProductStorage.setProducts(Parser.parseProductList(response));
+                        mProductAdapter.addItems(mProductStorage.getProducts());
+                        mProductAdapter.notifyDataSetChanged();
 
-                        //calling method to parse json array
-                        mProducts = Parser.parseProductList(response);
-                        updateUI();
+                        Log.d("i", String.valueOf(i++));
                     }
                 },
                 new Response.ErrorListener() {
@@ -208,11 +218,7 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
                     }
                 });
 
-        //Creating request queue
-        RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-
-        //Adding request to the queue
-        requestQueue.add(jsonObjectRequest);
+        Volley.newRequestQueue(getActivity()).add(jsonObjectRequest);
     }
 
     private class ProductAdapter extends RecyclerView.Adapter<ProductHolder> {
@@ -220,6 +226,10 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
         private ArrayList<Product> mProducts;
 
         public ProductAdapter(ArrayList<Product> products) {
+            mProducts = products;
+        }
+
+        public void addItems(ArrayList<Product> products) {
             mProducts = products;
         }
 
@@ -246,21 +256,28 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
     private class ProductHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private Product mProduct;
-        private TextView mTitleTextView;
         private ImageView mProductImageView;
+        private TextView mProductBrandTextView;
+        private TextView mProductTitleTextView;
+        private TextView mProductReviewRatingCount;
 
         public ProductHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
 
-            mTitleTextView = (TextView) itemView.findViewById(R.id.list_item_product_name);
             mProductImageView = (ImageView) itemView.findViewById(R.id.list_item_product_image);
+            mProductBrandTextView = (TextView) itemView.findViewById(R.id.list_item_product_brand);
+            mProductTitleTextView = (TextView) itemView.findViewById(R.id.list_item_product_name);
+            mProductReviewRatingCount = (TextView) itemView.findViewById(R.id.list_item_product_review_rating_count);
         }
 
         public void bindProduct(Product product) {
             mProduct = product;
-            mTitleTextView.setText(mProduct.getName());
             mProductImageView.setImageResource(mProduct.getImageResId());
+            mProductBrandTextView.setText(mProduct.getBrand());
+            mProductTitleTextView.setText(mProduct.getName());
+            mProductReviewRatingCount.setText(getString(
+                    R.string.list_item_product_review_rating_count, String.valueOf(mProduct.getVotedNumber())));
         }
 
         @Override
@@ -273,6 +290,36 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
 //            Intent intent = ProductPagerActivity.newIntent(getActivity(), mProduct.getId());
             startActivity(intent);
 //            startActivityForResult(intent, REQUEST_PRODUCT_ACTIVITY);
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        ProductStorage productStorage = ProductStorage.get(getActivity());
+        ArrayList<Product> products = productStorage.getProducts();
+        for (Product product : products) {
+            Log.i(TAG + "onPause()", product.toString());
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        ProductStorage productStorage = ProductStorage.get(getActivity());
+        ArrayList<Product> products = productStorage.getProducts();
+        for (Product product : products) {
+            Log.i(TAG + "onStop()", product.toString());
+        }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ProductStorage productStorage = ProductStorage.get(getActivity());
+        ArrayList<Product> products = productStorage.getProducts();
+        for (Product product : products) {
+            Log.i(TAG + "onDestroyView()", product.toString());
         }
     }
 }

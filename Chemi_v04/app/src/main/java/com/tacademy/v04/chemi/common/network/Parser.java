@@ -58,6 +58,8 @@ import static com.tacademy.v04.chemi.common.network.NetworkConfig.Review.Key.WRI
 
 public class Parser {
 
+    private static final String TAG = Parser.class.getSimpleName();
+
     /**
      * products
      * @param responseObject

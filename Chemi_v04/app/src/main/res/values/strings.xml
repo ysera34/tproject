@@ -100,7 +100,9 @@
     <string name="chemical_report_subject">Request modification of chemical information</string>
     <string name="send_report">send chemical report</string>
     <string name="chemical_report">Request modification of %1$s information.\nDate Time : %2$s</string>
-
+    <string name="request_loading_data">Loading Data</string>
+    <string name="load_please_wait">Please wait...</string>
+    <string name="list_item_product_review_rating_count">(%s)</string>
 
     <string-array name="product_list_sort_way">
         <item>@string/product_list_sort_review_total</item>

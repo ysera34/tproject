@@ -18,4 +18,6 @@ public class Common {
     public static final int REQUEST_NAVIGATION_FAQ = 116;
     public static final int REQUEST_NAVIGATION_SETTING = 117;
 
+    public static final int CATEGORY_DEFAULT_VALUE = -1;
+
 }

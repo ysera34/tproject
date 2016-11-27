@@ -11,6 +11,8 @@ import com.tacademy.v04.chemi.R;
 import com.tacademy.v04.chemi.view.activity.AppNavigationActivity;
 import com.tacademy.v04.chemi.view.fragment.product.ProductListFragment;
 
+import static com.tacademy.v04.chemi.common.Common.CATEGORY_DEFAULT_VALUE;
+
 /**
  * Created by yoon on 2016. 11. 14..
  */
@@ -21,7 +23,6 @@ public class ProductListActivity extends AppNavigationActivity {
 
     private static final String EXTRA_CATEGORY_ID = "com.tacademy.chemi.category_id";
     private int mCategoryId;
-    public static final int CATEGORY_DEFAULT_VALUE = -1;
 
     public static Intent newIntent(Context packageContext) {
         Intent intent = new Intent(packageContext, ProductListActivity.class);
