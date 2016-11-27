@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -90,12 +91,6 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
                     ARG_CATEGORY_ID, CATEGORY_DEFAULT_VALUE);
             Log.d(TAG, "mCategoryId : " + mCategoryId);
 
-            // mCategoryId = 0;(initial) category_default = -1;
-//            if (mCategoryId > 0) {
-//                mProducts = mProductStorage.getCategoryProducts(mCategoryId);
-//            } else {
-//                mProducts = mProductStorage.getProducts();
-//            }
         }
     }
 
@@ -113,8 +108,11 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
         mProductRecyclerView = (RecyclerView) view.findViewById(R.id.product_recycler_view);
         mProductRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        mProductAdapter = new ProductAdapter(mProducts);
-        mProductRecyclerView.setAdapter(mProductAdapter);
+
+//        switch above method
+        setupAdapter();
+//        mProductAdapter = new ProductAdapter(mProducts);
+//        mProductRecyclerView.setAdapter(mProductAdapter);
 
         return view;
     }
@@ -128,16 +126,31 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
 
     private void setupAdapter() {
         if (isAdded()) {
-            int productSize = mProducts.size();
-            Log.i(TAG, "mProducts.size() : " + mProducts.size());
-
             if (mProductAdapter == null) {
                 mProductAdapter = new ProductAdapter(mProducts);
                 mProductRecyclerView.setAdapter(mProductAdapter);
             } else {
-                mProductAdapter.addItems(mProducts);
-                mProductAdapter.notifyDataSetChanged();
-                mProductTotalTextView.setText(String.valueOf(mProducts.size()));
+                // category product
+                if (mCategoryId > 0) {
+                    Toast.makeText(getActivity(), "mCategoryId > 0", Toast.LENGTH_SHORT).show();
+                    mProductAdapter.addItems(mProductStorage.getCategoryProducts(mCategoryId));
+                    mProductAdapter.notifyDataSetChanged();
+                    mProductTotalTextView.setText(String.valueOf(mProductAdapter.getItemCount()));
+                // all products
+                } else {
+                    Toast.makeText(getActivity(), "mCategoryId < 0", Toast.LENGTH_SHORT).show();
+                    mProductAdapter.addItems(mProductStorage.getProducts());
+                    mProductAdapter.notifyDataSetChanged();
+                    mProductTotalTextView.setText(String.valueOf(mProductAdapter.getItemCount()));
+                }
+
+                // category no product
+                if (mCategoryId > 0 && mProductAdapter.getItemCount() == 0) {
+                    FragmentManager manager = getFragmentManager();
+                    NoProductDialogFragment dialogFragment =
+                            NoProductDialogFragment.newInstance();
+                    dialogFragment.show(manager, PRODUCT_NO_EXIST_INFO);
+                }
             }
         }
     }
@@ -190,8 +203,6 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
         }
     }
 
-    int i = 0;
-
     private void requestJsonObject() {
 
         final ProgressDialog pDialog =
@@ -203,12 +214,12 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
                     @Override
                     public void onResponse(JSONObject response) {
                         pDialog.dismiss();
-                        // validations?
                         mProductStorage.setProducts(Parser.parseProductList(response));
-                        mProductAdapter.addItems(mProductStorage.getProducts());
-                        mProductAdapter.notifyDataSetChanged();
 
-                        Log.d("i", String.valueOf(i++));
+//                        switch above method
+                        setupAdapter();
+//                        mProductAdapter.addItems(mProductStorage.getProducts());
+//                        mProductAdapter.notifyDataSetChanged();
                     }
                 },
                 new Response.ErrorListener() {
@@ -299,7 +310,7 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
         ProductStorage productStorage = ProductStorage.get(getActivity());
         ArrayList<Product> products = productStorage.getProducts();
         for (Product product : products) {
-            Log.i(TAG + "onPause()", product.toString());
+            Log.i(TAG + " onPause()", product.toString());
         }
     }
 
@@ -309,7 +320,7 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
         ProductStorage productStorage = ProductStorage.get(getActivity());
         ArrayList<Product> products = productStorage.getProducts();
         for (Product product : products) {
-            Log.i(TAG + "onStop()", product.toString());
+            Log.i(TAG + " onStop()", product.toString());
         }
     }
 
@@ -319,7 +330,7 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
         ProductStorage productStorage = ProductStorage.get(getActivity());
         ArrayList<Product> products = productStorage.getProducts();
         for (Product product : products) {
-            Log.i(TAG + "onDestroyView()", product.toString());
+            Log.i(TAG + " onDestroyView()", product.toString());
         }
     }
 }
