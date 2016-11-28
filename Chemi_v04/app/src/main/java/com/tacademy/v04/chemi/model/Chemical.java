@@ -96,6 +96,13 @@ public class Chemical {
         mEffects = effects;
     }
 
+    public String toStringId() {
+        return "Chemical{" +
+                "mId=" + mId +
+                ", mChemicalId=" + mChemicalId +
+                '}';
+    }
+
     @Override
     public String toString() {
         return "Chemical{" +

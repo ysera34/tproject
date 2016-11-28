@@ -1,5 +1,6 @@
 package com.tacademy.v04.chemi.view.fragment.product;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetDialog;
@@ -7,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,11 +17,24 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.tacademy.v04.chemi.R;
+import com.tacademy.v04.chemi.common.network.Parser;
 import com.tacademy.v04.chemi.model.Chemical;
-import com.tacademy.v04.chemi.model.ChemicalStorage;
+import com.tacademy.v04.chemi.model.Product;
+import com.tacademy.v04.chemi.model.ProductStorage;
 
+import org.json.JSONObject;
+
+import java.io.File;
 import java.util.ArrayList;
+import java.util.UUID;
+
+import static com.tacademy.v04.chemi.common.network.NetworkConfig.Product.PATH;
+import static com.tacademy.v04.chemi.common.network.NetworkConfig.URL_HOST;
 
 /**
  * Created by yoon on 2016. 11. 14..
@@ -27,7 +42,16 @@ import java.util.ArrayList;
 
 public class ChemicalListFragment extends Fragment implements View.OnClickListener {
 
+    public static final String TAG = ChemicalListFragment.class.getSimpleName();
+
     private static final String CHEMICAL_DETAILS = "ChemicalDetails";
+
+    private static final String ARG_PRODUCT_ID = "product_id";
+
+    private ProductStorage mProductStorage;
+    private ArrayList<Product> mProducts;
+    private Product mProduct;
+    private UUID mProductId;
 
     private RecyclerView mChemicalRecyclerView;
     private ChemicalAdapter mChemicalAdapter;
@@ -46,6 +70,8 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
     private Button mChemicalSortMarkButton;
 
     public ChemicalListFragment() {
+//        mProductStorage = ProductStorage.get(getActivity());
+//        mProducts = mProductStorage.getProducts();
     }
 
     public static ChemicalListFragment newInstance() {
@@ -54,11 +80,34 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
         return fragment;
     }
 
+    public static ChemicalListFragment newInstance(UUID id) {
+        Bundle args = new Bundle();
+        args.putSerializable(ARG_PRODUCT_ID, id);
+
+        ChemicalListFragment fragment = new ChemicalListFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ChemicalStorage chemicalStorage = ChemicalStorage.get(getActivity());
-        mChemicals = chemicalStorage.getChemicals();
+        mProductId = (UUID) getArguments().getSerializable(ARG_PRODUCT_ID);
+        mProductStorage = ProductStorage.get(getActivity());
+        mProduct = mProductStorage.getProduct(mProductId);
+
+//        ChemicalStorage chemicalStorage = ChemicalStorage.get(getActivity());
+//        mChemicals = chemicalStorage.getChemicals();
+
+        Log.i(TAG, "onCreate " + mProduct.toString());
+
+        mChemicals = mProduct.getChemicals();
+        Log.i(TAG, "mChemicals.size() " + mChemicals.size());
+        for (Chemical chemical : mChemicals) {
+            Log.i(TAG, chemical.toStringId());
+        }
+
+
     }
 
     @Nullable
@@ -82,31 +131,20 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
         mChemicalRecyclerView = (RecyclerView) view.findViewById(R.id.product_detail_chemical_recycler_view);
         mChemicalRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        updateUI();
+        setupAdapter();
 
         return view;
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        updateUI();
-    }
-
-    private void updateUI() {
-
-        if (mChemicalAdapter == null) {
-            mChemicalAdapter = new ChemicalAdapter(mChemicals);
-            mChemicalRecyclerView.setAdapter(mChemicalAdapter);
-        } else {
-            mChemicalAdapter.notifyDataSetChanged();
-        }
-
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onResume() {
+        super.onResume();
+        requestProductJsonObject();
     }
 
     @Override
@@ -150,11 +188,58 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
         }
     }
 
+    private void setupAdapter() {
+        if(isAdded()) {
+            if (mChemicalAdapter == null) {
+                mChemicalAdapter = new ChemicalAdapter(mChemicals);
+                mChemicalRecyclerView.setAdapter(mChemicalAdapter);
+            } else {
+                mChemicals = mProduct.getChemicals();
+                mChemicalAdapter.addItems(mChemicals);
+                mChemicalAdapter.notifyDataSetChanged();
+            }
+        }
+    }
+
+    private void requestProductJsonObject() {
+
+        final ProgressDialog pDialog =
+                ProgressDialog.show(getActivity(), getString(R.string.request_loading_data),
+                        getString(R.string.load_please_wait), false, false);
+
+        JsonObjectRequest jsonObjectRequest  = new JsonObjectRequest(URL_HOST + PATH
+                + File.separator + mProduct.getProductId(),
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        pDialog.dismiss();
+
+                        mProductStorage.setProduct(Parser.parseProduct(response, mProduct));
+
+                        mProduct = mProductStorage.getProduct(mProductId);
+                        setupAdapter();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.w(TAG, "onErrorResponse : " + error.toString());
+                    }
+                });
+
+        Volley.newRequestQueue(getActivity()).add(jsonObjectRequest);
+
+    }
+
     private class ChemicalAdapter extends RecyclerView.Adapter<ChemicalHolder> {
 
         private ArrayList<Chemical> mChemicals;
 
         public ChemicalAdapter(ArrayList<Chemical> chemicals) {
+            mChemicals = chemicals;
+        }
+
+        public void addItems(ArrayList<Chemical> chemicals) {
             mChemicals = chemicals;
         }
 
@@ -208,4 +293,31 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
             dialogFragment.show(manager, CHEMICAL_DETAILS);
         }
     }
+
+//    @Override
+//    public void onPause() {
+//        super.onPause();
+//        Log.i(TAG, "onPause mChemicals.size() " + mChemicals.size());
+//        for (Chemical chemical : mChemicals) {
+//            Log.i(TAG, chemical.toStringId());
+//        }
+//    }
+//
+//    @Override
+//    public void onStop() {
+//        super.onStop();
+//        Log.i(TAG, "onStop mChemicals.size() " + mChemicals.size());
+//        for (Chemical chemical : mChemicals) {
+//            Log.i(TAG, chemical.toStringId());
+//        }
+//    }
+//
+//    @Override
+//    public void onDestroyView() {
+//        super.onDestroyView();
+//        Log.i(TAG, "onDestroyView mChemicals.size() " + mChemicals.size());
+//        for (Chemical chemical : mChemicals) {
+//            Log.i(TAG, chemical.toStringId());
+//        }
+//    }
 }

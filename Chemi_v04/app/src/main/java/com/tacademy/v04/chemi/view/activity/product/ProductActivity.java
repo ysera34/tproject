@@ -123,8 +123,9 @@ public class ProductActivity extends AppBaseActivity {
     @Override
     public void onResume() {
         super.onResume();
-        requestJsonObject();
-        requestJsonObject();
+//        requestJsonObject();
+//        requestJsonObject();
+        bindProduct(mProduct);
     }
 
     private void bindProduct(Product product) {
@@ -176,7 +177,7 @@ public class ProductActivity extends AppBaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void requestJsonObject() {
+    private void requestProductJsonObject() {
 
         final ProgressDialog pDialog =
                 ProgressDialog.show(ProductActivity.this, getString(R.string.request_loading_data),
@@ -195,8 +196,9 @@ public class ProductActivity extends AppBaseActivity {
                         mProductStorage.setProduct(Parser.parseProduct(response, mProduct));
 
                         mProduct = mProductStorage.getProduct(mProductId);
-                        Log.i(TAG, "requestJsonObject() " + mProduct.toStringId());
+//                        Log.i(TAG, "requestJsonObject() " + mProduct.toStringId());
                         bindProduct(mProduct);
+//                        Log.i(TAG, "jsonObjectRequest() " + mProduct.toString());
                     }
                 },
                 new Response.ErrorListener() {
