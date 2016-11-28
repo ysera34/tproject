@@ -65,8 +65,10 @@
     <string name="list_total_prefix">total : </string>
     <string name="list_total_suffix"> </string>
     <string name="list_total_default">0</string>
+    <string name="product_brand_name_format">[%1$s]</string>
     <string name="product_detail_chemical_list_name">Chemical</string>
     <string name="product_detail_review_list_name">Review</string>
+    <string name="product_rating_value_format">%1$s / 5</string>
 
     <string name="product_list_sort_review_total">Reviews</string>
     <string name="product_list_sort_review_rating_avg">Ratings</string>

@@ -1,5 +1,6 @@
 package com.tacademy.v04.chemi.view.activity.product;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,21 +10,34 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.RatingBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.tacademy.v04.chemi.R;
+import com.tacademy.v04.chemi.common.network.Parser;
 import com.tacademy.v04.chemi.model.Product;
 import com.tacademy.v04.chemi.model.ProductStorage;
 import com.tacademy.v04.chemi.view.activity.AppBaseActivity;
 import com.tacademy.v04.chemi.view.activity.MainActivity;
 import com.tacademy.v04.chemi.view.fragment.product.ProductFragment;
 
+import org.json.JSONObject;
+
+import java.io.File;
 import java.util.UUID;
 
 import static com.tacademy.v04.chemi.common.Common.REQUEST_NAVIGATION_FAQ;
+import static com.tacademy.v04.chemi.common.network.NetworkConfig.Product.PATH;
+import static com.tacademy.v04.chemi.common.network.NetworkConfig.URL_HOST;
 
 /**
  * Created by yoon on 2016. 11. 14..
@@ -31,15 +45,26 @@ import static com.tacademy.v04.chemi.common.Common.REQUEST_NAVIGATION_FAQ;
 
 public class ProductActivity extends AppBaseActivity {
 
+    private static final String TAG = ProductActivity.class.getSimpleName();
+
     private static final String EXTRA_PRODUCT_ID =
             "com.tacademy.chemi.product_id";
 
+    private ProductStorage mProductStorage;
+
     private CollapsingToolbarLayout mCollapsingToolbarLayout;
     private Toolbar mToolbar;
+    private TextView mProductNameToolbarTextView;
     private FloatingActionButton mFloatingActionButton;
     private ImageView mProductImageView;
+    private TextView mProductBrandTextView;
+    private RatingBar mProductReviewRatingBar;
+    private TextView mProductReviewRatingValue;
+    private TextView mProductPriceTextView;
+
 
     private Product mProduct;
+    private UUID mProductId;
 
     public static Intent newIntent(Context packageContext, UUID productId) {
         Intent intent = new Intent(packageContext, ProductActivity.class);
@@ -47,19 +72,23 @@ public class ProductActivity extends AppBaseActivity {
         return intent;
     }
 
+    public ProductActivity() {
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
 
-        UUID productId = (UUID) getIntent().getSerializableExtra(EXTRA_PRODUCT_ID);
-        mProduct = ProductStorage.get(getApplicationContext()).getProduct(productId);
+        mProductId = (UUID) getIntent().getSerializableExtra(EXTRA_PRODUCT_ID);
+        mProductStorage = ProductStorage.get(getApplicationContext());
+        mProduct = mProductStorage.getProduct(mProductId);
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         Fragment fragment = fragmentManager.findFragmentById(R.id.fragment_product_container);
 
         if (fragment == null) {
-            fragment = ProductFragment.newInstance(productId);
+            fragment = ProductFragment.newInstance(mProductId);
             fragmentManager.beginTransaction()
                     .add(R.id.fragment_product_container, fragment)
                     .commit();
@@ -67,16 +96,46 @@ public class ProductActivity extends AppBaseActivity {
 
         mToolbar = (Toolbar) findViewById(R.id.product_detail_toolbar);
         setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setHomeButtonEnabled(true);
+//        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#08A3F5")));
+//        getSupportActionBar().setLogo(R.mipmap.ic_launcher);
+
 //        mToolbar.setTitle(R.string.title_activity_product);
 //        setTitle(R.string.title_activity_product);
+        mProductNameToolbarTextView = (TextView)
+                findViewById(R.id.product_detail_product_name_toolbar_text_view);
+        mProductNameToolbarTextView.setText(mProduct.getName());
 
         mCollapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
-        mCollapsingToolbarLayout.setTitle(mProduct.getName());
+//        mCollapsingToolbarLayout.setTitle(mProduct.getName());
 
 //        Toast.makeText(getApplicationContext(), mProduct.getName().toString(),
 //                Toast.LENGTH_SHORT).show();
+        mProductImageView = (ImageView) findViewById(R.id.toolbar_product_image);
+        mProductBrandTextView = (TextView) findViewById(R.id.product_brand_text_view);
+        mProductReviewRatingBar = (RatingBar) findViewById(R.id.product_ratingBar);
+        mProductReviewRatingValue = (TextView) findViewById(R.id.product_rating_value_text_view);
+        mProductPriceTextView = (TextView) findViewById(R.id.product_price_text_view);
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        requestJsonObject();
+        requestJsonObject();
+    }
+
+    private void bindProduct(Product product) {
+        mProductBrandTextView.setText(product.getBrand());
+        mProductReviewRatingBar.setRating(product.getRatingAvg());
+        mProductReviewRatingValue.setText(getString(
+                R.string.product_rating_value_format, String.valueOf(product.getRatingAvg())));
+//        mProductPriceTextView.setText();
+
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -102,7 +161,7 @@ public class ProductActivity extends AppBaseActivity {
             Toast.makeText(getApplicationContext(), "보관함에 추가되었습니다.", Toast.LENGTH_SHORT).show();
             return true;
         } else if (id == R.id.action_share) {
-            Toast.makeText(getApplicationContext(), "공유하겠습니당.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "공유하겠습니다.", Toast.LENGTH_SHORT).show();
             return true;
         }
 
@@ -117,6 +176,37 @@ public class ProductActivity extends AppBaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void requestJsonObject() {
 
+        final ProgressDialog pDialog =
+                ProgressDialog.show(ProductActivity.this, getString(R.string.request_loading_data),
+                        getString(R.string.load_please_wait), false, false);
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(URL_HOST + PATH
+                + File.separator + mProduct.getProductId(),
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        pDialog.dismiss();
+
+                        // have to save storage product
+//                        mProductStorage.getProduct(mProductId);
+                        Log.i(TAG,  mProduct.toStringId());
+                        mProductStorage.setProduct(Parser.parseProduct(response, mProduct));
+
+                        mProduct = mProductStorage.getProduct(mProductId);
+                        Log.i(TAG, "requestJsonObject() " + mProduct.toStringId());
+                        bindProduct(mProduct);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.w(TAG, "onErrorResponse : " + error.toString());
+                    }
+                });
+
+        Volley.newRequestQueue(getApplicationContext()).add(jsonObjectRequest);
+    }
 
 }

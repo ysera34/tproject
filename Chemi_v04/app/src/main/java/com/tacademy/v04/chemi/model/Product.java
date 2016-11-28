@@ -17,8 +17,9 @@ public class Product {
     private String mName;
     private String mType;
     private String mPurpose;
-    private double mRatingAvg;
+    private float mRatingAvg;
     private int mVotedNumber;
+    private int mPrice;
     private String mReleaseDate;
     private int mImageResId;
     private String mImagePath;
@@ -94,12 +95,13 @@ public class Product {
         mPurpose = purpose;
     }
 
-    public double getRatingAvg() {
+    public float getRatingAvg() {
         return mRatingAvg;
     }
 
-    public void setRatingAvg(double ratingAvg) {
-        mRatingAvg = ratingAvg;
+    public void setRatingAvg(float ratingAvg) {
+        mRatingAvg = Math.round(ratingAvg * 100) / 100.0f;
+//        mRatingAvg = ratingAvg;
     }
 
     public int getVotedNumber() {
@@ -108,6 +110,14 @@ public class Product {
 
     public void setVotedNumber(int votedNumber) {
         mVotedNumber = votedNumber;
+    }
+
+    public int getPrice() {
+        return mPrice;
+    }
+
+    public void setPrice(int price) {
+        mPrice = price;
     }
 
     public String getReleaseDate() {
@@ -150,6 +160,13 @@ public class Product {
         mArchiveSelect = archiveSelect;
     }
 
+    public String toStringId() {
+        return "Product{" +
+                "mId=" + mId +
+                ", mProductId=" + mProductId +
+                '}';
+    }
+
     @Override
     public String toString() {
         return "Product{" +
@@ -163,10 +180,11 @@ public class Product {
                 ", mPurpose='" + mPurpose + '\'' +
                 ", mRatingAvg=" + mRatingAvg +
                 ", mVotedNumber=" + mVotedNumber +
+                ", mPrice=" + mPrice +
                 ", mReleaseDate='" + mReleaseDate + '\'' +
                 ", mImageResId=" + mImageResId +
                 ", mImagePath='" + mImagePath + '\'' +
-                ", mChemicals=" + mChemicals.toString() +
+                ", mChemicals=" + mChemicals +
                 ", mArchiveSelect=" + mArchiveSelect +
                 '}';
     }

@@ -1,6 +1,7 @@
 package com.tacademy.v04.chemi.model;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.UUID;
@@ -57,21 +58,39 @@ public class ProductStorage {
         return null;
     }
 
-    public void setProduct(Product product) {
-        if (mProducts.size() == 0) {
-            mProducts.add(product);
-            mProductIds.add(product.getProductId());
-//            Log.i(TAG + " mProducts initial add", String.valueOf(product.getProductId()));
-        }
+    public boolean setProduct(Product product) {
 
-        if (!mProductIds.contains(product.getProductId())) {
+        if (mProducts.isEmpty()) { //isEmpty()
             mProducts.add(product);
             mProductIds.add(product.getProductId());
-//            Log.i(TAG + "mProducts.size()", String.valueOf(mProducts.size()));
-//            Log.i(TAG + " mProducts add", "ProductId : " + String.valueOf(product.getProductId()));
+            Log.i(TAG + " mProducts initial add", product.toStringId());
+//            Log.i(TAG + " mProducts initial add", String.valueOf(product.getProductId()));
+            return true;
         } else {
-//            Log.i(TAG + " mProducts do not add",
-//                    "already existed " + "ProductId : " + String.valueOf(product.getProductId()));
+
+            if (!mProductIds.contains(product.getProductId())) {
+                mProducts.add(product);
+                mProductIds.add(product.getProductId());
+    //            Log.i(TAG + "mProducts.size()", String.valueOf(mProducts.size()));
+                Log.i(TAG + " mProducts add", "ProductId : " + String.valueOf(product.toStringId()));
+            } else {
+                Log.i(TAG + " mProducts do not add",
+                        "already existed " + "ProductId : " + String.valueOf(product.toStringId()));
+//                for (Product product1 : mProducts) {
+//                    Log.i("mProducts before", product1.toString());
+//                }
+
+
+                Log.i("mProducts before", product.toStringId());
+
+                mProducts.set(product.getProductId()-1, product);
+
+//                for (Product product1 : mProducts) {
+//                    Log.i("mProducts after", product1.toString());
+//                }
+                Log.i("mProducts  after", product.toStringId());
+            }
+            return true;
         }
     }
 

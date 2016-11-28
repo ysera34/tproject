@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -118,53 +119,15 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
     }
 
     @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         requestJsonObject();
         requestJsonObject();
-    }
-
-    private void setupAdapter() {
-        if (isAdded()) {
-            if (mProductAdapter == null) {
-                mProductAdapter = new ProductAdapter(mProducts);
-                mProductRecyclerView.setAdapter(mProductAdapter);
-            } else {
-                // category product
-                if (mCategoryId > 0) {
-                    Toast.makeText(getActivity(), "mCategoryId > 0", Toast.LENGTH_SHORT).show();
-                    mProductAdapter.addItems(mProductStorage.getCategoryProducts(mCategoryId));
-                    mProductAdapter.notifyDataSetChanged();
-                    mProductTotalTextView.setText(String.valueOf(mProductAdapter.getItemCount()));
-                // all products
-                } else {
-                    Toast.makeText(getActivity(), "mCategoryId < 0", Toast.LENGTH_SHORT).show();
-                    mProductAdapter.addItems(mProductStorage.getProducts());
-                    mProductAdapter.notifyDataSetChanged();
-                    mProductTotalTextView.setText(String.valueOf(mProductAdapter.getItemCount()));
-                }
-
-                // category no product
-                if (mCategoryId > 0 && mProductAdapter.getItemCount() == 0) {
-                    FragmentManager manager = getFragmentManager();
-                    NoProductDialogFragment dialogFragment =
-                            NoProductDialogFragment.newInstance();
-                    dialogFragment.show(manager, PRODUCT_NO_EXIST_INFO);
-                }
-            }
-        }
-    }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-//        if (mCategoryId > 0 && mProducts.size() == 0) {
-//            FragmentManager manager = getFragmentManager();
-//            NoProductDialogFragment dialogFragment =
-//                    NoProductDialogFragment.newInstance();
-//            dialogFragment.show(manager, PRODUCT_NO_EXIST_INFO);
-//        }
     }
 
     @Override
@@ -203,6 +166,39 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
         }
     }
 
+
+    private void setupAdapter() {
+        if (isAdded()) {
+            if (mProductAdapter == null) {
+                mProductAdapter = new ProductAdapter(mProducts);
+                mProductRecyclerView.setAdapter(mProductAdapter);
+            } else {
+                // category product
+                if (mCategoryId > 0) {
+//                    Toast.makeText(getActivity(), "mCategoryId > 0", Toast.LENGTH_SHORT).show();
+                    mProductAdapter.addItems(mProductStorage.getCategoryProducts(mCategoryId));
+                    mProductAdapter.notifyDataSetChanged();
+                    mProductTotalTextView.setText(String.valueOf(mProductAdapter.getItemCount()));
+                    // all products
+                } else {
+//                    Toast.makeText(getActivity(), "mCategoryId < 0", Toast.LENGTH_SHORT).show();
+                    mProductAdapter.addItems(mProductStorage.getProducts());
+                    mProductAdapter.notifyDataSetChanged();
+                    mProductTotalTextView.setText(String.valueOf(mProductAdapter.getItemCount()));
+                }
+
+                // category no product
+                if (mCategoryId > 0 && mProductAdapter.getItemCount() == 0) {
+                    FragmentManager manager = getFragmentManager();
+                    NoProductDialogFragment dialogFragment =
+                            NoProductDialogFragment.newInstance();
+                    dialogFragment.show(manager, PRODUCT_NO_EXIST_INFO);
+                }
+            }
+        }
+    }
+
+
     private void requestJsonObject() {
 
         final ProgressDialog pDialog =
@@ -215,7 +211,7 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
                     public void onResponse(JSONObject response) {
                         pDialog.dismiss();
                         mProductStorage.setProducts(Parser.parseProductList(response));
-
+//                        mProductStorage.setProducts(Parser.parseProductList(response, mProducts));
 //                        switch above method
                         setupAdapter();
 //                        mProductAdapter.addItems(mProductStorage.getProducts());
@@ -270,6 +266,8 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
         private ImageView mProductImageView;
         private TextView mProductBrandTextView;
         private TextView mProductTitleTextView;
+        private RatingBar mProductReviewRatingBar;
+        private TextView mProductReviewRatingAvgValue;
         private TextView mProductReviewRatingCount;
 
         public ProductHolder(View itemView) {
@@ -279,14 +277,20 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
             mProductImageView = (ImageView) itemView.findViewById(R.id.list_item_product_image);
             mProductBrandTextView = (TextView) itemView.findViewById(R.id.list_item_product_brand);
             mProductTitleTextView = (TextView) itemView.findViewById(R.id.list_item_product_name);
+            mProductReviewRatingBar = (RatingBar) itemView.findViewById(R.id.list_item_product_ratingBar);
+            mProductReviewRatingAvgValue = (TextView) itemView.findViewById(R.id.list_item_product_ratingBar_value);
             mProductReviewRatingCount = (TextView) itemView.findViewById(R.id.list_item_product_review_rating_count);
         }
 
         public void bindProduct(Product product) {
             mProduct = product;
             mProductImageView.setImageResource(mProduct.getImageResId());
-            mProductBrandTextView.setText(mProduct.getBrand());
+            mProductBrandTextView.setText(getString(
+                    R.string.product_brand_name_format, mProduct.getBrand()));
             mProductTitleTextView.setText(mProduct.getName());
+            mProductReviewRatingBar.setRating(mProduct.getRatingAvg());
+            mProductReviewRatingAvgValue.setText(getString(
+                    R.string.product_rating_value_format, String.valueOf(mProduct.getRatingAvg())));
             mProductReviewRatingCount.setText(getString(
                     R.string.list_item_product_review_rating_count, String.valueOf(mProduct.getVotedNumber())));
         }
@@ -304,33 +308,33 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
         }
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        ProductStorage productStorage = ProductStorage.get(getActivity());
-        ArrayList<Product> products = productStorage.getProducts();
-        for (Product product : products) {
-            Log.i(TAG + " onPause()", product.toString());
-        }
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        ProductStorage productStorage = ProductStorage.get(getActivity());
-        ArrayList<Product> products = productStorage.getProducts();
-        for (Product product : products) {
-            Log.i(TAG + " onStop()", product.toString());
-        }
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ProductStorage productStorage = ProductStorage.get(getActivity());
-        ArrayList<Product> products = productStorage.getProducts();
-        for (Product product : products) {
-            Log.i(TAG + " onDestroyView()", product.toString());
-        }
-    }
+//    @Override
+//    public void onPause() {
+//        super.onPause();
+//        ProductStorage productStorage = ProductStorage.get(getActivity());
+//        ArrayList<Product> products = productStorage.getProducts();
+//        for (Product product : products) {
+//            Log.i(TAG + " onPause()", product.toString());
+//        }
+//    }
+//
+//    @Override
+//    public void onStop() {
+//        super.onStop();
+//        ProductStorage productStorage = ProductStorage.get(getActivity());
+//        ArrayList<Product> products = productStorage.getProducts();
+//        for (Product product : products) {
+//            Log.i(TAG + " onStop()", product.toString());
+//        }
+//    }
+//
+//    @Override
+//    public void onDestroyView() {
+//        super.onDestroyView();
+//        ProductStorage productStorage = ProductStorage.get(getActivity());
+//        ArrayList<Product> products = productStorage.getProducts();
+//        for (Product product : products) {
+//            Log.i(TAG + " onDestroyView()", product.toString());
+//        }
+//    }
 }

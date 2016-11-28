@@ -20,6 +20,21 @@
         <!--<item name="subtitleTextColor">@color/colorWhiteFont</item>-->
 
         <item name="android:actionModeCloseDrawable">@drawable/ic_arrow_left_green</item>
+        <item name="android:actionButtonStyle">@style/ActionButtonStyle</item>
+
+        <!--<item name="homeAsUpIndicator"></item>-->
+        <!--<item name="android:homeAsUpIndicator"></item>-->
+
+    </style>
+
+    <style name="ActionButtonStyle" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:minWidth">40dp</item>
+        <item name="android:paddingStart">10dp</item>
+        <item name="android:paddingEnd">10dp</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:layout_marginRight">20dp</item>
+        <item name="android:layout_marginEnd">20dp</item>
     </style>
 
     <style name="AppTheme.NoActionBar">

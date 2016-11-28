@@ -25,8 +25,12 @@ import java.util.UUID;
 
 public class ProductFragment extends Fragment {
 
+    private static final String TAG = ProductFragment.class.getSimpleName();
+
     private static final String ARG_PRODUCT_ID = "product_id";
 
+    private ProductStorage mProductStorage;
+    private ArrayList<Product> mProducts;
     private Product mProduct;
 
     private TextView mProductTitleTextView;
@@ -43,6 +47,11 @@ public class ProductFragment extends Fragment {
         ProductFragment fragment = new ProductFragment();
         fragment.setArguments(args);
         return fragment;
+    }
+
+    public ProductFragment() {
+        mProductStorage = ProductStorage.get(getActivity());
+        mProducts = mProductStorage.getProducts();
     }
 
     @Override

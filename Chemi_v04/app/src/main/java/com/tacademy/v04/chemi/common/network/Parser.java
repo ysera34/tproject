@@ -81,7 +81,21 @@ public class Parser {
                         product.setMaker(productObject.getString(MAKER));
                         product.setBrand(productObject.getString(BRAND));
                         product.setName(productObject.getString(NAME));
-//                        product.setRatingAvg(productObject.getDouble(RATING));
+//                        product.setRatingAvg((float) productObject.get(RATING));
+                        Object rating = productObject.get(RATING);
+                        float ratingf = 0.0f;
+//                        Log.i("parseProductList rating", String.valueOf(rating));
+                        if (rating instanceof Integer) {
+                            ratingf = ((Integer) rating).floatValue();
+                        } else if (rating instanceof Double) {
+                            ratingf = ((Double) rating).floatValue();
+                        } else if (rating == null) {
+                            ratingf = 0.0f;
+                        }
+//                        Log.i("float", String.valueOf(ratingf));
+//
+                        product.setRatingAvg(ratingf);
+//                        Log.i("product", String.valueOf(product.getRatingAvg()));
                         product.setVotedNumber(productObject.getInt(RATING_COUNT));
                         product.setImagePath(productObject.getString(IMAGE_PATH));
                         products.add(product);
@@ -92,6 +106,58 @@ public class Parser {
             e.printStackTrace();
             Log.w("Parse Exception", e.getMessage());
         }
+        return products;
+    }
+
+    /**
+     * products
+     * @param responseObject
+     * @param products
+     * @return ArrayList<Product>
+     */
+    public static ArrayList<Product> parseProductList(JSONObject responseObject, ArrayList<Product> products) {
+
+//        ArrayList<Product> products = new ArrayList<>();
+        try {
+            String responseMessage = responseObject.getString(RESPONSE_MESSAGE);
+            if (responseMessage.equals(RESPONSE_SUCCESS)) {
+                JSONArray dataArray = responseObject.getJSONArray(RESPONSE_DATA);
+                if (dataArray != null) {
+                    for (int i = 0; i < dataArray.length(); i++) {
+                        JSONObject productObject = (JSONObject) dataArray.get(i);
+                        Product product = new Product();
+                        product.setProductId(productObject.getInt(PRODUCT_ID));
+                        product.setCategoryId(productObject.getInt(CATEGORY_ID));
+                        product.setMaker(productObject.getString(MAKER));
+                        product.setBrand(productObject.getString(BRAND));
+                        product.setName(productObject.getString(NAME));
+//                        product.setRatingAvg((float) productObject.get(RATING));
+                        Object rating = productObject.get(RATING);
+                        float ratingf = 0.0f;
+//                        Log.i("parseProductList rating", String.valueOf(rating));
+                        if (rating instanceof Integer) {
+                            ratingf = ((Integer) rating).floatValue();
+                        } else if (rating instanceof Double) {
+                            ratingf = ((Double) rating).floatValue();
+                        } else if (rating == null) {
+                            ratingf = 0.0f;
+                        }
+//                        Log.i("float", String.valueOf(ratingf));
+//
+                        product.setRatingAvg(ratingf);
+//                        Log.i("product", String.valueOf(product.getRatingAvg()));
+                        product.setVotedNumber(productObject.getInt(RATING_COUNT));
+                        product.setImagePath(productObject.getString(IMAGE_PATH));
+                        products.add(product);
+                        Log.i("parseProductList", product.toStringId());
+                    }
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Log.w("Parse Exception", e.getMessage());
+        }
+        Log.i(TAG, "parseProductList mProducts.size() : " + products.size());
         return products;
     }
 
@@ -119,7 +185,79 @@ public class Parser {
                     product.setType(dataObject.getString(TYPE));
                     product.setPurpose(dataObject.getString(PURPOSE));
                     product.setReleaseDate(dataObject.getString(RELEASED));
-                    product.setRatingAvg(dataObject.getInt(RATING));
+//                    product.setRatingAvg((float) dataObject.getDouble(RATING));
+                    Object rating = dataObject.get(RATING);
+                    float ratingf = 0.0f;
+                    if (rating instanceof Integer) {
+                        ratingf = ((Integer) rating).floatValue();
+                    } else if (rating instanceof Double) {
+                        ratingf = ((Double) rating).floatValue();
+                    } else if (rating == null) {
+                        ratingf = 0.0f;
+                    }
+                    product.setRatingAvg(ratingf);
+                    product.setVotedNumber(dataObject.getInt(RATING_COUNT));
+                    product.setImagePath(dataObject.getString(IMAGE_PATH));
+
+                    JSONArray chemicalArray = dataObject.getJSONArray(CHEMICALS);
+                    if (chemicalArray != null) {
+                        for (int i = 0; i < chemicalArray.length(); i++) {
+                            JSONObject chemicalObject = (JSONObject) chemicalArray.get(i);
+                            Chemical chemical = new Chemical();
+                            chemical.setChemicalId(chemicalObject.getInt(CHEMICAL_ID));
+                            chemical.setNameKo(chemicalObject.getString(NAMEKO));
+                            chemical.setNameEn(chemicalObject.getString(NAMEEN));
+                            chemical.setHazard(chemicalObject.getInt(HAZARD));
+                            chemical.setKeyword(chemicalObject.getString(KEYWORD));
+                            chemicals.add(chemical);
+                        }
+                    }
+                    product.setChemicals(chemicals);
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Log.w("Parse Exception", e.getMessage());
+        }
+        return product;
+    }
+
+    /**
+     * products/:product_id
+     * @param responseObject
+     * @param product
+     * @return Product
+     */
+    public static Product parseProduct(JSONObject responseObject, Product product) {
+
+//        Product product = new Product();
+        ArrayList<Chemical> chemicals = new ArrayList<>();
+        try {
+            String responseMessage = responseObject.getString(RESPONSE_MESSAGE);
+            if (responseMessage.equals(RESPONSE_SUCCESS)) {
+                JSONObject dataObject = responseObject.getJSONObject(RESPONSE_DATA);
+                if (dataObject != null) {
+
+                    // need to equivalent reference injection including Storage
+                    product.setProductId(dataObject.getInt(PRODUCT_ID));
+                    product.setCategoryId(dataObject.getInt(CATEGORY_ID));
+                    product.setMaker(dataObject.getString(MAKER));
+                    product.setBrand(dataObject.getString(BRAND));
+                    product.setName(dataObject.getString(NAME));
+                    product.setType(dataObject.getString(TYPE));
+                    product.setPurpose(dataObject.getString(PURPOSE));
+                    product.setReleaseDate(dataObject.getString(RELEASED));
+//                    product.setRatingAvg((float) dataObject.getDouble(RATING));
+                    Object rating = dataObject.get(RATING);
+                    float ratingf = 0.0f;
+                    if (rating instanceof Integer) {
+                        ratingf = ((Integer) rating).floatValue();
+                    } else if (rating instanceof Double) {
+                        ratingf = ((Double) rating).floatValue();
+                    } else if (rating == null) {
+                        ratingf = 0.0f;
+                    }
+                    product.setRatingAvg(ratingf);
                     product.setVotedNumber(dataObject.getInt(RATING_COUNT));
                     product.setImagePath(dataObject.getString(IMAGE_PATH));
 
