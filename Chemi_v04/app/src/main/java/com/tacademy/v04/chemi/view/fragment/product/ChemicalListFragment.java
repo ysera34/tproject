@@ -24,6 +24,7 @@ import com.android.volley.toolbox.Volley;
 import com.tacademy.v04.chemi.R;
 import com.tacademy.v04.chemi.common.network.Parser;
 import com.tacademy.v04.chemi.model.Chemical;
+import com.tacademy.v04.chemi.model.ChemicalStorage;
 import com.tacademy.v04.chemi.model.Product;
 import com.tacademy.v04.chemi.model.ProductStorage;
 
@@ -50,6 +51,7 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
 
     private ProductStorage mProductStorage;
     private ArrayList<Product> mProducts;
+    private ChemicalStorage mChemicalStorage;
     private Product mProduct;
     private UUID mProductId;
 
@@ -99,6 +101,7 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
         super.onCreate(savedInstanceState);
         mProductId = (UUID) getArguments().getSerializable(ARG_PRODUCT_ID);
         mProductStorage = ProductStorage.get(getActivity());
+        mChemicalStorage = ChemicalStorage.get(getActivity());
         mProduct = mProductStorage.getProduct(mProductId);
 
 //        ChemicalStorage chemicalStorage = ChemicalStorage.get(getActivity());
@@ -233,8 +236,9 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
                         pDialog.dismiss();
 
                         mProductStorage.setProduct(Parser.parseProduct(response, mProduct));
-
                         mProduct = mProductStorage.getProduct(mProductId);
+                        mChemicalStorage.setChemicals(mProduct.getChemicals());
+
                         setupAdapter();
                     }
                 },

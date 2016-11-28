@@ -19,15 +19,6 @@ public class ChemicalStorage {
     private ChemicalStorage(Context appContext) {
         mAppContext = appContext;
         mChemicals = new ArrayList<>();
-
-        /*
-        sample data
-         */
-        for (int i = 0; i < 30; i++) {
-            Chemical chemical = new Chemical();
-            chemical.setNameKo("프로필렌클라이콜" + i);
-            mChemicals.add(chemical);
-        }
     }
 
     public static ChemicalStorage get(Context context) {
@@ -39,6 +30,10 @@ public class ChemicalStorage {
 
     public ArrayList<Chemical> getChemicals() {
         return mChemicals;
+    }
+
+    public void setChemicals(ArrayList<Chemical> chemicals) {
+        mChemicals = chemicals;
     }
 
     public Chemical getChemical(UUID id) {
