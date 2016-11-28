@@ -1,5 +1,7 @@
 package com.tacademy.v04.chemi.model;
 
+import com.tacademy.v04.chemi.R;
+
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -64,6 +66,34 @@ public class Chemical {
         mKeyword = keyword;
     }
 
+    public int getKeywordFontColorResId() {
+        int fontColorResId = 0;
+        if (mHazard == 0) {
+            fontColorResId = R.color.chemical_composition_dangerous_status4_color;
+        } else if (mHazard >= 1 && mHazard <= 2) {
+            fontColorResId = R.color.chemical_composition_dangerous_status1_color;
+        } else if (mHazard >= 3 && mHazard <= 6) {
+            fontColorResId = R.color.chemical_composition_dangerous_status2_color;
+        } else if (mHazard >= 7) {
+            fontColorResId = R.color.chemical_composition_dangerous_status3_color;
+        }
+        return fontColorResId;
+    }
+
+    public int getKeywordFontColorResId(int hazard) {
+        int fontColorResId = 0;
+        if (hazard == 0) {
+            fontColorResId = R.color.chemical_composition_dangerous_status4_color;
+        } else if (hazard >= 1 && hazard <= 2) {
+            fontColorResId = R.color.chemical_composition_dangerous_status1_color;
+        } else if (hazard >= 3 && hazard <= 6) {
+            fontColorResId = R.color.chemical_composition_dangerous_status2_color;
+        } else if (hazard >= 7) {
+            fontColorResId = R.color.chemical_composition_dangerous_status3_color;
+        }
+        return fontColorResId;
+    }
+
     public String getAbbr() {
         return mAbbr;
     }
@@ -80,8 +110,19 @@ public class Chemical {
         mMix = mix;
     }
 
-    public int getHazard() {
-        return mHazard;
+    public int[] getHazard() {
+        int[] hazards = new int[2];
+        hazards[0] = mHazard;
+        if (mHazard == 0) {
+            hazards[1] = R.drawable.ic_chemical_dangerous_indicator4;
+        } else if (mHazard >= 1 && mHazard <= 2) {
+            hazards[1] = R.drawable.ic_chemical_dangerous_indicator1;
+        } else if (mHazard >= 3 && mHazard <= 6) {
+            hazards[1] = R.drawable.ic_chemical_dangerous_indicator2;
+        } else if (mHazard >= 7) {
+            hazards[1] = R.drawable.ic_chemical_dangerous_indicator3;
+        }
+        return hazards;
     }
 
     public void setHazard(int hazard) {

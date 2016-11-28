@@ -24,7 +24,7 @@
             <LinearLayout
                 android:visibility="gone"
                 android:id="@+id/list_item_archive_product_select_layout"
-                android:layout_width="50dp"
+                android:layout_width="40dp"
                 android:layout_height="match_parent"
                 android:gravity="center">
 
@@ -33,7 +33,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:src="@drawable/ic_circle_gray"/>
+                    android:src="@drawable/ic_circle_gray_small"/>
 
             </LinearLayout>
 

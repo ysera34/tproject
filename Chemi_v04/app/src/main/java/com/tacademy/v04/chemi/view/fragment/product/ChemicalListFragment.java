@@ -63,6 +63,11 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
     private ImageButton mStateExpandImageButton;
     private boolean mChemicalDangerousGradeLayoutState = true;
 
+    private TextView mChemicalDangerousGrade1;
+    private TextView mChemicalDangerousGrade2;
+    private TextView mChemicalDangerousGrade3;
+    private TextView mChemicalDangerousGrade4;
+
     private TextView mChemicalTotalTextView;
     private View mChemicalSortView;
     private BottomSheetDialog mChemicalSortBottomSheetDialog;
@@ -107,7 +112,6 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
             Log.i(TAG, chemical.toStringId());
         }
 
-
     }
 
     @Nullable
@@ -122,6 +126,11 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
         mChemicalDangerousGradeLayout = view.findViewById(R.id.chemical_dangerous_grade_layout);
         mStateExpandTextView = (TextView) view.findViewById(R.id.list_chemical_state_expand_text);
         mStateExpandImageButton = (ImageButton) view.findViewById(R.id.list_chemical_state_expand_button);
+
+        mChemicalDangerousGrade1 = (TextView) view.findViewById(R.id.chemical_dangerous_grade1_number_text);
+        mChemicalDangerousGrade2 = (TextView) view.findViewById(R.id.chemical_dangerous_grade2_number_text);
+        mChemicalDangerousGrade3 = (TextView) view.findViewById(R.id.chemical_dangerous_grade3_number_text);
+        mChemicalDangerousGrade4 = (TextView) view.findViewById(R.id.chemical_dangerous_grade4_number_text);
 
         mChemicalTotalTextView = (TextView) view.findViewById(R.id.chemical_list_total);
 
@@ -197,6 +206,15 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
                 mChemicals = mProduct.getChemicals();
                 mChemicalAdapter.addItems(mChemicals);
                 mChemicalAdapter.notifyDataSetChanged();
+
+                mChemicalDangerousGrade1.setText(getString(R.string.chemical_dangerous_grade_format,
+                        String.valueOf(mProduct.getHazardGrade()[0])));
+                mChemicalDangerousGrade2.setText(getString(R.string.chemical_dangerous_grade_format,
+                        String.valueOf(mProduct.getHazardGrade()[1])));
+                mChemicalDangerousGrade3.setText(getString(R.string.chemical_dangerous_grade_format,
+                        String.valueOf(mProduct.getHazardGrade()[2])));
+                mChemicalDangerousGrade4.setText(getString(R.string.chemical_dangerous_grade_format,
+                        String.valueOf(mProduct.getHazardGrade()[3])));
             }
         }
     }
@@ -268,18 +286,29 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
 
         private Chemical mChemical;
         private TextView mChemicalTitleKoTextView;
+        private TextView mChemicalTitleEnTextView;
+        private TextView mChemicalHazardTextView;
+        private TextView mChemicalKeywordTextView;
+
 
         public ChemicalHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
 
             mChemicalTitleKoTextView = (TextView) itemView.findViewById(R.id.list_item_chemical_title_ko);
-            // setIsRecyclable(false);
+            mChemicalTitleEnTextView = (TextView) itemView.findViewById(R.id.list_item_chemical_title_eng);
+            mChemicalHazardTextView = (TextView) itemView.findViewById(R.id.list_item_chemical_hazard_image_view);
+            mChemicalKeywordTextView = (TextView) itemView.findViewById(R.id.list_item_chemical_keyword_text_view);
         }
 
         public void bindChemical(Chemical chemical) {
             mChemical = chemical;
             mChemicalTitleKoTextView.setText(mChemical.getNameKo());
+            mChemicalTitleEnTextView.setText(mChemical.getNameEn());
+            mChemicalHazardTextView.setText(String.valueOf(mChemical.getHazard()[0]));
+            mChemicalHazardTextView.setBackgroundResource(mChemical.getHazard()[1]);
+            mChemicalKeywordTextView.setTextColor(getResources().getColor(mChemical.getKeywordFontColorResId()));
+            mChemicalKeywordTextView.setText(mChemical.getKeyword());
         }
 
         @Override

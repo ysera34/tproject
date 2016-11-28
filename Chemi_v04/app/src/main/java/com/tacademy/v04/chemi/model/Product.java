@@ -152,6 +152,22 @@ public class Product {
         mChemicals = chemicals;
     }
 
+    public int[] getHazardGrade() {
+        int[] grades = new int[4];
+        for (Chemical chemical : mChemicals) {
+            if (chemical.getHazard()[0] == 0) {
+                grades[3]++;
+            } else if (chemical.getHazard()[0] >= 1 && chemical.getHazard()[0] <= 2) {
+                grades[0]++;
+            } else if (chemical.getHazard()[0] >= 3 && chemical.getHazard()[0] <= 6) {
+                grades[1]++;
+            } else if (chemical.getHazard()[0] >= 7) {
+                grades[2]++;
+            }
+        }
+        return grades;
+    }
+
     public boolean isArchiveSelect() {
         return mArchiveSelect;
     }

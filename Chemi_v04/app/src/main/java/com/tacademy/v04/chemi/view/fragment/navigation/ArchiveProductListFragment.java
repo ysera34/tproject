@@ -249,7 +249,7 @@ public class ArchiveProductListFragment extends Fragment implements View.OnClick
             mProduct = product;
             mArchiveProductNameTextView.setText(mProduct.getName());
             if (mActionModeActive && mProduct.isArchiveSelect()) {
-                mArchiveProductSelectImageView.setImageResource(R.drawable.ic_circle_orange);
+                mArchiveProductSelectImageView.setImageResource(R.drawable.ic_circle_orange_small);
             }
         }
 
@@ -258,11 +258,11 @@ public class ArchiveProductListFragment extends Fragment implements View.OnClick
             switch (view.getId()) {
                 case R.id.list_item_archive_product_card_view :
                     if (mActionModeActive && !mProduct.isArchiveSelect()) {
-                        mArchiveProductSelectImageView.setImageResource(R.drawable.ic_circle_orange);
+                        mArchiveProductSelectImageView.setImageResource(R.drawable.ic_circle_orange_small);
                         mProduct.setArchiveSelect(true);
                         mCheckedArchiveProducts.add(mProduct);
                     } else if (mActionModeActive && mProduct.isArchiveSelect()) {
-                        mArchiveProductSelectImageView.setImageResource(R.drawable.ic_circle_gray);
+                        mArchiveProductSelectImageView.setImageResource(R.drawable.ic_circle_gray_small);
                         mProduct.setArchiveSelect(false);
                         mCheckedArchiveProducts.remove(mProduct);
                     }

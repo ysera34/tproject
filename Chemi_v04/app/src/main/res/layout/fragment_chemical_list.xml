@@ -94,7 +94,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:text="9개"
+                        android:text="@string/chemical_dangerous_grade_format"
                         android:textColor="@color/colorWhiteFont"
                         android:textSize="21sp"
                         android:layout_alignParentTop="true"

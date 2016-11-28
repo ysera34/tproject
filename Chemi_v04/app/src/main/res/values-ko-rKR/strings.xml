@@ -98,6 +98,7 @@
     <string name="request_loading_data">데이터를 가져오고 있습니다</string>
     <string name="load_please_wait">잠시만 기다려주세요...</string>
     <string name="list_item_product_review_rating_count">(%s명)</string>
+    <string name="chemical_dangerous_grade_format">%s개</string>
 
     <string-array name="product_list_sort_way">
         <item>@string/product_list_sort_review_total</item>

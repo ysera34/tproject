@@ -48,17 +48,19 @@
 
             </LinearLayout>
 
-            <ImageView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.1"
+            <TextView
+                android:id="@+id/list_item_chemical_hazard_image_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorWhiteFont"
+                android:gravity="center"
                 android:src="@mipmap/ic_launcher"/>
             
             <TextView
+                android:id="@+id/list_item_chemical_keyword_text_view"
                 android:gravity="center"
                 android:text="알러지"
                 android:textSize="14sp"
-                android:textColor="@color/chemical_composition_dangerous_status3_color"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.2"/>
