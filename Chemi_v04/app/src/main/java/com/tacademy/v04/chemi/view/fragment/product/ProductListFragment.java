@@ -60,10 +60,12 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
 
     private TextView mProductTotalTextView;
     private View mProductSortView;
+    private TextView mProductSortStatusTextView;
     private BottomSheetDialog mProductSortBottomSheetDialog;
     private Button mProductSortReviewButton;
     private Button mProductSortAvgButton;
     private Button mProductSortLatestButton;
+
 
     public static ProductListFragment newInstance() {
 
@@ -107,6 +109,7 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
 
         mProductSortView = view.findViewById(R.id.product_list_sort_button_view);
         mProductSortView.setOnClickListener(this);
+        mProductSortStatusTextView = (TextView) view.findViewById(R.id.product_list_sort_status_text_view);
 
         mProductRecyclerView = (RecyclerView) view.findViewById(R.id.product_recycler_view);
         mProductRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -158,6 +161,7 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
                         Toast.LENGTH_SHORT).show();
                 Collections.sort(mProducts , mReviewDescProductComparator);
                 Collections.reverse(mProducts);
+                mProductSortStatusTextView.setText(R.string.product_list_sort_review_total);
                 mProductAdapter.addItems(mProducts);
                 mProductAdapter.notifyDataSetChanged();
                 mProductSortBottomSheetDialog.dismiss();
@@ -167,6 +171,7 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
                         Toast.LENGTH_SHORT).show();
                 Collections.sort(mProducts , mRatingDescProductComparator);
                 Collections.reverse(mProducts);
+                mProductSortStatusTextView.setText(R.string.product_list_sort_review_rating_avg);
                 mProductAdapter.addItems(mProducts);
                 mProductAdapter.notifyDataSetChanged();
                 mProductSortBottomSheetDialog.dismiss();
@@ -174,6 +179,8 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
             case R.id.bottom_sheet_product_filter_section3 :
                 Toast.makeText(getActivity(), "product_list_sort_latest_image_button",
                         Toast.LENGTH_SHORT).show();
+                mProductSortStatusTextView.setText(R.string.product_list_sort_latest_release);
+                mProductSortBottomSheetDialog.dismiss();
                 break;
         }
     }
@@ -188,13 +195,21 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
                 // category product
                 if (mCategoryId > 0) {
 //                    Toast.makeText(getActivity(), "mCategoryId > 0", Toast.LENGTH_SHORT).show();
-                    mProductAdapter.addItems(mProductStorage.getCategoryProducts(mCategoryId));
+                    mProducts = mProductStorage.getCategoryProducts(mCategoryId);
+                    // default sort
+                    Collections.sort(mProducts , mReviewDescProductComparator);
+                    Collections.reverse(mProducts);
+                    mProductAdapter.addItems(mProducts);
                     mProductAdapter.notifyDataSetChanged();
                     mProductTotalTextView.setText(String.valueOf(mProductAdapter.getItemCount()));
                     // all products
                 } else {
 //                    Toast.makeText(getActivity(), "mCategoryId < 0", Toast.LENGTH_SHORT).show();
-                    mProductAdapter.addItems(mProductStorage.getProducts());
+                    mProducts = mProductStorage.getProducts();
+                    // default sort
+                    Collections.sort(mProducts , mReviewDescProductComparator);
+                    Collections.reverse(mProducts);
+                    mProductAdapter.addItems(mProducts);
                     mProductAdapter.notifyDataSetChanged();
                     mProductTotalTextView.setText(String.valueOf(mProductAdapter.getItemCount()));
                 }

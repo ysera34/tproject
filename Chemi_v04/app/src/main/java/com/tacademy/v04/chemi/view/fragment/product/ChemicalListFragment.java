@@ -32,7 +32,10 @@ import com.tacademy.v04.chemi.model.ProductStorage;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.text.Collator;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.UUID;
 
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.Product.PATH;
@@ -73,6 +76,7 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
 
     private TextView mChemicalTotalTextView;
     private View mChemicalSortView;
+    private TextView mChemicalSortStatusTextView;
     private BottomSheetDialog mChemicalSortBottomSheetDialog;
     private Button mChemicalSortDangerButton;
     private Button mChemicalSortMarkButton;
@@ -142,6 +146,7 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
 
         mChemicalSortView = view.findViewById(R.id.chemical_list_sort_button_view);
         mChemicalSortView.setOnClickListener(this);
+        mChemicalSortStatusTextView = (TextView) view.findViewById(R.id.chemical_list_sort_status_text_view);
 
         mChemicalRecyclerView = (RecyclerView) view.findViewById(R.id.product_detail_chemical_recycler_view);
         mChemicalRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -182,10 +187,18 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
             case R.id.bottom_sheet_chemical_filter_section1:
                 Toast.makeText(getActivity(), "bottom_sheet_chemical_filter_section1",
                         Toast.LENGTH_SHORT).show();
+                Collections.sort(mChemicals, mHazardGradeDescChemicalComparator);
+                Collections.reverse(mChemicals);
+                mChemicalSortStatusTextView.setText(R.string.chemical_list_sort_dangerous);
+                mChemicalAdapter.addItems(mChemicals);
+                mChemicalAdapter.notifyDataSetChanged();
+                mChemicalSortBottomSheetDialog.dismiss();
                 break;
             case R.id.bottom_sheet_chemical_filter_section2:
                 Toast.makeText(getActivity(), "bottom_sheet_chemical_filter_section2",
                         Toast.LENGTH_SHORT).show();
+                mChemicalSortStatusTextView.setText(R.string.chemical_list_sort_notation);
+                mChemicalSortBottomSheetDialog.dismiss();
                 break;
             case R.id.list_chemical_state_expand_layout :
                 if (mChemicalDangerousGradeLayoutState) {
@@ -210,6 +223,9 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
                 mChemicalRecyclerView.setAdapter(mChemicalAdapter);
             } else {
                 mChemicals = mProduct.getChemicals();
+                // default sort
+                Collections.sort(mChemicals, mHazardGradeDescChemicalComparator);
+                Collections.reverse(mChemicals);
                 mChemicalAdapter.addItems(mChemicals);
                 mChemicalAdapter.notifyDataSetChanged();
 
@@ -241,6 +257,7 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
                         mProductStorage.setProduct(Parser.parseProduct(response, mProduct));
                         mProduct = mProductStorage.getProduct(mProductId);
                         mChemicalStorage.setChemicals(mProduct.getChemicals());
+                        mChemicals = mChemicalStorage.getChemicals();
 
                         setupAdapter();
                     }
@@ -388,4 +405,13 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
 //            Log.i(TAG, chemical.toStringId());
 //        }
 //    }
+
+    private final static Comparator mHazardGradeDescChemicalComparator = new Comparator() {
+
+        private final Collator mCollator = Collator.getInstance();
+        @Override
+        public int compare(Object o, Object t1) {
+            return mCollator.compare(String.valueOf(((Chemical)o).getHazard()[0]), String.valueOf(((Chemical)t1).getHazard()[0]));
+        }
+    };
 }
