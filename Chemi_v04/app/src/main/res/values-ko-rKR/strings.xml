@@ -101,6 +101,7 @@
     <string name="list_item_product_review_rating_count">(%s명)</string>
     <string name="chemical_dangerous_grade_format">%s개</string>
     <string name="empty_product_reivews_info">상품의 리뷰가 존재하지 않습니다.</string>
+    <string name="chemical_hazard_circle_transition_name">chemical_hazard_circle</string>
 
     <string-array name="product_list_sort_way">
         <item>@string/product_list_sort_review_total</item>

@@ -335,6 +335,7 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
                     .placeholder(R.drawable.unloaded_image_holder)
                     .error(R.drawable.unloaded_image_holder)
                     .crossFade()
+                    .animate(R.anim.slide_in_left)
                     .override(300, 200)
                     .centerCrop()
                     .into(mProductImageView);

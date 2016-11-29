@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -81,6 +82,7 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
     private Button mChemicalSortDangerButton;
     private Button mChemicalSortMarkButton;
 
+    private FragmentManager mFragmentManager;
     private ChemicalDialogFragment mDialogFragment;
 
     public ChemicalListFragment() {
@@ -121,6 +123,8 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
         for (Chemical chemical : mChemicals) {
             Log.i(TAG, chemical.toStringId());
         }
+
+//        mFragmentManager = getFragmentManager();
 
     }
 
@@ -342,8 +346,14 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
             // view.setBackgroundColor(getResources().getColor(R.color.chemical_card_view_clicked_color));
 
             mDialogFragment = ChemicalDialogFragment.newInstance(mChemical.getId());
-            requestChemicalJsonObject(mChemical);
 
+//            String transitionName = getString(R.string.chemical_hazard_circle_transition_name);
+//
+//            mFragmentManager.beginTransaction()
+//                    .addSharedElement(mChemicalHazardImageView, transitionName)
+//                    .addToBackStack(null)
+//                    .commit();
+            requestChemicalJsonObject(mChemical);
         }
     }
 
@@ -366,6 +376,7 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
                         Log.i(TAG, "requestChemicalJsonObject" + chemical.toString());
                         mChemicalStorage.setChemical(Parser.parseChemical(response, chemical));
 
+//                        mDialogFragment.show(mFragmentManager, CHEMICAL_DETAILS);
                         mDialogFragment.show(getFragmentManager(), CHEMICAL_DETAILS);
                     }
                 },

@@ -24,8 +24,8 @@
 
         <!--<item name="homeAsUpIndicator"></item>-->
         <!--<item name="android:homeAsUpIndicator"></item>-->
+        <!--<item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>-->
 
-        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
     </style>
 
     <style name="AppBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
