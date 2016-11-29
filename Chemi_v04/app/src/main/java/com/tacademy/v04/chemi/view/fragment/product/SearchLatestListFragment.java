@@ -14,8 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tacademy.v04.chemi.R;
-import com.tacademy.v04.chemi.common.OnPassDataListener;
-import com.tacademy.v04.chemi.common.SeparatorDecoration;
+import com.tacademy.v04.chemi.common.util.listener.OnPassDataListener;
+import com.tacademy.v04.chemi.common.util.decorator.SeparatorDecoration;
 import com.tacademy.v04.chemi.model.Search;
 import com.tacademy.v04.chemi.model.SearchLatestStorage;
 

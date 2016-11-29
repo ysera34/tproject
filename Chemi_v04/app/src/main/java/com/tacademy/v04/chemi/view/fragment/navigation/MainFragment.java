@@ -108,8 +108,6 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         mMainImageSwitch.setInAnimation(mImageAnimationLeftIn);
         mMainImageSwitch.setOutAnimation(mImageAnimationRightOut);
 
-
-
         mMainImageSwitch.setFactory(new ViewSwitcher.ViewFactory() {
             @Override
             public View makeView() {

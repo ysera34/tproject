@@ -38,6 +38,7 @@ public class ProductListActivity extends AppNavigationActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mFloatingActionButton.setVisibility(View.INVISIBLE);
 
 //        getSupportActionBar().setDisplayShowTitleEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);

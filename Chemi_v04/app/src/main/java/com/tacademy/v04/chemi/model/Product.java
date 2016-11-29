@@ -18,7 +18,7 @@ public class Product {
     private String mType;
     private String mPurpose;
     private float mRatingAvg;
-    private int mVotedNumber;
+    private int mRatingCount;
     private int mPrice;
     private String mReleaseDate;
     private int mImageResId;
@@ -104,12 +104,12 @@ public class Product {
 //        mRatingAvg = ratingAvg;
     }
 
-    public int getVotedNumber() {
-        return mVotedNumber;
+    public int getRatingCount() {
+        return mRatingCount;
     }
 
-    public void setVotedNumber(int votedNumber) {
-        mVotedNumber = votedNumber;
+    public void setRatingCount(int ratingCount) {
+        mRatingCount = ratingCount;
     }
 
     public int getPrice() {
@@ -195,7 +195,7 @@ public class Product {
                 ", mType='" + mType + '\'' +
                 ", mPurpose='" + mPurpose + '\'' +
                 ", mRatingAvg=" + mRatingAvg +
-                ", mVotedNumber=" + mVotedNumber +
+                ", mRatingCount=" + mRatingCount +
                 ", mPrice=" + mPrice +
                 ", mReleaseDate='" + mReleaseDate + '\'' +
                 ", mImageResId=" + mImageResId +

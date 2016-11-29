@@ -31,7 +31,10 @@ import com.tacademy.v04.chemi.view.activity.product.ProductActivity;
 
 import org.json.JSONObject;
 
+import java.text.Collator;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import static com.tacademy.v04.chemi.common.Common.CATEGORY_DEFAULT_VALUE;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.Product.PATH;
@@ -153,10 +156,20 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
             case R.id.bottom_sheet_product_filter_section1 :
                 Toast.makeText(getActivity(), "product_list_sort_review_image_button",
                         Toast.LENGTH_SHORT).show();
+                Collections.sort(mProducts , mReviewDescProductComparator);
+                Collections.reverse(mProducts);
+                mProductAdapter.addItems(mProducts);
+                mProductAdapter.notifyDataSetChanged();
+                mProductSortBottomSheetDialog.dismiss();
                 break;
             case R.id.bottom_sheet_product_filter_section2 :
                 Toast.makeText(getActivity(), "product_list_sort_avg_image_button",
                         Toast.LENGTH_SHORT).show();
+                Collections.sort(mProducts , mRatingDescProductComparator);
+                Collections.reverse(mProducts);
+                mProductAdapter.addItems(mProducts);
+                mProductAdapter.notifyDataSetChanged();
+                mProductSortBottomSheetDialog.dismiss();
                 break;
             case R.id.bottom_sheet_product_filter_section3 :
                 Toast.makeText(getActivity(), "product_list_sort_latest_image_button",
@@ -291,7 +304,8 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
             mProductReviewRatingAvgValue.setText(getString(
                     R.string.product_rating_value_format, String.valueOf(mProduct.getRatingAvg())));
             mProductReviewRatingCount.setText(getString(
-                    R.string.list_item_product_review_rating_count, String.valueOf(mProduct.getVotedNumber())));
+                    R.string.list_item_product_review_rating_count, String.valueOf(mProduct.getRatingCount())));
+//            mProductReviewRatingCount.setVisibility(View.GONE);
         }
 
         @Override
@@ -336,4 +350,34 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
 //            Log.i(TAG + " onDestroyView()", product.toString());
 //        }
 //    }
+
+    private final static Comparator mReviewDescProductComparator = new Comparator() {
+
+        private final Collator mCollator = Collator.getInstance();
+        @Override
+        public int compare(Object o, Object t1) {
+            return mCollator.compare(
+                    String.valueOf(((Product)o).getRatingCount()), String.valueOf(((Product)t1).getRatingCount()));
+        }
+    };
+
+    private final static Comparator mRatingDescProductComparator = new Comparator() {
+
+        private final Collator mCollator = Collator.getInstance();
+        @Override
+        public int compare(Object o, Object t1) {
+            return mCollator.compare(
+                    String.valueOf(((Product)o).getRatingAvg()), String.valueOf(((Product)t1).getRatingAvg()));
+        }
+    };
+
+    private final static Comparator mReleasedDescProductComparator = new Comparator() {
+
+        private final Collator mCollator = Collator.getInstance();
+        @Override
+        public int compare(Object o, Object t1) {
+            return mCollator.compare(
+                    String.valueOf(((Product)o).getReleaseDate()), String.valueOf(((Product)t1).getReleaseDate()));
+        }
+    };
 }

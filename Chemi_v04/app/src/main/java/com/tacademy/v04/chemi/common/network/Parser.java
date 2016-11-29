@@ -96,7 +96,7 @@ public class Parser {
 //
                         product.setRatingAvg(ratingf);
 //                        Log.i("product", String.valueOf(product.getRatingAvg()));
-                        product.setVotedNumber(productObject.getInt(RATING_COUNT));
+                        product.setRatingCount(productObject.getInt(RATING_COUNT));
                         product.setImagePath(productObject.getString(IMAGE_PATH));
                         products.add(product);
                     }
@@ -146,7 +146,7 @@ public class Parser {
 //
                         product.setRatingAvg(ratingf);
 //                        Log.i("product", String.valueOf(product.getRatingAvg()));
-                        product.setVotedNumber(productObject.getInt(RATING_COUNT));
+                        product.setRatingCount(productObject.getInt(RATING_COUNT));
                         product.setImagePath(productObject.getString(IMAGE_PATH));
                         products.add(product);
                         Log.i("parseProductList", product.toStringId());
@@ -196,7 +196,7 @@ public class Parser {
                         ratingf = 0.0f;
                     }
                     product.setRatingAvg(ratingf);
-                    product.setVotedNumber(dataObject.getInt(RATING_COUNT));
+                    product.setRatingCount(dataObject.getInt(RATING_COUNT));
                     product.setImagePath(dataObject.getString(IMAGE_PATH));
 
                     JSONArray chemicalArray = dataObject.getJSONArray(CHEMICALS);
@@ -258,7 +258,7 @@ public class Parser {
                         ratingf = 0.0f;
                     }
                     product.setRatingAvg(ratingf);
-                    product.setVotedNumber(dataObject.getInt(RATING_COUNT));
+                    product.setRatingCount(dataObject.getInt(RATING_COUNT));
                     product.setImagePath(dataObject.getString(IMAGE_PATH));
 
                     JSONArray chemicalArray = dataObject.getJSONArray(CHEMICALS);

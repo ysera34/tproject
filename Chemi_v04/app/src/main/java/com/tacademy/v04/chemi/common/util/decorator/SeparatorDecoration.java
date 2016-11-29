@@ -1,4 +1,4 @@
-package com.tacademy.v04.chemi.common;
+package com.tacademy.v04.chemi.common.util.decorator;
 
 import android.content.Context;
 import android.graphics.Canvas;
