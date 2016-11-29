@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -142,6 +143,8 @@ public class SearchActivity extends AppBaseActivity
                 View mBottomSheetView = getLayoutInflater()
                         .inflate(R.layout.bottom_sheet_category, null);
                 mCategoryBottomSheetDialog.setContentView(mBottomSheetView);
+                BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from((View) mBottomSheetView.getParent());
+                bottomSheetBehavior.setPeekHeight(R.dimen.custom_peek_height);
                 (mBottomSheetView.findViewById(R.id.bottom_sheet_button)).setOnClickListener(this);
                 (mBottomSheetView.findViewById(R.id.bottom_sheet_category_section11)).setOnClickListener(this);
                 (mBottomSheetView.findViewById(R.id.bottom_sheet_category_section12)).setOnClickListener(this);
