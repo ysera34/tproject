@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.tacademy.v04.chemi.R;
@@ -28,6 +29,11 @@ public class ReviewFragment extends Fragment {
     private static final String ARG_REVIEW = "review_id";
 
     private Review mReview;
+    private ImageView mReviewCardDetailUserImageView;
+    private TextView mReviewCardDetailWriterTextView;
+    private RatingBar mReviewCardDetailRatingBar;
+    private TextView mReviewCardDetailUserInfoStateTextView;
+    private ImageView mReviewCardDetailPhotoImageView;
     private TextView mReviewCardDetailPositiveTextView;
     private TextView mReviewCardDetailNegativeTextView;
 
@@ -67,6 +73,12 @@ public class ReviewFragment extends Fragment {
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 //        return super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_review, container, false);
+        mReviewCardDetailUserImageView = (ImageView) view.findViewById(R.id.review_card_user_image_view);
+        mReviewCardDetailWriterTextView = (TextView) view.findViewById(R.id.review_card_user_nickname_text_view);
+        mReviewCardDetailRatingBar = (RatingBar) view.findViewById(R.id.review_card_rating_bar);
+        mReviewCardDetailUserInfoStateTextView = (TextView) view.findViewById(R.id.review_card_user_info_state_text);
+        mReviewCardDetailPhotoImageView = (ImageView) view.findViewById(R.id.review_card_photo_image_view);
+
         mReviewCardDetailPositiveTextView = (TextView)
                 view.findViewById(R.id.review_card_detail_positive_content);
         mReviewCardDetailNegativeTextView = (TextView)
@@ -85,8 +97,27 @@ public class ReviewFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mReviewCardDetailPositiveTextView.setText(mReview.getPositiveContent());
-        mReviewCardDetailNegativeTextView.setText(mReview.getNegativeContent());
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        bindReview(mReview);
+    }
+
+    private void bindReview(Review review) {
+        mReviewCardDetailWriterTextView.setText(mReview.getName());
+        mReviewCardDetailUserInfoStateTextView.setText(getString(
+                R.string.review_card_user_symptom, mReview.getGender(),
+                String.valueOf(mReview.getBirthYear()), String.valueOf(mReview.getChild())));
+        if (mReview.isPhotoCheck()) {
+            mReviewCardDetailPhotoImageView.setImageResource(R.drawable.ic_photo_camera_24dp);
+        } else {
+            mReviewCardDetailPhotoImageView.setImageResource(R.drawable.ic_photo_camera_border_24dp);
+        }
+
+        mReviewCardDetailPositiveTextView.setText(review.getPositiveContent());
+        mReviewCardDetailNegativeTextView.setText(review.getNegativeContent());
     }
 
     private class ReviewImageAdapter extends RecyclerView.Adapter<ReviewImageHolder> {

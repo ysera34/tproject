@@ -39,9 +39,12 @@ public class ProductListActivity extends AppNavigationActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getSupportActionBar().setDisplayShowTitleEnabled(true);
+//        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
         mToolbarLogoImageView.setVisibility(View.GONE);
-        setTitle(R.string.title_activity_product_list);
+        mToolbarTextView.setVisibility(View.VISIBLE);
+        mToolbarTextView.setText(R.string.title_activity_product_list);
+//        setTitle(R.string.title_activity_product_list);
 
         mCategoryId = getIntent().getIntExtra(EXTRA_CATEGORY_ID, CATEGORY_DEFAULT_VALUE);
 

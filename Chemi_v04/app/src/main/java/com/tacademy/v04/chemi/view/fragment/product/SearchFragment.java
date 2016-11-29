@@ -57,6 +57,7 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
 //        return super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_search, container, false);
         mShowAllProductsButton = (Button) view.findViewById(R.id.product_show_all_button);
+        mShowAllProductsButton.setVisibility(View.GONE);
         mShowAllProductsButton.setOnClickListener(this);
 
         mProductSearchTabLayout = (TabLayout) view.findViewById(R.id.product_search_tabLayout);

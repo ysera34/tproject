@@ -307,7 +307,8 @@ public class MainFragment extends Fragment
 
         mMainImageSwitcherIndicatorLayout.removeAllViews();
         for (int i = 0; i < mBannerImageArray.length; i++) {
-            mIndicatorTextViews[i] = new TextView(getActivity());
+//            mIndicatorTextViews[i] = new TextView(getActivity());
+            mIndicatorTextViews[i] = new TextView(mMainActivity);
             mIndicatorTextViews[i].setText(Html.fromHtml("&#8226;"));
             mIndicatorTextViews[i].setPadding(16, 0, 16, 0);
             mIndicatorTextViews[i].setTextSize(35);

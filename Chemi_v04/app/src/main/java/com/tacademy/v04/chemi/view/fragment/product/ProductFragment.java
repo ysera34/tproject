@@ -73,7 +73,7 @@ public class ProductFragment extends Fragment {
 
         addProductDetailFragment(ChemicalListFragment.newInstance(mProduct.getId()),
                 getString(R.string.product_detail_chemical_list_name));
-        addProductDetailFragment(ReviewListFragment.newInstance(), getString(R.string.product_detail_review_list_name));
+        addProductDetailFragment(ReviewListFragment.newInstance(mProduct.getId()), getString(R.string.product_detail_review_list_name));
     }
 
     @Nullable

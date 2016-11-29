@@ -70,7 +70,7 @@ public class NetworkConfig {
             public static final String REVIEW_POSITIVE = "reviewp";
             public static final String REVIEW_NEGATIVE = "reviewn";
             public static final String REVIEW_CREATED = "created";
-            public static final String WRITER_CONSTITUTIONS = "consttitutions";
+            public static final String WRITER_CONSTITUTIONS = "constitutions";
             public static final String WRITER_CONSTITUTION = "name";
         }
     }

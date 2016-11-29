@@ -80,7 +80,6 @@ public class ProductStorage {
 //                    Log.i("mProducts before", product1.toString());
 //                }
 
-
                 Log.i("mProducts before", product.toStringId());
 
                 mProducts.set(product.getProductId()-1, product);

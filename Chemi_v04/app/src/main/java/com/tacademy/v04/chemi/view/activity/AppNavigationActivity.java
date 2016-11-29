@@ -45,6 +45,7 @@ public class AppNavigationActivity extends AppBaseActivity implements
 
     protected Toolbar mToolbar;
     protected ImageView mToolbarLogoImageView;
+    protected TextView mToolbarTextView;
     protected DrawerLayout mDrawerLayout;
     protected NavigationView mNavigationView;
     protected FloatingActionButton mFloatingActionButton;
@@ -64,8 +65,10 @@ public class AppNavigationActivity extends AppBaseActivity implements
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+        mToolbar.setContentInsetStartWithNavigation(0);
 
         mToolbarLogoImageView = (ImageView) findViewById(R.id.main_toolbar_logo_image);
+        mToolbarTextView = (TextView) findViewById(R.id.toolbar_text_view);
 
         mFloatingActionButton = (FloatingActionButton) findViewById(fab);
         mFloatingActionButton.setOnClickListener(new View.OnClickListener() {

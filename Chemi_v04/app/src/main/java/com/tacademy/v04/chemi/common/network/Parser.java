@@ -424,13 +424,58 @@ public class Parser {
                         review.setUserId(reviewObject.getInt(WRITER_ID));
                         review.setName(reviewObject.getString(WRITER_NAME));
                         review.setGender(reviewObject.getString(WRITER_GENDER));
-                        review.setBirthyear(reviewObject.getInt(WRITER_BIRTHYEAR));
+                        review.setBirthYear(reviewObject.getInt(WRITER_BIRTHYEAR));
                         review.setChild(reviewObject.getInt(WRITER_CHILD));
                         review.setRating(reviewObject.getDouble(REVIEW_RATING));
                         review.setPositiveContent(reviewObject.getString(REVIEW_POSITIVE));
                         review.setNegativeContent(reviewObject.getString(REVIEW_NEGATIVE));
                         review.setCreatedDate(reviewObject.getString(REVIEW_CREATED));
-                        jsonArray = responseObject.getJSONArray(WRITER_CONSTITUTIONS);
+                        jsonArray = reviewObject.getJSONArray(WRITER_CONSTITUTIONS);
+                        jsonObject = (JSONObject) jsonArray.get(0);
+                        review.setConstitution1(jsonObject.getString(WRITER_CONSTITUTION));
+                        jsonObject = (JSONObject) jsonArray.get(1);
+                        review.setConstitution2(jsonObject.getString(WRITER_CONSTITUTION));
+                        reviews.add(review);
+                    }
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Log.w("Parse Exception", e.getMessage());
+        }
+        return reviews;
+    }
+
+    /**
+     * products/:product_id/reviews
+     * @param responseObject
+     * @param reviews
+     * @return ArrayList<Review>
+     */
+    public static ArrayList<Review> parseReviewList(JSONObject responseObject, ArrayList<Review> reviews) {
+
+//        ArrayList<Review> reviews = new ArrayList<>();
+        JSONArray jsonArray = new JSONArray();
+        JSONObject jsonObject = new JSONObject();
+        try {
+            String responseMessage = responseObject.getString(RESPONSE_MESSAGE);
+            if (responseMessage.equals(RESPONSE_SUCCESS)) {
+                JSONArray dataArray = responseObject.getJSONArray(RESPONSE_DATA);
+                if (dataArray != null) {
+                    for (int i = 0; i < dataArray.length(); i++) {
+                        JSONObject reviewObject = (JSONObject) dataArray.get(i);
+                        Review review = new Review();
+                        review.setReviewId(reviewObject.getInt(REVIEW_ID));
+                        review.setUserId(reviewObject.getInt(WRITER_ID));
+                        review.setName(reviewObject.getString(WRITER_NAME));
+                        review.setGender(reviewObject.getString(WRITER_GENDER));
+                        review.setBirthYear(reviewObject.getInt(WRITER_BIRTHYEAR));
+                        review.setChild(reviewObject.getInt(WRITER_CHILD));
+                        review.setRating(reviewObject.getDouble(REVIEW_RATING));
+                        review.setPositiveContent(reviewObject.getString(REVIEW_POSITIVE));
+                        review.setNegativeContent(reviewObject.getString(REVIEW_NEGATIVE));
+                        review.setCreatedDate(reviewObject.getString(REVIEW_CREATED));
+                        jsonArray = reviewObject.getJSONArray(WRITER_CONSTITUTIONS);
                         jsonObject = (JSONObject) jsonArray.get(0);
                         review.setConstitution1(jsonObject.getString(WRITER_CONSTITUTION));
                         jsonObject = (JSONObject) jsonArray.get(1);

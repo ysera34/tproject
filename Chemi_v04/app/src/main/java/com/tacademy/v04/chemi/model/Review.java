@@ -20,7 +20,7 @@ public class Review {
 
     private String mName;
     private String mGender;
-    private int mBirthyear;
+    private int mBirthYear;
     private int mChild;
     private double mRating;
     private String mCreatedDate;
@@ -114,12 +114,12 @@ public class Review {
         mGender = gender;
     }
 
-    public int getBirthyear() {
-        return mBirthyear;
+    public int getBirthYear() {
+        return mBirthYear;
     }
 
-    public void setBirthyear(int birthyear) {
-        mBirthyear = birthyear;
+    public void setBirthYear(int birthYear) {
+        mBirthYear = birthYear;
     }
 
     public int getChild() {
@@ -183,7 +183,7 @@ public class Review {
                 ", mImageResIdArray=" + mImageResIdArray +
                 ", mName='" + mName + '\'' +
                 ", mGender='" + mGender + '\'' +
-                ", mBirthyear=" + mBirthyear +
+                ", mBirthyear=" + mBirthYear +
                 ", mChild=" + mChild +
                 ", mRating=" + mRating +
                 ", mCreatedDate='" + mCreatedDate + '\'' +

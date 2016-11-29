@@ -91,7 +91,6 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
             mCategoryId = getArguments().getInt(
                     ARG_CATEGORY_ID, CATEGORY_DEFAULT_VALUE);
             Log.d(TAG, "mCategoryId : " + mCategoryId);
-
         }
     }
 

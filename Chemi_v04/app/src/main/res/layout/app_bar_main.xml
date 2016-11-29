@@ -19,12 +19,31 @@
             android:popupTheme="@style/AppTheme.PopupOverlay"
             android:background="?attr/colorPrimary">
 
+            <!--android:visibility="gone"-->
             <ImageView
+
                 android:id="@+id/main_toolbar_logo_image"
                 android:layout_width="75dp"
                 android:layout_height="20dp"
                 android:src="@drawable/toolbar_logo"
                 />
+
+            <!--android:paddingLeft="25dp"-->
+            <!--android:paddingStart="25dp"-->
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/toolbar_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="2dp"
+                android:paddingRight="20dp"
+                android:paddingEnd="20dp"
+                android:textColor="@color/colorWhiteFont"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:textSize="20sp"
+                android:text="title"
+                android:textStyle="bold"/>
 
         </android.support.v7.widget.Toolbar>
         <!--android:layout_height="@dimen/toolbar_height"-->
