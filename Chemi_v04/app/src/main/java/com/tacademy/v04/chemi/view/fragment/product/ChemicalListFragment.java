@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -14,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +22,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.tacademy.v04.chemi.R;
+import com.tacademy.v04.chemi.common.network.NetworkConfig;
 import com.tacademy.v04.chemi.common.network.Parser;
 import com.tacademy.v04.chemi.model.Chemical;
 import com.tacademy.v04.chemi.model.ChemicalStorage;
@@ -75,6 +76,8 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
     private BottomSheetDialog mChemicalSortBottomSheetDialog;
     private Button mChemicalSortDangerButton;
     private Button mChemicalSortMarkButton;
+
+    private ChemicalDialogFragment mDialogFragment;
 
     public ChemicalListFragment() {
 //        mProductStorage = ProductStorage.get(getActivity());
@@ -250,7 +253,6 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
                 });
 
         Volley.newRequestQueue(getActivity()).add(jsonObjectRequest);
-
     }
 
     private class ChemicalAdapter extends RecyclerView.Adapter<ChemicalHolder> {
@@ -291,6 +293,7 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
         private Chemical mChemical;
         private TextView mChemicalTitleKoTextView;
         private TextView mChemicalTitleEnTextView;
+        private ImageView mChemicalHazardImageView;
         private TextView mChemicalHazardTextView;
         private TextView mChemicalKeywordTextView;
 
@@ -301,7 +304,8 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
 
             mChemicalTitleKoTextView = (TextView) itemView.findViewById(R.id.list_item_chemical_title_ko);
             mChemicalTitleEnTextView = (TextView) itemView.findViewById(R.id.list_item_chemical_title_eng);
-            mChemicalHazardTextView = (TextView) itemView.findViewById(R.id.list_item_chemical_hazard_image_view);
+            mChemicalHazardImageView = (ImageView) itemView.findViewById(R.id.list_item_chemical_hazard_image_view);
+            mChemicalHazardTextView = (TextView) itemView.findViewById(R.id.list_item_chemical_dialog_dangerous_grade_number_text);
             mChemicalKeywordTextView = (TextView) itemView.findViewById(R.id.list_item_chemical_keyword_text_view);
         }
 
@@ -310,7 +314,7 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
             mChemicalTitleKoTextView.setText(mChemical.getNameKo());
             mChemicalTitleEnTextView.setText(mChemical.getNameEn());
             mChemicalHazardTextView.setText(String.valueOf(mChemical.getHazard()[0]));
-            mChemicalHazardTextView.setBackgroundResource(mChemical.getHazard()[1]);
+            mChemicalHazardImageView.setBackgroundResource(mChemical.getHazard()[1]);
             mChemicalKeywordTextView.setTextColor(getResources().getColor(mChemical.getKeywordFontColorResId()));
             mChemicalKeywordTextView.setText(mChemical.getKeyword());
         }
@@ -320,11 +324,42 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
             Toast.makeText(getActivity(), mChemical.getNameKo(), Toast.LENGTH_SHORT).show();
             // view.setBackgroundColor(getResources().getColor(R.color.chemical_card_view_clicked_color));
 
-            FragmentManager manager = getFragmentManager();
-            ChemicalDialogFragment dialogFragment =
-                    ChemicalDialogFragment.newInstance(mChemical.getId());
-            dialogFragment.show(manager, CHEMICAL_DETAILS);
+            mDialogFragment = ChemicalDialogFragment.newInstance(mChemical.getId());
+            requestChemicalJsonObject(mChemical);
+
         }
+    }
+
+    private void requestChemicalJsonObject(final Chemical chemical) {
+
+        final ProgressDialog pDialog =
+                ProgressDialog.show(getActivity(), getString(R.string.request_loading_data),
+                        getString(R.string.load_please_wait), false, false);
+
+        JsonObjectRequest jsonObjectRequest  = new JsonObjectRequest(URL_HOST + NetworkConfig.Chemical.PATH
+                + File.separator + chemical.getChemicalId(),
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        pDialog.dismiss();
+
+//                        mProductStorage.setProduct(Parser.parseProduct(response, mProduct));
+//                        mProduct = mProductStorage.getProduct(mProductId);
+//                        mChemicalStorage.setChemicals(mProduct.getChemicals());
+                        Log.i(TAG, "requestChemicalJsonObject" + chemical.toString());
+                        mChemicalStorage.setChemical(Parser.parseChemical(response, chemical));
+
+                        mDialogFragment.show(getFragmentManager(), CHEMICAL_DETAILS);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.w(TAG, "onErrorResponse : " + error.toString());
+                    }
+                });
+
+        Volley.newRequestQueue(getActivity()).add(jsonObjectRequest);
     }
 
 //    @Override

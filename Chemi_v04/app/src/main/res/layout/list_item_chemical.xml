@@ -48,14 +48,51 @@
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/list_item_chemical_hazard_image_view"
+            <!--<TextView-->
+                <!--android:id="@+id/list_item_chemical_hazard_image_view"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textColor="@color/colorWhiteFont"-->
+                <!--android:gravity="center"-->
+                <!--android:src="@mipmap/ic_launcher"/>-->
+
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/colorWhiteFont"
+                android:layout_weight="0.1"
                 android:gravity="center"
-                android:src="@mipmap/ic_launcher"/>
-            
+                android:layout_gravity="center">
+
+                <RelativeLayout
+                    android:id="@+id/list_item_chemical_dialog_dangerous_circle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/list_item_chemical_hazard_image_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentStart="true"
+                        android:background="@drawable/ic_chemical_dangerous_indicator3"/>
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/list_item_chemical_dialog_dangerous_grade_number_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="7"
+                    android:textColor="@color/colorWhiteFont"
+                    android:textSize="14sp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignBottom="@+id/list_item_chemical_dialog_dangerous_circle"
+                    android:layout_alignEnd="@+id/list_item_chemical_dialog_dangerous_circle"
+                    android:layout_alignParentStart="true"/>
+
+            </RelativeLayout>
+
             <TextView
                 android:id="@+id/list_item_chemical_keyword_text_view"
                 android:gravity="center"

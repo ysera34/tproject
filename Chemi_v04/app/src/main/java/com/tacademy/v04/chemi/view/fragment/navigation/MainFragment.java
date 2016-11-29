@@ -11,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -34,8 +35,7 @@ import java.util.ArrayList;
  * Created by yoon on 2016. 11. 14..
  */
 
-public class MainFragment extends Fragment
-        implements View.OnClickListener {
+public class MainFragment extends Fragment implements View.OnClickListener {
 
     private static final String TAG = MainFragment.class.getSimpleName();
 
@@ -51,6 +51,8 @@ public class MainFragment extends Fragment
     private int activeColor;
     private int inactiveColor;
 
+    private ImageSwitcherGestureDetector mGestureDetector;
+    View.OnTouchListener mGestureListener;
     private int mBannerIndex;
     private int mBannerImageArray[];
 
@@ -103,6 +105,11 @@ public class MainFragment extends Fragment
         mMainNestedScrollView = (NestedScrollView) view.findViewById(R.id.main_nested_scroller_view);
         mMainImageSwitch = (ImageSwitcher) view.findViewById(R.id.main_image_switcher);
 
+        mMainImageSwitch.setInAnimation(mImageAnimationLeftIn);
+        mMainImageSwitch.setOutAnimation(mImageAnimationRightOut);
+
+
+
         mMainImageSwitch.setFactory(new ViewSwitcher.ViewFactory() {
             @Override
             public View makeView() {
@@ -112,13 +119,14 @@ public class MainFragment extends Fragment
                         ImageSwitcher.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT,
                         ActionBar.LayoutParams.WRAP_CONTENT));
                 mMainImageView.setImageResource(mBannerImageArray[mBannerIndex]);
+                mMainImageView.setOnTouchListener(new View.OnTouchListener() {
 //                mMainImageView.setOnClickListener(new View.OnClickListener() {
 //                    @Override
 //                    public void onClick(View view) {
 //                        Toast.makeText(getActivity(), "해당 컨텐츠로 이동합니다.", Toast.LENGTH_SHORT).show();
 //                    }
 //                });
-                mMainImageView.setOnTouchListener(new View.OnTouchListener() {
+
                     @Override
                     public boolean onTouch(View view, MotionEvent motionEvent) {
                         switch (motionEvent.getAction()) {
@@ -172,10 +180,12 @@ public class MainFragment extends Fragment
                             }
                         return true;
                         }
+
                     });
                     return mMainImageView;
                 }
             });
+
 
 //        mMainImageView = (ImageView) view.findViewById(R.id.main_image_view);
         mMainImageSwitcherIndicatorLayout =
@@ -318,6 +328,71 @@ public class MainFragment extends Fragment
 
         if (mIndicatorTextViews.length > 0)
             mIndicatorTextViews[currentImage].setTextColor(activeColor);
+    }
+
+    private static final int SWIPE_MIN_DISTANCE = 100;
+    private static final int SWIPE_MAX_OFF_PATH = 400;
+    private static final int SWIPE_THRESHOLD_VELOCITY = 100;
+
+    private class ImageSwitcherGestureDetector extends GestureDetector.SimpleOnGestureListener{
+
+        @Override
+        public boolean onSingleTapConfirmed(MotionEvent e) {
+            return super.onSingleTapConfirmed(e);
+        }
+
+        @Override
+        public boolean onDown(MotionEvent e) {
+//            return super.onDown(e);
+            return true;
+        }
+
+        @Override
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+
+            try {
+                if (Math.abs(e1.getY() - e2.getY()) > SWIPE_MAX_OFF_PATH) {
+                    return false;
+                }
+                if (e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE
+                        && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
+                    onHorizonTouch(true);
+//                    return false;
+                }
+                if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE
+                        && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
+                    onHorizonTouch(false);
+                }
+            } catch (Exception e) {
+
+            }
+            return false;
+//            return super.onFling(e1, e2, velocityX, velocityY);
+        }
+
+        private void onHorizonTouch(Boolean toLeft) {
+            if (!toLeft && mBannerIndex > 0) {
+                mMainImageSwitch.setInAnimation(mImageAnimationLeftIn);
+                mMainImageSwitch.setOutAnimation(mImageAnimationRightOut);
+                mMainImageSwitch.setImageResource(mBannerImageArray[mBannerIndex]);
+                mBannerIndex--;
+                if (mBannerIndex == -1) {
+                    mBannerIndex = mBannerImageArray.length - 1;
+                }
+                indicateSweepImage(mBannerIndex);
+            }
+            if (toLeft && mBannerIndex < 1) {
+                mMainImageSwitch.setInAnimation(mImageAnimationRightIn);
+                mMainImageSwitch.setOutAnimation(mImageAnimationLeftOut);
+                mMainImageSwitch.setImageResource(mBannerImageArray[mBannerIndex]);
+                mBannerIndex++;
+                if (mBannerIndex == mBannerImageArray.length) {
+                    mBannerIndex = 0;
+                }
+                indicateSweepImage(mBannerIndex);
+
+            }
+        }
     }
 
     private class ContentAdapter extends RecyclerView.Adapter<ContentHolder> {

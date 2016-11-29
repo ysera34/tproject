@@ -50,8 +50,8 @@ public class NetworkConfig {
             public static final String HAZARD = "hazard";
             public static final String KEYWORD = "keyword";
             public static final String EFFECTS = "effects";
-            public static final String CONSTITUTION_ID = "id";
-            public static final String CONSTITUTION = "constitution";
+            public static final String CONSTITUTION_ID = "constitutionid";
+            public static final String CONSTITUTION_NAME = "name";
             public static final String DESCRIPTION = "description";
         }
     }

@@ -16,8 +16,8 @@ import java.util.ArrayList;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.Chemical.Key.ABBR;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.Chemical.Key.CHEMICALS;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.Chemical.Key.CHEMICAL_ID;
-import static com.tacademy.v04.chemi.common.network.NetworkConfig.Chemical.Key.CONSTITUTION;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.Chemical.Key.CONSTITUTION_ID;
+import static com.tacademy.v04.chemi.common.network.NetworkConfig.Chemical.Key.CONSTITUTION_NAME;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.Chemical.Key.DESCRIPTION;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.Chemical.Key.EFFECTS;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.Chemical.Key.HAZARD;
@@ -321,9 +321,9 @@ public class Parser {
      * @param responseObject
      * @return Chemical
      */
-    public static Chemical parseChemical(JSONObject responseObject) {
+    public static Chemical parseChemical(JSONObject responseObject, Chemical chemical) {
 
-        Chemical chemical = new Chemical();
+//        Chemical chemical = new Chemical();
         ArrayList<Effect> effects = new ArrayList<>();
         try {
             String responseMessage = responseObject.getString(RESPONSE_MESSAGE);
@@ -344,7 +344,7 @@ public class Parser {
                             JSONObject effectObject = (JSONObject) effectArray.get(i);
                             Effect effect = new Effect();
                             effect.setId(effectObject.getInt(CONSTITUTION_ID));
-                            effect.setConstitution(effectObject.getString(CONSTITUTION));
+                            effect.setConstitution(effectObject.getString(CONSTITUTION_NAME));
                             effect.setDescription(effectObject.getString(DESCRIPTION));
                             effects.add(effect);
                         }
@@ -387,7 +387,7 @@ public class Parser {
                             JSONObject effectObject = (JSONObject) effectArray.get(i);
                             Effect effect = new Effect();
                             effect.setId(effectObject.getInt(CONSTITUTION_ID));
-                            effect.setConstitution(effectObject.getString(CONSTITUTION));
+                            effect.setConstitution(effectObject.getString(CONSTITUTION_NAME));
                             effect.setDescription(effectObject.getString(DESCRIPTION));
                             effects.add(effect);
                         }

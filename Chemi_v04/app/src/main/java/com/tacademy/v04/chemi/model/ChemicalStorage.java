@@ -44,4 +44,12 @@ public class ChemicalStorage {
         }
         return null;
     }
+
+    public void setChemical(Chemical chemical) {
+        for (Chemical c : mChemicals) {
+            if (c.getId().equals(chemical.getId())) {
+                mChemicals.set(mChemicals.indexOf(chemical), chemical);
+            }
+        }
+    }
 }

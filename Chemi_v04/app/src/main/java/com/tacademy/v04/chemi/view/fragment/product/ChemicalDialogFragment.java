@@ -9,8 +9,10 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,10 +29,18 @@ import java.util.UUID;
 
 public class ChemicalDialogFragment extends DialogFragment {
 
+    private static final String TAG = ChemicalDialogFragment.class.getSimpleName();
+
     private static final String ARG_CHEMICAL = "chemical_id";
 
+    private AlertDialog.Builder mBuilder;
+
     private Chemical mChemical;
-    private TextView mTitleTextView;
+    private TextView mChemicalDialogTitleKOTextView;
+    private TextView mChemicalDialogTitleENTextView;
+    private ImageView mChemicalDialogDangerousGradeImageView;
+    private TextView mChemicalDialogDangerousGradeTextView;
+    private TextView mChemicalDialogMixPurposeTextView;
 
     public static ChemicalDialogFragment newInstance() {
 
@@ -54,13 +64,25 @@ public class ChemicalDialogFragment extends DialogFragment {
         UUID id = (UUID) getArguments().getSerializable(ARG_CHEMICAL);
         mChemical = ChemicalStorage.get(getActivity()).getChemical(id);
 
+        Log.i(TAG, "onCreateDialog" + mChemical.toString());
+
         View view = LayoutInflater.from(getActivity())
                 .inflate(R.layout.fragment_chemical_dialog, null);
 
-        mTitleTextView = (TextView) view.findViewById(R.id.chemical_dialog_chemical_title_ko);
-        mTitleTextView.setText(mChemical.getNameKo());
+        mChemicalDialogTitleKOTextView = (TextView) view.findViewById(R.id.chemical_dialog_chemical_title_ko);
+        mChemicalDialogTitleENTextView = (TextView) view.findViewById(R.id.chemical_dialog_chemical_title_eng);
+        mChemicalDialogDangerousGradeImageView = (ImageView) view.findViewById(R.id.chemical_dialog_dangerous_grade_image);
+        mChemicalDialogDangerousGradeTextView = (TextView) view.findViewById(R.id.chemical_dialog_dangerous_grade_number_text);
+        mChemicalDialogMixPurposeTextView = (TextView) view.findViewById(R.id.chemical_dialog_chemical_mix_purpose);
 
-        return new AlertDialog.Builder(getActivity())
+        mChemicalDialogTitleKOTextView.setText(mChemical.getNameKo());
+        mChemicalDialogTitleENTextView.setText(mChemical.getNameEn());
+        mChemicalDialogDangerousGradeImageView.setBackgroundResource(mChemical.getHazard()[1]);
+        mChemicalDialogDangerousGradeTextView.setText(String.valueOf(mChemical.getHazard()[0]));
+        mChemicalDialogMixPurposeTextView.setText(mChemical.getMix());
+
+
+        mBuilder = new AlertDialog.Builder(getActivity())
                 .setView(view)
 //                .setTitle("composition details")
                 .setPositiveButton(android.R.string.ok, null)
@@ -81,7 +103,9 @@ public class ChemicalDialogFragment extends DialogFragment {
                         intent = Intent.createChooser(intent, getString(R.string.send_report));
                         startActivity(intent);
                     }
-                }).create();
+                });
+
+        return mBuilder.create();
     }
 
     private String getChemicalReport() {
