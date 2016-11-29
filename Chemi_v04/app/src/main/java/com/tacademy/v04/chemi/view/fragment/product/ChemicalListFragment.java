@@ -373,6 +373,7 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.w(TAG, "onErrorResponse : " + error.toString());
+                        pDialog.dismiss();
                     }
                 });
 

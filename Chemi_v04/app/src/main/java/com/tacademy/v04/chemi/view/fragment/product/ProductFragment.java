@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,7 +68,7 @@ public class ProductFragment extends Fragment {
         mProductDetailListFragments = new ArrayList<>();
         mProductDetailFragmentsTitles = new ArrayList<>();
 
-        Log.i(TAG, "onCreate " + mProduct.toString());
+//        Log.i(TAG, "onCreate " + mProduct.toString());
 
         addProductDetailFragment(ChemicalListFragment.newInstance(mProduct.getId()),
                 getString(R.string.product_detail_chemical_list_name));

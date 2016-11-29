@@ -22,6 +22,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.tacademy.v04.chemi.R;
 import com.tacademy.v04.chemi.common.network.Parser;
 import com.tacademy.v04.chemi.model.Product;
@@ -118,6 +119,8 @@ public class ProductActivity extends AppBaseActivity {
         mProductReviewRatingBar = (RatingBar) findViewById(R.id.product_ratingBar);
         mProductReviewRatingValue = (TextView) findViewById(R.id.product_rating_value_text_view);
         mProductPriceTextView = (TextView) findViewById(R.id.product_price_text_view);
+
+        mProductImageView.setImageDrawable(getResources().getDrawable(R.drawable.unloaded_image_holder));
     }
 
     @Override
@@ -134,6 +137,14 @@ public class ProductActivity extends AppBaseActivity {
         mProductReviewRatingValue.setText(getString(
                 R.string.product_rating_value_format, String.valueOf(product.getRatingAvg())));
 //        mProductPriceTextView.setText();
+//        mProductImageView
+        Glide.with(getApplicationContext())
+                .load("http://lorempixel.com/600/400/sports/")
+                .placeholder(R.drawable.unloaded_image_holder)
+                .error(R.drawable.unloaded_image_holder)
+                .override(500, 400)
+                .centerCrop()
+                .into(mProductImageView);
 
     }
 
@@ -204,6 +215,7 @@ public class ProductActivity extends AppBaseActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.w(TAG, "onErrorResponse : " + error.toString());
+                        pDialog.dismiss();
                     }
                 });
 

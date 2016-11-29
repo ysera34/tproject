@@ -144,6 +144,7 @@ public class ReviewListFragment extends Fragment {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.w(TAG, "onErrorResponse : " + error.toString());
+                        pDialog.dismiss();
                     }
                 });
 
