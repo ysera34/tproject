@@ -22,6 +22,7 @@ public class MainActivity extends AppNavigationActivity {
 
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final String EXTRA_REQUEST_NAVIGATION_ID = "com.tacademy.chemi.navigation_id";
+
     private int requestId;
 
     public static Intent newIntent(Context packageContext) {

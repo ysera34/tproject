@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -34,6 +35,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.UUID;
 
+import static com.tacademy.v04.chemi.common.Common.REQUEST_REVIEW_FORM;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.Product.PATH;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.URL_HOST;
 
@@ -41,11 +43,13 @@ import static com.tacademy.v04.chemi.common.network.NetworkConfig.URL_HOST;
  * Created by yoon on 2016. 11. 14..
  */
 
-public class ReviewListFragment extends Fragment {
+public class ReviewListFragment extends Fragment implements View.OnClickListener {
 
     private static final String TAG = ReviewListFragment.class.getSimpleName();
 
     private static final String ARG_PRODUCT_ID = "product_id";
+
+    private Button mReviewFormButton;
 
     private ReviewStorage mReviewStorage;
     private RecyclerView mReviewRecyclerView;
@@ -90,6 +94,9 @@ public class ReviewListFragment extends Fragment {
 //        return super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_review_list, container, false);
 
+        mReviewFormButton = (Button) view.findViewById(R.id.product_detail_review_form_button);
+        mReviewFormButton.setOnClickListener(this);
+
         mReviewRecyclerView = (RecyclerView) view.findViewById(R.id.product_detail_review_recycler_view);
         mReviewRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -107,6 +114,16 @@ public class ReviewListFragment extends Fragment {
     public void onResume() {
         super.onResume();
         requestReviewsJsonObject();
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.product_detail_review_form_button :
+                Intent intent = ReviewActivity.newIntent(getActivity(), REQUEST_REVIEW_FORM);
+                startActivity(intent);
+                break;
+        }
     }
 
     private void setupAdapter() {
