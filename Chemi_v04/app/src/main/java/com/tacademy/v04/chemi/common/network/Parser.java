@@ -6,7 +6,7 @@ import com.tacademy.v04.chemi.model.Chemical;
 import com.tacademy.v04.chemi.model.Effect;
 import com.tacademy.v04.chemi.model.Product;
 import com.tacademy.v04.chemi.model.Review;
-import com.tacademy.v04.chemi.model.Search;
+import com.tacademy.v04.chemi.model.Word;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -52,7 +52,9 @@ import static com.tacademy.v04.chemi.common.network.NetworkConfig.Review.Key.WRI
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.Review.Key.WRITER_GENDER;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.Review.Key.WRITER_ID;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.Review.Key.WRITER_NAME;
+import static com.tacademy.v04.chemi.common.network.NetworkConfig.Search.Key.SEARCHED_BRAND;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.Search.Key.SEARCH_WORD;
+import static com.tacademy.v04.chemi.common.network.NetworkConfig.Search.Key.SEARHCED_PRODUCT_NAME;
 
 /**
  * Created by yoon on 2016. 11. 25..
@@ -493,9 +495,9 @@ public class Parser {
         return reviews;
     }
 
-    public static ArrayList<Search> parseSearchList(JSONObject responseObject) {
+    public static ArrayList<Word> parseSearchWordPartList(JSONObject responseObject) {
 
-        ArrayList<Search> searches = new ArrayList<>();
+        ArrayList<Word> searchedWords = new ArrayList<>();
         try {
             String responseMessage = responseObject.getString(RESPONSE_MESSAGE);
             if (responseMessage.equals(RESPONSE_SUCCESS)) {
@@ -504,7 +506,10 @@ public class Parser {
                     JSONArray wordsArray = dataObject.getJSONArray(SEARCH_WORD);
                     for (int i = 0; i < wordsArray.length(); i++) {
                         JSONObject wordObject = (JSONObject) wordsArray.get(i);
-                        Search search = new Search();
+                        Word word = new Word();
+                        word.setBrand(wordObject.getString(SEARCHED_BRAND));
+                        word.setName(wordObject.getString(SEARHCED_PRODUCT_NAME));
+                        searchedWords.add(word);
                     }
                 }
             }
@@ -512,7 +517,51 @@ public class Parser {
             e.printStackTrace();
             Log.w("Parse Exception", e.getMessage());
         }
-        return searches;
+        return searchedWords;
+    }
+
+    public static ArrayList<Product> parseSearchKeywordProductList(JSONObject responseObject) {
+
+        ArrayList<Product> products = new ArrayList<>();
+        try {
+            String responseMessage = responseObject.getString(RESPONSE_MESSAGE);
+            if (responseMessage.equals(RESPONSE_SUCCESS)) {
+                JSONArray dataArray = responseObject.getJSONArray(RESPONSE_DATA);
+                if (dataArray != null) {
+                    for (int i = 0; i < dataArray.length(); i++) {
+                        JSONObject productObject = (JSONObject) dataArray.get(i);
+                        Product product = new Product();
+                        product.setProductId(productObject.getInt(PRODUCT_ID));
+                        product.setCategoryId(productObject.getInt(CATEGORY_ID));
+                        product.setMaker(productObject.getString(MAKER));
+                        product.setBrand(productObject.getString(BRAND));
+                        product.setName(productObject.getString(NAME));
+                        Object rating = productObject.get(RATING);
+                        float ratingf = 0.0f;
+//                        Log.i("parseProductList rating", String.valueOf(rating));
+                        if (rating instanceof Integer) {
+                            ratingf = ((Integer) rating).floatValue();
+                        } else if (rating instanceof Double) {
+                            ratingf = ((Double) rating).floatValue();
+                        } else if (rating == null) {
+                            ratingf = 0.0f;
+                        }
+//                        Log.i("float", String.valueOf(ratingf));
+//
+                        product.setRatingAvg(ratingf);
+//                        Log.i("product", String.valueOf(product.getRatingAvg()));
+                        product.setRatingCount(productObject.getInt(RATING_COUNT));
+                        product.setImagePath(productObject.getString(IMAGE_PATH));
+                        products.add(product);
+                        Log.i("parseProductList", product.toStringId());
+                    }
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Log.w("Parse Exception", e.getMessage());
+        }
+        return products;
     }
 }
 

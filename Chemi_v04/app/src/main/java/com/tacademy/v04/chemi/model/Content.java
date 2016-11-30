@@ -10,10 +10,12 @@ import java.util.UUID;
 public class Content {
 
     private UUID mId;
-    private int mImageId;
     private String mTitle;
     private String mDescription;
     private Date mPublishedDate;
+    private int mContentImageId;
+    private int mContentTypeImageId;
+    private int mContentType;
 
     public Content() {
         mId = UUID.randomUUID();
@@ -26,14 +28,6 @@ public class Content {
 
     public void setId(UUID id) {
         mId = id;
-    }
-
-    public int getImageId() {
-        return mImageId;
-    }
-
-    public void setImageId(int imageId) {
-        mImageId = imageId;
     }
 
     public String getTitle() {
@@ -60,14 +54,40 @@ public class Content {
         mPublishedDate = publishedDate;
     }
 
+    public int getContentImageId() {
+        return mContentImageId;
+    }
+
+    public void setContentImageId(int contentImageId) {
+        mContentImageId = contentImageId;
+    }
+
+    public int getContentTypeImageId() {
+        return mContentTypeImageId;
+    }
+
+    public void setContentTypeImageId(int contentTypeImageId) {
+        mContentTypeImageId = contentTypeImageId;
+    }
+
+    public int getContentType() {
+        return mContentType;
+    }
+
+    public void setContentType(int contentType) {
+        mContentType = contentType;
+    }
+
     @Override
     public String toString() {
         return "Content{" +
                 "mId=" + mId +
-                ", mImageId=" + mImageId +
                 ", mTitle='" + mTitle + '\'' +
                 ", mDescription='" + mDescription + '\'' +
                 ", mPublishedDate=" + mPublishedDate +
+                ", mContentImageId=" + mContentImageId +
+                ", mContentTypeImageId=" + mContentTypeImageId +
+                ", mContentType=" + mContentType +
                 '}';
     }
 }

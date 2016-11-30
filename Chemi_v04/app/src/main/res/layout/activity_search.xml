@@ -7,71 +7,86 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
-
-    <android.support.design.widget.AppBarLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/search_toolbar"
+        <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@android:color/white"
-            app:theme="@style/SearchToolbarStyle"
-            app:popupTheme="@style/AppTheme.PopupOverlay">
-            <!--android:background="?attr/colorPrimary"-->
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
 
-            <EditText
-                android:visibility="gone"
-                android:id="@+id/search_product_edit_text"
-                android:hint="@string/search_hint"
-                android:textColor="@color/searchActivity_editText_textColorHint"
-                android:textColorHint="@color/searchActivity_editText_textColorHint"
-                android:background="@android:color/transparent"
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/search_toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:maxLength="20"
-                android:singleLine="true"/>
+                android:layout_height="?attr/actionBarSize"
+                android:background="@android:color/white"
+                app:theme="@style/SearchToolbarStyle"
+                app:popupTheme="@style/AppTheme.PopupOverlay">
+                <!--android:background="?attr/colorPrimary"-->
 
-            <AutoCompleteTextView
-                android:id="@+id/search_product_auto_complete_text_view"
-                android:hint="@string/search_hint"
-                android:textColor="@color/searchActivity_editText_textColorHint"
-                android:textColorHint="@color/searchActivity_editText_textColorHint"
-                android:background="@android:color/transparent"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:maxLength="20"
-                android:singleLine="true"/>
+                <EditText
+                    android:visibility="gone"
+                    android:id="@+id/search_product_edit_text"
+                    android:hint="@string/search_hint"
+                    android:textColor="@color/searchActivity_editText_textColorHint"
+                    android:textColorHint="@color/searchActivity_editText_textColorHint"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:maxLength="20"
+                    android:singleLine="true"/>
 
-        </android.support.v7.widget.Toolbar>
+                <AutoCompleteTextView
+                    android:id="@+id/search_product_auto_complete_text_view"
+                    android:hint="@string/search_hint"
+                    android:textColor="@color/searchActivity_editText_textColorHint"
+                    android:textColorHint="@color/searchActivity_editText_textColorHint"
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:maxLength="20"
+                    android:dropDownAnchor="@+id/header_anchor_text_view"
+                    android:dropDownWidth="match_parent"
+                    android:singleLine="true"/>
 
-    </android.support.design.widget.AppBarLayout>
+            </android.support.v7.widget.Toolbar>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/searched_result_recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="16dp"
-        android:background="@color/colorBackground">
-    </android.support.v7.widget.RecyclerView>
+        </android.support.design.widget.AppBarLayout>
 
-    <!--<include layout="@layout/content_main"/>-->
-    <FrameLayout
-        android:id="@+id/fragment_search_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+        <!--<android.support.v7.widget.RecyclerView-->
+            <!--android:id="@+id/searched_result_recycler_view"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:padding="16dp"-->
+            <!--android:background="@color/colorBackground">-->
+        <!--</android.support.v7.widget.RecyclerView>-->
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/category_fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@drawable/ic_fab_category"/>
+        <!--<include layout="@layout/content_main"/>-->
+
+        <TextView
+            android:id="@+id/header_anchor_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:padding="16dp"/>
+
+        <FrameLayout
+            android:id="@+id/fragment_search_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+
+    </LinearLayout>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/category_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            app:srcCompat="@drawable/ic_fab_category"/>
 
 </android.support.design.widget.CoordinatorLayout>

@@ -42,10 +42,9 @@
                     android:gravity="bottom">
 
                     <ImageView
-                        android:id="@+id/list_item_content_main_content_category_image"
+                        android:id="@+id/list_item_content_main_content_type_image"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/selector_bottom_sheet_category_section42"/>
+                        android:layout_height="wrap_content"/>
 
                 </LinearLayout>
                 <LinearLayout
@@ -60,8 +59,7 @@
                         android:layout_height="match_parent"
                         android:maxLines="2"
                         android:textStyle="bold"
-                        android:textSize="19sp"
-                        android:text="뽀송뽀송 우리아이 피부를 지켜줄 \n 유아용 물티 10선"/>
+                        android:textSize="19sp"/>
 
                 </LinearLayout>
                 <LinearLayout
@@ -75,8 +73,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:maxLines="1"
-                        android:textSize="13sp"
-                        android:text="좋은 물티슈를 고르는 Tip!"/>
+                        android:textSize="13sp"/>
 
                 </LinearLayout>
 

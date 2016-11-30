@@ -20,12 +20,14 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="310dp">
+                android:layout_height="163dp"
+                android:layout_marginBottom="4dp">
 
                 <ImageSwitcher
                     android:id="@+id/main_image_switcher"
                     android:layout_width="match_parent"
-                    android:layout_height="310dp">
+                    android:layout_height="163dp"
+                    android:background="@drawable/main_banner_background">
 
                     <!--<ImageView-->
                     <!--android:id="@+id/main_image_view"-->
@@ -46,8 +48,6 @@
                     android:orientation="horizontal"></LinearLayout>
 
             </RelativeLayout>
-
-
 
             <!--<LinearLayout-->
                 <!--android:layout_width="match_parent"-->

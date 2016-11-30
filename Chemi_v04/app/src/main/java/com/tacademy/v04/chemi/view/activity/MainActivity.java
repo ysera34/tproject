@@ -9,7 +9,9 @@ import android.view.View;
 import com.tacademy.v04.chemi.R;
 import com.tacademy.v04.chemi.view.fragment.navigation.FAQFragment;
 import com.tacademy.v04.chemi.view.fragment.navigation.MainFragment;
+import com.tacademy.v04.chemi.view.fragment.navigation.AnalyzeRequestFragment;
 
+import static com.tacademy.v04.chemi.common.Common.REQUEST_NAVIGATION_ANALYZE_REQUEST;
 import static com.tacademy.v04.chemi.common.Common.REQUEST_NAVIGATION_FAQ;
 
 /**
@@ -42,10 +44,17 @@ public class MainActivity extends AppNavigationActivity {
         FragmentManager fm = getSupportFragmentManager();
         containerFragment = fm.findFragmentById(R.id.fragment_container);
 
-        requestId =  getIntent().getIntExtra(EXTRA_REQUEST_NAVIGATION_ID, 0);
+        requestId = getIntent().getIntExtra(EXTRA_REQUEST_NAVIGATION_ID, 0);
+
         if (requestId > 0) {
             if (requestId == REQUEST_NAVIGATION_FAQ) {
                 containerFragment = FAQFragment.newInstance();
+//                mToolbar.setTitle(R.string.fragment_title_faq);
+                fm.beginTransaction()
+                        .add(R.id.fragment_container, containerFragment)
+                        .commit();
+            } else if (requestId == REQUEST_NAVIGATION_ANALYZE_REQUEST) {
+                containerFragment = AnalyzeRequestFragment.newInstance();
 //                mToolbar.setTitle(R.string.fragment_title_faq);
                 fm.beginTransaction()
                         .add(R.id.fragment_container, containerFragment)

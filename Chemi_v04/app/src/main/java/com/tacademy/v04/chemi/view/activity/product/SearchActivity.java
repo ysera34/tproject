@@ -4,12 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
@@ -25,7 +25,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tacademy.v04.chemi.R;
-import com.tacademy.v04.chemi.common.util.decorator.SeparatorDecoration;
 import com.tacademy.v04.chemi.common.util.listener.OnPassDataListener;
 import com.tacademy.v04.chemi.model.Product;
 import com.tacademy.v04.chemi.model.ProductStorage;
@@ -97,9 +96,14 @@ public class SearchActivity extends AppBaseActivity
             }
         });
 
-
         mSearchProductAutoCompleteTextView =
                 (AutoCompleteTextView) findViewById(R.id.search_product_auto_complete_text_view);
+        mSearchResults = new ArrayList<>();
+        mSearchResults.add("abc");mSearchResults.add("abcfe");mSearchResults.add("abcdd");mSearchResults.add("aabc");
+        mSearchResults.add("babc");mSearchResults.add("babcfe");mSearchResults.add("cabcdd");mSearchResults.add("caabc");
+        mSearchResultsAdapter = new ArrayAdapter<>(this, R.layout.list_item_searched_wordpart, mSearchResults);
+        mSearchProductAutoCompleteTextView.setAdapter(mSearchResultsAdapter);
+        mSearchProductAutoCompleteTextView.setThreshold(1);
         mSearchProductAutoCompleteTextView.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -110,6 +114,7 @@ public class SearchActivity extends AppBaseActivity
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 Log.d(TAG, charSequence.toString());
                 Toast.makeText(getApplicationContext(), charSequence.toString(), Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
@@ -117,19 +122,6 @@ public class SearchActivity extends AppBaseActivity
 
             }
         });
-        mSearchResults = new ArrayList<>();
-        mSearchResults.add("피지");mSearchResults.add("피df지");mSearchResults.add("피지23");
-        mSearchResults.add("라피지");mSearchResults.add("가지");mSearchResults.add("피1지");
-        mSearchResults.add("피daf지");mSearchResults.add("나지");mSearchResults.add("가자지");
-        mSearchResults.add("라피지");mSearchResults.add("다지");mSearchResults.add("다나지");
-        mSearchResults.add("피지");mSearchResults.add("피지");mSearchResults.add("피지");
-        mSearchResults.add("피지");mSearchResults.add("피지");mSearchResults.add("피지");
-        mSearchResults.add("피지");mSearchResults.add("피지");mSearchResults.add("피지");
-        mSearchResults.add("피지");mSearchResults.add("피지");mSearchResults.add("피지");
-
-        mSearchResultsAdapter = new ArrayAdapter<>(this, R.layout.list_item_searched_wordpart, mSearchResults);
-        mSearchProductAutoCompleteTextView.setAdapter(mSearchResultsAdapter);
-        mSearchProductAutoCompleteTextView.setThreshold(1);
 
         // category_fab
         (findViewById(R.id.category_fab)).setOnClickListener(this);
@@ -142,11 +134,11 @@ public class SearchActivity extends AppBaseActivity
 //        (mBottomSheetView.findViewById(R.id.bottom_sheet_button)).setOnClickListener(this);
 
         // search edit_text auto completed
-        mSearchedResultRecyclerView = (RecyclerView) findViewById(R.id.searched_result_recycler_view);
-        mSearchedResultRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        SeparatorDecoration decoration =
-                new SeparatorDecoration(getApplicationContext(), android.R.color.transparent, 1.5f);
-        mSearchedResultRecyclerView.addItemDecoration(decoration);
+//        mSearchedResultRecyclerView = (RecyclerView) findViewById(R.id.searched_result_recycler_view);
+//        mSearchedResultRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+//        SeparatorDecoration decoration =
+//                new SeparatorDecoration(getApplicationContext(), android.R.color.transparent, 1.5f);
+//        mSearchedResultRecyclerView.addItemDecoration(decoration);
         mProducts = new ArrayList<>();
         mProductStorage = ProductStorage.get(getApplicationContext());
 //        mProducts = mProductStorage.getSearchProducts("query");
@@ -327,7 +319,6 @@ public class SearchActivity extends AppBaseActivity
     public void onStringDataPass(String data) {
         mSearchProductEditText.setText(data);
         mSearchProductAutoCompleteTextView.setText(data);
-
     }
 
     private class SearchedResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -493,6 +484,27 @@ public class SearchActivity extends AppBaseActivity
             fm.beginTransaction()
                     .add(R.id.fragment_search_container, mSearchFragmentContainer)
                     .commit();
+        }
+    }
+
+    private class AutoCompleteSearchProductAdapter extends ArrayAdapter<String> {
+
+        private ArrayList<String> mSearchedResults;
+
+        public AutoCompleteSearchProductAdapter(Context context, int resource, ArrayList<String> objects) {
+            super(context, resource, objects);
+            mSearchResults = objects;
+        }
+
+        @Override
+        public int getCount() {
+            return super.getCount();
+        }
+
+        @NonNull
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            return super.getView(position, convertView, parent);
         }
     }
 }

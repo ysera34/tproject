@@ -1,5 +1,6 @@
 package com.tacademy.v04.chemi.view.fragment.navigation;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -22,14 +23,18 @@ import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
 import com.tacademy.v04.chemi.R;
 import com.tacademy.v04.chemi.model.Content;
 import com.tacademy.v04.chemi.model.ContentMainStorage;
 import com.tacademy.v04.chemi.view.activity.MainActivity;
+import com.tacademy.v04.chemi.view.activity.content.ContentActivity;
 
 import java.util.ArrayList;
+
+import static com.tacademy.v04.chemi.common.Common.REQUEST_NAVIGATION_ANALYZE_REQUEST;
 
 /**
  * Created by yoon on 2016. 11. 14..
@@ -83,8 +88,8 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         ContentMainStorage contentMainStorage = ContentMainStorage.get(getActivity());
         mContents = contentMainStorage.getContents();
 
-        mBannerImageArray = new int[]{R.drawable.banner_sample01, R.drawable.banner_sample02,
-                R.drawable.banner_sample03, R.drawable.banner_sample04, R.drawable.banner_sample05,};
+        mBannerImageArray = new int[]{R.drawable.main_banner_content01,
+                R.drawable.main_banner_content02, R.drawable.main_banner_content03,};
         mMainActivity = (MainActivity) getActivity();
 
         activeColor = getResources().getColor(R.color.main_image_switcher_indicator_active_color);
@@ -117,13 +122,20 @@ public class MainFragment extends Fragment implements View.OnClickListener {
                         ImageSwitcher.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT,
                         ActionBar.LayoutParams.WRAP_CONTENT));
                 mMainImageView.setImageResource(mBannerImageArray[mBannerIndex]);
+                mMainImageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        if (mBannerIndex == 0) {
+                            Intent intent = MainActivity.newIntent(getActivity(), REQUEST_NAVIGATION_ANALYZE_REQUEST);
+                            startActivity(intent);
+                        }
+                        Toast.makeText(getActivity(), mBannerIndex + " 해당 컨텐츠로 이동합니다.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                /*
                 mMainImageView.setOnTouchListener(new View.OnTouchListener() {
-//                mMainImageView.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View view) {
-//                        Toast.makeText(getActivity(), "해당 컨텐츠로 이동합니다.", Toast.LENGTH_SHORT).show();
-//                    }
-//                });
+
 
                     @Override
                     public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -179,11 +191,10 @@ public class MainFragment extends Fragment implements View.OnClickListener {
                         return true;
                         }
 
-                    });
+                    });  */
                     return mMainImageView;
                 }
             });
-
 
 //        mMainImageView = (ImageView) view.findViewById(R.id.main_image_view);
         mMainImageSwitcherIndicatorLayout =
@@ -229,7 +240,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         @Override
         public void run() {
             try {
-                Thread.sleep(4000);
+                Thread.sleep(5000);
             } catch (InterruptedException e) {
                 Log.w(TAG, "runnable InterruptedException : " + e.toString());
             }
@@ -242,7 +253,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
             sweepRightToLeft();
             indicateSweepImage(mBannerIndex);
             Log.w(TAG, "handler alive..., please kill me.....");
-            mHandler.sendEmptyMessageDelayed(0, 4000);
+            mHandler.sendEmptyMessageDelayed(0, 5000);
         }
     };
 
@@ -318,7 +329,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 //            mIndicatorTextViews[i] = new TextView(getActivity());
             mIndicatorTextViews[i] = new TextView(mMainActivity);
             mIndicatorTextViews[i].setText(Html.fromHtml("&#8226;"));
-            mIndicatorTextViews[i].setPadding(16, 0, 16, 0);
+            mIndicatorTextViews[i].setPadding(10, 0, 10, 0);
             mIndicatorTextViews[i].setTextSize(35);
             mIndicatorTextViews[i].setTextColor(inactiveColor);
             mMainImageSwitcherIndicatorLayout.addView(mIndicatorTextViews[i]);
@@ -421,7 +432,8 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    private class ContentHolder extends RecyclerView.ViewHolder {
+    private class ContentHolder extends RecyclerView.ViewHolder
+            implements View.OnClickListener {
 
         private Content mContent;
 
@@ -432,11 +444,12 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 
         public ContentHolder(View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
 
             mContentImageView =
                     (ImageView) itemView.findViewById(R.id.list_item_content_main_image_view);
             mContentCategoryImageView =
-                    (ImageView) itemView.findViewById(R.id.list_item_content_main_content_category_image);
+                    (ImageView) itemView.findViewById(R.id.list_item_content_main_content_type_image);
             mContentTitleTextView =
                     (TextView) itemView.findViewById(R.id.list_item_content_main_content_title);
             mContentDescriptionTextView =
@@ -445,7 +458,18 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 
         public void bindContent(Content content) {
             mContent = content;
-            mContentImageView.setImageResource(mContent.getImageId());
+            mContentImageView.setImageResource(mContent.getContentImageId());
+            mContentCategoryImageView.setImageResource(mContent.getContentTypeImageId());
+            mContentTitleTextView.setText(mContent.getTitle());
+            mContentDescriptionTextView.setText(mContent.getDescription());
+        }
+
+        @Override
+        public void onClick(View view) {
+
+            Intent intent = ContentActivity.newIntent(getActivity(), mContent.getContentType());
+            startActivity(intent);
+
         }
     }
 }

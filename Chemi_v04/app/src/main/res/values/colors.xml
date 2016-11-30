@@ -47,9 +47,11 @@
     <color name="chemical_dialog_precaution_description_font_color">#757575</color>
 
 
-    <color name="main_image_switcher_indicator_inactive_color">#77B6B6B6</color>
-    <color name="main_image_switcher_indicator_active_color">#77454545</color>
+    <color name="main_image_switcher_indicator_inactive_color">#7fffffff</color>
+    <color name="main_image_switcher_indicator_active_color">#ffffff</color>
 
 
     <color name="coral_candy">#F5C9C8</color>
+    <color name="colorSplashStart">#d7df23</color>
+    <color name="colorSplashEnd">#32b9d4</color>
 </resources>

@@ -10,10 +10,8 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.tacademy.v04.chemi.R;
-import com.tacademy.v04.chemi.view.activity.product.ProductListActivity;
 
 import java.util.ArrayList;
 
@@ -22,8 +20,6 @@ import java.util.ArrayList;
  */
 
 public class SearchFragment extends Fragment implements View.OnClickListener {
-
-    private Button mShowAllProductsButton;
 
     private TabLayout mProductSearchTabLayout;
     private ViewPager mProductSearchViewPager;
@@ -56,9 +52,6 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 //        return super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_search, container, false);
-        mShowAllProductsButton = (Button) view.findViewById(R.id.product_show_all_button);
-        mShowAllProductsButton.setVisibility(View.GONE);
-        mShowAllProductsButton.setOnClickListener(this);
 
         mProductSearchTabLayout = (TabLayout) view.findViewById(R.id.product_search_tabLayout);
         mProductSearchViewPager = (ViewPager) view.findViewById(R.id.product_search_view_pager);
@@ -94,9 +87,6 @@ public class SearchFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.product_show_all_button :
-                startActivity(ProductListActivity.newIntent(getActivity()));
-                break;
         }
     }
 

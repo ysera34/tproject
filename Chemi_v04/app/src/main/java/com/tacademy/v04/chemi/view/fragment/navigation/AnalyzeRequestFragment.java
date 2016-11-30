@@ -15,14 +15,14 @@ import com.tacademy.v04.chemi.R;
  * Request Chemical of Product
  */
 
-public class RequestChemicalFragment extends Fragment {
+public class AnalyzeRequestFragment extends Fragment {
 
-    public RequestChemicalFragment() {
+    public AnalyzeRequestFragment() {
     }
 
-    public static RequestChemicalFragment newInstance() {
+    public static AnalyzeRequestFragment newInstance() {
 
-        RequestChemicalFragment fragment = new RequestChemicalFragment();
+        AnalyzeRequestFragment fragment = new AnalyzeRequestFragment();
         return fragment;
     }
 

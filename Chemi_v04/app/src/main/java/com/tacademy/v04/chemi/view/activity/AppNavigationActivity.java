@@ -27,9 +27,10 @@ import com.tacademy.v04.chemi.view.activity.product.CustomSearchActivity;
 import com.tacademy.v04.chemi.view.activity.product.SearchActivity;
 import com.tacademy.v04.chemi.view.fragment.navigation.ArchiveFragment;
 import com.tacademy.v04.chemi.view.fragment.navigation.ConfigureFragment;
+import com.tacademy.v04.chemi.view.fragment.navigation.CustomSearchLogFragment;
 import com.tacademy.v04.chemi.view.fragment.navigation.FAQFragment;
 import com.tacademy.v04.chemi.view.fragment.navigation.NoticeFragment;
-import com.tacademy.v04.chemi.view.fragment.navigation.RequestChemicalFragment;
+import com.tacademy.v04.chemi.view.fragment.navigation.AnalyzeRequestFragment;
 import com.tacademy.v04.chemi.view.fragment.navigation.ReviewLogFragment;
 
 import static com.tacademy.v04.chemi.R.id.fab;
@@ -194,10 +195,10 @@ public class AppNavigationActivity extends AppBaseActivity implements
             fragment = ReviewLogFragment.newInstance();
 //            mToolbar.setTitle(R.string.fragment_title_reviews);
         } else if (id == R.id.nav_custom_search_log) {
-            fragment = RequestChemicalFragment.newInstance();
+            fragment = CustomSearchLogFragment.newInstance();
 //            mToolbar.setTitle(R.string.fragment_title_custom_search_log);
         } else if (id == R.id.nav_item_analyze_request) {
-            fragment = RequestChemicalFragment.newInstance();
+            fragment = AnalyzeRequestFragment.newInstance();
 //            mToolbar.setTitle(R.string.fragment_title_analyze_request);
         } else if (id == R.id.nav_notifications) {
             fragment = NoticeFragment.newInstance();

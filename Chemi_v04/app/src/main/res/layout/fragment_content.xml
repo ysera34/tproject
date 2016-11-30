@@ -4,10 +4,16 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/splash_image_view"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/splash" />
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/content_detail_image_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="center"/>
+
+    </ScrollView>
 
 </LinearLayout>
