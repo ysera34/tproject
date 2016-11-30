@@ -6,6 +6,7 @@ import com.tacademy.v04.chemi.model.Chemical;
 import com.tacademy.v04.chemi.model.Effect;
 import com.tacademy.v04.chemi.model.Product;
 import com.tacademy.v04.chemi.model.Review;
+import com.tacademy.v04.chemi.model.Search;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -51,6 +52,7 @@ import static com.tacademy.v04.chemi.common.network.NetworkConfig.Review.Key.WRI
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.Review.Key.WRITER_GENDER;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.Review.Key.WRITER_ID;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.Review.Key.WRITER_NAME;
+import static com.tacademy.v04.chemi.common.network.NetworkConfig.Search.Key.SEARCH_WORD;
 
 /**
  * Created by yoon on 2016. 11. 25..
@@ -489,6 +491,28 @@ public class Parser {
             Log.w("Parse Exception", e.getMessage());
         }
         return reviews;
+    }
+
+    public static ArrayList<Search> parseSearchList(JSONObject responseObject) {
+
+        ArrayList<Search> searches = new ArrayList<>();
+        try {
+            String responseMessage = responseObject.getString(RESPONSE_MESSAGE);
+            if (responseMessage.equals(RESPONSE_SUCCESS)) {
+                JSONObject dataObject = responseObject.getJSONObject(RESPONSE_DATA);
+                if (dataObject != null) {
+                    JSONArray wordsArray = dataObject.getJSONArray(SEARCH_WORD);
+                    for (int i = 0; i < wordsArray.length(); i++) {
+                        JSONObject wordObject = (JSONObject) wordsArray.get(i);
+                        Search search = new Search();
+                    }
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Log.w("Parse Exception", e.getMessage());
+        }
+        return searches;
     }
 }
 

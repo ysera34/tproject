@@ -36,6 +36,7 @@ import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Random;
 
 import static com.tacademy.v04.chemi.common.Common.CATEGORY_DEFAULT_VALUE;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.Product.PATH;
@@ -226,7 +227,6 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
         }
     }
 
-
     private void requestJsonObject() {
 
         final ProgressDialog pDialog =
@@ -331,7 +331,7 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
                     "http://lorempixel.com/500/500/technics/",
             };
             Glide.with(getActivity())
-                    .load(imagePath[1])
+                    .load(imagePath[new Random().nextInt(5)])
                     .placeholder(R.drawable.unloaded_image_holder)
                     .error(R.drawable.unloaded_image_holder)
                     .crossFade()

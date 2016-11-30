@@ -18,13 +18,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tacademy.v04.chemi.R;
-import com.tacademy.v04.chemi.common.util.listener.OnPassDataListener;
 import com.tacademy.v04.chemi.common.util.decorator.SeparatorDecoration;
+import com.tacademy.v04.chemi.common.util.listener.OnPassDataListener;
 import com.tacademy.v04.chemi.model.Product;
 import com.tacademy.v04.chemi.model.ProductStorage;
 import com.tacademy.v04.chemi.view.activity.AppBaseActivity;
@@ -44,6 +46,9 @@ public class SearchActivity extends AppBaseActivity
 
     private Toolbar mToolbar;
     private EditText mSearchProductEditText;
+    private AutoCompleteTextView mSearchProductAutoCompleteTextView;
+    private ArrayList<String> mSearchResults;
+    private ArrayAdapter<String> mSearchResultsAdapter;
     private BottomSheetDialog mCategoryBottomSheetDialog;
 
     private RecyclerView mSearchedResultRecyclerView;
@@ -78,7 +83,8 @@ public class SearchActivity extends AppBaseActivity
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 Log.d(TAG, charSequence.toString());
-//                Toast.makeText(getApplicationContext(), charSequence.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), charSequence.toString(), Toast.LENGTH_SHORT).show();
+
 //                mProducts = mProductStorage.getSearchProducts(charSequence.toString());
 //                updateUI(mProducts);
 //                queryString = charSequence.toString();
@@ -90,6 +96,40 @@ public class SearchActivity extends AppBaseActivity
 
             }
         });
+
+
+        mSearchProductAutoCompleteTextView =
+                (AutoCompleteTextView) findViewById(R.id.search_product_auto_complete_text_view);
+        mSearchProductAutoCompleteTextView.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                Log.d(TAG, charSequence.toString());
+                Toast.makeText(getApplicationContext(), charSequence.toString(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        mSearchResults = new ArrayList<>();
+        mSearchResults.add("피지");mSearchResults.add("피df지");mSearchResults.add("피지23");
+        mSearchResults.add("라피지");mSearchResults.add("가지");mSearchResults.add("피1지");
+        mSearchResults.add("피daf지");mSearchResults.add("나지");mSearchResults.add("가자지");
+        mSearchResults.add("라피지");mSearchResults.add("다지");mSearchResults.add("다나지");
+        mSearchResults.add("피지");mSearchResults.add("피지");mSearchResults.add("피지");
+        mSearchResults.add("피지");mSearchResults.add("피지");mSearchResults.add("피지");
+        mSearchResults.add("피지");mSearchResults.add("피지");mSearchResults.add("피지");
+        mSearchResults.add("피지");mSearchResults.add("피지");mSearchResults.add("피지");
+
+        mSearchResultsAdapter = new ArrayAdapter<>(this, R.layout.list_item_searched_wordpart, mSearchResults);
+        mSearchProductAutoCompleteTextView.setAdapter(mSearchResultsAdapter);
+        mSearchProductAutoCompleteTextView.setThreshold(1);
 
         // category_fab
         (findViewById(R.id.category_fab)).setOnClickListener(this);
@@ -247,7 +287,8 @@ public class SearchActivity extends AppBaseActivity
             case R.id.bottom_sheet_category_section53 :
                 Toast.makeText(SearchActivity.this, "bottom_sheet_category_section53",
                         Toast.LENGTH_SHORT).show();
-                startActivity(ProductListActivity.newIntent(getApplicationContext(), 53));
+                startActivity(ProductListActivity.newIntent(getApplicationContext()));
+//                startActivity(ProductListActivity.newIntent(getApplicationContext(), 53));
                 break;
             case R.id.bottom_sheet_category_section61 :
                 Toast.makeText(SearchActivity.this, "bottom_sheet_category_section61",
@@ -285,6 +326,8 @@ public class SearchActivity extends AppBaseActivity
     @Override
     public void onStringDataPass(String data) {
         mSearchProductEditText.setText(data);
+        mSearchProductAutoCompleteTextView.setText(data);
+
     }
 
     private class SearchedResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {

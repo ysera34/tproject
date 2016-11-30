@@ -17,6 +17,7 @@ public class NetworkConfig {
     public static final String PAGE = "page";
     public static final String PAGE_PREV = "prev";
     public static final String PAGE_NEXT = "next";
+    public static final String SEARCH_WORD_QUERY = "?wordpart=";
 
     public static final class Product {
         public static final String PATH = File.separator + "products";
@@ -72,6 +73,18 @@ public class NetworkConfig {
             public static final String REVIEW_CREATED = "created";
             public static final String WRITER_CONSTITUTIONS = "constitutions";
             public static final String WRITER_CONSTITUTION = "name";
+        }
+    }
+
+    public static final class Search {
+        public static final String PATH = File.separator + "searchs";
+
+        public static final class Key {
+            public static final String SEARCH_WORD = "words";
+            public static final String SEARCHED_BRAND = "brand";
+            public static final String SEARCHED_MAKER = "maker";
+            public static final String SEARHCED_PRODUCT_NAME = "name";
+
         }
     }
 }

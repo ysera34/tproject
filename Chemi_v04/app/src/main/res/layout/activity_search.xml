@@ -23,7 +23,20 @@
             <!--android:background="?attr/colorPrimary"-->
 
             <EditText
+                android:visibility="gone"
                 android:id="@+id/search_product_edit_text"
+                android:hint="@string/search_hint"
+                android:textColor="@color/searchActivity_editText_textColorHint"
+                android:textColorHint="@color/searchActivity_editText_textColorHint"
+                android:background="@android:color/transparent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:maxLength="20"
+                android:singleLine="true"/>
+
+            <AutoCompleteTextView
+                android:id="@+id/search_product_auto_complete_text_view"
                 android:hint="@string/search_hint"
                 android:textColor="@color/searchActivity_editText_textColorHint"
                 android:textColorHint="@color/searchActivity_editText_textColorHint"
