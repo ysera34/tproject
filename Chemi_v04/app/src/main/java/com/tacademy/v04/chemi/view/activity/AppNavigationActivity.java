@@ -8,6 +8,7 @@ import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -25,13 +26,15 @@ import com.tacademy.v04.chemi.R;
 import com.tacademy.v04.chemi.view.activity.content.ContentListActivity;
 import com.tacademy.v04.chemi.view.activity.product.CustomSearchActivity;
 import com.tacademy.v04.chemi.view.activity.product.SearchActivity;
+import com.tacademy.v04.chemi.view.fragment.navigation.AnalyzeRequestFragment;
 import com.tacademy.v04.chemi.view.fragment.navigation.ArchiveFragment;
 import com.tacademy.v04.chemi.view.fragment.navigation.ConfigureFragment;
 import com.tacademy.v04.chemi.view.fragment.navigation.CustomSearchLogFragment;
 import com.tacademy.v04.chemi.view.fragment.navigation.FAQFragment;
 import com.tacademy.v04.chemi.view.fragment.navigation.NoticeFragment;
-import com.tacademy.v04.chemi.view.fragment.navigation.AnalyzeRequestFragment;
+import com.tacademy.v04.chemi.view.fragment.navigation.PartnerFragment;
 import com.tacademy.v04.chemi.view.fragment.navigation.ReviewLogFragment;
+import com.tacademy.v04.chemi.view.fragment.navigation.TermsFragment;
 
 import static com.tacademy.v04.chemi.R.id.fab;
 
@@ -126,15 +129,6 @@ public class AppNavigationActivity extends AppBaseActivity implements
     }
 
     @Override
-    public void onBackPressed() {
-        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
-            mDrawerLayout.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
-
-    @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.nav_header_custom_search_button :
@@ -149,9 +143,27 @@ public class AppNavigationActivity extends AppBaseActivity implements
                 startActivity(ContentListActivity.newIntent(getApplicationContext()));
                 mDrawerLayout.closeDrawers();
                 break;
-        }
+            case R.id.configure_partner_layout :
+                PartnerFragment newFragment = PartnerFragment.newInstance();
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction()
+                        .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right);
 
+                ft.replace(R.id.fragment_container, newFragment).commit();
+                break;
+        }
     }
+
+//    containerFragment = fragment;
+//    fm.beginTransaction()
+//            .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
+//    .replace(R.id.fragment_container, containerFragment)
+//    .commit();
+//
+//    containerFragment = fragment;
+//    fm.beginTransaction()
+//            .setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
+//    .replace(R.id.fragment_container, containerFragment)
+//    .commit();
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -232,5 +244,24 @@ public class AppNavigationActivity extends AppBaseActivity implements
         }
         item.setChecked(true);
         return true;
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
+        FragmentManager fm = getSupportFragmentManager();
+        ConfigureFragment configureFragment = ConfigureFragment.newInstance();
+
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            mDrawerLayout.closeDrawer(GravityCompat.START);
+        } else if (fragment instanceof TermsFragment || fragment instanceof PartnerFragment) {
+                containerFragment = fm.findFragmentById(R.id.fragment_container);
+                fm.beginTransaction()
+                        .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
+                        .replace(R.id.fragment_container, configureFragment).commit();
+        } else {
+            super.onBackPressed();
+        }
     }
 }

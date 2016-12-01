@@ -17,6 +17,7 @@ public class Common {
     public static final int REQUEST_NAVIGATION_NOTIFICATION = 115;
     public static final int REQUEST_NAVIGATION_FAQ = 116;
     public static final int REQUEST_NAVIGATION_SETTING = 117;
+    public static final int REQUEST_NAVIGATION_SETTING_PARTNERS = 1171;
 
     public static final int REQUEST_REVIEW_FORM = 131;
 
