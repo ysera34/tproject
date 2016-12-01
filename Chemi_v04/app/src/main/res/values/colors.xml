@@ -11,6 +11,8 @@
     <color name="colorFont">#4a4a4a</color>
     <color name="colorFontEquivalent">#000000</color>
     <color name="colorFontRest">#9e9e9e</color>
+    <color name="colorFontHeader">#000000</color>
+    <color name="colorFontBody">#757575</color>
     <color name="colorTransparent">@android:color/transparent</color>
     <color name="colorActionModeToolbar">#ffffff</color>
 

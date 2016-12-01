@@ -124,6 +124,9 @@
 
     <string name="bottom_sheet_menu_camera">camera</string>
     <string name="bottom_sheet_menu_gallery">gallery</string>
+    <string name="chemi_agreement1">케미 서비스를 이용해 주셔서 감사합니다.\n</string>
+    <string name="chemi_agreement2">케미 서비스를 이용해 주셔서 감사합니다.\n</string>
+    <string name="chemi_privacy_body">케미 서비스를 이용해 주셔서 감사합니다.\n</string>
     <!-- REQUEST -->
     <!--<string name="request_product_id">%1$s</string>-->
 

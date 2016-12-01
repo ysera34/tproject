@@ -115,4 +115,63 @@
 
     <string name="bottom_sheet_menu_camera">카메라</string>
     <string name="bottom_sheet_menu_gallery">갤러리</string>
+    <string name="chemi_agreement1">케미 서비스를 이용해 주셔서 감사합니다.\n
+    케미는 일상 속 화학제품의 성분을 분석하여 제품의 안정성 정보를 제공하고, 여러분이 직접 리뷰를 남기고 또 다른 사용
+    자의 리뷰를 본 후 원하는 제품을 선택 하실 수 이쏟록 지원하고 있습니다 케미는 앞으로도 소비자의 건강을 위한 유용한
+    콘텐츠와 정보 및 서비스를 제공해드리고자 합니다.\n
+    케미를 더 가깝게 느끼실 수 있도록 딱딱하고 어려운 내용이 아닌 쉽고 친숙한 느낌의 이용 약관을 마련하였으니, 시간을
+    내어 읽어 주시면 여러분과 케미가 더욱 더 가까운 사이가 뒬 수 있을 것이라고 생각합니다.</string>
+    <string name="chemi_agreement2">
+        1. 각종 제조사의 화학제품 주성분을 공신력 있는 기관 및 출처(미국 비영리 단체 EWG, 대한 피부과 의사회,
+        식품의약품안전처를 기반으로 분석한 결과\n
+        2. 대상자의 체질과 유해성분제외, 유익성분포함\n
+        3. 화학제품 리뷰 작성 및 조회 서비스\n
+        4. 화학성분, 건강에 관한 각종 콘텐츠 및 정보
+    </string>
+    <string name="chemi_privacy_body">
+        저희 케미에게 있어서 여러분의 개인정보를 안전하게 취급하는 일은 가장 중요한 일 중에 하나입니다. 케미가 취급하는
+        여러분의 개인정보는 서비스의 원활한 제공을 위하여 여러분이 동의한 목적과 범위 내에서만 이용됩니다. 법령에 의
+        하거나 여러분이 별도로 동의하지 않는 한 케미가 여러분의 개인정보를 제3자에게 제공하는 일은 절대로 없으므로
+        안심하고 서비스를 사용해 주시면 감사하겠습니다. 개인정보 취급방침에 수정이 있는 경우에는 여러분이 언제든지 그
+        내용과 이유를 쉽게 알 수 있도록 공지사항을 통하여 알려 드리겠습니다. 무엇보다도 소중한 여러분의 개인정보는 더 나은
+        서비스를 제공하기 위해 활용됩니다. 케미는 서비스의 원활한 제공과 더욱 더 발전된 이용자 경험을 드리기 위해
+        필요한 최소한의 개인정보를 수집합니다.
+    </string>
+
+    <string-array name="faq_header_list">
+        <item>@string/faq_header_1</item>
+        <item>@string/faq_header_2</item>
+        <item>@string/faq_header_3</item>
+        <item>@string/faq_header_4</item>
+        <item>@string/faq_header_5</item>
+        <item>@string/faq_header_6</item>
+        <item>@string/faq_header_7</item>
+    </string-array>
+
+    <string name="faq_header_1">Q1. 성분 정보의 출처는 어디인가요?</string>
+    <string name="faq_header_2">Q2. 성분 정보의 출처는 어디인가요?</string>
+    <string name="faq_header_3">Q3. 성분 정보의 출처는 어디인가요?</string>
+    <string name="faq_header_4">Q4. 성분 정보의 출처는 어디인가요?</string>
+    <string name="faq_header_5">Q5. 성분 정보의 출처는 어디인가요?</string>
+    <string name="faq_header_6">Q6. 성분 정보의 출처는 어디인가요?</string>
+    <string name="faq_header_7">Q7. 성분 정보의 출처는 어디인가요?</string>
+
+    <string-array name="faq_body_list">
+        <item>@string/faq_body_1</item>
+        <item>@string/faq_body_2</item>
+        <item>@string/faq_body_3</item>
+        <item>@string/faq_body_4</item>
+        <item>@string/faq_body_5</item>
+        <item>@string/faq_body_6</item>
+        <item>@string/faq_body_7</item>
+    </string-array>
+
+    <string name="faq_body_1">정답은 1번입니다.</string>
+    <string name="faq_body_2">정답은 1번입니다.</string>
+    <string name="faq_body_3">정답은 1번입니다.</string>
+    <string name="faq_body_4">정답은 1번입니다.</string>
+    <string name="faq_body_5">정답은 1번입니다.</string>
+    <string name="faq_body_6">정답은 1번입니다.</string>
+    <string name="faq_body_7">정답은 1번입니다.</string>
+
 </resources>
