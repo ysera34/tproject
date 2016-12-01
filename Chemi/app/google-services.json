@@ -1,0 +1,117 @@
+{
+  "project_info": {
+    "project_number": "565436151759",
+    "firebase_url": "https://fir-example-9184e.firebaseio.com",
+    "project_id": "fir-example-9184e",
+    "storage_bucket": "fir-example-9184e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:565436151759:android:481360940e76b51d",
+        "android_client_info": {
+          "package_name": "com.android.study.myfirebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "565436151759-elir49ahphk5q93idl4fpoe8v1kmk4rv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAa-RXUaj24eYAsDqi-wdX9MshlyJKjFfA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:565436151759:android:0f9432994ee63323",
+        "android_client_info": {
+          "package_name": "com.android.study"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "565436151759-elir49ahphk5q93idl4fpoe8v1kmk4rv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAa-RXUaj24eYAsDqi-wdX9MshlyJKjFfA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:565436151759:android:e15bd80fb5ffe1f3",
+        "android_client_info": {
+          "package_name": "com.tacademy.chemi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "565436151759-r65pn8neaoulrsa8rh0slmsitlcsjt3e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tacademy.chemi",
+            "certificate_hash": "22DDA491F66E7B61AD94CF2BBAE09198DB05050F"
+          }
+        },
+        {
+          "client_id": "565436151759-elir49ahphk5q93idl4fpoe8v1kmk4rv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAa-RXUaj24eYAsDqi-wdX9MshlyJKjFfA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "565436151759-elir49ahphk5q93idl4fpoe8v1kmk4rv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

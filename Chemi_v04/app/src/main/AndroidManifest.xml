@@ -81,6 +81,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:launchMode="singleTop"
+            android:windowSoftInputMode="stateHidden"
             android:parentActivityName=".view.activity.product.ProductActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

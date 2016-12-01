@@ -110,6 +110,11 @@
     <string name="review_card_user_symptom">%1$s / %2$s / %3$s</string>
     <string name="empty_product_reivews_info">empty reviews</string>
     <string name="chemical_hazard_circle_transition_name">chemical_hazard_circle</string>
+    <string name="review_form_string_length_form">%s / 500</string>
+    <string name="review_negative_title">아쉬워요</string>
+    <string name="review_positive_title">좋아요</string>
+    <string name="review_positive_hint">이 제품이 좋은 이유를 다른 사람에게도 알려주세요</string>
+    <string name="review_negative_hint">이 제품이 아쉬운 이유를 다른 사람에게도 알려주세요</string>
 
     <string-array name="product_list_sort_way">
         <item>@string/product_list_sort_review_total</item>
@@ -117,7 +122,8 @@
         <item>@string/product_list_sort_latest_release</item>
     </string-array>
 
-
+    <string name="bottom_sheet_menu_camera">camera</string>
+    <string name="bottom_sheet_menu_gallery">gallery</string>
     <!-- REQUEST -->
     <!--<string name="request_product_id">%1$s</string>-->
 
