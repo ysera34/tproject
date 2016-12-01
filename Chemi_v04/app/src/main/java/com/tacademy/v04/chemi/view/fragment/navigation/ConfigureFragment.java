@@ -5,6 +5,8 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -33,6 +35,7 @@ public class ConfigureFragment extends Fragment implements View.OnClickListener 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     @Nullable
@@ -70,6 +73,13 @@ public class ConfigureFragment extends Fragment implements View.OnClickListener 
                 PartnerFragment partnerFragment = PartnerFragment.newInstance();
                 ft2.replace(R.id.fragment_container, partnerFragment).commit();
                 break;
+        }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        if ((menu.findItem(R.id.action_delete)) != null) {
+            menu.findItem(R.id.action_delete).setVisible(false);
         }
     }
 }

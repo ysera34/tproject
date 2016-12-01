@@ -31,6 +31,7 @@ import com.tacademy.v04.chemi.view.fragment.navigation.ArchiveFragment;
 import com.tacademy.v04.chemi.view.fragment.navigation.ConfigureFragment;
 import com.tacademy.v04.chemi.view.fragment.navigation.CustomSearchLogFragment;
 import com.tacademy.v04.chemi.view.fragment.navigation.FAQFragment;
+import com.tacademy.v04.chemi.view.fragment.navigation.MainFragment;
 import com.tacademy.v04.chemi.view.fragment.navigation.NoticeFragment;
 import com.tacademy.v04.chemi.view.fragment.navigation.PartnerFragment;
 import com.tacademy.v04.chemi.view.fragment.navigation.ReviewLogFragment;
@@ -252,14 +253,24 @@ public class AppNavigationActivity extends AppBaseActivity implements
         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
         FragmentManager fm = getSupportFragmentManager();
         ConfigureFragment configureFragment = ConfigureFragment.newInstance();
+        MainFragment mainFragment = MainFragment.newInstance();
+        containerFragment = fm.findFragmentById(R.id.fragment_container);
 
         if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             mDrawerLayout.closeDrawer(GravityCompat.START);
         } else if (fragment instanceof TermsFragment || fragment instanceof PartnerFragment) {
-                containerFragment = fm.findFragmentById(R.id.fragment_container);
-                fm.beginTransaction()
-                        .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
-                        .replace(R.id.fragment_container, configureFragment).commit();
+            fm.beginTransaction()
+                    .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
+                    .replace(R.id.fragment_container, configureFragment).commit();
+        } else if
+                (fragment instanceof ArchiveFragment || fragment instanceof ReviewLogFragment ||
+                fragment instanceof CustomSearchLogFragment || fragment instanceof AnalyzeRequestFragment ||
+                fragment instanceof NoticeFragment || fragment instanceof FAQFragment ||
+                fragment instanceof ConfigureFragment) {
+            fm.beginTransaction()
+                    .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_right)
+                    .replace(R.id.fragment_container, mainFragment).commit();
+
         } else {
             super.onBackPressed();
         }

@@ -14,6 +14,8 @@ import android.text.Html;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,7 +53,6 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 //    private ImageView mMainImageView;
     private LinearLayout mMainImageSwitcherIndicatorLayout;
     private TextView[] mIndicatorTextViews;
-    private MainActivity mMainActivity;
 
     private int activeColor;
     private int inactiveColor;
@@ -85,12 +86,12 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
         ContentMainStorage contentMainStorage = ContentMainStorage.get(getActivity());
         mContents = contentMainStorage.getContents();
 
         mBannerImageArray = new int[]{R.drawable.main_banner_content01,
                 R.drawable.main_banner_content02, R.drawable.main_banner_content03,};
-        mMainActivity = (MainActivity) getActivity();
 
         activeColor = getResources().getColor(R.color.main_image_switcher_indicator_active_color);
         inactiveColor = getResources().getColor(R.color.main_image_switcher_indicator_inactive_color);
@@ -300,6 +301,17 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+//        super.onCreateOptionsMenu(menu, inflater);
+        if ((menu.findItem(R.id.action_delete)) != null) {
+            menu.findItem(R.id.action_delete).setVisible(false);
+        }
+//        menu.findItem(R.id.action_search).setVisible(false);
+//        menu.findItem(R.id.action_home).setVisible(false);
+//        getActivity().getMenuInflater().inflate(R.menu.menu_toolbar, menu);
+    }
+
     //if left to right sweep event on screen
     private void sweepLeftToRight() {
         mBannerIndex--;
@@ -327,7 +339,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         mMainImageSwitcherIndicatorLayout.removeAllViews();
         for (int i = 0; i < mBannerImageArray.length; i++) {
 //            mIndicatorTextViews[i] = new TextView(getActivity());
-            mIndicatorTextViews[i] = new TextView(mMainActivity);
+            mIndicatorTextViews[i] = new TextView(getActivity());
             mIndicatorTextViews[i].setText(Html.fromHtml("&#8226;"));
             mIndicatorTextViews[i].setPadding(10, 0, 10, 0);
             mIndicatorTextViews[i].setTextSize(35);

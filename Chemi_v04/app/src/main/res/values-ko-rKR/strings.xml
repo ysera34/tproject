@@ -185,5 +185,37 @@
     <string name="slide_skip">넘기기</string>
     <string name="slide_start">시작</string>
 
+    <string-array name="analyze_request_category_parent">
+        <item>세탁</item>
+        <item>주방</item>
+        <item>욕실</item>
+    </string-array>
 
+    <string-array name="analyze_request_category_child0">
+        <item></item>
+    </string-array>
+
+    <string-array name="analyze_request_category_child1">
+        <item></item>
+    </string-array>
+
+    <string-array name="analyze_request_category_child2">
+        <item></item>
+    </string-array>
+
+    <string-array name="analyze_request_category_child3">
+        <item></item>
+    </string-array>
+
+    <string-array name="analyze_request_category_child4">
+        <item></item>
+    </string-array>
+
+    <string-array name="analyze_request_category_child5">
+        <item></item>
+    </string-array>
+
+    <string-array name="analyze_request_category_child6">
+        <item></item>
+    </string-array>
 </resources>

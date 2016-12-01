@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
+import android.view.View;
 
 import com.tacademy.v04.chemi.R;
 import com.tacademy.v04.chemi.view.activity.AppNavigationActivity;
@@ -26,6 +27,7 @@ public class CustomSearchActivity extends AppNavigationActivity {
         super.onCreate(savedInstanceState);
 
         setTitle(R.string.fragment_title_custom_search);
+        mFloatingActionButton.setVisibility(View.GONE);
 
         FragmentManager fm = getSupportFragmentManager();
         containerFragment = fm.findFragmentById(R.id.fragment_container);
