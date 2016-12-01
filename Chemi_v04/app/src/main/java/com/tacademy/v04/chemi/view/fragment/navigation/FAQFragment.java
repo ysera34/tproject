@@ -94,4 +94,5 @@ public class FAQFragment extends Fragment {
         mBodyDataMap.put(mHeaderDataList.get(5), body6);
         mBodyDataMap.put(mHeaderDataList.get(6), body7);
     }
+
 }

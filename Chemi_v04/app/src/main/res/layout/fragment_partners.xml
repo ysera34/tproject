@@ -21,6 +21,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="71dp"
+        android:orientation="vertical"
         android:gravity="center"
         android:layout_marginBottom="30dp">
 
@@ -28,7 +29,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="함께 만들어가는 케미!\n제휴를 원하시는 경우,\n아래 주소로 연락주세요."/>
+            android:text="함께 만들어가는 케미!"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="제휴를 원하시는 경우,"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:text="아래 주소로 연락주세요."/>
+
     </LinearLayout>
 
     <LinearLayout

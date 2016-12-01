@@ -52,6 +52,8 @@
     <color name="main_image_switcher_indicator_inactive_color">#7fffffff</color>
     <color name="main_image_switcher_indicator_active_color">#ffffff</color>
 
+    <color name="intro_view_pager_indicator_inactive_color">#d8d8d8</color>
+    <color name="intro_view_pager_indicator_active_color">#a4ca5a</color>
 
     <color name="coral_candy">#F5C9C8</color>
     <color name="colorSplashStart">#d7df23</color>

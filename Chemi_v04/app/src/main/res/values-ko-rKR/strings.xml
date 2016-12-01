@@ -174,4 +174,16 @@
     <string name="faq_body_6">정답은 1번입니다.</string>
     <string name="faq_body_7">정답은 1번입니다.</string>
 
+    <string name="slide_title_11">상품명과 브랜드 명으로</string>
+    <string name="slide_title_12">쉽게 성분 검색.</string>
+    <string name="slide_title_21">현명한 소비자를 위한</string>
+    <string name="slide_title_22">생생한 컨텐츠.</string>
+    <string name="slide_title_31">나와 비슷한 체질을</string>
+    <string name="slide_title_32">가진 사람의 선택을 확인.</string>
+
+    <string name="slide_next">다음</string>
+    <string name="slide_skip">넘기기</string>
+    <string name="slide_start">시작</string>
+
+
 </resources>
