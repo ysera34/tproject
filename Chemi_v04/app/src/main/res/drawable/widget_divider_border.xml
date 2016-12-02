@@ -8,16 +8,16 @@
         <!--</shape>-->
     <!--</item>-->
 
-    <!--<item-->
-        <!--android:gravity="top"-->
-        <!--android:height="1dp">-->
-        <!--<shape-->
-            <!--android:shape="line" >-->
-            <!--<stroke-->
-                <!--android:width="0.5dp"-->
-                <!--android:color="#000000" />-->
-        <!--</shape>-->
-    <!--</item>-->
+    <item
+        android:gravity="top"
+        android:height="1dp">
+        <shape
+            android:shape="line" >
+            <stroke
+                android:width="0.5dp"
+                android:color="#eeeeee" />
+        </shape>
+    </item>
     <!--<item-->
         <!--android:gravity="bottom"-->
         <!--android:height="4dp"-->
