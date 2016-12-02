@@ -40,7 +40,7 @@ public class ContentActivity extends AppNavigationActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mFloatingActionButton.setVisibility(View.GONEgit );
+        mFloatingActionButton.setVisibility(View.GONE);
 
         mContentType = getIntent().getIntExtra(EXTRA_CONTENT_TYPE, 0);
         Log.i(TAG, "mContentType : " + mContentType);
