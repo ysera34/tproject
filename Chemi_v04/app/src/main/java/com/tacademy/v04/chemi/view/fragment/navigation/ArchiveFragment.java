@@ -18,7 +18,7 @@ import java.util.ArrayList;
 /**
  * Created by yoon on 2016. 11. 14..
  * flows from Navigation Drawer menu Button
- * User's Archive, Storage : ViewPager (ArchiveContentListFragment, ArchiveProductListFragment)
+ * User's Archive, Storage : ViewPager (ArchiveContentTabFragment, ArchiveProductListFragment)
  */
 
 public class ArchiveFragment extends Fragment {
@@ -48,7 +48,7 @@ public class ArchiveFragment extends Fragment {
         addArchiveFragment(
                 ArchiveProductListFragment.newInstance(), getString(R.string.archive_product_tab_title));
         addArchiveFragment(
-                ArchiveContentListFragment.newInstance(), getString(R.string.archive_content_tab_title));
+                ArchiveContentTabFragment.newInstance(), getString(R.string.archive_content_tab_title));
     }
 
     @Nullable

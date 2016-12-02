@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
+import android.view.View;
 
 import com.tacademy.v04.chemi.R;
 import com.tacademy.v04.chemi.view.activity.AppNavigationActivity;
@@ -38,6 +39,8 @@ public class ContentActivity extends AppNavigationActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        mFloatingActionButton.setVisibility(View.GONEgit );
 
         mContentType = getIntent().getIntExtra(EXTRA_CONTENT_TYPE, 0);
         Log.i(TAG, "mContentType : " + mContentType);

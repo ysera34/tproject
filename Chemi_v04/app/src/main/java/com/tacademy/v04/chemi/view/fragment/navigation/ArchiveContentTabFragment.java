@@ -1,4 +1,4 @@
-package com.tacademy.v04.chemi.view.fragment.content;
+package com.tacademy.v04.chemi.view.fragment.navigation;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,16 +11,17 @@ import com.tacademy.v04.chemi.R;
 
 /**
  * Created by yoon on 2016. 11. 14..
+ * ChildFragment of ArchiveFragment
  */
 
-public class ContentListFragment extends Fragment {
+public class ArchiveContentTabFragment extends Fragment {
 
-    public ContentListFragment() {
+    public ArchiveContentTabFragment() {
     }
 
-    public static ContentListFragment newInstance() {
+    public static ArchiveContentTabFragment newInstance() {
 
-        ContentListFragment fragment = new ContentListFragment();
+        ArchiveContentTabFragment fragment = new ArchiveContentTabFragment();
         return fragment;
     }
 
@@ -34,7 +35,7 @@ public class ContentListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 //        return super.onCreateView(inflater, container, savedInstanceState);
-        View view = inflater.inflate(R.layout.fragment_content_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_archive_content_tab, container, false);
         return view;
     }
 

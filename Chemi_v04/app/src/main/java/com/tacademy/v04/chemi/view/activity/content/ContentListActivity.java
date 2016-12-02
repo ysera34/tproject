@@ -9,7 +9,7 @@ import android.view.View;
 
 import com.tacademy.v04.chemi.R;
 import com.tacademy.v04.chemi.view.activity.AppNavigationActivity;
-import com.tacademy.v04.chemi.view.fragment.content.ContentListFragment;
+import com.tacademy.v04.chemi.view.fragment.content.ContentTabFragment;
 
 /**
  * Created by yoon on 2016. 11. 14..
@@ -33,7 +33,7 @@ public class ContentListActivity extends AppNavigationActivity {
         containerFragment = fm.findFragmentById(R.id.fragment_container);
 
         if (containerFragment == null) {
-            containerFragment = ContentListFragment.newInstance();
+            containerFragment = ContentTabFragment.newInstance();
             fm.beginTransaction()
                     .add(R.id.fragment_container, containerFragment)
                     .commit();
