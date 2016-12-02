@@ -12,6 +12,7 @@
     <color name="colorFontEquivalent">#000000</color>
     <color name="colorFontRest">#9e9e9e</color>
     <color name="colorFontHeader">#000000</color>
+    <color name="colorFontBlack">#000000</color>
     <color name="colorFontBody">#757575</color>
     <color name="colorTransparent">@android:color/transparent</color>
     <color name="colorActionModeToolbar">#ffffff</color>
@@ -58,4 +59,6 @@
     <color name="coral_candy">#F5C9C8</color>
     <color name="colorSplashStart">#d7df23</color>
     <color name="colorSplashEnd">#32b9d4</color>
+
+    <color name="spinner_border">#bdbdbd</color>
 </resources>

@@ -166,13 +166,52 @@
         <item>@string/faq_body_7</item>
     </string-array>
 
-    <string name="faq_body_1">정답은 1번입니다.</string>
+    <string name="faq_body_1">정답은 1번입니다. 정답은 1번입니다. 정답은 1번입니다. 정답은 1번입니다. 정답은 1번입니다. 정답은 1번입니다. 정답은 1번입니다. 정답은 1번입니다. 정답은 1번입니다. 정답은 1번입니다. 정답은 1번입니다. </string>
     <string name="faq_body_2">정답은 1번입니다.</string>
     <string name="faq_body_3">정답은 1번입니다.</string>
     <string name="faq_body_4">정답은 1번입니다.</string>
     <string name="faq_body_5">정답은 1번입니다.</string>
     <string name="faq_body_6">정답은 1번입니다.</string>
     <string name="faq_body_7">정답은 1번입니다.</string>
+
+
+    <string-array name="notify_header_list">
+        <item>@string/notify_header_1</item>
+        <item>@string/notify_header_2</item>
+        <item>@string/notify_header_3</item>
+        <item>@string/notify_header_4</item>
+        <item>@string/notify_header_5</item>
+        <item>@string/notify_header_6</item>
+        <item>@string/notify_header_7</item>
+    </string-array>
+
+    <string name="notify_header_1">[안내] 성분 등록 요청 기능에 대한 안내</string>
+    <string name="notify_header_2">[안내] 리뷰 작성 기능에 대한 안내</string>
+    <string name="notify_header_3">[안내] 서버 안정화로 인한 접속 불가 시간 안내</string>
+    <string name="notify_header_4">[안내] 맞춤 검색 기능에 관한 안내</string>
+    <string name="notify_header_5">[안내] 제품 추천 컨텐츠에 대한 안내</string>
+    <string name="notify_header_6">[안내] 성분 분석 기준에 관한 안내</string>
+    <string name="notify_header_7">[안내] 성분 등록 요청 기능에 대한 안내</string>
+
+    <string-array name="notify_body_list">
+        <item>@string/notify_body_1</item>
+        <item>@string/notify_body_2</item>
+        <item>@string/notify_body_3</item>
+        <item>@string/notify_body_4</item>
+        <item>@string/notify_body_5</item>
+        <item>@string/notify_body_6</item>
+        <item>@string/notify_body_7</item>
+    </string-array>
+
+    <string name="notify_body_1">노티정답은 1번입니다. 정답은 1번입니다. 정답은 1번입니다. 정답은 1번입니다. 정답은 1번입니다. 정답은 1번입니다. 정답은 1번입니다. 정답은 1번입니다. 정답은 1번입니다. 정답은 1번입니다. 정답은 1번입니다. </string>
+    <string name="notify_body_2">노티정답은 1번입니다.</string>
+    <string name="notify_body_3">노티정답은 1번입니다.</string>
+    <string name="notify_body_4">노티정답은 1번입니다.</string>
+    <string name="notify_body_5">노티정답은 1번입니다.</string>
+    <string name="notify_body_6">노티정답은 1번입니다.</string>
+    <string name="notify_body_7">노티정답은 1번입니다.</string>
+
+
 
     <string name="slide_title_11">상품명과 브랜드 명으로</string>
     <string name="slide_title_12">쉽게 성분 검색.</string>
@@ -185,37 +224,62 @@
     <string name="slide_skip">넘기기</string>
     <string name="slide_start">시작</string>
 
-    <string-array name="analyze_request_category_parent">
+    <string-array name="analyze_request_parent_category_array">
+        <item>상위 카테고리 선택</item>
         <item>세탁</item>
         <item>주방</item>
         <item>욕실</item>
+        <item>방향 / 청정</item>
+        <item>유아 / 아동</item>
+        <item>여성</item>
+        <item>기타</item>
     </string-array>
 
-    <string-array name="analyze_request_category_child0">
-        <item></item>
+    <string-array name="analyze_request_child_category_array1">
+        <item>하위 카테고리 선택</item>
+        <item>세탁세제</item>
+        <item>섬유유연제</item>
+        <item>표백제</item>
     </string-array>
 
-    <string-array name="analyze_request_category_child1">
-        <item></item>
+    <string-array name="analyze_request_child_category_array2">
+        <item>하위 카테고리 선택</item>
+        <item>주방세제</item>
+        <item>주방 세정제</item>
+        <item>식기 세척기용</item>
     </string-array>
 
-    <string-array name="analyze_request_category_child2">
-        <item></item>
+    <string-array name="analyze_request_child_category_array3">
+        <item>하위 카테고리 선택</item>
+        <item>헤어</item>
+        <item>바디 / 세안</item>
+        <item>욕실 세정제</item>
     </string-array>
 
-    <string-array name="analyze_request_category_child3">
-        <item></item>
+    <string-array name="analyze_request_child_category_array4">
+        <item>하위 카테고리 선택</item>
+        <item>섬유 탈취제</item>
+        <item>방향제</item>
     </string-array>
 
-    <string-array name="analyze_request_category_child4">
-        <item></item>
+    <string-array name="analyze_request_child_category_array5">
+        <item>하위 카테고리 선택</item>
+        <item>유아용 기저귀</item>
+        <item>유아용 물티슈</item>
     </string-array>
 
-    <string-array name="analyze_request_category_child5">
-        <item></item>
+    <string-array name="analyze_request_child_category_array6">
+        <item>하위 카테고리 선택</item>
+        <item>생리대</item>
+        <item>여성 청결제</item>
+        <item>성인용 기저귀</item>
     </string-array>
 
-    <string-array name="analyze_request_category_child6">
-        <item></item>
+    <string-array name="analyze_request_child_category_array7">
+        <item>하위 카테고리 선택</item>
+        <item>물티슈</item>
+        <item>렌즈 세척액</item>
+        <item>콘돔</item>
     </string-array>
+
 </resources>

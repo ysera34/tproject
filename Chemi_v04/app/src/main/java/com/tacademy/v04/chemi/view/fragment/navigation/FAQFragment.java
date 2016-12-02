@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ExpandableListView;
 
 import com.tacademy.v04.chemi.R;
-import com.tacademy.v04.chemi.common.util.adapter.ExpandableListAdapter;
+import com.tacademy.v04.chemi.common.util.adapter.FAQExpandableListAdapter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,10 +23,10 @@ import java.util.HashMap;
 
 public class FAQFragment extends Fragment {
 
-    private ExpandableListAdapter mExpandableListAdapter;
-    private ExpandableListView mExpandableListView;
-    private ArrayList<String> mHeaderDataList;
-    private HashMap<String, ArrayList<String>> mBodyDataMap;
+    private FAQExpandableListAdapter mFAQExpandableListAdapter;
+    private ExpandableListView mFAQExpandableListView;
+    private ArrayList<String> mFAQHeaderDataList;
+    private HashMap<String, ArrayList<String>> mFAQBodyDataMap;
 
     public FAQFragment() {
     }
@@ -41,8 +41,8 @@ public class FAQFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
-        mHeaderDataList = new ArrayList<>();
-        mBodyDataMap = new HashMap<>();
+        mFAQHeaderDataList = new ArrayList<>();
+        mFAQBodyDataMap = new HashMap<>();
     }
 
     @Nullable
@@ -51,12 +51,12 @@ public class FAQFragment extends Fragment {
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 //        return super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_faq, container, false);
-        mExpandableListView = (ExpandableListView) view.findViewById(R.id.faq_expandable_list_view);
+        mFAQExpandableListView = (ExpandableListView) view.findViewById(R.id.faq_expandable_list_view);
 
         setupFAQData();
 
-        mExpandableListAdapter = new ExpandableListAdapter(getActivity(), mHeaderDataList, mBodyDataMap);
-        mExpandableListView.setAdapter(mExpandableListAdapter);
+        mFAQExpandableListAdapter = new FAQExpandableListAdapter(getActivity(), mFAQHeaderDataList, mFAQBodyDataMap);
+        mFAQExpandableListView.setAdapter(mFAQExpandableListAdapter);
 
         return view;
     }
@@ -71,7 +71,7 @@ public class FAQFragment extends Fragment {
         String[] bodyTextArr = getResources().getStringArray(R.array.faq_body_list);
 
         for (int i = 0; i < headerTextArr.length; i++) {
-            mHeaderDataList.add(headerTextArr[i]);
+            mFAQHeaderDataList.add(headerTextArr[i]);
         }
 
         ArrayList<String> body1 = new ArrayList<>();
@@ -89,13 +89,13 @@ public class FAQFragment extends Fragment {
         ArrayList<String> body7 = new ArrayList<>();
         body7.add(bodyTextArr[6]);
 
-        mBodyDataMap.put(mHeaderDataList.get(0), body1);
-        mBodyDataMap.put(mHeaderDataList.get(1), body2);
-        mBodyDataMap.put(mHeaderDataList.get(2), body3);
-        mBodyDataMap.put(mHeaderDataList.get(3), body4);
-        mBodyDataMap.put(mHeaderDataList.get(4), body5);
-        mBodyDataMap.put(mHeaderDataList.get(5), body6);
-        mBodyDataMap.put(mHeaderDataList.get(6), body7);
+        mFAQBodyDataMap.put(mFAQHeaderDataList.get(0), body1);
+        mFAQBodyDataMap.put(mFAQHeaderDataList.get(1), body2);
+        mFAQBodyDataMap.put(mFAQHeaderDataList.get(2), body3);
+        mFAQBodyDataMap.put(mFAQHeaderDataList.get(3), body4);
+        mFAQBodyDataMap.put(mFAQHeaderDataList.get(4), body5);
+        mFAQBodyDataMap.put(mFAQHeaderDataList.get(5), body6);
+        mFAQBodyDataMap.put(mFAQHeaderDataList.get(6), body7);
     }
 
     @Override

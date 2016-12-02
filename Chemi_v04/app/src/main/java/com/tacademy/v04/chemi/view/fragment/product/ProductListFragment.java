@@ -23,7 +23,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.bumptech.glide.Glide;
 import com.tacademy.v04.chemi.R;
 import com.tacademy.v04.chemi.common.network.Parser;
 import com.tacademy.v04.chemi.model.Product;
@@ -36,7 +35,6 @@ import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Random;
 
 import static com.tacademy.v04.chemi.common.Common.CATEGORY_DEFAULT_VALUE;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.Product.PATH;
@@ -313,7 +311,8 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
 
         public void bindProduct(Product product) {
             mProduct = product;
-            mProductImageView.setImageDrawable(getResources().getDrawable(R.drawable.unloaded_image_holder));
+//            mProductImageView.setImageDrawable(getResources().getDrawable(R.drawable.unloaded_image_holder));
+            mProductImageView.setImageResource(R.drawable.product3);
             mProductBrandTextView.setText(getString(
                     R.string.product_brand_name_format, mProduct.getBrand()));
             mProductTitleTextView.setText(mProduct.getName());
@@ -330,15 +329,15 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
                     "http://lorempixel.com/500/500/city/",
                     "http://lorempixel.com/500/500/technics/",
             };
-            Glide.with(getActivity())
-                    .load(imagePath[new Random().nextInt(5)])
-                    .placeholder(R.drawable.unloaded_image_holder)
-                    .error(R.drawable.unloaded_image_holder)
-                    .crossFade()
-                    .animate(R.anim.slide_in_left)
-                    .override(300, 200)
-                    .centerCrop()
-                    .into(mProductImageView);
+//            Glide.with(getActivity())
+//                    .load(imagePath[new Random().nextInt(5)])
+//                    .placeholder(R.drawable.unloaded_image_holder)
+//                    .error(R.drawable.unloaded_image_holder)
+//                    .crossFade()
+//                    .animate(R.anim.slide_in_left)
+//                    .override(300, 200)
+//                    .centerCrop()
+//                    .into(mProductImageView);
 
 //            Glide.with(getActivity()).load("Image Path")
 //                    .thumbnail(0.5f)

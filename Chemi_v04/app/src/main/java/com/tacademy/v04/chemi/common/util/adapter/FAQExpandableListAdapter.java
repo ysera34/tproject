@@ -16,14 +16,14 @@ import java.util.HashMap;
  * Created by yoon on 2016. 12. 2..
  */
 
-public class ExpandableListAdapter extends BaseExpandableListAdapter {
+public class FAQExpandableListAdapter extends BaseExpandableListAdapter {
 
     private Context mContext;
     private ArrayList<String> mHeaderDataList;
     private HashMap<String, ArrayList<String>> mBodyDataMap;
 
-    public ExpandableListAdapter(Context context, ArrayList<String> headerDataList,
-                                 HashMap<String, ArrayList<String>> bodyDataMap) {
+    public FAQExpandableListAdapter(Context context, ArrayList<String> headerDataList,
+                                    HashMap<String, ArrayList<String>> bodyDataMap) {
         mContext = context;
         mHeaderDataList = headerDataList;
         mBodyDataMap = bodyDataMap;

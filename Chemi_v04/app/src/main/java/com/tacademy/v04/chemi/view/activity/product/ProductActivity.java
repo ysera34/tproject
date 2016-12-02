@@ -13,7 +13,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.Window;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -23,7 +22,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.bumptech.glide.Glide;
 import com.tacademy.v04.chemi.R;
 import com.tacademy.v04.chemi.common.network.Parser;
 import com.tacademy.v04.chemi.model.Product;
@@ -120,7 +118,7 @@ public class ProductActivity extends AppBaseActivity {
         mProductBrandTextView = (TextView) findViewById(R.id.product_brand_text_view);
         mProductReviewRatingBar = (RatingBar) findViewById(R.id.product_ratingBar);
         mProductReviewRatingValue = (TextView) findViewById(R.id.product_rating_value_text_view);
-        mProductPriceTextView = (TextView) findViewById(R.id.product_price_text_view);
+//        mProductPriceTextView = (TextView) findViewById(R.id.product_price_text_view);
 
         mProductImageView.setImageDrawable(getResources().getDrawable(R.drawable.unloaded_image_holder));
     }
@@ -136,17 +134,16 @@ public class ProductActivity extends AppBaseActivity {
     private void bindProduct(Product product) {
         mProductBrandTextView.setText(product.getBrand());
         mProductReviewRatingBar.setRating(product.getRatingAvg());
-        mProductReviewRatingValue.setText(getString(
-                R.string.product_rating_value_format, String.valueOf(product.getRatingAvg())));
+        mProductReviewRatingValue.setText(String.valueOf(product.getRatingAvg()));
 //        mProductPriceTextView.setText();
-//        mProductImageView
-        Glide.with(getApplicationContext())
-                .load("http://lorempixel.com/600/400/sports/")
-                .placeholder(R.drawable.unloaded_image_holder)
-                .error(R.drawable.unloaded_image_holder)
-                .override(500, 400)
-                .centerCrop()
-                .into(mProductImageView);
+        mProductImageView.setImageResource(R.drawable.product3);
+//        Glide.with(getApplicationContext())
+//                .load("http://lorempixel.com/600/400/sports/")
+//                .placeholder(R.drawable.unloaded_image_holder)
+//                .error(R.drawable.unloaded_image_holder)
+//                .override(500, 400)
+//                .centerCrop()
+//                .into(mProductImageView);
 
     }
 

@@ -4,18 +4,14 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingStart="16dp"
-    android:paddingEnd="16dp"
-    android:paddingTop="27dp"
-    android:paddingBottom="27dp"
-    android:background="@color/colorWhiteBackground">
+    android:padding="16dp">
 
     <TextView
-        android:id="@+id/list_item_faq_header_text_view"
+        android:id="@+id/list_item_notify_body_text_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:textSize="16sp"
-        android:textColor="@color/colorFontHeader"/>
+        android:textColor="@color/colorFontBody"/>
 
 </LinearLayout>
