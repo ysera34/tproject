@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:card_view="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/list_item_search_log_card_view"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="142dp"
+        android:layout_marginBottom="8dp"
+        card_view:contentPadding="5dp">
+        <!--card_view:cardCornerRadius="2dp"-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            
+            <LinearLayout
+                android:id="@+id/list_item_search_log_card_view_header"
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:background="@drawable/widget_bottom_border">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:padding="16dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="유아용 물티슈"
+                        android:textSize="16sp"
+                        android:textColor="@color/colorFontBlack"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center_vertical"
+                    android:paddingStart="22dp"
+                    android:paddingEnd="22dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="검색 날짜 : 2016. 11. 11"
+                        android:textSize="12sp"
+                        android:textColor="@color/colorFontRest"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/list_item_search_log_card_view_body"
+                android:layout_width="match_parent"
+                android:layout_height="95dp">
+
+                <LinearLayout
+                    android:id="@+id/list_item_review_card_user_info_layout"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center_vertical"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="체질"
+                        android:textSize="14sp"
+                        android:textColor="@color/colorFontBody"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:text="포함할 성분"
+                        android:textSize="14sp"
+                        android:textColor="@color/colorFontBody"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="제외할 성분"
+                        android:textSize="14sp"
+                        android:textColor="@color/colorFontBody"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:orientation="vertical"
+                    android:gravity="center_vertical"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="알러지, 아토피"
+                        android:maxLines="1"
+                        android:textSize="14sp"
+                        android:textColor="@color/colorFontBody"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:text="알로에 베라잎즙 천연유기농"
+                        android:maxLines="1"
+                        android:textSize="14sp"
+                        android:textColor="@color/colorFontBody"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="테트라소듐이디티에이"
+                        android:maxLines="1"
+                        android:textSize="14sp"
+                        android:textColor="@color/colorFontBody"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>
