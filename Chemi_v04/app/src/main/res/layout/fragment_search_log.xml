@@ -8,6 +8,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:text="fragment_custom_search_log"/>
+        android:text="fragment_search_log"/>
 
 </LinearLayout>

@@ -307,6 +307,9 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         if ((menu.findItem(R.id.action_delete)) != null) {
             menu.findItem(R.id.action_delete).setVisible(false);
         }
+        if ((menu.findItem(R.id.action_home)) != null) {
+            menu.findItem(R.id.action_home).setVisible(false);
+        }
 //        menu.findItem(R.id.action_search).setVisible(false);
 //        menu.findItem(R.id.action_home).setVisible(false);
 //        getActivity().getMenuInflater().inflate(R.menu.menu_toolbar, menu);

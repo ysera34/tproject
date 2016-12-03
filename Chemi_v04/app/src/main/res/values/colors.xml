@@ -16,6 +16,7 @@
     <color name="colorFontBody">#757575</color>
     <color name="colorTransparent">@android:color/transparent</color>
     <color name="colorActionModeToolbar">#ffffff</color>
+    <color name="colorSettingButtonText">#9d9d9d</color>
 
     <color name="colorPrimary_searchActivity">#dedede</color>
     <color name="colorPrimaryDark_searchActivity">#9b9b9b</color>

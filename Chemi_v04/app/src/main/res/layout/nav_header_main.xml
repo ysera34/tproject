@@ -18,8 +18,8 @@
         android:layout_weight="0.5"
         android:paddingTop="25dp"
         android:paddingStart="25dp"
-        android:background="@color/colorWhiteBackground">
-
+        android:background="@drawable/widget_divider_border">
+        <!--android:background="@color/colorWhiteBackground"-->
         <ImageView
             android:id="@+id/nav_header_user_image_view"
             android:layout_width="80dp"
@@ -75,9 +75,8 @@
         android:paddingStart="25dp"
         android:paddingEnd="25dp"
         android:gravity="center"
-        android:background="@color/colorWhiteBackground">
-        <!--android:background="@drawable/drawer_bottom_border"-->
-
+        android:background="@drawable/drawer_top_bottom_border">
+        <!--android:background="@color/colorWhiteBackground">-->
         <TextView
             android:layout_width="75dp"
             android:layout_height="match_parent"/>

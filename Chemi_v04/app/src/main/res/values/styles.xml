@@ -104,6 +104,24 @@
         <!--<item name="android:textSize">17sp</item>-->
     <!--</style>-->
 
+    <style name="ArchiveSubTabLayoutTheme" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="colorPrimary">@android:color/transparent</item>
+        <item name="colorAccent">@color/colorPrimary</item>
+
+
+    </style>
+
+    <style name="ArchiveSubTabLayoutTextStyle" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="android:textSize">15sp</item>
+        <!--<item name="android:textAllCaps">true</item>-->
+    </style>
+
+    <style name="ArchiveSubTabLayoutStyle" parent="Widget.Design.TabLayout">
+        <item name="tabPaddingStart">5dp</item>
+        <item name="tabPaddingEnd">5dp</item>
+        <item name="tabBackground">@drawable/archive_tab_border_small</item>
+    </style>
+
     <style name="NavigationTheme" parent="AppTheme">
         <item name="android:textSize">14sp</item>
         <!--<item  name="android:textStyle">bold</item>-->

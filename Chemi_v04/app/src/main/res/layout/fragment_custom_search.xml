@@ -1,13 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
 
-    <TextView
+    <RelativeLayout
+        android:id="@+id/custom_search_setting_button_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="fragment_custom_search"/>
+        android:layout_height="27dp"
+        android:layout_marginBottom="16dp">
 
-</LinearLayout>
+        <Button
+            android:id="@+id/custom_search_load_log_button"
+            android:layout_width="55dp"
+            android:layout_height="27dp"
+            android:text="불러오기"
+            android:textSize="12sp"
+            android:textColor="@color/colorSettingButtonText"
+            android:layout_toStartOf="@+id/custom_search_reset_button"
+            android:background="@drawable/widget_square_border_spinner"/>
+
+        <Button
+            android:id="@+id/custom_search_reset_button"
+            android:layout_width="55dp"
+            android:layout_height="27dp"
+            android:text="초기화"
+            android:textSize="12sp"
+            android:textColor="@color/colorSettingButtonText"
+            android:layout_marginStart="6dp"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/widget_square_border_spinner" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/custom_search_category_button"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_below="@+id/custom_search_setting_button_layout"
+        android:paddingStart="50dp"
+        android:paddingEnd="50dp"
+        android:maxLines="1"
+        android:gravity="center_vertical"
+        android:text="모든 카테고리"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorFontBody"
+        android:background="@drawable/widget_square_border_spinner"/>
+
+    <Button
+        android:id="@+id/custom_search_constitution_button"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_below="@+id/custom_search_category_button"
+        android:paddingStart="50dp"
+        android:paddingEnd="50dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:maxLines="1"
+        android:gravity="center_vertical"
+        android:text="모든 체질"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorFontBody"
+        android:background="@drawable/widget_square_border_spinner" />
+
+    <Button
+        android:id="@+id/custom_search_chemical_button"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_below="@+id/custom_search_constitution_button"
+        android:paddingStart="50dp"
+        android:paddingEnd="50dp"
+        android:maxLines="1"
+        android:gravity="center_vertical"
+        android:text="모든 성분"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorFontBody"
+        android:background="@drawable/widget_square_border_spinner" />
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true">
+
+        <Button
+            android:id="@+id/custom_search_save_log_button"
+            android:layout_width="156dp"
+            android:layout_height="match_parent"
+            android:text="저장하기"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorAccent"
+            android:layout_alignParentStart="true"
+            android:background="@drawable/widget_square_border_submit"/>
+
+        <Button
+            android:id="@+id/custom_search_submit_button"
+            android:layout_width="156dp"
+            android:layout_height="match_parent"
+            android:text="검색하기"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorAccent"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/widget_square_border_submit"/>
+    </RelativeLayout>
+
+</RelativeLayout>

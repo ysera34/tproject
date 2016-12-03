@@ -29,7 +29,7 @@ import com.tacademy.v04.chemi.view.activity.product.SearchActivity;
 import com.tacademy.v04.chemi.view.fragment.navigation.AnalyzeRequestFragment;
 import com.tacademy.v04.chemi.view.fragment.navigation.ArchiveFragment;
 import com.tacademy.v04.chemi.view.fragment.navigation.ConfigureFragment;
-import com.tacademy.v04.chemi.view.fragment.navigation.CustomSearchLogFragment;
+import com.tacademy.v04.chemi.view.fragment.navigation.SearchLogFragment;
 import com.tacademy.v04.chemi.view.fragment.navigation.FAQFragment;
 import com.tacademy.v04.chemi.view.fragment.navigation.MainFragment;
 import com.tacademy.v04.chemi.view.fragment.navigation.NoticeFragment;
@@ -208,7 +208,7 @@ public class AppNavigationActivity extends AppBaseActivity implements
             fragment = ReviewLogFragment.newInstance();
 //            mToolbar.setTitle(R.string.fragment_title_reviews);
         } else if (id == R.id.nav_custom_search_log) {
-            fragment = CustomSearchLogFragment.newInstance();
+            fragment = SearchLogFragment.newInstance();
 //            mToolbar.setTitle(R.string.fragment_title_custom_search_log);
         } else if (id == R.id.nav_item_analyze_request) {
             fragment = AnalyzeRequestFragment.newInstance();
@@ -264,7 +264,7 @@ public class AppNavigationActivity extends AppBaseActivity implements
                     .replace(R.id.fragment_container, configureFragment).commit();
         } else if
                 (fragment instanceof ArchiveFragment || fragment instanceof ReviewLogFragment ||
-                fragment instanceof CustomSearchLogFragment || fragment instanceof AnalyzeRequestFragment ||
+                fragment instanceof SearchLogFragment || fragment instanceof AnalyzeRequestFragment ||
                 fragment instanceof NoticeFragment || fragment instanceof FAQFragment ||
                 fragment instanceof ConfigureFragment) {
             fm.beginTransaction()

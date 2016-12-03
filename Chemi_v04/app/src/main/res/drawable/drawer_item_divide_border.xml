@@ -14,10 +14,7 @@
                 android:width="1dp"
                 android:color="@color/colorBackground" />
         </shape>
-        <!--
-        android:dashGap="10px"
-                android:dashWidth="10px"
-                -->
+
     </item>
 
 </layer-list>

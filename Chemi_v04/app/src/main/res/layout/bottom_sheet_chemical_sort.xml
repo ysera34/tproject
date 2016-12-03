@@ -5,14 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/bottom_sheet_product_sort_height"
     android:orientation="vertical"
-    android:padding="25dp"
+    android:padding="30dp"
     app:layout_behavior="@string/bottom_sheet_behavior"
     app:behavior_hideable="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp">
+        android:layout_height="wrap_content">
 
     </RelativeLayout>
 

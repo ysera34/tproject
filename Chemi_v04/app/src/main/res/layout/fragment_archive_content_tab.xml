@@ -10,25 +10,37 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <android.support.design.widget.TabLayout
-            android:id="@+id/archive_content_tabLayout"
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="@style/ChemiTabLayoutTheme"
-            app:tabTextAppearance="@style/ChemiTabLayoutTextStyle"
-            app:tabGravity="fill"
-            app:tabMode="fixed"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            app:tabTextColor="@color/tabLayout_unselected_text_color"
-            app:tabSelectedTextColor="@color/tabLayout_selected_text_color" />
+            android:layout_height="20dp"/>
 
-        <!--android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"-->
-        <!--app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"-->
+            <android.support.design.widget.TabLayout
+                android:id="@+id/archive_content_tabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="?attr/colorPrimary"
+                android:theme="@style/ArchiveSubTabLayoutTheme"
+                app:tabTextAppearance="@style/ArchiveSubTabLayoutTextStyle"
+                style="@style/ArchiveSubTabLayoutStyle"
+                app:tabMaxWidth="80dp"
+                app:tabIndicatorHeight="0dp"
+                app:tabGravity="center"
+                app:tabMode="fixed"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                app:tabTextColor="@color/tabLayout_unselected_text_color"
+                app:tabSelectedTextColor="@color/tabLayout_selected_text_color"/>
+
+            <!--android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"-->
+            <!--app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"-->
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"/>
+
         <android.support.v4.view.ViewPager
             android:id="@+id/archive_content_view_pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+
     </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>

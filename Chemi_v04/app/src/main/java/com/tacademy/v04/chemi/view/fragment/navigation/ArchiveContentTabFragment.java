@@ -48,7 +48,6 @@ public class ArchiveContentTabFragment extends Fragment {
         addArchiveContentListFragment(ArchiveContentT3ListFragment.newInstance(3), "생활 정보");
     }
 
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -78,9 +77,28 @@ public class ArchiveContentTabFragment extends Fragment {
 //                return super.getPageTitle(position);
                 return mArchiveContentFragmentsTitles.get(position);
             }
+
+
         });
 
         mArchiveContentTabLayout.setupWithViewPager(mArchiveContentViewPager);
+        mArchiveContentTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
 
         return view;
     }
@@ -94,5 +112,7 @@ public class ArchiveContentTabFragment extends Fragment {
         mArchiveContentListFragments.add(fragment);
         mArchiveContentFragmentsTitles.add(title);
     }
+
+
 
 }
