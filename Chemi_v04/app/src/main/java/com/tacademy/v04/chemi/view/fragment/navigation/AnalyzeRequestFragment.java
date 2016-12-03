@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -25,6 +26,7 @@ import java.util.ArrayList;
 
 public class AnalyzeRequestFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
+    private ScrollView mAnalyzeRequestScrollView;
     private Spinner mParentSpinner;
     private Spinner mChildSpinner;
     private ArrayList<ArrayList<String>> mChildSpinnerDataList;
@@ -83,6 +85,9 @@ public class AnalyzeRequestFragment extends Fragment implements AdapterView.OnIt
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 //        return super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_analyze_request, container, false);
+
+        mAnalyzeRequestScrollView = (ScrollView) view.findViewById(R.id.analyze_request_scroll_view);
+        mAnalyzeRequestScrollView.setVerticalScrollBarEnabled(false);
         mParentSpinner = (Spinner) view.findViewById(R.id.analyze_parent_category_spinner);
         mParentSpinner.setAdapter(mParentDataAdapter);
         mParentSpinner.setOnItemSelectedListener(this);
