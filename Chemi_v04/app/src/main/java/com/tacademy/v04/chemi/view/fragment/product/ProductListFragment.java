@@ -107,11 +107,11 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
         if (getArguments() != null) {
             mCategoryId = getArguments().getInt(
                     ARG_CATEGORY_ID, CATEGORY_DEFAULT_VALUE);
-            Log.d(TAG, "mCategoryId : " + mCategoryId);
+            Log.d(TAG, "onCreate() mCategoryId : " + mCategoryId);
 
             mProductId = getArguments().getLong(
                     ARG_PRODUCT_ID, PRODUCT_DEFAULT_VALUE);
-            Log.d(TAG, "mProductId : " + mProductId);
+            Log.d(TAG, "onCreate() mProductId : " + mProductId);
         }
     }
 
@@ -211,10 +211,7 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
                 // category product
 
                 if (mProductId > 0) {
-                    Toast.makeText(getActivity(), "mProductId > 0", Toast.LENGTH_SHORT).show();
-                    Log.d(TAG + " productId : ", String.valueOf(mProductId));
                     mProducts = mProductStorage.getProduct(mProductId);
-                    Log.e(TAG + " size : ", "" +mProducts.size());
                     mProductAdapter.addItems(mProducts);
                     mProductAdapter.notifyDataSetChanged();
                     mProductTotalTextView.setText(String.valueOf(mProductAdapter.getItemCount()));

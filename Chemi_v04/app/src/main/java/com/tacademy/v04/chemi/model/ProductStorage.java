@@ -70,8 +70,6 @@ public class ProductStorage {
     public ArrayList<Product> getProduct(long productId) {
 
         int intProductId = (int) productId;
-        Log.e("xvzxcvzcxv", String.valueOf(mProducts.size()));
-        Log.e("dfsdfsdfsdfs" , String.valueOf(intProductId));
         ArrayList<Product> products = new ArrayList<>();
         for (Product product : mProducts) {
             if (product.getProductId()==intProductId) {

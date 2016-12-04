@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -24,7 +25,8 @@ import com.tacademy.v04.chemi.common.util.manager.PreferenceManager;
  * Created by yoon on 2016. 12. 2..
  */
 
-public class IntroActivity extends AppBaseActivity implements View.OnClickListener {
+public class IntroActivity extends AppBaseActivity
+        implements View.OnClickListener, ViewPager.OnPageChangeListener {
 
     private ViewPager mIntroViewPager;
     private IntroViewPagerAdapter mIntroViewPagerAdapter;
@@ -34,6 +36,11 @@ public class IntroActivity extends AppBaseActivity implements View.OnClickListen
     private Button mSkipButton;
     private Button mNextButton;
     private PreferenceManager mPreferenceManager;
+
+    private int mDotsCount;
+    private ImageView[] mDotsImageView;
+    protected View mView;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -64,11 +71,13 @@ public class IntroActivity extends AppBaseActivity implements View.OnClickListen
                 R.layout.view_intro_slider1, R.layout.view_intro_slider2, R.layout.view_intro_slider3,};
 
         indicateViewPager(0);
+//        setPageViewController();
         changeStatusBarColor();
 
         mIntroViewPagerAdapter = new IntroViewPagerAdapter();
         mIntroViewPager.setAdapter(mIntroViewPagerAdapter);
         mIntroViewPager.addOnPageChangeListener(viewPagerPageChangeListener);
+//        mIntroViewPager.setOnPageChangeListener(this);
     }
 
     @Override
@@ -90,6 +99,56 @@ public class IntroActivity extends AppBaseActivity implements View.OnClickListen
                 }
                 break;
         }
+    }
+
+    private void setPageViewController() {
+
+        mDotsCount = mIntroViewPagerAdapter.getCount();
+        mDotsImageView = new ImageView[mDotsCount];
+
+        for (int i = 0; i < mDotsCount; i++) {
+            mDotsImageView[i] = new ImageView(this);
+            mDotsImageView[i].setImageDrawable(getResources().getDrawable(
+                    R.drawable.intro_viewpager_indicator_unselected_item_dot));
+
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.WRAP_CONTENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT);
+
+            params.setMargins(4,0,4,0);
+            mIntroDotsLayout.addView(mDotsImageView[i], params);
+        }
+
+        mDotsImageView[0].setImageDrawable(getResources().getDrawable(
+                R.drawable.intro_viewpager_indicator_selected_item_dot));
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+        for (int i = 0; i < mDotsCount; i++) {
+            mDotsImageView[i].setImageDrawable(getResources().getDrawable(
+                    R.drawable.intro_viewpager_indicator_unselected_item_dot));
+        }
+        mDotsImageView[0].setImageDrawable(getResources().getDrawable(
+                R.drawable.intro_viewpager_indicator_selected_item_dot));
+
+        if (position + 1 == mDotsCount) {
+            mSkipButton.setVisibility(View.VISIBLE);
+            mNextButton.setVisibility(View.GONE);
+        } else {
+            mSkipButton.setVisibility(View.GONE);
+            mNextButton.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
     }
 
     private void indicateViewPager(int currentPage) {

@@ -35,7 +35,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.UUID;
 
-import static com.tacademy.v04.chemi.common.Common.REQUEST_REVIEW_FORM;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.Product.PATH;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.URL_HOST;
 
@@ -120,7 +119,8 @@ public class ReviewListFragment extends Fragment implements View.OnClickListener
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.product_detail_review_form_button :
-                Intent intent = ReviewActivity.newIntent(getActivity(), REQUEST_REVIEW_FORM);
+//                Intent intent = ReviewActivity.newIntent(getActivity(), REQUEST_REVIEW_FORM);
+                Intent intent = ReviewActivity.newIntent(getActivity(), mProduct.getProductId());
                 startActivity(intent);
                 break;
         }

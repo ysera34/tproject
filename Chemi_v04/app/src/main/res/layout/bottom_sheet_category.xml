@@ -22,7 +22,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="27dp"/>
-    
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="77dp"
@@ -43,13 +43,23 @@
             android:layout_height="32dp"
             android:gravity="center">
 
-            <Button
+            <TextView
                 android:id="@+id/bottom_sheet_category_section11"
                 android:text="세탁세제"
                 android:layout_width="100dp"
                 android:layout_height="30dp"
-                android:textColor="@color/colorFontBody"
+                android:gravity="center"
+                android:textColorHighlight="@color/bottom_sheet_button_clickable_text_color"
+                android:textColorLink="@color/bottom_sheet_button_clickable_text_color"
                 android:background="@drawable/selector_bottom_sheet_category_xml_section11"/>
+
+            <!--<Button-->
+                <!--android:id="@+id/bottom_sheet_category_section11"-->
+                <!--android:text="세탁세제"-->
+                <!--android:layout_width="100dp"-->
+                <!--android:layout_height="30dp"-->
+                <!--android:textColor="@color/colorFontBody"-->
+                <!--android:background="@drawable/selector_bottom_sheet_category_xml_section11"/>-->
 
             <!--<Button-->
                 <!--android:id="@+id/bottom_sheet_category_section11"-->

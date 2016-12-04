@@ -38,6 +38,7 @@
         android:layout_alignParentBottom="true"
         android:background="@null"
         android:text="@string/slide_skip"
+        android:textSize="16sp"
         android:textColor="@color/colorPrimaryFont"/>
 
     <Button
@@ -48,6 +49,7 @@
         android:layout_alignParentBottom="true"
         android:background="@null"
         android:text="@string/slide_next"
+        android:textSize="16sp"
         android:textColor="@color/colorPrimaryFont"/>
 
 </RelativeLayout>

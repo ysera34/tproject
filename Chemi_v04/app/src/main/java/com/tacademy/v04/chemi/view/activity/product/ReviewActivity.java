@@ -20,8 +20,6 @@ import com.tacademy.v04.chemi.view.fragment.product.ReviewFragment;
 
 import java.util.UUID;
 
-import static com.tacademy.v04.chemi.common.Common.REQUEST_REVIEW_FORM;
-
 /**
  * Created by yoon on 2016. 11. 22..
  */
@@ -30,18 +28,26 @@ public class ReviewActivity extends AppBaseActivity {
 
     private static final String EXTRA_REVIEW_ID = "com.tacademy.chemi.review_id";
     private static final String EXTRA_REVIEW_FORM = "com.tacademy.chemi.review_form";
+    private static final String EXTRA_PRODUCT_ID = "com.tacademy.chemi.product_id";
 
     private int requestId;
+    private int mProductId;
 
     private Toolbar mToolbar;
 
     private Review mReview;
 
-    public static Intent newIntent(Context packageContext, int fragmentRequestId) {
+    public static Intent newIntent(Context packageContext, int productId) {
         Intent intent = new Intent(packageContext, ReviewActivity.class);
-        intent.putExtra(EXTRA_REVIEW_FORM, fragmentRequestId);
+        intent.putExtra(EXTRA_PRODUCT_ID, productId);
         return intent;
     }
+
+//    public static Intent newIntent(Context packageContext, int fragmentRequestId) {
+//        Intent intent = new Intent(packageContext, ReviewActivity.class);
+//        intent.putExtra(EXTRA_REVIEW_FORM, fragmentRequestId);
+//        return intent;
+//    }
 
     public static Intent newIntent(Context packageContext, UUID reviewId) {
         Intent intent = new Intent(packageContext, ReviewActivity.class);
@@ -56,7 +62,9 @@ public class ReviewActivity extends AppBaseActivity {
 
         setTitle(R.string.title_activity_review);
 
-        requestId = getIntent().getIntExtra(EXTRA_REVIEW_FORM, 0);
+//        requestId = getIntent().getIntExtra(EXTRA_REVIEW_FORM, 0);
+
+        mProductId = getIntent().getIntExtra(EXTRA_PRODUCT_ID, 0);
 
         UUID reviewId = (UUID) getIntent().getSerializableExtra(EXTRA_REVIEW_ID);
         mReview = ReviewStorage.get(getApplicationContext()).getReview(reviewId);
@@ -64,13 +72,21 @@ public class ReviewActivity extends AppBaseActivity {
         FragmentManager fm = getSupportFragmentManager();
         Fragment fragment = fm.findFragmentById(R.id.fragment_review_container);
 
-        if (requestId > 0) {
-            if (requestId == REQUEST_REVIEW_FORM) {
-                fragment = ReviewFormFragment.newInstance();
-                fm.beginTransaction()
-                        .add(R.id.fragment_review_container, fragment)
-                        .commit();
-            }
+
+//         if (requestId > 0) {
+//            if (requestId == REQUEST_REVIEW_FORM) {
+//                fragment = ReviewFormFragment.newInstance();
+//                fm.beginTransaction()
+//                        .add(R.id.fragment_review_container, fragment)
+//                        .commit();
+//            }
+//        }
+
+        if (mProductId > 0) {
+            fragment = ReviewFormFragment.newInstance(mProductId);
+            fm.beginTransaction()
+                    .add(R.id.fragment_review_container, fragment)
+                    .commit();
         } else {
             if (fragment == null) {
                 fragment = ReviewFragment.newInstance(reviewId);

@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
  * Created by yoon on 2016. 12. 4..
  */
 
-public class UTF8Encoder {
+public class URIEncoder {
 
     private static Pattern HANGLE_PATTERN = Pattern.compile("[\\x{ac00}-\\x{d7af}]");
 
@@ -20,7 +20,7 @@ public class UTF8Encoder {
             String group = matcher.group();
 
             try {
-                input = input.replace(group, URLEncoder.encode(group, "UTF-8"));
+                input = input.replace(group, java.net.URLEncoder.encode(group, "UTF-8"));
 
             } catch (UnsupportedEncodingException e) {
 

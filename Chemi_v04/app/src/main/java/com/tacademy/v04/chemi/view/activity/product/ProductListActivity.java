@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.View;
 
 import com.tacademy.v04.chemi.R;
@@ -60,7 +59,7 @@ public class ProductListActivity extends AppNavigationActivity {
 
         mCategoryId = getIntent().getIntExtra(EXTRA_CATEGORY_ID, CATEGORY_DEFAULT_VALUE);
         mProductId = getIntent().getLongExtra(EXTRA_PRODUCT_ID, PRODUCT_DEFAULT_VALUE);
-        Log.d(TAG + " productId : ", String.valueOf(mProductId));
+
         FragmentManager fm = getSupportFragmentManager();
         containerFragment = fm.findFragmentById(R.id.fragment_container);
 

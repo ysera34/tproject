@@ -39,6 +39,8 @@ import com.tacademy.v04.chemi.view.fragment.product.SearchFragment;
 
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 import static com.android.volley.Request.Method.GET;
@@ -49,7 +51,6 @@ import static com.tacademy.v04.chemi.common.network.NetworkConfig.Search.SEARCH_
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.URL_HOST;
 import static com.tacademy.v04.chemi.common.network.Parser.parseSearchKeywordProductList;
 import static com.tacademy.v04.chemi.common.network.Parser.parseStringSearchWordPartList;
-import static com.tacademy.v04.chemi.common.util.encoder.UTF8Encoder.encordUTF8;
 
 /**
  * Created by yoon on 2016. 11. 15..
@@ -188,11 +189,11 @@ public class SearchActivity extends AppBaseActivity
 
     @Override
     public void onClick(View view) {
+        View mBottomSheetView = null;
         switch (view.getId()) {
             case R.id.category_fab :
                 mCategoryBottomSheetDialog = new BottomSheetDialog(SearchActivity.this);
-                View mBottomSheetView = getLayoutInflater()
-                        .inflate(R.layout.bottom_sheet_category, null);
+                mBottomSheetView = getLayoutInflater().inflate(R.layout.bottom_sheet_category, null);
                 mCategoryBottomSheetDialog.setContentView(mBottomSheetView);
                 BottomSheetBehavior bottomSheetBehavior = BottomSheetBehavior.from((View) mBottomSheetView.getParent());
                 bottomSheetBehavior.setPeekHeight(R.dimen.custom_peek_height);
@@ -529,8 +530,15 @@ public class SearchActivity extends AppBaseActivity
 
     private void requestWordsJsonObject(String query) {
 
+        String utf8Query = null;
+        try {
+            utf8Query = URLEncoder.encode(query, "utf-8");
+        } catch (UnsupportedEncodingException e) {
+            Log.w(TAG, "UnsupportedEncodingException : " + e.toString());
+        }
+
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(GET,
-                URL_HOST + SEARCH_TARGET_PRODUCT + SEARCH_PATH + SEARCH_WORDPART_QUERY + encordUTF8(query),
+                URL_HOST + SEARCH_TARGET_PRODUCT + SEARCH_PATH + SEARCH_WORDPART_QUERY + utf8Query,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -544,10 +552,8 @@ public class SearchActivity extends AppBaseActivity
                             @Override
                             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                                 String value = (String) adapterView.getItemAtPosition(i);
-                                Log.w(TAG + "onItemClick",  URL_HOST + SEARCH_TARGET_PRODUCT + SEARCH_KEYWORD_QUERY + encordUTF8(value));
 
                                 requestKeywordJsonObject(value);
-
                             }
                         });
                     }
@@ -564,10 +570,15 @@ public class SearchActivity extends AppBaseActivity
 
     private void requestKeywordJsonObject(String query) {
 
-//        RequestQueue requestQueue = MySingleton.getInstance(getApplicationContext()).getRequestQueue();
-//        requestQueue.cancelAll(WORDPART_TAG);
+        String utf8Query = null;
+        try {
+            utf8Query = URLEncoder.encode(query, "utf-8");
+        } catch (UnsupportedEncodingException e) {
+            Log.w(TAG, "UnsupportedEncodingException : " + e.toString());
+        }
+
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(GET,
-                URL_HOST + SEARCH_TARGET_PRODUCT + SEARCH_KEYWORD_QUERY + encordUTF8(query),
+                URL_HOST + SEARCH_TARGET_PRODUCT + SEARCH_KEYWORD_QUERY + utf8Query,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -575,7 +586,6 @@ public class SearchActivity extends AppBaseActivity
 
                         ArrayList<Product> products = parseSearchKeywordProductList(response);
                         long productId = Long.parseLong(String.valueOf(products.get(0).getProductId()));
-                        Log.d(TAG + " productId : ", String.valueOf(productId));
                         Intent intent = ProductListActivity.newIntent(getApplicationContext(), productId);
                         startActivity(intent);
                     }
