@@ -223,6 +223,7 @@
     <string name="slide_next">다음</string>
     <string name="slide_skip">넘기기</string>
     <string name="slide_start">시작</string>
+    <string name="analyze_request_child_spinner_initial_data">상위 카테고리를 먼저 선택하세요.</string>
 
     <string-array name="analyze_request_parent_category_array">
         <item>상위 카테고리 선택</item>

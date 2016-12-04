@@ -106,7 +106,7 @@ public class AnalyzeRequestFragment extends Fragment implements AdapterView.OnIt
         Toast.makeText(getActivity(), adapterView.getItemAtPosition(i).toString() + " i : " + i, Toast.LENGTH_SHORT).show();
         if (i == 0) {
             ArrayList<String> childSpinnerInitData = new ArrayList<>();
-            childSpinnerInitData.add("상위 카테고리를 먼저 선택하세요.");
+            childSpinnerInitData.add(getString(R.string.analyze_request_child_spinner_initial_data));
             mChildDataAdapter = new ArrayAdapter<>(getActivity(),
                     R.layout.list_item_analyze_request, childSpinnerInitData);
             mChildSpinner.setAdapter(mChildDataAdapter);

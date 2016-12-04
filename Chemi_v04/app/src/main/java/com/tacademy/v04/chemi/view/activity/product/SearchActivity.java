@@ -18,20 +18,38 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.tacademy.v04.chemi.R;
 import com.tacademy.v04.chemi.common.util.listener.OnPassDataListener;
 import com.tacademy.v04.chemi.model.Product;
 import com.tacademy.v04.chemi.model.ProductStorage;
+import com.tacademy.v04.chemi.model.Word;
 import com.tacademy.v04.chemi.view.activity.AppBaseActivity;
 import com.tacademy.v04.chemi.view.fragment.product.SearchFragment;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+
+import static com.android.volley.Request.Method.GET;
+import static com.tacademy.v04.chemi.common.network.NetworkConfig.Search.SEARCH_KEYWORD_QUERY;
+import static com.tacademy.v04.chemi.common.network.NetworkConfig.Search.SEARCH_PATH;
+import static com.tacademy.v04.chemi.common.network.NetworkConfig.Search.SEARCH_TARGET_PRODUCT;
+import static com.tacademy.v04.chemi.common.network.NetworkConfig.Search.SEARCH_WORDPART_QUERY;
+import static com.tacademy.v04.chemi.common.network.NetworkConfig.URL_HOST;
+import static com.tacademy.v04.chemi.common.network.Parser.parseSearchKeywordProductList;
+import static com.tacademy.v04.chemi.common.network.Parser.parseStringSearchWordPartList;
+import static com.tacademy.v04.chemi.common.util.encoder.UTF8Encoder.encordUTF8;
 
 /**
  * Created by yoon on 2016. 11. 15..
@@ -42,6 +60,8 @@ public class SearchActivity extends AppBaseActivity
         implements View.OnClickListener, OnPassDataListener {
 
     private static final String TAG = SearchActivity.class.getSimpleName();
+    private static final String WORDPART_TAG = "wordpart";
+    private static final String KEYWORD_TAG = "keyword";
 
     private Toolbar mToolbar;
     private EditText mSearchProductEditText;
@@ -52,6 +72,7 @@ public class SearchActivity extends AppBaseActivity
 
     private RecyclerView mSearchedResultRecyclerView;
     private SearchedResultAdapter mResultAdapter;
+    private ArrayList<Word> mWords;
     private ArrayList<Product> mProducts;
     private ProductStorage mProductStorage;
     private String queryString;
@@ -96,13 +117,9 @@ public class SearchActivity extends AppBaseActivity
             }
         });
 
+        mSearchResults = new ArrayList<>();
         mSearchProductAutoCompleteTextView =
                 (AutoCompleteTextView) findViewById(R.id.search_product_auto_complete_text_view);
-        mSearchResults = new ArrayList<>();
-        mSearchResults.add("abc");mSearchResults.add("abcfe");mSearchResults.add("abcdd");mSearchResults.add("aabc");
-        mSearchResults.add("babc");mSearchResults.add("babcfe");mSearchResults.add("cabcdd");mSearchResults.add("caabc");
-        mSearchResultsAdapter = new ArrayAdapter<>(this, R.layout.list_item_searched_wordpart, mSearchResults);
-        mSearchProductAutoCompleteTextView.setAdapter(mSearchResultsAdapter);
         mSearchProductAutoCompleteTextView.setThreshold(1);
         mSearchProductAutoCompleteTextView.addTextChangedListener(new TextWatcher() {
             @Override
@@ -112,9 +129,11 @@ public class SearchActivity extends AppBaseActivity
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                Log.d(TAG, charSequence.toString());
-                Toast.makeText(getApplicationContext(), charSequence.toString(), Toast.LENGTH_SHORT).show();
-
+//                Log.d(TAG, charSequence.toString());
+//                Toast.makeText(getApplicationContext(), charSequence.length() + "", Toast.LENGTH_SHORT).show();
+                if (charSequence.length() > 0) {
+                    requestWordsJsonObject(charSequence.toString());
+                }
             }
 
             @Override
@@ -506,5 +525,68 @@ public class SearchActivity extends AppBaseActivity
         public View getView(int position, View convertView, ViewGroup parent) {
             return super.getView(position, convertView, parent);
         }
+    }
+
+    private void requestWordsJsonObject(String query) {
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(GET,
+                URL_HOST + SEARCH_TARGET_PRODUCT + SEARCH_PATH + SEARCH_WORDPART_QUERY + encordUTF8(query),
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        mSearchProductAutoCompleteTextView =
+                                (AutoCompleteTextView) findViewById(R.id.search_product_auto_complete_text_view);
+                        mSearchResultsAdapter = new ArrayAdapter<>(getApplicationContext(),
+                                R.layout.list_item_searched_wordpart, parseStringSearchWordPartList(response));
+                        mSearchProductAutoCompleteTextView.setAdapter(mSearchResultsAdapter);
+                        mSearchResultsAdapter.notifyDataSetChanged();
+                        mSearchProductAutoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                String value = (String) adapterView.getItemAtPosition(i);
+                                Log.w(TAG + "onItemClick",  URL_HOST + SEARCH_TARGET_PRODUCT + SEARCH_KEYWORD_QUERY + encordUTF8(value));
+
+                                requestKeywordJsonObject(value);
+
+                            }
+                        });
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.w(TAG, "onErrorResponse : " + error.toString());
+                    }
+                });
+        jsonObjectRequest.setTag(WORDPART_TAG);
+        Volley.newRequestQueue(getApplicationContext()).add(jsonObjectRequest);
+    }
+
+    private void requestKeywordJsonObject(String query) {
+
+//        RequestQueue requestQueue = MySingleton.getInstance(getApplicationContext()).getRequestQueue();
+//        requestQueue.cancelAll(WORDPART_TAG);
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(GET,
+                URL_HOST + SEARCH_TARGET_PRODUCT + SEARCH_KEYWORD_QUERY + encordUTF8(query),
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d(TAG, response.toString());
+
+                        ArrayList<Product> products = parseSearchKeywordProductList(response);
+                        long productId = Long.parseLong(String.valueOf(products.get(0).getProductId()));
+                        Log.d(TAG + " productId : ", String.valueOf(productId));
+                        Intent intent = ProductListActivity.newIntent(getApplicationContext(), productId);
+                        startActivity(intent);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.w(TAG, "onErrorResponse : " + error.toString());
+                    }
+                });
+
+        Volley.newRequestQueue(getApplicationContext()).add(jsonObjectRequest);
     }
 }

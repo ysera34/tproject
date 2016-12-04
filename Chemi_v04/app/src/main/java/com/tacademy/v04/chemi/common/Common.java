@@ -22,5 +22,6 @@ public class Common {
     public static final int REQUEST_REVIEW_FORM = 131;
 
     public static final int CATEGORY_DEFAULT_VALUE = -1;
+    public static final int PRODUCT_DEFAULT_VALUE = -1;
 
 }

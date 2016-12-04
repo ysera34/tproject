@@ -71,7 +71,5 @@ public class MainActivity extends AppNavigationActivity {
                         .commit();
             }
         }
-
-
     }
 }

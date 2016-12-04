@@ -53,6 +53,7 @@ import static com.tacademy.v04.chemi.common.network.NetworkConfig.Review.Key.WRI
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.Review.Key.WRITER_ID;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.Review.Key.WRITER_NAME;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.Search.Key.SEARCHED_BRAND;
+import static com.tacademy.v04.chemi.common.network.NetworkConfig.Search.Key.SEARCHED_ID;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.Search.Key.SEARCH_WORD;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.Search.Key.SEARHCED_PRODUCT_NAME;
 
@@ -495,6 +496,12 @@ public class Parser {
         return reviews;
     }
 
+
+    /**
+     * /products/search?wordpart=
+     * @param responseObject
+     * @return
+     */
     public static ArrayList<Word> parseSearchWordPartList(JSONObject responseObject) {
 
         ArrayList<Word> searchedWords = new ArrayList<>();
@@ -507,6 +514,7 @@ public class Parser {
                     for (int i = 0; i < wordsArray.length(); i++) {
                         JSONObject wordObject = (JSONObject) wordsArray.get(i);
                         Word word = new Word();
+                        word.setProductId(wordObject.getInt(SEARCHED_ID));
                         word.setBrand(wordObject.getString(SEARCHED_BRAND));
                         word.setName(wordObject.getString(SEARHCED_PRODUCT_NAME));
                         searchedWords.add(word);
@@ -520,16 +528,49 @@ public class Parser {
         return searchedWords;
     }
 
+    /**
+     * /products/search?wordpart=
+     * @param responseObject
+     * @return
+     */
+    public static ArrayList<String> parseStringSearchWordPartList(JSONObject responseObject) {
+
+        ArrayList<String> searchedWords = new ArrayList<>();
+        try {
+            String responseMessage = responseObject.getString(RESPONSE_MESSAGE);
+            if (responseMessage.equals(RESPONSE_SUCCESS)) {
+                JSONObject dataObject = responseObject.getJSONObject(RESPONSE_DATA);
+                if (dataObject != null) {
+                    JSONArray wordsArray = dataObject.getJSONArray(SEARCH_WORD);
+                    for (int i = 0; i < wordsArray.length(); i++) {
+                        JSONObject wordObject = (JSONObject) wordsArray.get(i);
+                        String str = wordObject.getString(SEARHCED_PRODUCT_NAME);
+                        searchedWords.add(str);
+                    }
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Log.w("Parse Exception", e.getMessage());
+        }
+        return searchedWords;
+    }
+
+    /**
+     * /products?keyword=
+     * @param responseObject
+     * @return
+     */
     public static ArrayList<Product> parseSearchKeywordProductList(JSONObject responseObject) {
 
         ArrayList<Product> products = new ArrayList<>();
         try {
             String responseMessage = responseObject.getString(RESPONSE_MESSAGE);
             if (responseMessage.equals(RESPONSE_SUCCESS)) {
-                JSONArray dataArray = responseObject.getJSONArray(RESPONSE_DATA);
-                if (dataArray != null) {
-                    for (int i = 0; i < dataArray.length(); i++) {
-                        JSONObject productObject = (JSONObject) dataArray.get(i);
+                JSONArray dataObjects = responseObject.getJSONArray(RESPONSE_DATA);
+                if (dataObjects != null) {
+                    for (int i = 0; i < dataObjects.length(); i++) {
+                        JSONObject productObject = (JSONObject) dataObjects.get(i);
                         Product product = new Product();
                         product.setProductId(productObject.getInt(PRODUCT_ID));
                         product.setCategoryId(productObject.getInt(CATEGORY_ID));

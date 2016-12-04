@@ -127,6 +127,7 @@
     <string name="chemi_agreement1">케미 서비스를 이용해 주셔서 감사합니다.\n</string>
     <string name="chemi_agreement2">케미 서비스를 이용해 주셔서 감사합니다.\n</string>
     <string name="chemi_privacy_body">케미 서비스를 이용해 주셔서 감사합니다.\n</string>
+    <string name="analyze_request_child_spinner_initial_data">상위 카테고리를 먼저 선택하세요.</string>
     <!-- REQUEST -->
     <!--<string name="request_product_id">%1$s</string>-->
 

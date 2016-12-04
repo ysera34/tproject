@@ -76,12 +76,14 @@ public class NetworkConfig {
     }
 
     public static final class Search {
-        public static final String PATH = File.separator + "searchs";
+        public static final String SEARCH_TARGET_PRODUCT = File.separator + "products";
+        public static final String SEARCH_PATH = File.separator + "search";
         public static final String SEARCH_WORDPART_QUERY = "?wordpart=";
         public static final String SEARCH_KEYWORD_QUERY = "?keyword=";
 
         public static final class Key {
             public static final String SEARCH_WORD = "words";
+            public static final String SEARCHED_ID = "id";
             public static final String SEARCHED_BRAND = "brand";
             public static final String SEARCHED_MAKER = "maker";
             public static final String SEARHCED_PRODUCT_NAME = "name";

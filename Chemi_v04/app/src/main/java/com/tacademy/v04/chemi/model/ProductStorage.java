@@ -58,6 +58,29 @@ public class ProductStorage {
         return null;
     }
 
+    public Product getProduct(int productId) {
+        for (Product product : mProducts) {
+            if (product.getProductId()==productId) {
+                return product;
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<Product> getProduct(long productId) {
+
+        int intProductId = (int) productId;
+        Log.e("xvzxcvzcxv", String.valueOf(mProducts.size()));
+        Log.e("dfsdfsdfsdfs" , String.valueOf(intProductId));
+        ArrayList<Product> products = new ArrayList<>();
+        for (Product product : mProducts) {
+            if (product.getProductId()==intProductId) {
+                products.add(product);
+            }
+        }
+        return products;
+    }
+
     public boolean setProduct(Product product) {
 
         if (mProducts.isEmpty()) { //isEmpty()

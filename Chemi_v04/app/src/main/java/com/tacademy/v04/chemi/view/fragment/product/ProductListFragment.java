@@ -37,6 +37,7 @@ import java.util.Collections;
 import java.util.Comparator;
 
 import static com.tacademy.v04.chemi.common.Common.CATEGORY_DEFAULT_VALUE;
+import static com.tacademy.v04.chemi.common.Common.PRODUCT_DEFAULT_VALUE;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.Product.PATH;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.URL_HOST;
 
@@ -50,12 +51,14 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
 
     private static final String PRODUCT_NO_EXIST_INFO = "NoExistProduct";
 
+    private static final String ARG_PRODUCT_ID = "product_id";
     private static final String ARG_CATEGORY_ID = "category_id";
 
     private ProductStorage mProductStorage;
     private RecyclerView mProductRecyclerView;
     private ProductAdapter mProductAdapter;
     private ArrayList<Product> mProducts;
+    private long mProductId;
     private int mCategoryId;
 
     private TextView mProductTotalTextView;
@@ -70,6 +73,15 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
     public static ProductListFragment newInstance() {
 
         ProductListFragment fragment = new ProductListFragment();
+        return fragment;
+    }
+
+    public static ProductListFragment newInstance(long productId) {
+        Bundle args = new Bundle();
+        args.putSerializable(ARG_PRODUCT_ID, productId);
+
+        ProductListFragment fragment = new ProductListFragment();
+        fragment.setArguments(args);
         return fragment;
     }
 
@@ -96,6 +108,10 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
             mCategoryId = getArguments().getInt(
                     ARG_CATEGORY_ID, CATEGORY_DEFAULT_VALUE);
             Log.d(TAG, "mCategoryId : " + mCategoryId);
+
+            mProductId = getArguments().getLong(
+                    ARG_PRODUCT_ID, PRODUCT_DEFAULT_VALUE);
+            Log.d(TAG, "mProductId : " + mProductId);
         }
     }
 
@@ -193,7 +209,16 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
                 mProductRecyclerView.setAdapter(mProductAdapter);
             } else {
                 // category product
-                if (mCategoryId > 0) {
+
+                if (mProductId > 0) {
+                    Toast.makeText(getActivity(), "mProductId > 0", Toast.LENGTH_SHORT).show();
+                    Log.d(TAG + " productId : ", String.valueOf(mProductId));
+                    mProducts = mProductStorage.getProduct(mProductId);
+                    Log.e(TAG + " size : ", "" +mProducts.size());
+                    mProductAdapter.addItems(mProducts);
+                    mProductAdapter.notifyDataSetChanged();
+                    mProductTotalTextView.setText(String.valueOf(mProductAdapter.getItemCount()));
+                } else if (mCategoryId > 0) {
 //                    Toast.makeText(getActivity(), "mCategoryId > 0", Toast.LENGTH_SHORT).show();
                     mProducts = mProductStorage.getCategoryProducts(mCategoryId);
                     // default sort

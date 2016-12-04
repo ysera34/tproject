@@ -6,6 +6,7 @@ package com.tacademy.v04.chemi.model;
 
 public class Word {
 
+    private int mProductId;
     private String mBrand;
     private String mName;
 
@@ -23,5 +24,13 @@ public class Word {
 
     public void setName(String name) {
         mName = name;
+    }
+
+    public int getProductId() {
+        return mProductId;
+    }
+
+    public void setProductId(int productId) {
+        mProductId = productId;
     }
 }
