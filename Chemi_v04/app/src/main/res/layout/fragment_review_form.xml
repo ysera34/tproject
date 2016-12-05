@@ -67,6 +67,15 @@
                         android:numStars="5"
                         android:stepSize="0.01"/>
 
+                    <TextView
+                        android:id="@+id/review_form_rating_value_status_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="-10dp"
+                        android:text="@string/review_form_rating_value_format"
+                        android:gravity="bottom"
+                        android:textSize="15sp"/>
+
                 </LinearLayout>
 
                 <LinearLayout

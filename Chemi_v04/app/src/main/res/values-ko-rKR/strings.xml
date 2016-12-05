@@ -225,6 +225,7 @@
     <string name="slide_start">시작</string>
     <string name="analyze_request_child_spinner_initial_data">상위 카테고리를 먼저 선택하세요.</string>
     <string name="request_send_data">데이터를 전송하고 있습니다.</string>
+    <string name="review_form_rating_value_format">0점</string>
 
     <string-array name="analyze_request_parent_category_array">
         <item>상위 카테고리 선택</item>

@@ -121,6 +121,8 @@ public class ReviewFragment extends Fragment {
         } else {
             mReviewCardDetailPhotoImageView.setImageResource(R.drawable.ic_photo_camera_border_24dp);
         }
+        mReviewCardDetailRatingBar.setRating(mReview.getRatingValue());
+
 
         mReviewCardDetailPositiveTextView.setText(review.getPositiveContent());
         mReviewCardDetailNegativeTextView.setText(review.getNegativeContent());

@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RatingBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -66,6 +67,8 @@ public class ReviewFormFragment extends Fragment implements View.OnClickListener
     private int mProductId;
 
     private ScrollView mReviewFormScrollView;
+    private RatingBar mReviewFormRatingBar;
+    private TextView mReviewFormRatingBarValueStatusTextView;
     private TextView mReviewFormReviewPositiveLengthTextView;
     private EditText mReviewFormReviewPositiveEditText;
     private TextView mReviewFormReviewNegativeLengthTextView;
@@ -114,6 +117,17 @@ public class ReviewFormFragment extends Fragment implements View.OnClickListener
 
         mReviewFormScrollView = (ScrollView) view.findViewById(R.id.review_form_scroll_view);
         mReviewFormScrollView.setVerticalScrollBarEnabled(false);
+        mReviewFormRatingBar = (RatingBar) view.findViewById(R.id.review_form_ratingBar);
+        mReviewFormRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
+                mReviewFormRatingBarValueStatusTextView.setText(
+                        getString(R.string.review_form_rating_value_format,
+                        String.valueOf(ratingBar.getRating())));
+            }
+        });
+        mReviewFormRatingBarValueStatusTextView = (TextView)
+                view.findViewById(R.id.review_form_rating_value_status_text_view);
         mReviewFormReviewPositiveLengthTextView = (TextView)
                 view.findViewById(R.id.review_form_review_positive_length_text_view);
         mReviewFormReviewNegativeLengthTextView = (TextView)
@@ -176,6 +190,9 @@ public class ReviewFormFragment extends Fragment implements View.OnClickListener
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.review_form_ratingBar :
+
+                break;
             case R.id.review_form_review_image_button1 :
                 createMenuBottomSheetDialog();
                 break;
@@ -326,7 +343,7 @@ public class ReviewFormFragment extends Fragment implements View.OnClickListener
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> params = new HashMap<>();
                     params.put("userid", "3");
-                    params.put("rating", "3.5");
+                    params.put("rating", String.valueOf(mReviewFormRatingBar.getRating()));
                     params.put("reviewp", encodeUTF8(mReviewFormReviewPositiveEditText.getText().toString()));
                     params.put("reviewn", encodeUTF8(mReviewFormReviewNegativeEditText.getText().toString()));
                     return params;
