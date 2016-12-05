@@ -9,6 +9,7 @@ import java.io.File;
 public class NetworkConfig {
 
     public static final String URL_HOST = "http://52.78.226.188:3000";
+    public static final String IMAGE_URL_HOST = "https://s3.ap-northeast-2.amazonaws.com/chemistaticfiles/";
     public static final String RESPONSE_MESSAGE = "message";
     public static final String RESPONSE_SUCCESS = "success";
     public static final String RESPONSE_ERROR = "error";
@@ -69,6 +70,9 @@ public class NetworkConfig {
             public static final String REVIEW_RATING = "rating";
             public static final String REVIEW_POSITIVE = "reviewp";
             public static final String REVIEW_NEGATIVE = "reviewn";
+            public static final String REVIEW_IMAGE1 = "image1";
+            public static final String REVIEW_IMAGE2 = "image2";
+            public static final String REVIEW_IMAGE3 = "image3";
             public static final String REVIEW_CREATED = "created";
             public static final String WRITER_CONSTITUTIONS = "constitutions";
             public static final String WRITER_CONSTITUTION = "name";

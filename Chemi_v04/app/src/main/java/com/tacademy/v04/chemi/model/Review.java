@@ -17,6 +17,7 @@ public class Review {
     private String mPositiveContent;
     private String mNegativeContent;
     private ArrayList<Integer> mImageResIdArray;
+    private ArrayList<String> mImagePaths;
 
     private String mName;
     private String mGender;
@@ -31,6 +32,7 @@ public class Review {
     public Review() {
         mId = UUID.randomUUID();
         mImageResIdArray = new ArrayList<>();
+        mImagePaths = new ArrayList<>();
     }
 
     public UUID getId() {
@@ -96,6 +98,15 @@ public class Review {
     public void setImageResIdArray(ArrayList<Integer> imageResIdArray) {
         mImageResIdArray = imageResIdArray;
     }
+
+    public ArrayList<String> getImagePaths() {
+        return mImagePaths;
+    }
+
+    public void setImagePaths(ArrayList<String> imagePaths) {
+        mImagePaths = imagePaths;
+    }
+
 
 
     public String getName() {
@@ -181,9 +192,10 @@ public class Review {
                 ", mPositiveContent='" + mPositiveContent + '\'' +
                 ", mNegativeContent='" + mNegativeContent + '\'' +
                 ", mImageResIdArray=" + mImageResIdArray +
+                ", mImagePaths=" + mImagePaths +
                 ", mName='" + mName + '\'' +
                 ", mGender='" + mGender + '\'' +
-                ", mBirthyear=" + mBirthYear +
+                ", mBirthYear=" + mBirthYear +
                 ", mChild=" + mChild +
                 ", mRating=" + mRating +
                 ", mCreatedDate='" + mCreatedDate + '\'' +

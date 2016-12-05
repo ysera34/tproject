@@ -37,6 +37,7 @@ import com.tacademy.v04.chemi.view.activity.content.ContentActivity;
 import java.util.ArrayList;
 
 import static com.tacademy.v04.chemi.common.Common.REQUEST_NAVIGATION_ANALYZE_REQUEST;
+import static com.tacademy.v04.chemi.common.Common.REQUEST_NAVIGATION_FAQ;
 
 /**
  * Created by yoon on 2016. 11. 14..
@@ -90,8 +91,8 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         ContentMainStorage contentMainStorage = ContentMainStorage.get(getActivity());
         mContents = contentMainStorage.getContents();
 
-        mBannerImageArray = new int[]{R.drawable.main_banner_content01,
-                R.drawable.main_banner_content02, R.drawable.main_banner_content03,};
+        mBannerImageArray = new int[]{R.drawable.main_banner01,
+                R.drawable.main_banner02, R.drawable.main_banner03,};
 
         activeColor = getResources().getColor(R.color.main_image_switcher_indicator_active_color);
         inactiveColor = getResources().getColor(R.color.main_image_switcher_indicator_inactive_color);
@@ -127,10 +128,15 @@ public class MainFragment extends Fragment implements View.OnClickListener {
                     @Override
                     public void onClick(View view) {
                         if (mBannerIndex == 0) {
+                            Intent intent = MainActivity.newIntent(getActivity(), REQUEST_NAVIGATION_FAQ);
+                            startActivity(intent);
+                        } else if (mBannerIndex == 1) {
+                            Toast.makeText(getActivity(), "업데이트 예정입니다", Toast.LENGTH_SHORT).show();
+                        } else if (mBannerIndex == 2) {
                             Intent intent = MainActivity.newIntent(getActivity(), REQUEST_NAVIGATION_ANALYZE_REQUEST);
                             startActivity(intent);
                         }
-                        Toast.makeText(getActivity(), mBannerIndex + " 해당 컨텐츠로 이동합니다.", Toast.LENGTH_SHORT).show();
+
                     }
                 });
 

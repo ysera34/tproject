@@ -15,10 +15,11 @@ import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
@@ -140,6 +141,24 @@ public class SearchActivity extends AppBaseActivity
             @Override
             public void afterTextChanged(Editable editable) {
 
+            }
+        });
+
+        mSearchProductAutoCompleteTextView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                switch (i) {
+                    case EditorInfo.IME_ACTION_SEARCH :
+//                        return true;
+//                    case keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER :
+                        Toast.makeText(getApplicationContext(), textView.getText().toString(), Toast.LENGTH_LONG).show();
+                        requestKeywordJsonObject(textView.getText().toString());
+                        return true;
+
+                    default:
+                        Toast.makeText(getApplicationContext(), "기본", Toast.LENGTH_LONG).show();
+                        return false;
+                }
             }
         });
 
@@ -548,14 +567,14 @@ public class SearchActivity extends AppBaseActivity
                                 R.layout.list_item_searched_wordpart, parseStringSearchWordPartList(response));
                         mSearchProductAutoCompleteTextView.setAdapter(mSearchResultsAdapter);
                         mSearchResultsAdapter.notifyDataSetChanged();
-                        mSearchProductAutoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                                String value = (String) adapterView.getItemAtPosition(i);
-
-                                requestKeywordJsonObject(value);
-                            }
-                        });
+//                        mSearchProductAutoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//                            @Override
+//                            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//                                String value = (String) adapterView.getItemAtPosition(i);
+//
+//                                requestKeywordJsonObject(value);
+//                            }
+//                        });
                     }
                 },
                 new Response.ErrorListener() {
@@ -585,9 +604,13 @@ public class SearchActivity extends AppBaseActivity
                         Log.d(TAG, response.toString());
 
                         ArrayList<Product> products = parseSearchKeywordProductList(response);
-                        long productId = Long.parseLong(String.valueOf(products.get(0).getProductId()));
-                        Intent intent = ProductListActivity.newIntent(getApplicationContext(), productId);
-                        startActivity(intent);
+                        if (products.size() > 0) {
+                            long productId = Long.parseLong(String.valueOf(products.get(0).getProductId()));
+                            Intent intent = ProductListActivity.newIntent(getApplicationContext(), productId);
+                            startActivity(intent);
+                        } else {
+                            startActivity(ProductListActivity.newIntent(getApplicationContext(), 43));
+                        }
                     }
                 },
                 new Response.ErrorListener() {
@@ -595,7 +618,10 @@ public class SearchActivity extends AppBaseActivity
                     public void onErrorResponse(VolleyError error) {
                         Log.w(TAG, "onErrorResponse : " + error.toString());
                     }
-                });
+                }
+        ) {
+
+        };
 
         Volley.newRequestQueue(getApplicationContext()).add(jsonObjectRequest);
     }

@@ -13,12 +13,15 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.tacademy.v04.chemi.R;
 import com.tacademy.v04.chemi.model.Review;
 import com.tacademy.v04.chemi.model.ReviewStorage;
 
 import java.util.ArrayList;
 import java.util.UUID;
+
+import static com.tacademy.v04.chemi.common.network.NetworkConfig.IMAGE_URL_HOST;
 
 /**
  * Created by yoon on 2016. 11. 22..
@@ -40,6 +43,7 @@ public class ReviewFragment extends Fragment {
     private RecyclerView mReviewCardDetailImageRecyclerView;
     private ReviewImageAdapter mReviewImageAdapter;
     private ArrayList<Integer> mReviewImageResIds;
+    private ArrayList<String> mReviewImagePaths;
 
     public ReviewFragment() {
     }
@@ -64,7 +68,8 @@ public class ReviewFragment extends Fragment {
         super.onCreate(savedInstanceState);
         UUID id = (UUID) getArguments().getSerializable(ARG_REVIEW);
         mReview = ReviewStorage.get(getActivity()).getReview(id);
-        mReviewImageResIds = mReview.getImageResIdArray();
+//        mReviewImageResIds = mReview.getImageResIdArray();
+        mReviewImagePaths = mReview.getImagePaths();
     }
 
     @Nullable
@@ -89,7 +94,8 @@ public class ReviewFragment extends Fragment {
         mReviewCardDetailImageRecyclerView.setLayoutManager(
                 new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
 
-        mReviewImageAdapter = new ReviewImageAdapter(mReviewImageResIds);
+//        mReviewImageAdapter = new ReviewImageAdapter(mReviewImageResIds);
+        mReviewImageAdapter = new ReviewImageAdapter(mReviewImagePaths);
         mReviewCardDetailImageRecyclerView.setAdapter(mReviewImageAdapter);
         return view;
     }
@@ -122,10 +128,15 @@ public class ReviewFragment extends Fragment {
 
     private class ReviewImageAdapter extends RecyclerView.Adapter<ReviewImageHolder> {
 
-        private ArrayList<Integer> mReviewImageResIds;
+//        private ArrayList<Integer> mReviewImageResIds;
+        private ArrayList<String> mReviewImagePaths;
 
-        public ReviewImageAdapter(ArrayList<Integer> reviewImageResIds) {
-            mReviewImageResIds = reviewImageResIds;
+//        public ReviewImageAdapter(ArrayList<Integer> reviewImageResIds) {
+//            mReviewImageResIds = reviewImageResIds;
+//        }
+
+        public ReviewImageAdapter(ArrayList<String> reviewImagePaths) {
+            mReviewImagePaths = reviewImagePaths;
         }
 
         @Override
@@ -137,19 +148,23 @@ public class ReviewFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(ReviewImageHolder holder, int position) {
-            Integer integer = mReviewImageResIds.get(position);
-            holder.bindReviewImage(integer);
+//            Integer integer = mReviewImageResIds.get(position);
+//            holder.bindReviewImage(integer);
+            String imagePath = mReviewImagePaths.get(position);
+            holder.bindReviewImage(imagePath);
         }
 
         @Override
         public int getItemCount() {
-            return mReviewImageResIds.size();
+//            return mReviewImageResIds.size();
+            return mReviewImagePaths.size();
         }
     }
 
     private class ReviewImageHolder extends RecyclerView.ViewHolder {
 
         private Integer mInteger;
+        private String mImagePath;
 
         private ImageView mReviewCardDetailReviewImage;
 
@@ -163,6 +178,17 @@ public class ReviewFragment extends Fragment {
         public void bindReviewImage(Integer integer) {
             mInteger = integer;
             mReviewCardDetailReviewImage.setImageResource(mInteger);
+        }
+
+        public void bindReviewImage(String imagePath) {
+            mImagePath = imagePath;
+            Glide.with(getActivity())
+                    .load(IMAGE_URL_HOST + mImagePath)
+                    .placeholder(R.drawable.unloaded_image_holder)
+                    .error(R.drawable.unloaded_image_holder)
+                    .override(140, 140)
+                    .centerCrop()
+                    .into(mReviewCardDetailReviewImage);
         }
     }
 }

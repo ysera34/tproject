@@ -1,6 +1,7 @@
 package com.tacademy.v04.chemi.view.fragment.product;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetDialog;
@@ -20,23 +21,35 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
+import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.tacademy.v04.chemi.R;
+import com.tacademy.v04.chemi.common.network.MultipartRequestHelper;
 import com.tacademy.v04.chemi.common.network.NetworkConfig;
+import com.tacademy.v04.chemi.common.network.Parser;
+import com.tacademy.v04.chemi.common.network.VolleyMultipartRequest;
 import com.tacademy.v04.chemi.common.util.adapter.BottomSheetMenuAdapter;
 import com.tacademy.v04.chemi.model.BottomSheetMenu;
+import com.tacademy.v04.chemi.model.Review;
+import com.tacademy.v04.chemi.model.ReviewStorage;
+import com.tacademy.v04.chemi.view.activity.product.ReviewActivity;
+
+import org.json.JSONObject;
 
 import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.android.volley.Request.Method.POST;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.Product.PATH;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.URL_HOST;
 
@@ -219,6 +232,12 @@ public class ReviewFormFragment extends Fragment implements View.OnClickListener
             @Override
             public void onItemClick(BottomSheetMenuAdapter.MenuItemHolder item, int position) {
                 // dismissDialog();
+
+                if (position == 0) {
+                    Toast.makeText(getActivity(), "카메라", Toast.LENGTH_SHORT).show();
+                } else if (position == 1) {
+                    Toast.makeText(getActivity(), "갤러리", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -236,40 +255,141 @@ public class ReviewFormFragment extends Fragment implements View.OnClickListener
 
     private void requestJsonObject() {
 
-        Log.w(TAG, "requestJsonObject : " + URL_HOST + PATH + File.separator + String.valueOf(mProductId) + NetworkConfig.Review.PATH);
+        Log.w(TAG, "requestJsonObject : " +
+                URL_HOST + PATH + File.separator + String.valueOf(mProductId) + NetworkConfig.Review.PATH);
 
         final ProgressDialog pDialog =
                 ProgressDialog.show(getActivity(), getString(R.string.request_send_data),
                         getString(R.string.load_please_wait), false, false);
 
-        StringRequest postRequest = new StringRequest(POST,
+//        StringRequest postRequest = new StringRequest(POST,
+//                URL_HOST + PATH + File.separator + String.valueOf(mProductId) + NetworkConfig.Review.PATH,
+//                new Response.Listener<String>() {
+//                    @Override
+//                    public void onResponse(String response) {
+//                        pDialog.dismiss();
+//                        Log.i(TAG, "onResponse : " + response.toString());
+//                    }
+//                },
+//                new Response.ErrorListener() {
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//                        pDialog.dismiss();
+//                        Log.w(TAG, "onErrorResponse : " + error.toString());
+//                    }
+//                }
+//        ) {
+//            @Override
+//            public byte[] getBody() throws AuthFailureError {
+//                return super.getBody();
+//            }
+//
+//            @Override
+//            public String getBodyContentType() {
+////                return super.getBodyContentType();
+////                return "application/x-www-form-urlencoded";
+//                return "multipart/form-data; charset=UTF-8";
+//            }
+//
+//            @Override
+//            protected Map<String, String> getParams() throws AuthFailureError {
+//                Map<String, String> params = new HashMap<>();
+//                params.put("userid", "3");
+//                params.put("rating", "3.5");
+//                params.put("reviewp", "안녕하세요~~``");
+//                params.put("reviewn", "영어test 1234 #$%#");
+//                return params;
+//            }
+//        };
+
+//        Volley.newRequestQueue(getActivity()).add(postRequest);
+
+        VolleyMultipartRequest multipartRequest = new VolleyMultipartRequest(Request.Method.POST,
                 URL_HOST + PATH + File.separator + String.valueOf(mProductId) + NetworkConfig.Review.PATH,
-                new Response.Listener<String>() {
+                new Response.Listener<NetworkResponse>() {
                     @Override
-                    public void onResponse(String response) {
+                    public void onResponse(NetworkResponse response) {
                         pDialog.dismiss();
                         Log.i(TAG, "onResponse : " + response.toString());
+
+
                     }
-                },
-                new Response.ErrorListener() {
+                }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         pDialog.dismiss();
                         Log.w(TAG, "onErrorResponse : " + error.toString());
                     }
+                })
+                {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("userid", "3");
+                    params.put("rating", "3.5");
+                    params.put("reviewp", encodeUTF8(mReviewFormReviewPositiveEditText.getText().toString()));
+                    params.put("reviewn", encodeUTF8(mReviewFormReviewNegativeEditText.getText().toString()));
+                    return params;
                 }
-        ) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("userid", "3");
-                params.put("rating", "3.5");
-                params.put("reviewp", "안녕하세요~~``");
-                params.put("reviewn", "영어test 1234 #$%#");
+
+                @Override
+                protected Map<String, DataPart> getByteData() {
+                    Map<String, DataPart> params = new HashMap<>();
+                    // file name could found file base or direct access from real path
+                    // for now just get bitmap data from ImageView
+                    params.put("images1", new DataPart("?.png", MultipartRequestHelper.getFileDataFromDrawable(getActivity(), R.drawable.ic_drawer), "image/*"));
+                    params.put("images2", new DataPart("?.png", MultipartRequestHelper.getFileDataFromDrawable(getActivity(), R.drawable.ic_drawer), "image/*"));
+                    params.put("images3", new DataPart("?.png", MultipartRequestHelper.getFileDataFromDrawable(getActivity(), R.drawable.ic_drawer), "image/*"));
                 return params;
             }
         };
 
-        Volley.newRequestQueue(getActivity()).add(postRequest);
+        Volley.newRequestQueue(getActivity()).add(multipartRequest);
+
+//        VolleySingleton.getInstance(getBaseContext()).addToRequestQueue(multipartRequest);
+
+    }
+
+
+    private String encodeUTF8 (String rawStr) {
+        String utf8String = null;
+        try {
+            utf8String = URLEncoder.encode(rawStr, "utf-8");
+        } catch (UnsupportedEncodingException e) {
+            Log.w(TAG, "UnsupportedEncodingException : " + e.toString());
+        }
+        return utf8String;
+    }
+
+    private void requestReviewJsonObject(final Review review) {
+
+        final ProgressDialog pDialog =
+                ProgressDialog.show(getActivity(), getString(R.string.request_loading_data),
+                        getString(R.string.load_please_wait), false, false);
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(URL_HOST + PATH
+                + File.separator + String.valueOf(mProductId) + NetworkConfig.Review.PATH + File.separator + review.getReviewId(),
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        pDialog.dismiss();
+
+//                        mReviewStorage.setReviews(Parser.parseReviewList(response, mReviews));
+//                        mReviewStorage.setReviews(Parser.parseReviewList(response));
+                        ReviewStorage.get(getActivity()).setReview(Parser.parseReview(response, review));
+
+                        Intent intent = ReviewActivity.newIntent(getActivity(), review.getId());
+                        startActivity(intent);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.w(TAG, "onErrorResponse : " + error.toString());
+                        pDialog.dismiss();
+                    }
+                });
+
+        Volley.newRequestQueue(getActivity()).add(jsonObjectRequest);
     }
 }

@@ -11,11 +11,11 @@
         <!--app:showAsAction="ifRoom|collapseActionView"-->
         <!--app:actionViewClass="android.support.v7.widget.SearchView"-->
 
-    <!--<item-->
-        <!--android:id="@+id/action_home"-->
-        <!--android:icon="@drawable/ic_home"-->
-        <!--android:title="@string/action_home"-->
-        <!--android:orderInCategory="100"-->
-        <!--app:showAsAction="always" />-->
+    <item
+        android:id="@+id/action_home"
+        android:icon="@drawable/ic_home"
+        android:title="@string/action_home"
+        android:orderInCategory="100"
+        app:showAsAction="always" />
 
 </menu>

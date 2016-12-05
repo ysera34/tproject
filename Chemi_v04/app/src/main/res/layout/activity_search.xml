@@ -51,7 +51,9 @@
                     android:maxLength="20"
                     android:dropDownAnchor="@+id/header_anchor_text_view"
                     android:dropDownWidth="match_parent"
-                    android:singleLine="true"/>
+                    android:singleLine="true"
+                    android:imeOptions="actionSearch"
+                    android:inputType="text"/>
 
             </android.support.v7.widget.Toolbar>
 

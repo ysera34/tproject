@@ -107,8 +107,8 @@
                     android:layout_weight="2"
                     android:orientation="vertical"
                     android:gravity="center_vertical"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp">
+                    android:paddingStart="22dp"
+                    android:paddingEnd="22dp">
 
                     <TextView
                         android:layout_width="wrap_content"

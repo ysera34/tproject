@@ -42,6 +42,9 @@ import static com.tacademy.v04.chemi.common.network.NetworkConfig.RESPONSE_MESSA
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.RESPONSE_SUCCESS;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.Review.Key.REVIEW_CREATED;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.Review.Key.REVIEW_ID;
+import static com.tacademy.v04.chemi.common.network.NetworkConfig.Review.Key.REVIEW_IMAGE1;
+import static com.tacademy.v04.chemi.common.network.NetworkConfig.Review.Key.REVIEW_IMAGE2;
+import static com.tacademy.v04.chemi.common.network.NetworkConfig.Review.Key.REVIEW_IMAGE3;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.Review.Key.REVIEW_NEGATIVE;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.Review.Key.REVIEW_POSITIVE;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.Review.Key.REVIEW_RATING;
@@ -496,7 +499,6 @@ public class Parser {
         return reviews;
     }
 
-
     /**
      * /products/search?wordpart=
      * @param responseObject
@@ -596,6 +598,8 @@ public class Parser {
                         products.add(product);
                         Log.i("parseProductList", product.toStringId());
                     }
+                } else {
+                    return null;
                 }
             }
         } catch (JSONException e) {
@@ -603,6 +607,58 @@ public class Parser {
             Log.w("Parse Exception", e.getMessage());
         }
         return products;
+    }
+
+    /**
+     * /products/:product_id/reviews/:review_id
+     * @param responseObject
+     * @param review
+     * @return
+     */
+    public static Review parseReview(JSONObject responseObject, Review review) {
+
+        try {
+            String responseMessage = responseObject.getString(RESPONSE_MESSAGE);
+            if (responseMessage.equals(RESPONSE_SUCCESS)) {
+                JSONArray dataArray = responseObject.getJSONArray(RESPONSE_DATA);
+                if (dataArray != null) {
+                    JSONObject reviewObject = dataArray.getJSONObject(0);
+                    review.setReviewId(reviewObject.getInt(REVIEW_ID));
+                    review.setUserId(reviewObject.getInt(WRITER_ID));
+                    review.setName(reviewObject.getString(WRITER_NAME));
+                    review.setGender(reviewObject.getString(WRITER_GENDER));
+                    review.setBirthYear(reviewObject.getInt(WRITER_BIRTHYEAR));
+                    review.setChild(reviewObject.getInt(WRITER_CHILD));;
+
+                    Object rating = reviewObject.get(RATING);
+                    float ratingf = 0.0f;
+//                        Log.i("parseProductList rating", String.valueOf(rating));
+                    if (rating instanceof Integer) {
+                        ratingf = ((Integer) rating).floatValue();
+                    } else if (rating instanceof Double) {
+                        ratingf = ((Double) rating).floatValue();
+                    } else if (rating == null) {
+                        ratingf = 0.0f;
+                    }
+//                        Log.i("float", String.valueOf(ratingf));
+//
+                    review.setRating(ratingf);
+                    review.setPositiveContent(reviewObject.getString(REVIEW_POSITIVE));
+                    review.setNegativeContent(reviewObject.getString(REVIEW_NEGATIVE));
+                    String imagePath1 = reviewObject.getString(REVIEW_IMAGE1);
+                    String imagePath2 = reviewObject.getString(REVIEW_IMAGE2);
+                    String imagePath3 = reviewObject.getString(REVIEW_IMAGE3);
+                    review.getImagePaths().add(imagePath1);
+                    review.getImagePaths().add(imagePath2);
+                    review.getImagePaths().add(imagePath3);
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Log.w("Parse Exception", e.getMessage());
+        }
+
+        return review;
     }
 }
 

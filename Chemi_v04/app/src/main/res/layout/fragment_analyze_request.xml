@@ -1,88 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
     <ScrollView
         android:id="@+id/analyze_request_scroll_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="29dp"
-                android:layout_marginBottom="29dp"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
+                android:layout_height="wrap_content">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="함께 만들어가는 케미!"
-                    android:textColor="@color/colorPrimaryFont"
-                    android:textSize="16sp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="아직 등록되지 않은 제품을"
-                    android:textColor="@color/colorPrimaryFont"
-                    android:textSize="16sp"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginBottom="3dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="요청해주시면 분석해 드립니다!"
-                    android:textColor="@color/colorPrimaryFont"
-                    android:textSize="16sp"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
-
-                <android.support.v7.widget.AppCompatSpinner
-                    android:id="@+id/analyze_parent_category_spinner"
+                <LinearLayout
+                    android:id="@+id/analyze_request_info_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:spinnerMode="dropdown"
-                    android:background="@drawable/widget_square_border_spinner">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="29dp"
+                    android:layout_marginBottom="29dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
 
-                </android.support.v7.widget.AppCompatSpinner>
-                <!--android:entries="@array/analyze_request_parent_category_array"-->
-                <android.support.v7.widget.AppCompatSpinner
-                    android:id="@+id/analyze_child_category_spinner"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="함께 만들어가는 케미!"
+                        android:textColor="@color/colorPrimaryFont"
+                        android:textSize="16sp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="아직 등록되지 않은 제품을"
+                        android:textColor="@color/colorPrimaryFont"
+                        android:textSize="16sp"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginBottom="3dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="요청해주시면 분석해 드립니다!"
+                        android:textColor="@color/colorPrimaryFont"
+                        android:textSize="16sp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginBottom="12dp"
-                    android:spinnerMode="dropdown"
-                    android:background="@drawable/widget_square_border_spinner">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_below="@+id/analyze_request_info_layout"
+                    android:padding="16dp">
 
-                </android.support.v7.widget.AppCompatSpinner>
+                    <android.support.v7.widget.AppCompatSpinner
+                        android:id="@+id/analyze_parent_category_spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:spinnerMode="dropdown"
+                        android:background="@drawable/widget_square_border_spinner">
 
-                <EditText
-                    android:id="@+id/analyze_detail_edit_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:paddingStart="?android:attr/listPreferredItemPaddingStart"
-                    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
-                    android:textAppearance="?android:attr/textAppearanceListItemSmall"
-                    android:maxLines="1"
-                    android:hint="제품명을 입력해주세요"
-                    android:background="@drawable/widget_square_border_spinner">
+                    </android.support.v7.widget.AppCompatSpinner>
+                    <!--android:entries="@array/analyze_request_parent_category_array"-->
+                    <android.support.v7.widget.AppCompatSpinner
+                        android:id="@+id/analyze_child_category_spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginBottom="12dp"
+                        android:spinnerMode="dropdown"
+                        android:background="@drawable/widget_square_border_spinner">
 
-                </EditText>
-            </LinearLayout>
-    </LinearLayout>
+                    </android.support.v7.widget.AppCompatSpinner>
+
+                    <EditText
+                        android:id="@+id/analyze_detail_edit_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+                        android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+                        android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                        android:maxLines="1"
+                        android:hint="카테고리 선택 후, 제품명을 입력해주세요"
+                        android:background="@drawable/widget_square_border_spinner">
+
+                    </EditText>
+                </LinearLayout>
+
+            </RelativeLayout>
+        </LinearLayout>
     </ScrollView>
-</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:padding="16dp">
+
+        <Button
+            android:id="@+id/analyze_request_submit_button"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:gravity="center"
+            android:text="확인"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorAccent"
+            android:background="@drawable/widget_square_border_submit" />
+
+    </LinearLayout>
+</RelativeLayout>

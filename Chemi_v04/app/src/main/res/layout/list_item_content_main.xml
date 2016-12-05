@@ -68,12 +68,68 @@
                     android:layout_weight="3"
                     android:paddingTop="8dp">
 
-                    <TextView
-                        android:id="@+id/list_item_content_main_content_description"
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:maxLines="1"
-                        android:textSize="13sp"/>
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/list_item_content_main_content_description"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:text="좋은 물티슈 고르는 TIP "
+                            android:maxLines="1"
+                            android:textSize="13sp"/>
+
+                        <LinearLayout
+                            android:layout_width="110dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true">
+
+                            <LinearLayout
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical"
+                                android:layout_marginEnd="7dp">
+                                
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="3dp"
+                                    android:src="@drawable/ic_favorite_border_24dp"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="360"
+                                    android:textSize="15sp"
+                                    android:textColor="@color/colorFontBody"/>
+                                
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="50dp"
+                                android:layout_height="match_parent"
+                                android:gravity="center_vertical">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="3dp"
+                                    android:src="@drawable/ic_visibility_24dp"/>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="360"
+                                    android:textSize="15sp"
+                                    android:textColor="@color/colorFontBody"/>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
 
                 </LinearLayout>
 

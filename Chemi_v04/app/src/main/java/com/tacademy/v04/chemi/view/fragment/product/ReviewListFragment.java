@@ -278,8 +278,41 @@ public class ReviewListFragment extends Fragment implements View.OnClickListener
 //                    .add(R.id.fragment_product_container, containerFragment)
 //                    .commit();
 
-            Intent intent = ReviewActivity.newIntent(getActivity(), mReview.getId());
-            startActivity(intent);
+            requestReviewJsonObject(mReview);
+
+
         }
+    }
+
+     private void requestReviewJsonObject(final Review review) {
+
+        final ProgressDialog pDialog =
+                ProgressDialog.show(getActivity(), getString(R.string.request_loading_data),
+                        getString(R.string.load_please_wait), false, false);
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(URL_HOST + PATH
+                + File.separator + mProduct.getProductId() + NetworkConfig.Review.PATH + File.separator + review.getReviewId(),
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        pDialog.dismiss();
+
+//                        mReviewStorage.setReviews(Parser.parseReviewList(response, mReviews));
+//                        mReviewStorage.setReviews(Parser.parseReviewList(response));
+                        mReviewStorage.setReview(Parser.parseReview(response, review));
+
+                        Intent intent = ReviewActivity.newIntent(getActivity(), review.getId());
+                        startActivity(intent);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.w(TAG, "onErrorResponse : " + error.toString());
+                        pDialog.dismiss();
+                    }
+                });
+
+        Volley.newRequestQueue(getActivity()).add(jsonObjectRequest);
     }
 }

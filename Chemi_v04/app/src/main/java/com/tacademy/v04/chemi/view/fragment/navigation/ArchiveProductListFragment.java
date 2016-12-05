@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.tacademy.v04.chemi.R;
 import com.tacademy.v04.chemi.model.Product;
 import com.tacademy.v04.chemi.model.ProductArchiveStorage;
+import com.tacademy.v04.chemi.view.activity.MainActivity;
 
 import java.util.ArrayList;
 
@@ -125,6 +126,8 @@ public class ArchiveProductListFragment extends Fragment implements View.OnClick
                 mActionModeActive = true;
             }
             return true;
+        } else if (id == R.id.action_home) {
+            startActivity(MainActivity.newIntent(getActivity()));
         }
         return super.onOptionsItemSelected(item);
     }
