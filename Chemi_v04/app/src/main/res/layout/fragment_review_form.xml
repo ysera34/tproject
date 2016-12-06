@@ -170,7 +170,8 @@
                         android:id="@+id/review_form_review_image_button1"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
-                        android:src="@drawable/ic_add_a_photo_black_24dp"/>
+                        android:src="@drawable/ic_add_a_photo_black_24dp"
+                        android:background="@null"/>
 
                     <ImageButton
                         android:id="@+id/review_form_review_image_button2"

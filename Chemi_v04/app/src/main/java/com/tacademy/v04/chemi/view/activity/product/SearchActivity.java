@@ -618,7 +618,7 @@ public class SearchActivity extends AppBaseActivity
                             Intent intent = ProductListActivity.newIntent(getApplicationContext(), productId);
                             startActivity(intent);
                         } else {
-                            startActivity(ProductListActivity.newIntent(getApplicationContext(), 43));
+                            startActivity(ProductListActivity.newIntent(getApplicationContext(), 63));
                         }
                     }
                 },

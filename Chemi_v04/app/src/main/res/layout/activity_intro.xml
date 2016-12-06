@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,23 +13,36 @@
         android:layout_height="match_parent">
         
     </android.support.v4.view.ViewPager>
-    
-    <LinearLayout
-        android:id="@+id/intro_dots_layout"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dp"
-        android:gravity="center"
-        android:orientation="horizontal">
-    </LinearLayout>
 
-    <View
+    <com.viewpagerindicator.CirclePageIndicator
+        android:id="@+id/intro_view_pager_indicator"
+        android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:alpha="0.5"
-        android:layout_above="@id/intro_dots_layout"
-        android:background="@color/colorWhiteBackground" />
+        android:layout_alignParentBottom="true"
+        android:paddingBottom="22dp"
+        android:background="#00FFFFFF"
+        app:radius="4dp"
+        app:fillColor="@color/intro_view_pager_indicator_active_color"
+        app:pageColor="@color/intro_view_pager_indicator_inactive_color"
+        app:strokeColor="#FF000000"
+        app:strokeWidth="0dp"/>
+
+    <!--<LinearLayout-->
+        <!--android:id="@+id/intro_dots_layout"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="30dp"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_marginBottom="20dp"-->
+        <!--android:gravity="center"-->
+        <!--android:orientation="horizontal">-->
+    <!--</LinearLayout>-->
+
+    <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="1dp"-->
+        <!--android:alpha="0.5"-->
+        <!--android:layout_above="@id/intro_dots_layout"-->
+        <!--android:background="@color/colorWhiteBackground" />-->
 
     <Button
         android:id="@+id/intro_skip_button"

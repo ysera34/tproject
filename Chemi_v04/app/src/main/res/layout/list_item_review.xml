@@ -80,6 +80,7 @@
                         <TextView
                             android:id="@+id/list_item_review_card_user_info_state_text"
                             android:text="여성 / 40대 / 자녀있음"
+                            android:textSize="12sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
                         
@@ -167,7 +168,6 @@
                         android:padding="5dp"/>
 
                 </LinearLayout>
-
 
             </LinearLayout>
 
