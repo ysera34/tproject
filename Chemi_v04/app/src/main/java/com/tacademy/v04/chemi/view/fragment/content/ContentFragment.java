@@ -29,7 +29,10 @@ public class ContentFragment extends Fragment {
     private ArrayList<Content> mContents;
     private Content mContent;
 
-    private ImageView mContentDetailImageView;
+    private ImageView mContentDetailImageView1;
+    private ImageView mContentDetailImageView2;
+    private ImageView mContentDetailImageView3;
+    private ImageView mContentDetailImageView4;
     int mContentType;
 
     public static ContentFragment newInstance(int type) {
@@ -61,7 +64,10 @@ public class ContentFragment extends Fragment {
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 //        return super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_content, container, false);
-        mContentDetailImageView = (ImageView) view.findViewById(R.id.content_detail_image_view);
+        mContentDetailImageView1 = (ImageView) view.findViewById(R.id.content_detail_image_view1);
+        mContentDetailImageView2 = (ImageView) view.findViewById(R.id.content_detail_image_view2);
+        mContentDetailImageView3 = (ImageView) view.findViewById(R.id.content_detail_image_view3);
+        mContentDetailImageView4 = (ImageView) view.findViewById(R.id.content_detail_image_view4);
 
         return view;
     }
@@ -73,15 +79,16 @@ public class ContentFragment extends Fragment {
         switch (mContentType) {
             case 1 :
                 Log.i(TAG, "mContentType : " + mContentType);
-                mContentDetailImageView.setImageResource(R.drawable.content01);
+                mContentDetailImageView1.setImageResource(R.drawable.content1001);
                 break;
             case 2 :
                 Log.i(TAG, "mContentType : " + mContentType);
-                mContentDetailImageView.setImageResource(R.drawable.content02);
+                mContentDetailImageView1.setImageResource(R.drawable.content2001_1);
+                mContentDetailImageView2.setImageResource(R.drawable.content2001_2);
                 break;
             case 3 :
                 Log.i(TAG, "mContentType : " + mContentType);
-                mContentDetailImageView.setImageResource(R.drawable.content03);
+                mContentDetailImageView1.setImageResource(R.drawable.content3001);
                 break;
         }
     }

@@ -51,8 +51,8 @@
     <color name="chemical_dialog_precaution_description_font_color">#757575</color>
 
 
-    <color name="main_image_switcher_indicator_inactive_color">#7fffffff</color>
-    <color name="main_image_switcher_indicator_active_color">#ffffff</color>
+    <color name="main_view_pager_indicator_inactive_color">#7fffffff</color>
+    <color name="main_view_pager_indicator_active_color">#ffffff</color>
 
     <color name="intro_view_pager_indicator_inactive_color">#d8d8d8</color>
     <color name="intro_view_pager_indicator_active_color">#a4ca5a</color>

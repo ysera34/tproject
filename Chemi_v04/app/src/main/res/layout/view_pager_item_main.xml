@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ImageView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/view_pager_item_main_image_view"
-    android:layout_width="match_parent"
-    android:layout_height="360dp"/>
-
-<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-              <!--android:orientation="vertical"-->
-              <!--android:layout_width="match_parent"-->
-              <!--android:layout_height="360dp">-->
-
 <!--<ImageView-->
+    <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
     <!--android:id="@+id/view_pager_item_main_image_view"-->
     <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:scaleType="center"/>-->
+    <!--android:layout_height="360dp"/>-->
 
-<!--</LinearLayout>-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="163dp">
+
+    <ImageView
+        android:id="@+id/view_pager_item_main_image_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="center"/>
+
+</LinearLayout>

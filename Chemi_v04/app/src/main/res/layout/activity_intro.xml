@@ -27,23 +27,6 @@
         app:strokeColor="#FF000000"
         app:strokeWidth="0dp"/>
 
-    <!--<LinearLayout-->
-        <!--android:id="@+id/intro_dots_layout"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="30dp"-->
-        <!--android:layout_alignParentBottom="true"-->
-        <!--android:layout_marginBottom="20dp"-->
-        <!--android:gravity="center"-->
-        <!--android:orientation="horizontal">-->
-    <!--</LinearLayout>-->
-
-    <!--<View-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="1dp"-->
-        <!--android:alpha="0.5"-->
-        <!--android:layout_above="@id/intro_dots_layout"-->
-        <!--android:background="@color/colorWhiteBackground" />-->
-
     <Button
         android:id="@+id/intro_skip_button"
         android:layout_width="wrap_content"
