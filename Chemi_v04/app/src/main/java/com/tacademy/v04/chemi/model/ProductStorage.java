@@ -114,6 +114,15 @@ public class ProductStorage {
         }
     }
 
+    public ArrayList<Product> getSearchProducts(ArrayList<Integer> productIds) {
+
+        ArrayList<Product> products = new ArrayList<>();
+        for (int i : productIds) {
+            products.add(getProduct(i));
+        }
+        return products;
+    }
+
     public ArrayList<Product> getSearchProducts(String searchQuery) {
 
         ArrayList<Product> products = new ArrayList<>();

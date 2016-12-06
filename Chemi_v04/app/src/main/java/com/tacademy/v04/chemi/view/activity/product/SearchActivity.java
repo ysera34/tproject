@@ -604,7 +604,16 @@ public class SearchActivity extends AppBaseActivity
                         Log.d(TAG, response.toString());
 
                         ArrayList<Product> products = parseSearchKeywordProductList(response);
-                        if (products.size() > 0) {
+                        Log.i(TAG, "products.size() " + products.size());
+                        ArrayList<Integer> productIds = new ArrayList<>();
+                        if (products.size() > 1) {
+                            for (int i = 0; i < products.size(); i++) {
+                                productIds.add(products.get(i).getProductId());
+                            }
+                            Intent intent = ProductListActivity.newIntent(getApplicationContext(), productIds);
+                            startActivity(intent);
+                            Log.i(TAG, "productIds.size() " + productIds.size());
+                        } else if (products.size() == 1) {
                             long productId = Long.parseLong(String.valueOf(products.get(0).getProductId()));
                             Intent intent = ProductListActivity.newIntent(getApplicationContext(), productId);
                             startActivity(intent);

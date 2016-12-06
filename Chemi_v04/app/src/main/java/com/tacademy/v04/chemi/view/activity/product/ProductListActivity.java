@@ -11,6 +11,8 @@ import com.tacademy.v04.chemi.R;
 import com.tacademy.v04.chemi.view.activity.AppNavigationActivity;
 import com.tacademy.v04.chemi.view.fragment.product.ProductListFragment;
 
+import java.util.ArrayList;
+
 import static com.tacademy.v04.chemi.common.Common.CATEGORY_DEFAULT_VALUE;
 import static com.tacademy.v04.chemi.common.Common.PRODUCT_DEFAULT_VALUE;
 
@@ -24,9 +26,11 @@ public class ProductListActivity extends AppNavigationActivity {
 
     private static final String EXTRA_CATEGORY_ID = "com.tacademy.chemi.category_id";
     private static final String EXTRA_PRODUCT_ID = "com.tacademy.chemi.product_id";
+    private static final String EXTRA_PRODUCT_IDS = "com.tacademy.chemi.product_ids";
 
     private int mCategoryId;
     private long mProductId;
+    private ArrayList<Integer> mProductIds;
 
     public static Intent newIntent(Context packageContext) {
         Intent intent = new Intent(packageContext, ProductListActivity.class);
@@ -45,6 +49,12 @@ public class ProductListActivity extends AppNavigationActivity {
         return intent;
     }
 
+    public static Intent newIntent(Context packageContext, ArrayList<Integer> productIds) {
+        Intent intent = new Intent(packageContext, ProductListActivity.class);
+        intent.putExtra(EXTRA_PRODUCT_IDS, productIds);
+        return intent;
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,14 +67,17 @@ public class ProductListActivity extends AppNavigationActivity {
         mToolbarTextView.setText(R.string.title_activity_product_list);
 //        setTitle(R.string.title_activity_product_list);
 
-        mCategoryId = getIntent().getIntExtra(EXTRA_CATEGORY_ID, CATEGORY_DEFAULT_VALUE);
         mProductId = getIntent().getLongExtra(EXTRA_PRODUCT_ID, PRODUCT_DEFAULT_VALUE);
+        mProductIds = getIntent().getIntegerArrayListExtra(EXTRA_PRODUCT_IDS);
+        mCategoryId = getIntent().getIntExtra(EXTRA_CATEGORY_ID, CATEGORY_DEFAULT_VALUE);
 
         FragmentManager fm = getSupportFragmentManager();
         containerFragment = fm.findFragmentById(R.id.fragment_container);
 
         if (containerFragment == null) {
-            if (mProductId > 0) {
+            if (mProductIds != null && mProductIds.size() > 1) {
+                containerFragment = ProductListFragment.newInstance(mProductIds);
+            } else if (mProductId > 0) {
                 containerFragment = ProductListFragment.newInstance(mProductId);
             } else if (mCategoryId > 0) {
                 containerFragment = ProductListFragment.newInstance(mCategoryId);

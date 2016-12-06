@@ -121,9 +121,7 @@ public class ReviewFormFragment extends Fragment implements View.OnClickListener
         mReviewFormRatingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
-                mReviewFormRatingBarValueStatusTextView.setText(
-                        getString(R.string.review_form_rating_value_format,
-                        String.valueOf(ratingBar.getRating())));
+
             }
         });
         mReviewFormRatingBarValueStatusTextView = (TextView)

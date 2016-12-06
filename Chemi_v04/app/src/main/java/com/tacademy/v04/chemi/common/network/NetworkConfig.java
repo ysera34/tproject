@@ -19,6 +19,9 @@ public class NetworkConfig {
     public static final String PAGE_PREV = "prev";
     public static final String PAGE_NEXT = "next";
 
+    public static final int SOCKET_TIMEOUT_GET_REQ = 5000;
+    public static final int SOCKET_TIMEOUT_POST_REQ = 10000;
+
     public static final class Product {
         public static final String PATH = File.separator + "products";
 

@@ -1,6 +1,5 @@
 package com.tacademy.v04.chemi.view.fragment.product;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -53,6 +52,7 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
 
     private static final String ARG_PRODUCT_ID = "product_id";
     private static final String ARG_CATEGORY_ID = "category_id";
+    private static final String ARG_PRODUCT_IDS = "prouduct_ids";
 
     private ProductStorage mProductStorage;
     private RecyclerView mProductRecyclerView;
@@ -60,6 +60,7 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
     private ArrayList<Product> mProducts;
     private long mProductId;
     private int mCategoryId;
+    private ArrayList<Integer> mProductIds;
 
     private TextView mProductTotalTextView;
     private View mProductSortView;
@@ -94,9 +95,21 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
         return fragment;
     }
 
+    public static ProductListFragment newInstance(ArrayList<Integer> productIds) {
+
+        Bundle args = new Bundle();
+        args.putSerializable(ARG_PRODUCT_IDS, productIds);
+
+        ProductListFragment fragment = new ProductListFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     public ProductListFragment() {
         mProductStorage = ProductStorage.get(getActivity());
         mProducts = mProductStorage.getProducts();
+
+        mProductIds = new ArrayList<>();
     }
 
     @Override
@@ -112,6 +125,11 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
             mProductId = getArguments().getLong(
                     ARG_PRODUCT_ID, PRODUCT_DEFAULT_VALUE);
             Log.d(TAG, "onCreate() mProductId : " + mProductId);
+
+            if (mProductIds != null) {
+                mProductIds = getArguments().getIntegerArrayList(ARG_PRODUCT_IDS);
+//                Log.d(TAG, "onCreate() mProductIds : " + mProductIds.size());
+            }
         }
     }
 
@@ -208,9 +226,13 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
                 mProductAdapter = new ProductAdapter(mProducts);
                 mProductRecyclerView.setAdapter(mProductAdapter);
             } else {
-                // category product
-
-                if (mProductId > 0) {
+                if (mProductIds != null && mProductIds.size() > 1) {
+                    mProducts = mProductStorage.getSearchProducts(mProductIds);
+                    Log.i(TAG, "products.size() " + mProductIds.size());
+                    mProductAdapter.addItems(mProducts);
+                    mProductAdapter.notifyDataSetChanged();
+                    mProductTotalTextView.setText(String.valueOf(mProductAdapter.getItemCount()));
+                } else if (mProductId > 0) {
                     mProducts = mProductStorage.getProduct(mProductId);
                     mProductAdapter.addItems(mProducts);
                     mProductAdapter.notifyDataSetChanged();
@@ -249,15 +271,19 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
 
     private void requestJsonObject() {
 
-        final ProgressDialog pDialog =
-                ProgressDialog.show(getActivity(), getString(R.string.request_loading_data),
-                        getString(R.string.load_please_wait), false, false);
+//        final ProgressDialog pDialog =
+//                ProgressDialog.show(getActivity(), getString(R.string.request_loading_data),
+//                        getString(R.string.load_please_wait), false, false);
 
+        final com.tacademy.v04.chemi.view.custom.ProgressDialog customDialog;
+        customDialog = new com.tacademy.v04.chemi.view.custom.ProgressDialog(getActivity());
+        customDialog.show();
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(URL_HOST + PATH,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        pDialog.dismiss();
+//                        pDialog.dismiss();
+                        customDialog.dismiss();
                         mProductStorage.setProducts(Parser.parseProductList(response));
 //                        mProductStorage.setProducts(Parser.parseProductList(response, mProducts));
 //                        switch above method
@@ -270,9 +296,14 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.w(TAG, "onErrorResponse : " + error.toString());
-                        pDialog.dismiss();
+//                        pDialog.dismiss();
+                        customDialog.dismiss();
                     }
                 });
+
+//        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(SOCKET_TIMEOUT_GET_REQ,
+//                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+//                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
         Volley.newRequestQueue(getActivity()).add(jsonObjectRequest);
     }
