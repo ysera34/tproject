@@ -1,8 +1,15 @@
 package com.tacademy.v04.chemi.view.fragment.product;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.v4.app.Fragment;
@@ -51,6 +58,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.tacademy.v04.chemi.common.Common.PICK_FROM_CAMERA;
+import static com.tacademy.v04.chemi.common.Common.PICK_FROM_GALLERY;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.Product.PATH;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.URL_HOST;
 
@@ -62,6 +71,8 @@ public class ReviewFormFragment extends Fragment implements View.OnClickListener
 
     private static final String TAG = ReviewFormFragment.class.getSimpleName();
 
+    private static final int CAMERA_CAPTURE_IMAGE_REQUEST = 301;
+    private static final int GALLERY_IMAGE_REQUEST = 302;
     private static final String ARG_PRODUCT_ID = "product_id";
 
     private int mProductId;
@@ -78,6 +89,9 @@ public class ReviewFormFragment extends Fragment implements View.OnClickListener
     private ImageButton mReviewFormReviewImageButton3;
 
     private BottomSheetDialog mMenuBottomSheetDialog;
+    private Uri mImageUri;
+    private File mImageDir;
+    private String mImagePath;
 
     public static ReviewFormFragment newInstance(int productId) {
         Bundle args = new Bundle();
@@ -247,11 +261,48 @@ public class ReviewFormFragment extends Fragment implements View.OnClickListener
             @Override
             public void onItemClick(BottomSheetMenuAdapter.MenuItemHolder item, int position) {
                 // dismissDialog();
+                String state = Environment.getExternalStorageState();
+                if (Environment.MEDIA_MOUNTED.equals(state) || Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
+                    Toast.makeText(getActivity(), "SD카드가 없어 종료 합니다.", Toast.LENGTH_SHORT).show();
+                    dismissDialog();
+                }
+
+                String currentAppPackage = getActivity().getPackageName();
+                mImageDir = new File(Environment.getExternalStorageDirectory().getAbsolutePath(), currentAppPackage);
+
+                checkPermission();
+
+                if (!mImageDir.exists()) {
+                    Toast.makeText(getActivity(), "저장할 디렉토리가 생성 되었습니다.", Toast.LENGTH_SHORT).show();
+                }
 
                 if (position == 0) {
                     Toast.makeText(getActivity(), "카메라", Toast.LENGTH_SHORT).show();
+                    if (getActivity().getPackageManager().hasSystemFeature(
+                            PackageManager.FEATURE_CAMERA)) {
+
+                        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                        if (mImagePath != null) {
+                            mImagePath = "";
+                        }
+                        String imageName = "upload_" + String.valueOf(System.currentTimeMillis() / 1000) + ".png";
+                        File imageFile = new File(mImageDir, imageName);
+                        mImagePath = imageFile.getAbsolutePath();
+                        mImageUri = Uri.fromFile(imageFile);
+                        intent.putExtra(MediaStore.EXTRA_OUTPUT, mImageUri);
+                        startActivityForResult(intent, PICK_FROM_CAMERA);
+
+                    } else {
+                        Toast.makeText(getActivity(), "카메라를 사용 할 수 없습니다.", Toast.LENGTH_SHORT).show();
+                        dismissDialog();
+                    }
+
                 } else if (position == 1) {
                     Toast.makeText(getActivity(), "갤러리", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent();
+                    intent.setAction(Intent.ACTION_PICK);
+                    intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
+                    startActivityForResult(intent, PICK_FROM_GALLERY);
                 }
             }
         });
@@ -406,5 +457,43 @@ public class ReviewFormFragment extends Fragment implements View.OnClickListener
                 });
 
         Volley.newRequestQueue(getActivity()).add(jsonObjectRequest);
+    }
+
+    private static final int PERMISSION_REQUEST_STORAGE = 100;
+
+    private void checkPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (getActivity().checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED
+                    || getActivity().checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED) {
+
+                if (shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                    Toast.makeText(getActivity(), "Read/Write external storage", Toast.LENGTH_SHORT).show();
+                }
+
+                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_REQUEST_STORAGE);
+
+            } else {
+
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String[] permissions, @NonNull int[] grantResults) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case PERMISSION_REQUEST_STORAGE :
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED
+                        && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+
+                } else {
+                    Log.d(TAG, "Permission always deny");
+                }
+                break;
+        }
     }
 }

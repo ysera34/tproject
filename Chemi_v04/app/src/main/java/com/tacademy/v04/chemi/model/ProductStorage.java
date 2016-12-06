@@ -97,18 +97,7 @@ public class ProductStorage {
             } else {
                 Log.i(TAG + " mProducts do not add",
                         "already existed " + "ProductId : " + String.valueOf(product.toStringId()));
-//                for (Product product1 : mProducts) {
-//                    Log.i("mProducts before", product1.toString());
-//                }
-
-                Log.i("mProducts before", product.toStringId());
-
-                mProducts.set(product.getProductId()-1, product);
-
-//                for (Product product1 : mProducts) {
-//                    Log.i("mProducts after", product1.toString());
-//                }
-                Log.i("mProducts  after", product.toStringId());
+//                mProducts.set(product.getProductId()-1, product);
             }
             return true;
         }

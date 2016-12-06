@@ -394,6 +394,10 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
                     }
                 });
 
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(SOCKET_TIMEOUT_GET_REQ,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
         Volley.newRequestQueue(getActivity()).add(jsonObjectRequest);
     }
 

@@ -1,5 +1,7 @@
 package com.tacademy.v04.chemi.common;
 
+import java.io.File;
+
 /**
  * Created by yoon on 2016. 11. 22..
  */
@@ -23,5 +25,12 @@ public class Common {
 
     public static final int CATEGORY_DEFAULT_VALUE = -1;
     public static final int PRODUCT_DEFAULT_VALUE = -1;
+
+    public static final String IMAGE_DIRECTORY_NAME = File.separator + "chemi";
+
+    public static final int PICK_FROM_CAMERA = 501;
+    public static final int PICK_FROM_GALLERY = 502;
+    public static final int CROP_FROM_CAMERA = 503;
+
 
 }

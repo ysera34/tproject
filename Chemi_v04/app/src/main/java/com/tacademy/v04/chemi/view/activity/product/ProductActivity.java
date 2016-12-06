@@ -22,6 +22,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.tacademy.v04.chemi.R;
 import com.tacademy.v04.chemi.common.network.Parser;
 import com.tacademy.v04.chemi.model.Product;
@@ -36,6 +37,7 @@ import java.io.File;
 import java.util.UUID;
 
 import static com.tacademy.v04.chemi.common.Common.REQUEST_NAVIGATION_FAQ;
+import static com.tacademy.v04.chemi.common.network.NetworkConfig.IMAGE_URL_HOST;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.Product.PATH;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.URL_HOST;
 
@@ -58,6 +60,7 @@ public class ProductActivity extends AppBaseActivity {
     private FloatingActionButton mFloatingActionButton;
     private ImageView mProductImageView;
     private TextView mProductBrandTextView;
+    private TextView mProductNameTextView;
     private RatingBar mProductReviewRatingBar;
     private TextView mProductReviewRatingValue;
     private TextView mProductPriceTextView;
@@ -116,6 +119,7 @@ public class ProductActivity extends AppBaseActivity {
 //                Toast.LENGTH_SHORT).show();
         mProductImageView = (ImageView) findViewById(R.id.toolbar_product_image);
         mProductBrandTextView = (TextView) findViewById(R.id.product_brand_text_view);
+        mProductNameTextView= (TextView) findViewById(R.id.product_name_text_view);
         mProductReviewRatingBar = (RatingBar) findViewById(R.id.product_ratingBar);
         mProductReviewRatingValue = (TextView) findViewById(R.id.product_rating_value_text_view);
 //        mProductPriceTextView = (TextView) findViewById(R.id.product_price_text_view);
@@ -133,17 +137,18 @@ public class ProductActivity extends AppBaseActivity {
 
     private void bindProduct(Product product) {
         mProductBrandTextView.setText(product.getBrand());
+        mProductNameTextView.setText(product.getName());
         mProductReviewRatingBar.setRating(product.getRatingAvg());
         mProductReviewRatingValue.setText(String.valueOf(product.getRatingAvg()));
 //        mProductPriceTextView.setText();
-        mProductImageView.setImageResource(R.drawable.product3);
-//        Glide.with(getApplicationContext())
-//                .load("http://lorempixel.com/600/400/sports/")
+//        mProductImageView.setImageResource(R.drawable.product3);
+        Glide.with(getApplicationContext())
+                .load(IMAGE_URL_HOST + product.getImagePath())
 //                .placeholder(R.drawable.unloaded_image_holder)
-//                .error(R.drawable.unloaded_image_holder)
-//                .override(500, 400)
-//                .centerCrop()
-//                .into(mProductImageView);
+                .error(R.drawable.unloaded_image_holder)
+//                .override(360, 153)
+                .centerCrop()
+                .into(mProductImageView);
 
     }
 

@@ -439,10 +439,17 @@ public class Parser {
                         review.setNegativeContent(reviewObject.getString(REVIEW_NEGATIVE));
                         review.setCreatedDate(reviewObject.getString(REVIEW_CREATED));
                         jsonArray = reviewObject.getJSONArray(WRITER_CONSTITUTIONS);
-                        jsonObject = (JSONObject) jsonArray.get(0);
-                        review.setConstitution1(jsonObject.getString(WRITER_CONSTITUTION));
-                        jsonObject = (JSONObject) jsonArray.get(1);
-                        review.setConstitution2(jsonObject.getString(WRITER_CONSTITUTION));
+                        switch (jsonArray.length()) {
+                            case 2 :
+                                jsonObject = (JSONObject) jsonArray.get(1);
+                                review.setConstitution2(jsonObject.getString(WRITER_CONSTITUTION));
+                            case 1 :
+                                jsonObject = (JSONObject) jsonArray.get(0);
+                                review.setConstitution1(jsonObject.getString(WRITER_CONSTITUTION));
+                                break;
+                            case 0 :
+                                break;
+                        }
                         reviews.add(review);
                     }
                 }

@@ -1,5 +1,6 @@
 package com.tacademy.v04.chemi.view.fragment.product;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,10 +19,12 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.tacademy.v04.chemi.R;
 import com.tacademy.v04.chemi.common.network.Parser;
 import com.tacademy.v04.chemi.model.Product;
@@ -37,7 +40,9 @@ import java.util.Comparator;
 
 import static com.tacademy.v04.chemi.common.Common.CATEGORY_DEFAULT_VALUE;
 import static com.tacademy.v04.chemi.common.Common.PRODUCT_DEFAULT_VALUE;
+import static com.tacademy.v04.chemi.common.network.NetworkConfig.IMAGE_URL_HOST;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.Product.PATH;
+import static com.tacademy.v04.chemi.common.network.NetworkConfig.SOCKET_TIMEOUT_GET_REQ;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.URL_HOST;
 
 /**
@@ -166,7 +171,7 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
     public void onResume() {
         super.onResume();
         requestJsonObject();
-        requestJsonObject();
+//        requestJsonObject();
     }
 
     @Override
@@ -271,19 +276,15 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
 
     private void requestJsonObject() {
 
-//        final ProgressDialog pDialog =
-//                ProgressDialog.show(getActivity(), getString(R.string.request_loading_data),
-//                        getString(R.string.load_please_wait), false, false);
+        final ProgressDialog pDialog =
+                ProgressDialog.show(getActivity(), getString(R.string.request_loading_data),
+                        getString(R.string.load_please_wait), false, false);
 
-        final com.tacademy.v04.chemi.view.custom.ProgressDialog customDialog;
-        customDialog = new com.tacademy.v04.chemi.view.custom.ProgressDialog(getActivity());
-        customDialog.show();
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(URL_HOST + PATH,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-//                        pDialog.dismiss();
-                        customDialog.dismiss();
+                        pDialog.dismiss();
                         mProductStorage.setProducts(Parser.parseProductList(response));
 //                        mProductStorage.setProducts(Parser.parseProductList(response, mProducts));
 //                        switch above method
@@ -296,14 +297,13 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.w(TAG, "onErrorResponse : " + error.toString());
-//                        pDialog.dismiss();
-                        customDialog.dismiss();
+                        pDialog.dismiss();
                     }
                 });
 
-//        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(SOCKET_TIMEOUT_GET_REQ,
-//                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-//                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(SOCKET_TIMEOUT_GET_REQ,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
         Volley.newRequestQueue(getActivity()).add(jsonObjectRequest);
     }
@@ -364,33 +364,35 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
 
         public void bindProduct(Product product) {
             mProduct = product;
-//            mProductImageView.setImageDrawable(getResources().getDrawable(R.drawable.unloaded_image_holder));
-            mProductImageView.setImageResource(R.drawable.product3);
+            mProductImageView.setImageDrawable(getResources().getDrawable(R.drawable.unloaded_image_holder));
+//            mProductImageView.setImageResource(R.drawable.product3);
             mProductBrandTextView.setText(getString(
                     R.string.product_brand_name_format, mProduct.getBrand()));
             mProductTitleTextView.setText(mProduct.getName());
+            mProductTitleTextView.setSelected(true);
             mProductReviewRatingBar.setRating(mProduct.getRatingAvg());
             mProductReviewRatingAvgValue.setText(getString(
                     R.string.product_rating_value_format, String.valueOf(mProduct.getRatingAvg())));
             mProductReviewRatingCount.setText(getString(
                     R.string.list_item_product_review_rating_count, String.valueOf(mProduct.getRatingCount())));
 
-            String[] imagePath = {
-                    "http://lorempixel.com/500/500/abstract/",
-                    "http://lorempixel.com/500/500/sports/",
-                    "http://lorempixel.com/500/500/food/",
-                    "http://lorempixel.com/500/500/city/",
-                    "http://lorempixel.com/500/500/technics/",
-            };
-//            Glide.with(getActivity())
-//                    .load(imagePath[new Random().nextInt(5)])
-//                    .placeholder(R.drawable.unloaded_image_holder)
-//                    .error(R.drawable.unloaded_image_holder)
-//                    .crossFade()
+//            String[] imagePath = {
+//                    "http://lorempixel.com/500/500/abstract/",
+//                    "http://lorempixel.com/500/500/sports/",
+//                    "http://lorempixel.com/500/500/food/",
+//                    "http://lorempixel.com/500/500/city/",
+//                    "http://lorempixel.com/500/500/technics/",
+//            };
+//            Log.i(TAG, IMAGE_URL_HOST + product.getImagePath());
+            Glide.with(getActivity())
+                    .load(IMAGE_URL_HOST + product.getImagePath())
+                    .placeholder(R.drawable.unloaded_image_holder)
+                    .error(R.drawable.unloaded_image_holder)
+                    .crossFade()
 //                    .animate(R.anim.slide_in_left)
-//                    .override(300, 200)
-//                    .centerCrop()
-//                    .into(mProductImageView);
+                    .override(330, 220)
+                    .centerCrop()
+                    .into(mProductImageView);
 
 //            Glide.with(getActivity()).load("Image Path")
 //                    .thumbnail(0.5f)
