@@ -68,7 +68,8 @@ public class IntroActivity extends AppBaseActivity
         mNextButton.setOnClickListener(this);
 
         mLayouts = new int[]{
-                R.layout.view_intro_slider1, R.layout.view_intro_slider2, R.layout.view_intro_slider3,};
+                R.layout.view_intro_slider1, R.layout.view_intro_slider2,
+                R.layout.view_intro_slider3, R.layout.view_intro_slider4};
 
         indicateViewPager(0);
 //        setPageViewController();
@@ -167,6 +168,12 @@ public class IntroActivity extends AppBaseActivity
         if (mTextViews.length > 0) {
             mTextViews[currentPage].setTextColor(activeColorId);
         }
+
+        if (currentPage + 1 == mLayouts.length) {
+            for (int i = 0; i < mTextViews.length; i++) {
+                mTextViews[i].setVisibility(View.GONE);
+            }
+        }
     }
 
     private int getItem(int i) {
@@ -188,9 +195,11 @@ public class IntroActivity extends AppBaseActivity
             indicateViewPager(position);
 
             if (position == mLayouts.length - 1) {
-                mNextButton.setText(getString(R.string.slide_start));
+//                mNextButton.setText(getString(R.string.slide_start));
+                mNextButton.setVisibility(View.GONE);
                 mSkipButton.setVisibility(View.GONE);
             } else {
+                mNextButton.setVisibility(View.VISIBLE);
                 mNextButton.setText(getString(R.string.slide_next));
                 mSkipButton.setVisibility(View.VISIBLE);
             }

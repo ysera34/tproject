@@ -22,8 +22,8 @@
     <dimen name="bottom_sheet_category_height">620dp</dimen>
     <dimen name="bottom_sheet_product_sort_height">127dp</dimen>
 
-    <dimen name="main_image_switcher_indicator_height">25dp</dimen>
-    <dimen name="main_image_switcher_indicator_margin_bottom">15dp</dimen>
+    <dimen name="main_image_switcher_indicator_height">30dp</dimen>
+    <dimen name="main_image_switcher_indicator_margin_bottom">16dp</dimen>
 
     <dimen name="custom_peek_height">620dp</dimen>
 

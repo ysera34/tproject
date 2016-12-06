@@ -28,8 +28,12 @@ public class Common {
 
     public static final String IMAGE_DIRECTORY_NAME = File.separator + "chemi";
 
-    public static final int PICK_FROM_CAMERA = 501;
-    public static final int PICK_FROM_GALLERY = 502;
+    public static final int PICK_FROM_CAMERA1 = 5011;
+    public static final int PICK_FROM_GALLERY1 = 5012;
+    public static final int PICK_FROM_CAMERA2 = 5021;
+    public static final int PICK_FROM_GALLERY2 = 5022;
+    public static final int PICK_FROM_CAMERA3 = 5031;
+    public static final int PICK_FROM_GALLERY3 = 5032;
     public static final int CROP_FROM_CAMERA = 503;
 
 

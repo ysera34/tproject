@@ -105,25 +105,34 @@
             android:layout_height="30dp"
             android:gravity="center">
 
-            <Button
+            <TextView
                 android:id="@+id/bottom_sheet_category_section21"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/selector_bottom_sheet_category_section21"/>
+                android:text="식기세척세제"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:gravity="center"
+                android:textColorHighlight="@color/bottom_sheet_button_clickable_text_color"
+                android:textColorLink="@color/bottom_sheet_button_clickable_text_color"
+                android:background="@drawable/selector_bottom_sheet_category"/>
 
-            <Button
+            <TextView
                 android:id="@+id/bottom_sheet_category_section22"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:text="주방세정제"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:gravity="center"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
-                android:background="@drawable/selector_bottom_sheet_category_section22"/>
+                android:textColorHighlight="@color/bottom_sheet_button_clickable_text_color"
+                android:textColorLink="@color/bottom_sheet_button_clickable_text_color"
+                android:background="@drawable/selector_bottom_sheet_category"/>
 
             <Button
                 android:id="@+id/bottom_sheet_category_section23"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/selector_bottom_sheet_category_section23"/>
+                android:background="@drawable/selector_bottom_sheet_category_section23"
+                android:visibility="invisible"/>
 
         </LinearLayout>
 
@@ -211,6 +220,7 @@
                 android:id="@+id/bottom_sheet_category_section43"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/selector_bottom_sheet_category_section23"
                 android:visibility="invisible"/>
 
         </LinearLayout>

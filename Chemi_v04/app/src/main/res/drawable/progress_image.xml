@@ -2,4 +2,6 @@
 <animated-rotate xmlns:android="http://schemas.android.com/apk/res/android"
                  android:drawable="@drawable/progress_spinner"
                  android:pivotX="50%"
-                 android:pivotY="50%"></animated-rotate>
+                 android:pivotY="50%" />
+
+    <!--android:drawable="@drawable/preloader"-->

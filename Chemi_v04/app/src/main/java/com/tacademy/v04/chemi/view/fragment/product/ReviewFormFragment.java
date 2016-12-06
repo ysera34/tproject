@@ -1,9 +1,11 @@
 package com.tacademy.v04.chemi.view.fragment.product;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -58,8 +60,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.tacademy.v04.chemi.common.Common.PICK_FROM_CAMERA;
-import static com.tacademy.v04.chemi.common.Common.PICK_FROM_GALLERY;
+import static com.tacademy.v04.chemi.common.Common.PICK_FROM_CAMERA1;
+import static com.tacademy.v04.chemi.common.Common.PICK_FROM_CAMERA2;
+import static com.tacademy.v04.chemi.common.Common.PICK_FROM_CAMERA3;
+import static com.tacademy.v04.chemi.common.Common.PICK_FROM_GALLERY1;
+import static com.tacademy.v04.chemi.common.Common.PICK_FROM_GALLERY2;
+import static com.tacademy.v04.chemi.common.Common.PICK_FROM_GALLERY3;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.Product.PATH;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.URL_HOST;
 
@@ -199,6 +205,8 @@ public class ReviewFormFragment extends Fragment implements View.OnClickListener
         super.onViewCreated(view, savedInstanceState);
     }
 
+    private static final String IMAGE_POSITION = "image_button_position";
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -206,11 +214,13 @@ public class ReviewFormFragment extends Fragment implements View.OnClickListener
 
                 break;
             case R.id.review_form_review_image_button1 :
-                createMenuBottomSheetDialog();
+                createMenuBottomSheetDialog(0);
                 break;
             case R.id.review_form_review_image_button2 :
+                createMenuBottomSheetDialog(1);
                 break;
             case R.id.review_form_review_image_button3 :
+                createMenuBottomSheetDialog(2);
                 break;
         }
     }
@@ -247,7 +257,7 @@ public class ReviewFormFragment extends Fragment implements View.OnClickListener
         return false;
     }
 
-    private void createMenuBottomSheetDialog() {
+    private void createMenuBottomSheetDialog(final int imagePosition) {
         if (dismissDialog()) {
             return;
         }
@@ -260,9 +270,9 @@ public class ReviewFormFragment extends Fragment implements View.OnClickListener
         menuAdapter.setOnItemClickListener(new BottomSheetMenuAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BottomSheetMenuAdapter.MenuItemHolder item, int position) {
-                // dismissDialog();
+
                 String state = Environment.getExternalStorageState();
-                if (Environment.MEDIA_MOUNTED.equals(state) || Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
+                if (!Environment.MEDIA_MOUNTED.equals(state) || Environment.MEDIA_MOUNTED_READ_ONLY.equals(state)) {
                     Toast.makeText(getActivity(), "SD카드가 없어 종료 합니다.", Toast.LENGTH_SHORT).show();
                     dismissDialog();
                 }
@@ -276,8 +286,11 @@ public class ReviewFormFragment extends Fragment implements View.OnClickListener
                     Toast.makeText(getActivity(), "저장할 디렉토리가 생성 되었습니다.", Toast.LENGTH_SHORT).show();
                 }
 
+                int[] cameraRequestCodeArr = {PICK_FROM_CAMERA1, PICK_FROM_CAMERA2, PICK_FROM_CAMERA3};
+
                 if (position == 0) {
                     Toast.makeText(getActivity(), "카메라", Toast.LENGTH_SHORT).show();
+                    dismissDialog();
                     if (getActivity().getPackageManager().hasSystemFeature(
                             PackageManager.FEATURE_CAMERA)) {
 
@@ -290,7 +303,7 @@ public class ReviewFormFragment extends Fragment implements View.OnClickListener
                         mImagePath = imageFile.getAbsolutePath();
                         mImageUri = Uri.fromFile(imageFile);
                         intent.putExtra(MediaStore.EXTRA_OUTPUT, mImageUri);
-                        startActivityForResult(intent, PICK_FROM_CAMERA);
+                        startActivityForResult(intent, cameraRequestCodeArr[imagePosition]);
 
                     } else {
                         Toast.makeText(getActivity(), "카메라를 사용 할 수 없습니다.", Toast.LENGTH_SHORT).show();
@@ -298,11 +311,14 @@ public class ReviewFormFragment extends Fragment implements View.OnClickListener
                     }
 
                 } else if (position == 1) {
+
+                    int[] galleryRequestCodeArr = {PICK_FROM_GALLERY1, PICK_FROM_GALLERY2, PICK_FROM_GALLERY3};
                     Toast.makeText(getActivity(), "갤러리", Toast.LENGTH_SHORT).show();
+                    dismissDialog();
                     Intent intent = new Intent();
                     intent.setAction(Intent.ACTION_PICK);
                     intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
-                    startActivityForResult(intent, PICK_FROM_GALLERY);
+                    startActivityForResult(intent, galleryRequestCodeArr[imagePosition]);
                 }
             }
         });
@@ -318,6 +334,92 @@ public class ReviewFormFragment extends Fragment implements View.OnClickListener
         mMenuBottomSheetDialog.setContentView(view);
         mMenuBottomSheetDialog.show();
     }
+
+    private static final int PERMISSION_REQUEST_STORAGE = 100;
+
+    private void checkPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (getActivity().checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED
+                    || getActivity().checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED) {
+
+                if (shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                    Toast.makeText(getActivity(), "Read/Write external storage", Toast.LENGTH_SHORT).show();
+                }
+
+                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_REQUEST_STORAGE);
+
+            } else {
+
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           @NonNull String[] permissions, @NonNull int[] grantResults) {
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case PERMISSION_REQUEST_STORAGE :
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED
+                        && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+
+                } else {
+                    Log.d(TAG, "Permission always deny");
+                }
+                break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+        Uri returnedImageUri;
+        if (resultCode != Activity.RESULT_OK || resultCode == Activity.RESULT_CANCELED) {
+            return;
+        }
+        switch (requestCode) {
+            case PICK_FROM_GALLERY1 :
+                returnedImageUri = data.getData();
+                if (returnedImageUri != null) {
+                    mReviewFormReviewImageButton1.setImageURI(returnedImageUri);
+                } else {
+                    Bundle extras = data.getExtras();
+                    Bitmap returnedBitmap = (Bitmap) extras.get("data");
+                }
+                break;
+            case PICK_FROM_GALLERY2 :
+                returnedImageUri = data.getData();
+                if (returnedImageUri != null) {
+                    mReviewFormReviewImageButton2.setImageURI(returnedImageUri);
+                } else {
+                    Bundle extras = data.getExtras();
+                    Bitmap returnedBitmap = (Bitmap) extras.get("data");
+                }
+                break;
+            case PICK_FROM_GALLERY3 :
+                returnedImageUri = data.getData();
+                if (returnedImageUri != null) {
+                    mReviewFormReviewImageButton3.setImageURI(returnedImageUri);
+                } else {
+                    Bundle extras = data.getExtras();
+                    Bitmap returnedBitmap = (Bitmap) extras.get("data");
+                }
+                break;
+            case PICK_FROM_CAMERA1 :
+                mReviewFormReviewImageButton1.setImageURI(Uri.fromFile(new File(mImagePath)));
+                break;
+            case PICK_FROM_CAMERA2 :
+                mReviewFormReviewImageButton1.setImageURI(Uri.fromFile(new File(mImagePath)));
+                break;
+            case PICK_FROM_CAMERA3 :
+                mReviewFormReviewImageButton1.setImageURI(Uri.fromFile(new File(mImagePath)));
+                break;
+        }
+    }
+
 
     private void requestJsonObject() {
 
@@ -381,31 +483,31 @@ public class ReviewFormFragment extends Fragment implements View.OnClickListener
 
                     }
                 }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        pDialog.dismiss();
-                        Log.w(TAG, "onErrorResponse : " + error.toString());
-                    }
-                })
-                {
-                @Override
-                protected Map<String, String> getParams() throws AuthFailureError {
-                    Map<String, String> params = new HashMap<>();
-                    params.put("userid", "3");
-                    params.put("rating", String.valueOf(mReviewFormRatingBar.getRating()));
-                    params.put("reviewp", encodeUTF8(mReviewFormReviewPositiveEditText.getText().toString()));
-                    params.put("reviewn", encodeUTF8(mReviewFormReviewNegativeEditText.getText().toString()));
-                    return params;
-                }
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                pDialog.dismiss();
+                Log.w(TAG, "onErrorResponse : " + error.toString());
+            }
+        })
+        {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("userid", "3");
+                params.put("rating", String.valueOf(mReviewFormRatingBar.getRating()));
+                params.put("reviewp", encodeUTF8(mReviewFormReviewPositiveEditText.getText().toString()));
+                params.put("reviewn", encodeUTF8(mReviewFormReviewNegativeEditText.getText().toString()));
+                return params;
+            }
 
-                @Override
-                protected Map<String, DataPart> getByteData() {
-                    Map<String, DataPart> params = new HashMap<>();
-                    // file name could found file base or direct access from real path
-                    // for now just get bitmap data from ImageView
-                    params.put("images1", new DataPart("?.png", MultipartRequestHelper.getFileDataFromDrawable(getActivity(), R.drawable.ic_drawer), "image/*"));
-                    params.put("images2", new DataPart("?.png", MultipartRequestHelper.getFileDataFromDrawable(getActivity(), R.drawable.ic_drawer), "image/*"));
-                    params.put("images3", new DataPart("?.png", MultipartRequestHelper.getFileDataFromDrawable(getActivity(), R.drawable.ic_drawer), "image/*"));
+            @Override
+            protected Map<String, DataPart> getByteData() {
+                Map<String, DataPart> params = new HashMap<>();
+                // file name could found file base or direct access from real path
+                // for now just get bitmap data from ImageView
+                params.put("images1", new DataPart("?.png", MultipartRequestHelper.getFileDataFromDrawable(getActivity(), mReviewFormReviewImageButton1.getDrawable()), "image/*"));
+                params.put("images2", new DataPart("?.png", MultipartRequestHelper.getFileDataFromDrawable(getActivity(), mReviewFormReviewImageButton2.getDrawable()), "image/*"));
+                params.put("images3", new DataPart("?.png", MultipartRequestHelper.getFileDataFromDrawable(getActivity(), mReviewFormReviewImageButton3.getDrawable()), "image/*"));
                 return params;
             }
         };
@@ -413,9 +515,7 @@ public class ReviewFormFragment extends Fragment implements View.OnClickListener
         Volley.newRequestQueue(getActivity()).add(multipartRequest);
 
 //        VolleySingleton.getInstance(getBaseContext()).addToRequestQueue(multipartRequest);
-
     }
-
 
     private String encodeUTF8 (String rawStr) {
         String utf8String = null;
@@ -459,41 +559,4 @@ public class ReviewFormFragment extends Fragment implements View.OnClickListener
         Volley.newRequestQueue(getActivity()).add(jsonObjectRequest);
     }
 
-    private static final int PERMISSION_REQUEST_STORAGE = 100;
-
-    private void checkPermission() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (getActivity().checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                    != PackageManager.PERMISSION_GRANTED
-                    || getActivity().checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
-                    != PackageManager.PERMISSION_GRANTED) {
-
-                if (shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                    Toast.makeText(getActivity(), "Read/Write external storage", Toast.LENGTH_SHORT).show();
-                }
-
-                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_REQUEST_STORAGE);
-
-            } else {
-
-            }
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           @NonNull String[] permissions, @NonNull int[] grantResults) {
-//        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode) {
-            case PERMISSION_REQUEST_STORAGE :
-                if (grantResults[0] == PackageManager.PERMISSION_GRANTED
-                        && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
-
-                } else {
-                    Log.d(TAG, "Permission always deny");
-                }
-                break;
-        }
-    }
 }

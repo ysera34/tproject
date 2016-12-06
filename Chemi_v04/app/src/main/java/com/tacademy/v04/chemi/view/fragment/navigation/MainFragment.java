@@ -33,6 +33,7 @@ import com.tacademy.v04.chemi.model.Content;
 import com.tacademy.v04.chemi.model.ContentMainStorage;
 import com.tacademy.v04.chemi.view.activity.MainActivity;
 import com.tacademy.v04.chemi.view.activity.content.ContentActivity;
+import com.tacademy.v04.chemi.view.custom.ProgressDialog;
 
 import java.util.ArrayList;
 
@@ -213,8 +214,8 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         mMainContentRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mMainContentRecyclerView.setNestedScrollingEnabled(false);
 
-//        (view.findViewById(R.id.prev_button)).setOnClickListener(this);
-//        (view.findViewById(R.id.next_button)).setOnClickListener(this);
+        (view.findViewById(R.id.prev_button)).setOnClickListener(this);
+        (view.findViewById(R.id.next_button)).setOnClickListener(this);
 
         return view;
     }
@@ -296,14 +297,17 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
+        ProgressDialog progressDialog = new ProgressDialog(getActivity());
         switch (view.getId()) {
-//            case R.id.prev_button :
+            case R.id.prev_button :
 //                mMainImageSwitch.setImageResource(R.drawable.main_content_sample01);
-//                break;
-//
-//            case R.id.next_button:
+                progressDialog.show();
+                break;
+
+            case R.id.next_button:
 //                mMainImageSwitch.setImageResource(R.drawable.main_content_sample02);
-//                break;
+                progressDialog.dismiss();
+                break;
         }
     }
 

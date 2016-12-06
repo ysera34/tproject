@@ -18,6 +18,7 @@ import com.tacademy.v04.chemi.R;
 import com.tacademy.v04.chemi.model.Review;
 import com.tacademy.v04.chemi.model.ReviewStorage;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -28,6 +29,8 @@ import static com.tacademy.v04.chemi.common.network.NetworkConfig.IMAGE_URL_HOST
  */
 
 public class ReviewFragment extends Fragment {
+
+    private static final String TAG = ReviewFragment.class.getSimpleName();
 
     private static final String ARG_REVIEW = "review_id";
 
@@ -185,7 +188,7 @@ public class ReviewFragment extends Fragment {
         public void bindReviewImage(String imagePath) {
             mImagePath = imagePath;
             Glide.with(getActivity())
-                    .load(IMAGE_URL_HOST + mImagePath)
+                    .load(IMAGE_URL_HOST + File.separator +  mImagePath)
                     .placeholder(R.drawable.unloaded_image_holder)
                     .error(R.drawable.unloaded_image_holder)
                     .override(140, 140)
