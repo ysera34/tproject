@@ -18,6 +18,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -39,6 +40,7 @@ import java.util.UUID;
 import static com.tacademy.v04.chemi.common.Common.REQUEST_NAVIGATION_FAQ;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.IMAGE_URL_HOST;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.Product.PATH;
+import static com.tacademy.v04.chemi.common.network.NetworkConfig.SOCKET_TIMEOUT_GET_REQ;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.URL_HOST;
 
 /**
@@ -218,10 +220,16 @@ public class ProductActivity extends AppBaseActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.w(TAG, "onErrorResponse : " + error.toString());
                         pDialog.dismiss();
+                        Log.w(TAG, "onErrorResponse : " + error.toString());
+                        Toast.makeText(getApplicationContext(), "데이터 수신 중, 서버에서 문제가 발생하였습니다.",
+                                Toast.LENGTH_SHORT).show();
                     }
                 });
+
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(SOCKET_TIMEOUT_GET_REQ,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
         Volley.newRequestQueue(getApplicationContext()).add(jsonObjectRequest);
     }

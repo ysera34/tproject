@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Response;
@@ -164,6 +165,8 @@ public class ReviewListFragment extends Fragment implements View.OnClickListener
                     public void onErrorResponse(VolleyError error) {
                         Log.w(TAG, "onErrorResponse : " + error.toString());
                         pDialog.dismiss();
+                        Toast.makeText(getActivity(), "데이터 수신 중, 서버에서 문제가 발생하였습니다.",
+                                Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -316,8 +319,14 @@ public class ReviewListFragment extends Fragment implements View.OnClickListener
                     public void onErrorResponse(VolleyError error) {
                         Log.w(TAG, "onErrorResponse : " + error.toString());
                         pDialog.dismiss();
+                        Toast.makeText(getActivity(), "데이터 수신 중, 서버에서 문제가 발생하였습니다.",
+                                Toast.LENGTH_SHORT).show();
                     }
                 });
+
+         jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(SOCKET_TIMEOUT_GET_REQ,
+                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
         Volley.newRequestQueue(getActivity()).add(jsonObjectRequest);
     }

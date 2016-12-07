@@ -76,8 +76,8 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         ContentMainStorage contentMainStorage = ContentMainStorage.get(getActivity());
         mContents = contentMainStorage.getContents();
 
-        mImageBannerArray = new int[]{0, R.drawable.main_banner01,
-                R.drawable.main_banner02, R.drawable.main_banner03, 0,};
+        mImageBannerArray = new int[]{R.drawable.main_banner01,
+                R.drawable.main_banner02, R.drawable.main_banner03,};
 //        mImageAnimationLeftIn = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_in_left);
 //        mImageAnimationRightOut = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_out_right);
 //        mImageAnimationRightIn = AnimationUtils.loadAnimation(getActivity(), R.anim.slide_in_right);
@@ -95,51 +95,6 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         mImageBannerViewPager = (ViewPager) view.findViewById(R.id.main_image_banner_view_pager);
         mViewPagerAdapter = new ImageBannerViewPagerAdapter();
         mImageBannerViewPager.setAdapter(mViewPagerAdapter);
-        mImageBannerViewPager.setCurrentItem(1);
-        mImageBannerViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                try {
-                    mPagerHandler.add(Integer.valueOf(positionOffsetPixels));
-                    if (mPagerHandler.size() > 0) {
-                        if (position == mImageBannerArray.length - 2
-                                & (mPagerHandler.get(mPagerHandler.size() - 1) - mPagerHandler.get(0) < 100)
-                                & mScrollState == 2
-                                & !isFirstVisitEnd) {
-                            mImageBannerViewPager.setCurrentItem(1, false);
-                        }
-
-                        if (position == 0 & (mPagerHandler.get(mPagerHandler.size() - 1) - mPagerHandler.get(0) > -100)
-                                & mScrollState == 2
-                                & isFirstVisitBegin) {
-                            mImageBannerViewPager.setCurrentItem(mImageBannerArray.length - 2, false);
-                        }
-                    }
-                } catch (Exception e) {
-                    Log.d(TAG, e.toString());
-                }
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                mPagerHandler.clear();
-                if (position == mImageBannerArray.length - 1) {
-                    isFirstVisitEnd = false;
-                } else {
-                    isFirstVisitEnd = true;
-                }
-                if (position == 0) {
-                    isFirstVisitBegin = false;
-                } else {
-                    isFirstVisitBegin = true;
-                }
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-                mScrollState = state;
-            }
-        });
 
         mMainContentRecyclerView = (RecyclerView) view.findViewById(R.id.main_recycler_view);
         mMainContentRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -257,11 +212,6 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 //        menu.findItem(R.id.action_home).setVisible(false);
 //        getActivity().getMenuInflater().inflate(R.menu.menu_toolbar, menu);
     }
-
-    private int mScrollState;
-    private boolean isFirstVisitBegin = true;
-    private boolean isFirstVisitEnd = true;
-    private ArrayList<Integer> mPagerHandler = new ArrayList<>();
 
     private class ImageBannerViewPagerAdapter extends PagerAdapter {
 

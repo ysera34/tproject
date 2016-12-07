@@ -271,7 +271,10 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        pDialog.dismiss();
                         Log.w(TAG, "onErrorResponse : " + error.toString());
+                        Toast.makeText(getActivity(), "데이터 수신 중, 서버에서 문제가 발생하였습니다.",
+                                Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -389,8 +392,10 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.w(TAG, "onErrorResponse : " + error.toString());
                         pDialog.dismiss();
+                        Log.w(TAG, "onErrorResponse : " + error.toString());
+                        Toast.makeText(getActivity(), "데이터 수신 중, 서버에서 문제가 발생하였습니다.",
+                                Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -433,7 +438,8 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
         private final Collator mCollator = Collator.getInstance();
         @Override
         public int compare(Object o, Object t1) {
-            return mCollator.compare(String.valueOf(((Chemical)o).getHazard()[0]), String.valueOf(((Chemical)t1).getHazard()[0]));
+            return mCollator.compare(String.valueOf(((Chemical)o).getHazard()[0]),
+                    String.valueOf(((Chemical)t1).getHazard()[0]));
         }
     };
 }

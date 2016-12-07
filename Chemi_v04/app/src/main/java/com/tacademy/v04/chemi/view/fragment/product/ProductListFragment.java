@@ -1,5 +1,6 @@
 package com.tacademy.v04.chemi.view.fragment.product;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,6 +19,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -40,6 +42,7 @@ import static com.tacademy.v04.chemi.common.Common.CATEGORY_DEFAULT_VALUE;
 import static com.tacademy.v04.chemi.common.Common.PRODUCT_DEFAULT_VALUE;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.IMAGE_URL_HOST;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.Product.PATH;
+import static com.tacademy.v04.chemi.common.network.NetworkConfig.SOCKET_TIMEOUT_GET_REQ;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.URL_HOST;
 
 /**
@@ -273,15 +276,15 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
 
     private void requestJsonObject() {
 
-//        final ProgressDialog pDialog =
-//                ProgressDialog.show(getActivity(), getString(R.string.request_loading_data),
-//                        getString(R.string.load_please_wait), false, false);
-//
+        final ProgressDialog pDialog =
+                ProgressDialog.show(getActivity(), getString(R.string.request_loading_data),
+                        getString(R.string.load_please_wait), false, false);
+
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(URL_HOST + PATH,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-//                        pDialog.dismiss();
+                        pDialog.dismiss();
                         mProductStorage.setProducts(Parser.parseProductList(response));
 //                        mProductStorage.setProducts(Parser.parseProductList(response, mProducts));
 //                        switch above method
@@ -293,14 +296,15 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        pDialog.dismiss();
                         Log.w(TAG, "onErrorResponse : " + error.toString());
-//                        pDialog.dismiss();
+                        Toast.makeText(getActivity(), "데이터 수신 중, 서버에서 문제가 발생하였습니다.", Toast.LENGTH_SHORT).show();
                     }
                 });
 
-//        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(SOCKET_TIMEOUT_GET_REQ,
-//                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-//                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(SOCKET_TIMEOUT_GET_REQ,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
         Volley.newRequestQueue(getActivity()).add(jsonObjectRequest);
     }
