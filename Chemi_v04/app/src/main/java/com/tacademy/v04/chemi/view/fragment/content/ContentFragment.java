@@ -75,7 +75,7 @@ public class ContentFragment extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+//        mContents.
         switch (mContentType) {
             case 1 :
                 Log.i(TAG, "mContentType : " + mContentType);
@@ -85,8 +85,22 @@ public class ContentFragment extends Fragment {
                 Log.i(TAG, "mContentType : " + mContentType);
                 mContentDetailImageView1.setImageResource(R.drawable.content2001_1);
                 mContentDetailImageView2.setImageResource(R.drawable.content2001_2);
+                mContentDetailImageView3.setImageResource(R.drawable.content2001_3);
+                mContentDetailImageView4.setImageResource(R.drawable.content2001_4);
                 break;
             case 3 :
+                Log.i(TAG, "mContentType : " + mContentType);
+                mContentDetailImageView1.setImageResource(R.drawable.content3001);
+                break;
+            case 4 :
+                Log.i(TAG, "mContentType : " + mContentType);
+                mContentDetailImageView1.setImageResource(R.drawable.content1003);
+                break;
+            case 5 :
+                Log.i(TAG, "mContentType : " + mContentType);
+                mContentDetailImageView1.setImageResource(R.drawable.content2002);
+                break;
+            case 6 :
                 Log.i(TAG, "mContentType : " + mContentType);
                 mContentDetailImageView1.setImageResource(R.drawable.content3001);
                 break;

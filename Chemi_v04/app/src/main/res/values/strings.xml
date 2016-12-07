@@ -107,7 +107,7 @@
     <string name="load_please_wait">Please wait...</string>
     <string name="list_item_product_review_rating_count">(%s)</string>
     <string name="chemical_dangerous_grade_format">%s</string>
-    <string name="review_card_user_symptom">%1$s / %2$s / %3$s</string>
+    <string name="review_card_user_symptom">%1$s / %2$s년생/ %3$s</string>
     <string name="empty_product_reivews_info">empty reviews</string>
     <string name="chemical_hazard_circle_transition_name">chemical_hazard_circle</string>
     <string name="review_form_string_length_form">%s / 500</string>

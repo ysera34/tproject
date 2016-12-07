@@ -68,7 +68,10 @@ public class Review {
     }
 
     public boolean isPhotoCheck() {
-        return mPhotoCheck;
+        if (getImageResIdArray().size() > 0) {
+            return true;
+        }
+        return false;
     }
 
     public void setPhotoCheck(boolean photoCheck) {
@@ -107,8 +110,6 @@ public class Review {
         mImagePaths = imagePaths;
     }
 
-
-
     public String getName() {
         return mName;
     }
@@ -133,8 +134,15 @@ public class Review {
         mBirthYear = birthYear;
     }
 
-    public int getChild() {
-        return mChild;
+//    public int getChild() {
+//        return mChild;
+//    }
+
+    public String getChild() {
+        if (mChild > 0) {
+            return "자녀 있음";
+        }
+        return "자녀 없음";
     }
 
     public void setChild(int child) {

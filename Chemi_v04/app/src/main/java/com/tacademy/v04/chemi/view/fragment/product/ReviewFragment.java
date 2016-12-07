@@ -126,7 +126,6 @@ public class ReviewFragment extends Fragment {
         }
         mReviewCardDetailRatingBar.setRating(mReview.getRatingValue());
 
-
         mReviewCardDetailPositiveTextView.setText(review.getPositiveContent());
         mReviewCardDetailNegativeTextView.setText(review.getNegativeContent());
     }
@@ -189,7 +188,7 @@ public class ReviewFragment extends Fragment {
             mImagePath = imagePath;
             Glide.with(getActivity())
                     .load(IMAGE_URL_HOST + File.separator +  mImagePath)
-                    .placeholder(R.drawable.unloaded_image_holder)
+//                    .placeholder(R.drawable.unloaded_image_holder)
                     .error(R.drawable.unloaded_image_holder)
                     .override(140, 140)
                     .centerCrop()

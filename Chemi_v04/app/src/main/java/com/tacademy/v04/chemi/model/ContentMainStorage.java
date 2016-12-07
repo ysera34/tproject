@@ -47,21 +47,21 @@ public class ContentMainStorage {
                     content.setContentTypeImageId(R.drawable.ic_main_banner_type3);
                     break;
                 case 3 :
-                    content.setContentType(1);
+                    content.setContentType(4);
                     content.setTitle("환경부, 안전기준 위반 생활화학제품\n11개 퇴출 발표");
                     content.setDescription("");
                     content.setContentImageId(R.drawable.main_content_sample04);
                     content.setContentTypeImageId(R.drawable.ic_main_banner_type1);
                     break;
                 case 4 :
-                    content.setContentType(2);
+                    content.setContentType(5);
                     content.setTitle("30대 주부님들이 가장 많이 찾아본\n제품 TOP5");
                     content.setDescription("12월 넷째");
                     content.setContentImageId(R.drawable.main_content_sample05);
                     content.setContentTypeImageId(R.drawable.ic_main_banner_type2);
                     break;
                 case 5 :
-                    content.setContentType(3);
+                    content.setContentType(6);
                     content.setTitle("천연 세제 만들기");
                     content.setDescription("케미녀가 해봤습니다!");
                     content.setContentImageId(R.drawable.main_content_sample06);

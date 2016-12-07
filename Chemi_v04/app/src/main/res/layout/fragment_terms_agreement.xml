@@ -10,27 +10,31 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
         android:text="환영합니다!"
-        android:textSize="14sp"
+        android:textSize="16sp"
         android:textStyle="bold"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/chemi_agreement1"
-        android:textSize="14sp"
+        android:textSize="15sp"
+        android:lineSpacingMultiplier="1.3"
         android:layout_marginBottom="32dp"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
         android:text="케미는 아래와 같은 서비스를 제공합니다."
-        android:textSize="14sp"
+        android:textSize="16sp"
         android:textStyle="bold"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="14sp"
+        android:textSize="15sp"
+        android:lineSpacingMultiplier="1.3"
         android:text="@string/chemi_agreement2"/>
 
 
