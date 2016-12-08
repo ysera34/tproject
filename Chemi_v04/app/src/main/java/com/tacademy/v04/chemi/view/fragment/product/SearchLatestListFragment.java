@@ -176,7 +176,7 @@ public class SearchLatestListFragment extends Fragment {
                 case R.id.list_item_clear_image_button :
                     Toast.makeText(getActivity(), R.string.remove_search_word_info_message,
                             Toast.LENGTH_SHORT).show();
-                    mSearches = searchLatestStorage.removeSearch(mSearch);
+                    mSearches = searchLatestStorage.removeSearch(mSearch, this.getAdapterPosition());
                     mLatestWordAdapter.notifyDataSetChanged();
                     break;
             }

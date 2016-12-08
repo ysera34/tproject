@@ -1,9 +1,11 @@
 package com.tacademy.v04.chemi.model;
 
 import android.content.Context;
+import android.util.Log;
+
+import com.tacademy.v04.chemi.common.util.manager.PreferenceManager;
 
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.UUID;
 
 /**
@@ -12,26 +14,19 @@ import java.util.UUID;
 
 public class SearchLatestStorage {
 
+    private static final int MAX_NUMBER_OF_SEARCH_WORDS = 8;
+
     private static SearchLatestStorage sSearchStorage;
     private Context mAppContext;
+
+    private PreferenceManager mPreferenceManager;
 
     private ArrayList<Search> mSearches;
 
     private SearchLatestStorage(Context appContext) {
         mAppContext = appContext;
         mSearches = new ArrayList<>();
-
-        /*
-        sample data
-         */
-        for (int i = 0; i < 8; i++) {
-            Search search = new Search();
-            search.setRatingNumber(i);
-            search.setSearchWord("최근검색어English" + i);
-            search.setVariationValue(new Random().nextInt(10));
-            search.setVariationState(i%2 == 0);
-            mSearches.add(search);
-        }
+        mPreferenceManager = new PreferenceManager(mAppContext.getApplicationContext());
     }
 
     public static SearchLatestStorage get(Context context) {
@@ -42,6 +37,17 @@ public class SearchLatestStorage {
     }
 
     public ArrayList<Search> getSearches() {
+
+        ArrayList<String> searchLatestWords = getSearchLatestWordsPreference();
+        Log.w("searchLatestWords", "size" + searchLatestWords.size());
+        if (searchLatestWords != null) {
+            for (int i = 0; i < searchLatestWords.size(); i++) {
+                Search search = new Search();
+                search.setSearchWord(searchLatestWords.get(i));
+                mSearches.add(search);
+            }
+        }
+
         return mSearches;
     }
 
@@ -63,4 +69,34 @@ public class SearchLatestStorage {
         }
         return mSearches;
     }
+
+    public ArrayList<Search> removeSearch(Search search, int position) {
+        for (Search s : mSearches) {
+            if (s.getId().equals(search.getId())) {
+                mSearches.remove(search);
+                removeSearchLatestWordsPreference(position);
+                break;
+            }
+        }
+        return mSearches;
+    }
+
+    public ArrayList<String> getSearchLatestWordsPreference() {
+        return mPreferenceManager.getSearchLatestWordsPreference(MAX_NUMBER_OF_SEARCH_WORDS);
+    }
+
+    public void setSearchLatestWordsPreference(String word, int index) {
+        mPreferenceManager.setSearchLatestWordsPreference(word, index);
+    }
+
+    public void removeSearchLatestWordsPreference(int index) {
+        mPreferenceManager.removeSearchLatestWordsPreference(index);
+    }
+
+    public int getSearchLatestWordsPreferenceIndex() {
+        return mPreferenceManager.getSearchLatestWordsPreferenceIndex();
+    }
+
+
+
 }

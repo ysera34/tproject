@@ -44,7 +44,7 @@ public class ContentTabFragment extends Fragment {
 
         addContentListFragment(ContentT1ListFragment.newInstance(1), "케미데스크");
         addContentListFragment(ContentT2ListFragment.newInstance(2), "케미 PICK");
-        addContentListFragment(ContentT3ListFragment.newInstance(3), "생활 정보");
+        addContentListFragment(ContentT3ListFragment.newInstance(3), "케미 라이프");
     }
 
     @Nullable

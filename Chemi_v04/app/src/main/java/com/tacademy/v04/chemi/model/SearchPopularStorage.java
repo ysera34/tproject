@@ -2,6 +2,8 @@ package com.tacademy.v04.chemi.model;
 
 import android.content.Context;
 
+import com.tacademy.v04.chemi.R;
+
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.UUID;
@@ -24,14 +26,17 @@ public class SearchPopularStorage {
         /*
         sample data
          */
+        String[] searchWordArr = mAppContext.getResources().getStringArray(R.array.search_popular_word_array);
+
         for (int i = 0; i < 8; i++) {
             Search search = new Search();
             search.setRatingNumber(i);
-            search.setSearchWord("인기검색어English" + i);
-            search.setVariationValue(new Random().nextInt(10));
+            search.setSearchWord(searchWordArr[i]);
+            search.setVariationValue(new Random().nextInt(9) + 1);
             search.setVariationState(i%2 == 0);
             mSearches.add(search);
         }
+
     }
 
     public static SearchPopularStorage get(Context context) {

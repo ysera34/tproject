@@ -45,7 +45,7 @@ public class ArchiveContentTabFragment extends Fragment {
 
         addArchiveContentListFragment(ArchiveContentT1ListFragment.newInstance(1), "케미데스크");
         addArchiveContentListFragment(ArchiveContentT2ListFragment.newInstance(2), "케미 PICK");
-        addArchiveContentListFragment(ArchiveContentT3ListFragment.newInstance(3), "생활 정보");
+        addArchiveContentListFragment(ArchiveContentT3ListFragment.newInstance(3), "케미 라이프");
     }
 
     @Nullable

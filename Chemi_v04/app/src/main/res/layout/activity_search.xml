@@ -36,25 +36,38 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:maxLength="20"
+                    android:maxLength="15"
                     android:singleLine="true"/>
 
-                <AutoCompleteTextView
-                    android:id="@+id/search_product_auto_complete_text_view"
-                    android:hint="@string/search_hint"
-                    android:textColor="@color/searchActivity_editText_textColorHint"
-                    android:textColorHint="@color/searchActivity_editText_textColorHint"
-                    android:background="@android:color/transparent"
-                    android:layout_width="match_parent"
+                    <AutoCompleteTextView
+                        android:id="@+id/search_product_auto_complete_text_view"
+                        android:hint="@string/search_hint"
+                        android:textColor="@color/searchActivity_editText_textColorHint"
+                        android:textColorHint="@color/searchActivity_editText_textColorHint"
+                        android:background="@android:color/transparent"
+                        android:layout_width="240dp"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentStart="true"
+                        android:gravity="center_vertical"
+                        android:maxLength="15"
+                        android:dropDownAnchor="@+id/header_anchor_text_view"
+                        android:dropDownWidth="match_parent"
+                        android:singleLine="true"
+                        android:imeOptions="actionSearch"
+                        android:inputType="text"/>
+                <RelativeLayout
+                    android:visibility="gone"
+                    android:id="@+id/search_product_search_button_layout"
+                    android:layout_width="54dp"
                     android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:maxLength="20"
-                    android:dropDownAnchor="@+id/header_anchor_text_view"
-                    android:dropDownWidth="match_parent"
-                    android:singleLine="true"
-                    android:imeOptions="actionSearch"
-                    android:inputType="text"/>
+                    android:gravity="center_vertical">
+                    <Button
+                        android:layout_width="26dp"
+                        android:layout_height="15dp"
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/ic_search_button"/>
 
+                </RelativeLayout>
             </android.support.v7.widget.Toolbar>
 
         </android.support.design.widget.AppBarLayout>

@@ -17,12 +17,15 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +38,7 @@ import com.tacademy.v04.chemi.R;
 import com.tacademy.v04.chemi.common.util.listener.OnPassDataListener;
 import com.tacademy.v04.chemi.model.Product;
 import com.tacademy.v04.chemi.model.ProductStorage;
+import com.tacademy.v04.chemi.model.SearchLatestStorage;
 import com.tacademy.v04.chemi.model.Word;
 import com.tacademy.v04.chemi.view.activity.AppBaseActivity;
 import com.tacademy.v04.chemi.view.fragment.product.SearchFragment;
@@ -70,6 +74,7 @@ public class SearchActivity extends AppBaseActivity
     private Toolbar mToolbar;
     private EditText mSearchProductEditText;
     private AutoCompleteTextView mSearchProductAutoCompleteTextView;
+    private RelativeLayout mSearchProductSearchButtonLayout;
     private ArrayList<String> mSearchResults;
     private ArrayAdapter<String> mSearchResultsAdapter;
     private BottomSheetDialog mCategoryBottomSheetDialog;
@@ -80,6 +85,8 @@ public class SearchActivity extends AppBaseActivity
     private ArrayList<Product> mProducts;
     private ProductStorage mProductStorage;
     private String queryString;
+
+    private SearchLatestStorage searchLatestStorage;
 
     private Fragment mSearchFragmentContainer;
 
@@ -92,6 +99,7 @@ public class SearchActivity extends AppBaseActivity
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+        searchLatestStorage = SearchLatestStorage.get(getApplicationContext());
 
         mToolbar = (Toolbar) findViewById(R.id.search_toolbar);
         setSupportActionBar(mToolbar);
@@ -125,6 +133,7 @@ public class SearchActivity extends AppBaseActivity
         mSearchProductAutoCompleteTextView =
                 (AutoCompleteTextView) findViewById(R.id.search_product_auto_complete_text_view);
         mSearchProductAutoCompleteTextView.setThreshold(1);
+        mSearchProductAutoCompleteTextView.setSelection(mSearchProductAutoCompleteTextView.getText().length());
         mSearchProductAutoCompleteTextView.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -135,9 +144,7 @@ public class SearchActivity extends AppBaseActivity
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 //                Log.d(TAG, charSequence.toString());
 //                Toast.makeText(getApplicationContext(), charSequence.length() + "", Toast.LENGTH_SHORT).show();
-                if (charSequence.length() > 0) {
-                    requestWordsJsonObject(charSequence.toString());
-                }
+                requestWordsJsonObject(charSequence.toString());
             }
 
             @Override
@@ -153,8 +160,10 @@ public class SearchActivity extends AppBaseActivity
                     case EditorInfo.IME_ACTION_SEARCH :
 //                        return true;
 //                    case keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER :
-                        Toast.makeText(getApplicationContext(), textView.getText().toString(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), textView.getText().toString(), Toast.LENGTH_SHORT).show();
                         requestKeywordJsonObject(textView.getText().toString());
+                        searchLatestStorage.setSearchLatestWordsPreference(textView.getText().toString(),
+                                searchLatestStorage.getSearchLatestWordsPreferenceIndex());
                         return true;
 
                     default:
@@ -163,6 +172,36 @@ public class SearchActivity extends AppBaseActivity
                 }
             }
         });
+
+//        mSearchProductSearchButtonLayout = (RelativeLayout) findViewById(R.id.search_product_search_button_layout);
+//        mSearchProductSearchButtonLayout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Toast.makeText(getApplicationContext(), mSearchProductAutoCompleteTextView.getText().toString(),
+//                        Toast.LENGTH_SHORT).show();
+//                requestKeywordJsonObject(mSearchProductAutoCompleteTextView.getText().toString());
+//                searchLatestStorage.setSearchLatestWordsPreference(mSearchProductAutoCompleteTextView.getText().toString(),
+//                        searchLatestStorage.getSearchLatestWordsPreferenceIndex());
+//            }
+//        });
+
+//        mSearchProductSearchButtonLayout.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View view, MotionEvent motionEvent) {
+//                if(motionEvent.getAction() == MotionEvent.ACTION_DOWN){
+//                    Toast.makeText(getApplicationContext(), mSearchProductAutoCompleteTextView.getText().toString(),
+//                            Toast.LENGTH_SHORT).show();
+//                    requestKeywordJsonObject(mSearchProductAutoCompleteTextView.getText().toString());
+//                    searchLatestStorage.setSearchLatestWordsPreference(mSearchProductAutoCompleteTextView.getText().toString(),
+//                            searchLatestStorage.getSearchLatestWordsPreferenceIndex());
+//                    return true;
+//                }
+//                if(motionEvent.getAction() == MotionEvent.ACTION_UP){
+//                    return false;
+//                }
+//                return false;
+//            }
+//        });
 
         // category_fab
         (findViewById(R.id.category_fab)).setOnClickListener(this);
@@ -377,9 +416,33 @@ public class SearchActivity extends AppBaseActivity
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+//        return super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.menu_search_toolbar, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        if (id == R.id.action_search) {
+            requestKeywordJsonObject(mSearchProductAutoCompleteTextView.getText().toString());
+            searchLatestStorage.setSearchLatestWordsPreference(
+                    mSearchProductAutoCompleteTextView.getText().toString(),
+            searchLatestStorage.getSearchLatestWordsPreferenceIndex());
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+        @Override
     public void onStringDataPass(String data) {
         mSearchProductEditText.setText(data);
+        mSearchProductEditText.setSelection(mSearchProductEditText.getText().length());
         mSearchProductAutoCompleteTextView.setText(data);
+        mSearchProductAutoCompleteTextView.setSelection(mSearchProductAutoCompleteTextView.getText().length());
     }
 
     private class SearchedResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {

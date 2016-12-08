@@ -370,4 +370,15 @@
         <item>@string/conid5_null_effect</item>
         <item>@string/conid6_null_effect</item>
     </string-array>
+
+    <string-array name="search_popular_word_array">
+        <item>친환경 소다 세제</item>
+        <item>사라야 세제 젤</item>
+        <item>카카오프렌즈 섬유향수 어피치</item>
+        <item>디펜드 스타일언더웨어</item>
+        <item>이마트 알로에 바디워시</item>
+        <item>하기스 팬티형</item>
+        <item>유한락스 주방청소용</item>
+        <item>아토마일드 프리미엄</item>
+    </string-array>
 </resources>
