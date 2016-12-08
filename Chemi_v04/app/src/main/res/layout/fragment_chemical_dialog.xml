@@ -74,7 +74,14 @@
                     android:text="프로필렌글라이콜"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:maxWidth="200dp"
                     android:textSize="16sp"
+                    android:ellipsize="marquee"
+                    android:focusable="true"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:maxLines="1"
+                    android:focusableInTouchMode="true"
+                    android:singleLine="true"
                     android:textColor="@color/chemical_dialog_name_font_color"
                     android:layout_marginBottom="4dp"/>
 
@@ -82,7 +89,14 @@
                     android:id="@+id/chemical_dialog_chemical_title_eng"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:maxWidth="200dp"
                     android:textSize="14sp"
+                    android:ellipsize="marquee"
+                    android:focusable="true"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:maxLines="1"
+                    android:focusableInTouchMode="true"
+                    android:singleLine="true"
                     android:textColor="@color/chemical_dialog_name_font_color"
                     android:text="Propylene Glycol"/>
 
@@ -111,8 +125,6 @@
                 android:layout_height="wrap_content"/>
 
         </LinearLayout>
-
-
 
 
     </LinearLayout>

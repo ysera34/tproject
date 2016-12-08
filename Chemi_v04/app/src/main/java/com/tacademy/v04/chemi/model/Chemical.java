@@ -20,6 +20,7 @@ public class Chemical {
     private String mMix;
     private int mHazard;
     private ArrayList<Effect> mEffects;
+    private ArrayList<String> mConstitutions;
 
     public Chemical() {
         mId = UUID.randomUUID();
@@ -137,6 +138,14 @@ public class Chemical {
         mEffects = effects;
     }
 
+    public ArrayList<String> getConstitutions() {
+        return mConstitutions;
+    }
+
+    public void setConstitutions(ArrayList<String> constitutions) {
+        mConstitutions = constitutions;
+    }
+
     public String toStringId() {
         return "Chemical{" +
                 "mId=" + mId +
@@ -156,6 +165,7 @@ public class Chemical {
                 ", mMix='" + mMix + '\'' +
                 ", mHazard=" + mHazard +
                 ", mEffects=" + mEffects.toString() +
+                ", mConstitutions=" + mConstitutions +
                 '}';
     }
 }

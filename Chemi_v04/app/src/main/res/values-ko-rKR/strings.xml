@@ -116,17 +116,35 @@
     <string name="bottom_sheet_menu_camera">카메라</string>
     <string name="bottom_sheet_menu_gallery">갤러리</string>
     <string name="chemi_agreement1">케미 서비스를 이용해 주셔서 감사합니다.\n
-    케미는 일상 속 화학제품의 성분을 분석하여 제품의 안정성 정보를 제공하고, 여러분이 직접 리뷰를 남기고 또 다른 사용
-    자의 리뷰를 본 후 원하는 제품을 선택 하실 수 이쏟록 지원하고 있습니다 케미는 앞으로도 소비자의 건강을 위한 유용한
-    콘텐츠와 정보 및 서비스를 제공해드리고자 합니다.\n
-    케미를 더 가깝게 느끼실 수 있도록 딱딱하고 어려운 내용이 아닌 쉽고 친숙한 느낌의 이용 약관을 마련하였으니, 시간을
-    내어 읽어 주시면 여러분과 케미가 더욱 더 가까운 사이가 뒬 수 있을 것이라고 생각합니다.</string>
-    <string name="chemi_agreement2">
+        케미는 일상 속 화학제품의 성분을 분석하여 제품의 안정성 정보를 제공하고, 여러분이 직접 리뷰를 남기고 또 다른 사용자의 리뷰를 본 후 원하는 제품을 선택 하실 수 이쏟록 지원하고 있습니다.
+        케미는 앞으로도 소비자의 건강을 위한 유용한 콘텐츠와 정보 및 서비스를 제공해드리고자 합니다.\n
+        케미를 더 가깝게 느끼실 수 있도록 딱딱하고 어려운 내용이 아닌 쉽고 친숙한 느낌의 이용 약관을 마련하였으니, 시간을 내어 읽어 주시면 여러분과 케미가 더욱 더 가까운 사이가 뒬 수 있을 것이라고 생각합니다.
+    </string>
+    <string name="chemi_agreement2" formatted="false">
         1. 각종 제조사의 화학제품 주성분을 공신력 있는 기관 및 출처(미국 비영리 단체 EWG, 대한 피부과 의사회,
-        식품의약품안전처를 기반으로 분석한 결과\n
+        식품의약품안전처)를 기반으로 분석한 결과\n
         2. 대상자의 체질과 유해성분제외, 유익성분포함\n
         3. 화학제품 리뷰 작성 및 조회 서비스\n
-        4. 화학성분, 건강에 관한 각종 콘텐츠 및 정보
+        4. 화학성분, 건강에 관한 각종 콘텐츠 및 정보\n
+        5. 서비스의 운영과 관련한 광고 대행 서비스\n
+        6. 기타 케미가 추가 개발하거나 다른 회사와의 제휴계약 등을 통해 제공하는 일체의 서비스\n
+        \n
+        \n
+        (이하 생략)
+        \n
+        \n
+        여러분은 스마트폰의 어플리케이션 스토어에서 케미를 설치하여 위와 같은 서비스를 이용할 수 있습니다.
+        그런데 케미의 서비스는 지속적으로 업데이트 될 예정이며,
+        더욱 더 여러분과 맞는 화학제품을 고르실 수 있도록 다양한 서비스를 제공할 계획이기 때문에 서비스의 자세한 내용을 약관을 통해 시시각각 알려드릴 수는 없습니다.
+        이러한 점을 이해해 주시길 바라며, 추후에 개발될 다양한 서비스는 어플리케이션 스토어, 서비스 내 공지사항을 통해 안내할 예정이오니 언제든지 확인하여 주시기 바랍니다.\n
+
+        본 약관 또는 케미 서비스와 관련하여서는 대한민국의 법률이 적용됩니다.\n
+        \n
+        \n
+        공고일자 : 2016년 12월 16일\n
+        시행일자 : 2016년 12월 16일\n
+        \n
+
     </string>
     <string name="chemi_privacy_body">
         저희 케미에게 있어서 여러분의 개인정보를 안전하게 취급하는 일은 가장 중요한 일 중에 하나입니다. 케미가 취급하는
@@ -145,16 +163,15 @@
         <item>@string/faq_header_4</item>
         <item>@string/faq_header_5</item>
         <item>@string/faq_header_6</item>
-        <item>@string/faq_header_7</item>
     </string-array>
 
-    <string name="faq_header_1">Q1. 성분 정보의 출처는 어디인가요?</string>
-    <string name="faq_header_2">Q2. 성분 정보의 출처는 어디인가요?</string>
-    <string name="faq_header_3">Q3. 성분 정보의 출처는 어디인가요?</string>
-    <string name="faq_header_4">Q4. 성분 정보의 출처는 어디인가요?</string>
-    <string name="faq_header_5">Q5. 성분 정보의 출처는 어디인가요?</string>
-    <string name="faq_header_6">Q6. 성분 정보의 출처는 어디인가요?</string>
-    <string name="faq_header_7">Q7. 성분 정보의 출처는 어디인가요?</string>
+    <string name="faq_header_1">Q1. 화학 성분 정보의 출처는 어디인가요?</string>
+    <string name="faq_header_2">Q2. 제품에 포함된 화학물질 성분의 함량은 알 수 없나요?</string>
+    <string name="faq_header_3">Q3. 케미를 통해 제공되는 성분정보를 제품의 종합적 안전성을 판단하는 절대적 기준으로
+        활용할 수 있나요?</string>
+    <string name="faq_header_4">Q4. 그렇다면 케미를 통해 제공되는 성분정보는 이용자에게 어떤 의미를 가지나요?</string>
+    <string name="faq_header_5">Q5. EWG 스킨딥 등급은 무엇인가요?</string>
+    <string name="faq_header_6">Q6. 식품의약품안전처 데이터는 무엇인가요?</string>
 
     <string-array name="faq_body_list">
         <item>@string/faq_body_1</item>
@@ -163,16 +180,48 @@
         <item>@string/faq_body_4</item>
         <item>@string/faq_body_5</item>
         <item>@string/faq_body_6</item>
-        <item>@string/faq_body_7</item>
     </string-array>
 
-    <string name="faq_body_1">정답은 1번입니다. 정답은 1번입니다. 정답은 1번입니다. 정답은 1번입니다. 정답은 1번입니다. 정답은 1번입니다. 정답은 1번입니다. 정답은 1번입니다. 정답은 1번입니다. 정답은 1번입니다. 정답은 1번입니다. </string>
+    <string name="faq_body_1">
+         케미에서 제공되는 화학 성분 정보는 다음의 자료만을 인용합니다.\n
+          1) EWG(Enviromental Working Group) : Skin Deep 위험등급\n
+          2) 식품의약품안전처 : 알레르기 주의 성분, 기능성 성분\n
+          3) 안전보건관리공단: 화학물질의 건강유해성 및 독성 정보
+    </string>
     <string name="faq_body_2">정답은 1번입니다.</string>
-    <string name="faq_body_3">정답은 1번입니다.</string>
-    <string name="faq_body_4">정답은 1번입니다.</string>
-    <string name="faq_body_5">정답은 1번입니다.</string>
-    <string name="faq_body_6">정답은 1번입니다.</string>
-    <string name="faq_body_7">정답은 1번입니다.</string>
+    <string name="faq_body_3">
+         그렇지 않습니다.\n\n
+         그 이유는 다음과 같습니다.\n\n
+         1) 케미는 개별 성분의 함량에 관한 정보를 제공하지 않습니다.\n\n
+          개별성분의 종합적 유해성은 성분의 실제 함량이 반드시 고려되어야 합니다. 유해물질로 분류된 성분도 함량에 따라 인체에 미치는 결과적 영향이 천차만별로 달라질 수 있습니다. 케미에서 제공되는 정보는 개별성분의 함량에 따른 안전도를 제공되지 않습니다.\n\n
+         2) 제품의 용도와 목적에 따라 유해성분이 불가피하게 포함되는 제품도 있습니다.\n\n
+          제품의 용도와 목적에 따라 특정 유해성분이 불가피하게 포함될 수 있습니다. 가령 살충제의 경우 살충성분이 반드시 들어가야 하며 소독제의 경우 살균성분이 포함되어야 합니다. 인체에 유해할 수있는 성분이 포함되었다는 사실만으로는 제품의 안전도를 단정할 수 없고 제품의 용도와 성분의 배합목적이 종합적으로 고려되어야 합니다.\n\n
+         3) 제품의 사용법에 따라 사용자에게 미치는 유해성의 정도가 달라질 수 있습니다.\n\n
+          유해성분이 일체 포함되지 않은 제품도 정해진 용법과 용량을 지켜서 사용하지 않으면 인체에 유해한 결과를 초래할 수 있습니다.\n\n
+          반면 유해성분을 포함하고 있는 제품도 정해진 용법과 용량을 지켜 사용한다면 인체에 아무런 영향을 끼치지 않을 수 있습니다.\n\n
+          제품의 목적과 사용법 등 많은 변수들이 제품의 실제 인체영향을 결정하기 때문에 케미의 정보만으로 제품의 최종적 안전성을 예측할 수 없습니다.\n\n
+    </string>
+    <string name="faq_body_4">
+        케미는 개별 성분에 대해 지금까지 밝혀진 과학적 자료만을 전달해드립니다.\n\n
+        제품에 대한 종합적인 판단은 케미에서 제공하는 성분정보 뿐만 아니라 여러 가지 요소를 종합적으로 고려하여 내려주시길 바랍니다. 케미에서 제공되는 정보는 제품에 대한 판단요소 중 하나로서 활용하시길 권장하며 제품구매 및 사용에 대한 최종적인 결정과 선택은 이용자의 몫임을 알려드립니다.\n\n
+        케미는 관련 법과 제도의 범위 안에서 소비자에게 보다 많은 정보를 제공할 수 있도록 끊임없이 노력하겠습니다.
+    </string>
+    <string name="faq_body_5">
+        EWG는 Environment Working Group의 약자로 안전한 성분을 대안으로 제시하는 미국의 비영리 환경시민단체를 뜻합니다. 2억 5000여 개의 연구 조사 결과를 통해 1~10까지 성분안전도 등급을 설정하였습니다.\n\n
+        EWG등급은 EWG가 연구한 각 성분의 안전도 등급입니다.\n
+        현재 케미의 요약정보에서는 0등급(회색-등급 미정), 1~2등급(초록-낮은 위험), 3~6등급(주황-보통 위험), 7~10등급(빨강-높은위험)을 기준으로 제품 성분의 등급별 비중을 아이콘을 통해 보여드리고있습니다.\n\n
+        EWG등급은 각 성분에 대한 안전도를 판단하는 데 있어 가장 중요하고 공신력 있는 척도라고 할 수 있습니다.
+    </string>
+    <string name="faq_body_6" formatted="false">
+        식품의약품안전처(이하 식약처) 데이터는 식약처에서 고시한 ‘화장품 알러지 성분’을 기준으로 하였습니다.\n\n
+        해당 성분들은 착향제 구성성분 중 알레르기 유발 가능성이 있어, 식약처가 기재 및 표시를 권장한 성분입니다. 해당 성분 목록은 다음과 같습니다.\n\n
+        1.아밀신남알\n2.벤질알코올\n3.신나밀알코올\n4.시트랄\n5.유제놀\n6.하이드록시시트로넬알\n7.이소유제놀\n
+        8.아밀신나밀알코올\n9.벤질살리실레이트\n10.신남알\n11.쿠마린\n12.제라니올\n13.하이드록시이소헥실3-시이클로헥센카복스알데하이드\n
+        14.아니스에탄올\n15.벤질신나메이트\n16.파네솔\n17.부틸페닐메칠프로피오날\n18.리날룰\n19.벤질벤조에이트\n
+        20.시트로넬롤\n21.헥실신남알\n22.리모넨\n23.메칠2-옥티노에이트\n24.알파-이소메칠이오논\n25.참나무이끼추출물\n26.나무이끼추출물\n
+        \n
+        단, 사용 후 세척되는 제품은 0.01%이상, 사용 후 세척되는 제품 이외의 화장품은 0.001%이상 함유하는 경우에 한한다.
+    </string>
 
 
     <string-array name="notify_header_list">
@@ -287,4 +336,38 @@
         <item>콘돔</item>
     </string-array>
 
+    <!-- chemical effect null info string -->
+    <string name="conid1_name">피부 </string>
+    <string name="conid2_name">안구 </string>
+    <string name="conid3_name">호흡기 </string>
+    <string name="conid4_name">구강 </string>
+    <string name="conid5_name">내부장기 </string>
+    <string name="conid6_name">유아, 아동 </string>
+
+    <string-array name="conid_name_array">
+        <item>@string/conid1_name</item>
+        <item>@string/conid2_name</item>
+        <item>@string/conid3_name</item>
+        <item>@string/conid4_name</item>
+        <item>@string/conid5_name</item>
+        <item>@string/conid6_name</item>
+    </string-array>
+
+    <string name="null_effect_desc">관련 정보는 현재 충분하지 않습니다.</string>
+
+    <string name="conid1_null_effect">피부 관련 정보는 현재 충분하지 않습니다.</string>
+    <string name="conid2_null_effect">안구 관련 정보는 현재 충분하지 않습니다.</string>
+    <string name="conid3_null_effect">호흡기 관련 정보는 현재 충분하지 않습니다.</string>
+    <string name="conid4_null_effect">구강 관련 정보는 현재 충분하지 않습니다.</string>
+    <string name="conid5_null_effect">내부장기 관련 정보는 현재 충분하지 않습니다.</string>
+    <string name="conid6_null_effect">유아, 아동 관련 정보는 현재 충분하지 않습니다.</string>
+
+    <string-array name="constitution_null_effect_array">
+        <item>@string/conid1_null_effect</item>
+        <item>@string/conid2_null_effect</item>
+        <item>@string/conid3_null_effect</item>
+        <item>@string/conid4_null_effect</item>
+        <item>@string/conid5_null_effect</item>
+        <item>@string/conid6_null_effect</item>
+    </string-array>
 </resources>

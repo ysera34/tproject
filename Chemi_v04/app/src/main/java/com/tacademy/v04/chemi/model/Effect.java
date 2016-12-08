@@ -7,11 +7,11 @@ package com.tacademy.v04.chemi.model;
 public class Effect {
 
     private int mId;
-    private int mType;
+    private int mConstitutionId;
     private int mImageId;
-    private String mContent;
-    private String mConstitution;
+    private String mConstitutionName;
     private String mDescription;
+    private String mContent;
 
     public int getId() {
         return mId;
@@ -21,12 +21,12 @@ public class Effect {
         mId = id;
     }
 
-    public int getType() {
-        return mType;
+    public int getConstitutionId() {
+        return mConstitutionId;
     }
 
-    public void setType(int type) {
-        mType = type;
+    public void setConstitutionId(int constitutionId) {
+        mConstitutionId = constitutionId;
     }
 
     public int getImageId() {
@@ -37,20 +37,12 @@ public class Effect {
         mImageId = imageId;
     }
 
-    public String getContent() {
-        return mContent;
+    public String getConstitutionName() {
+        return mConstitutionName;
     }
 
-    public void setContent(String content) {
-        mContent = content;
-    }
-
-    public String getConstitution() {
-        return mConstitution;
-    }
-
-    public void setConstitution(String constitution) {
-        mConstitution = constitution;
+    public void setConstitutionName(String constitutionName) {
+        mConstitutionName = constitutionName;
     }
 
     public String getDescription() {
@@ -61,15 +53,23 @@ public class Effect {
         mDescription = description;
     }
 
+    public String getContent() {
+        return mContent;
+    }
+
+    public void setContent(String content) {
+        mContent = content;
+    }
+
     @Override
     public String toString() {
         return "Effect{" +
                 "mId=" + mId +
-                ", mType=" + mType +
+                ", mConstitutionId=" + mConstitutionId +
                 ", mImageId=" + mImageId +
-                ", mContent='" + mContent + '\'' +
-                ", mConstitution='" + mConstitution + '\'' +
+                ", mConstitutionName='" + mConstitutionName + '\'' +
                 ", mDescription='" + mDescription + '\'' +
+                ", mContent='" + mContent + '\'' +
                 '}';
     }
 }

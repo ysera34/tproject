@@ -383,7 +383,8 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
 //                        mProduct = mProductStorage.getProduct(mProductId);
 //                        mChemicalStorage.setChemicals(mProduct.getChemicals());
                         Log.i(TAG, "requestChemicalJsonObject" + chemical.toString());
-                        mChemicalStorage.setChemical(Parser.parseChemical(response, chemical));
+//                        mChemicalStorage.setChemical(Parser.parseChemical(response, chemical));
+                        mChemicalStorage.setChemical(Parser.parseChemical(response, chemical, true));
 
 //                        mDialogFragment.show(mFragmentManager, CHEMICAL_DETAILS);
                         mDialogFragment.show(getFragmentManager(), CHEMICAL_DETAILS);

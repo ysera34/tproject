@@ -14,11 +14,16 @@ public class ChemicalStorage {
     private static ChemicalStorage sChemicalStorage;
     private Context mAppContext;
 
+    private EffectStorage mEffectStorage;
+
     private ArrayList<Chemical> mChemicals;
 
     private ChemicalStorage(Context appContext) {
         mAppContext = appContext;
         mChemicals = new ArrayList<>();
+
+        mEffectStorage = EffectStorage.get(mAppContext);
+
     }
 
     public static ChemicalStorage get(Context context) {
@@ -46,6 +51,14 @@ public class ChemicalStorage {
     }
 
     public void setChemical(Chemical chemical) {
+
+        ArrayList<String> constitutions = chemical.getConstitutions();
+
+        for (int i = 1; i <= 6; i++) {
+            mEffectStorage.setEffect(i, constitutions.get(i - 1));
+        }
+        chemical.setEffects(mEffectStorage.getEffects());
+
         for (Chemical c : mChemicals) {
             if (c.getId().equals(chemical.getId())) {
                 mChemicals.set(mChemicals.indexOf(chemical), chemical);

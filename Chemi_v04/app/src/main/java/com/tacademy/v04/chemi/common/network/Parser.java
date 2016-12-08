@@ -352,7 +352,7 @@ public class Parser {
                             JSONObject effectObject = (JSONObject) effectArray.get(i);
                             Effect effect = new Effect();
                             effect.setId(effectObject.getInt(CONSTITUTION_ID));
-                            effect.setConstitution(effectObject.getString(CONSTITUTION_NAME));
+                            effect.setConstitutionName(effectObject.getString(CONSTITUTION_NAME));
                             effect.setDescription(effectObject.getString(DESCRIPTION));
                             effects.add(effect);
                         }
@@ -372,14 +372,14 @@ public class Parser {
      * @param responseObject
      * @return Chemical
      */
-    public static Chemical parseChemical(JSONObject responseObject, boolean isLove) {
+    public static Chemical parseChemical(JSONObject responseObject, Chemical chemical, boolean isLove) {
 
-        Chemical chemical = new Chemical();
-        ArrayList<Effect> effects = new ArrayList<>();
+//        Chemical chemical = new Chemical();
+        ArrayList<String> constitutions = new ArrayList<>();
         try {
             String responseMessage = responseObject.getString(RESPONSE_MESSAGE);
             if (responseMessage.equals(RESPONSE_SUCCESS)) {
-                JSONObject dataObject = (JSONObject) responseObject.getJSONArray(RESPONSE_DATA).get(0);
+                JSONObject dataObject = responseObject.getJSONObject(RESPONSE_DATA);
                 if (dataObject != null) {
                     chemical.setChemicalId(dataObject.getInt(CHEMICAL_ID));
                     chemical.setNameKo(dataObject.getString(NAMEKO));
@@ -393,14 +393,19 @@ public class Parser {
                     if (effectArray != null) {
                         for (int i = 0; i < effectArray.length(); i++) {
                             JSONObject effectObject = (JSONObject) effectArray.get(i);
-                            Effect effect = new Effect();
-                            effect.setId(effectObject.getInt(CONSTITUTION_ID));
-                            effect.setConstitution(effectObject.getString(CONSTITUTION_NAME));
-                            effect.setDescription(effectObject.getString(DESCRIPTION));
-                            effects.add(effect);
+//                            Effect effect = new Effect();
+//                            effect.setId(effectObject.getInt(CONSTITUTION_ID));
+//                            effect.setConstitutionName(effectObject.getString(CONSTITUTION_NAME));
+//                            effect.setDescription(effectObject.getString(DESCRIPTION));
+//                            effects.add(effect);
+
+                            int constitutionId = effectObject.getInt(CONSTITUTION_ID);
+                            String description = effectObject.getString(DESCRIPTION);
+
+                            constitutions.add(description);
                         }
+                        chemical.setConstitutions(constitutions);
                     }
-                    chemical.setEffects(effects);
                 }
             }
         } catch (JSONException e) {

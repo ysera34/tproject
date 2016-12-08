@@ -70,7 +70,9 @@ public class ChemicalDialogFragment extends DialogFragment {
                 .inflate(R.layout.fragment_chemical_dialog, null);
 
         mChemicalDialogTitleKOTextView = (TextView) view.findViewById(R.id.chemical_dialog_chemical_title_ko);
+        mChemicalDialogTitleKOTextView.setSelected(true);
         mChemicalDialogTitleENTextView = (TextView) view.findViewById(R.id.chemical_dialog_chemical_title_eng);
+        mChemicalDialogTitleENTextView.setSelected(true);
         mChemicalDialogDangerousGradeImageView = (ImageView) view.findViewById(R.id.chemical_dialog_dangerous_grade_image);
         mChemicalDialogDangerousGradeTextView = (TextView) view.findViewById(R.id.chemical_dialog_dangerous_grade_number_text);
         mChemicalDialogMixPurposeTextView = (TextView) view.findViewById(R.id.chemical_dialog_chemical_mix_purpose);

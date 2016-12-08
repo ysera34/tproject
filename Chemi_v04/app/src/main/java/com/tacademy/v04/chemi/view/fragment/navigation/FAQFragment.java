@@ -87,7 +87,7 @@ public class FAQFragment extends Fragment {
         ArrayList<String> body6 = new ArrayList<>();
         body6.add(bodyTextArr[5]);
         ArrayList<String> body7 = new ArrayList<>();
-        body7.add(bodyTextArr[6]);
+//        body7.add(bodyTextArr[6]);
 
         mFAQBodyDataMap.put(mFAQHeaderDataList.get(0), body1);
         mFAQBodyDataMap.put(mFAQHeaderDataList.get(1), body2);
@@ -95,7 +95,7 @@ public class FAQFragment extends Fragment {
         mFAQBodyDataMap.put(mFAQHeaderDataList.get(3), body4);
         mFAQBodyDataMap.put(mFAQHeaderDataList.get(4), body5);
         mFAQBodyDataMap.put(mFAQHeaderDataList.get(5), body6);
-        mFAQBodyDataMap.put(mFAQHeaderDataList.get(6), body7);
+//        mFAQBodyDataMap.put(mFAQHeaderDataList.get(6), body7);
     }
 
     @Override
