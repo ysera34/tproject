@@ -9,7 +9,7 @@
         android:id="@+id/list_item_review_card_view"
         android:layout_gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="225dp"
+        android:layout_height="200dp"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="4dp"
         card_view:contentPadding="5dp">
@@ -23,7 +23,7 @@
             <LinearLayout
                 android:id="@+id/list_item_review_card_view_header"
                 android:layout_width="match_parent"
-                android:layout_height="85dp"
+                android:layout_height="75dp"
                 android:orientation="horizontal"
                 android:background="@drawable/widget_bottom_border">
 
@@ -31,8 +31,9 @@
                     android:id="@+id/list_item_review_card_user_info_layout"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:padding="16dp"
+                    android:padding="10dp"
                     android:layout_weight="2.2"
+                    android:gravity="center_vertical"
                     android:orientation="horizontal">
                     
                     <ImageView
@@ -40,7 +41,7 @@
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:layout_marginEnd="10dp"
-                        android:src="@mipmap/ic_launcher"/>
+                        android:src="@drawable/ic_account_circle_grey_24dp"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -120,12 +121,13 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="130dp"
-                android:orientation="vertical">
+                android:layout_height="115dp"
+                android:orientation="vertical"
+                android:layout_gravity="center_vertical">
                 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="65dp"
+                    android:layout_height="57dp"
                     android:padding="7dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
@@ -149,7 +151,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="65dp"
+                    android:layout_height="57dp"
                     android:padding="7dp"
                     android:gravity="center_vertical"
                     android:orientation="horizontal">

@@ -171,7 +171,6 @@
                         android:maxLines="1"
                         android:textSize="20sp"
                         android:textStyle="bold"
-                        android:text="title"
                         android:ellipsize="marquee"
                         android:focusable="true"
                         android:focusableInTouchMode="true"

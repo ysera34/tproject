@@ -439,8 +439,26 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
         private final Collator mCollator = Collator.getInstance();
         @Override
         public int compare(Object o, Object t1) {
-            return mCollator.compare(String.valueOf(((Chemical)o).getHazard()[0]),
-                    String.valueOf(((Chemical)t1).getHazard()[0]));
+
+            int int1 = ((Chemical)o).getHazard()[0];
+            int int2 = ((Chemical)t1).getHazard()[0];
+
+            String str1;
+            String str2;
+
+            if (int1 == 10) {
+                str1 = String.valueOf(int1);
+            } else {
+                str1 = "0" + String.valueOf(int1);
+            }
+
+            if (int2 == 10) {
+                str2 = String.valueOf(int2);
+            } else {
+                str2 = "0" + String.valueOf(int2);
+            }
+
+            return mCollator.compare(str1, str2);
         }
     };
 }

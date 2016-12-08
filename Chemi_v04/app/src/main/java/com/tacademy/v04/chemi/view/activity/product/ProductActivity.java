@@ -11,8 +11,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -29,7 +27,6 @@ import com.tacademy.v04.chemi.common.network.Parser;
 import com.tacademy.v04.chemi.model.Product;
 import com.tacademy.v04.chemi.model.ProductStorage;
 import com.tacademy.v04.chemi.view.activity.AppBaseActivity;
-import com.tacademy.v04.chemi.view.activity.MainActivity;
 import com.tacademy.v04.chemi.view.fragment.product.ProductFragment;
 
 import org.json.JSONObject;
@@ -37,7 +34,6 @@ import org.json.JSONObject;
 import java.io.File;
 import java.util.UUID;
 
-import static com.tacademy.v04.chemi.common.Common.REQUEST_NAVIGATION_FAQ;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.IMAGE_URL_HOST;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.Product.PATH;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.SOCKET_TIMEOUT_GET_REQ;
@@ -68,9 +64,13 @@ public class ProductActivity extends AppBaseActivity {
     private TextView mProductReviewRatingValue;
     private TextView mProductPriceTextView;
 
-
     private Product mProduct;
     private UUID mProductId;
+
+//    private BottomSheetDialog mProductShareBottomSheetDialog;
+//    private ImageButton mProductShareImageButton1;
+//    private ImageButton mProductShareImageButton2;
+//    private ImageButton mProductShareImageButton3;
 
     public static Intent newIntent(Context packageContext, UUID productId) {
         Intent intent = new Intent(packageContext, ProductActivity.class);
@@ -161,34 +161,51 @@ public class ProductActivity extends AppBaseActivity {
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-//        return super.onCreateOptionsMenu(menu);
-        getMenuInflater().inflate(R.menu.menu_product_detail_toolbar, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_faq) {
-            Toast.makeText(getApplicationContext(), "자주 묻는 질문을 삼가하세요.", Toast.LENGTH_SHORT).show();
-            Intent intent = MainActivity.newIntent(getApplicationContext(), REQUEST_NAVIGATION_FAQ);
-            startActivity(intent);
-            return true;
-        } else if (id == R.id.action_archive) {
-            Toast.makeText(getApplicationContext(), "보관함에 추가되었습니다.", Toast.LENGTH_SHORT).show();
-            return true;
-        } else if (id == R.id.action_share) {
-            Toast.makeText(getApplicationContext(), "공유하겠습니다.", Toast.LENGTH_SHORT).show();
-            return true;
-        }
-
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+////        return super.onCreateOptionsMenu(menu);
+//        getMenuInflater().inflate(R.menu.menu_product_detail_toolbar, menu);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//
+//        //noinspection SimplifiableIfStatement
+//        if (id == R.id.action_faq) {
+//            Toast.makeText(getApplicationContext(), "자주 묻는 질문을 삼가하세요.", Toast.LENGTH_SHORT).show();
+//            Intent intent = MainActivity.newIntent(getApplicationContext(), REQUEST_NAVIGATION_FAQ);
+//            startActivity(intent);
+//            return true;
+//        } else if (id == R.id.action_archive) {
+//            Toast.makeText(getApplicationContext(), "보관함에 추가되었습니다.", Toast.LENGTH_SHORT).show();
+//            return true;
+//        }
+//        else if (id == R.id.action_share) {
+//            Toast.makeText(getApplicationContext(), "공유하겠습니다.", Toast.LENGTH_SHORT).show();
+//
+//            mProductShareBottomSheetDialog = new BottomSheetDialog(getApplicationContext());
+//            View mShareBottomSheetView = getLayoutInflater().inflate(R.layout.bottom_sheet_product_share, null);
+//            mProductShareBottomSheetDialog.setContentView(mShareBottomSheetView);
+//
+//            mProductShareImageButton1 = (ImageButton) mShareBottomSheetView
+//                    .findViewById(R.id.bottom_sheet_product_share_button1);
+//            mProductShareImageButton2 = (ImageButton) mShareBottomSheetView
+//                    .findViewById(R.id.bottom_sheet_product_share_button2);
+//            mProductShareImageButton3 = (ImageButton) mShareBottomSheetView
+//                    .findViewById(R.id.bottom_sheet_product_share_button3);
+//
+//            mProductShareImageButton1.setOnClickListener(this);
+//            mProductShareImageButton2.setOnClickListener(this);
+//            mProductShareImageButton3.setOnClickListener(this);
+//            mProductShareBottomSheetDialog.show();
+//            return true;
+//        }
+//
 //        if (id == R.id.action_search) {
 //            startActivity(SearchActivity.newIntent(getApplicationContext()));
 //            return true;
@@ -196,9 +213,24 @@ public class ProductActivity extends AppBaseActivity {
 //            startActivity(MainActivity.newIntent(getApplicationContext()));
 //            return true;
 //        }
-
-        return super.onOptionsItemSelected(item);
-    }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
+//
+//    @Override
+//    public void onClick(View view) {
+//        switch (view.getId()) {
+//            case R.id.bottom_sheet_product_share_button1 :
+//                Toast.makeText(getApplicationContext(), "카카오톡으로 공유합니다. 업데이트 예정입니다.", Toast.LENGTH_SHORT).show();
+//                break;
+//            case R.id.bottom_sheet_product_share_button2 :
+//                Toast.makeText(getApplicationContext(), "카카오 스토리로 공유합니다. 업데이트 예정입니다.", Toast.LENGTH_SHORT).show();
+//                break;
+//            case R.id.bottom_sheet_product_share_button3 :
+//                Toast.makeText(getApplicationContext(), "네이버 블로그로 공유합니다. 업데이트 예정입니다.", Toast.LENGTH_SHORT).show();
+//                break;
+//        }
+//    }
 
     private void requestProductJsonObject() {
 

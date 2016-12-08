@@ -1,29 +1,39 @@
 package com.tacademy.v04.chemi.view.fragment.product;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.tacademy.v04.chemi.R;
 import com.tacademy.v04.chemi.model.Product;
 import com.tacademy.v04.chemi.model.ProductStorage;
+import com.tacademy.v04.chemi.view.activity.MainActivity;
 
 import java.util.ArrayList;
 import java.util.UUID;
+
+import static com.tacademy.v04.chemi.common.Common.REQUEST_NAVIGATION_FAQ;
 
 /**
  * Created by yoon on 2016. 11. 14..
  */
 
-public class ProductFragment extends Fragment {
+public class ProductFragment extends Fragment implements View.OnClickListener {
 
     private static final String TAG = ProductFragment.class.getSimpleName();
 
@@ -39,6 +49,11 @@ public class ProductFragment extends Fragment {
     private ViewPager mProductDetailViewPager;
     private ArrayList<Fragment> mProductDetailListFragments;
     private ArrayList<String> mProductDetailFragmentsTitles;
+
+    private BottomSheetDialog mProductShareBottomSheetDialog;
+    private ImageButton mProductShareImageButton1;
+    private ImageButton mProductShareImageButton2;
+    private ImageButton mProductShareImageButton3;
 
     public static ProductFragment newInstance(UUID productId) {
         Bundle args = new Bundle();
@@ -120,4 +135,75 @@ public class ProductFragment extends Fragment {
         mProductDetailListFragments.add(fragment);
         mProductDetailFragmentsTitles.add(title);
     }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.bottom_sheet_product_share_button1 :
+                Toast.makeText(getActivity(), "카카오톡으로 공유합니다. 업데이트 예정입니다.", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.bottom_sheet_product_share_button2 :
+                Toast.makeText(getActivity(), "카카오 스토리로 공유합니다. 업데이트 예정입니다.", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.bottom_sheet_product_share_button3 :
+                Toast.makeText(getActivity(), "네이버 블로그로 공유합니다. 업데이트 예정입니다.", Toast.LENGTH_SHORT).show();
+                break;
+        }
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+//        super.onCreateOptionsMenu(menu, inflater);
+        getActivity().getMenuInflater().inflate(R.menu.menu_product_detail_toolbar, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_faq) {
+            Toast.makeText(getActivity(), "자주 묻는 질문을 삼가하세요.", Toast.LENGTH_SHORT).show();
+            Intent intent = MainActivity.newIntent(getActivity(), REQUEST_NAVIGATION_FAQ);
+            startActivity(intent);
+            return true;
+        } else if (id == R.id.action_archive) {
+            Toast.makeText(getActivity(), "보관함에 추가되었습니다.", Toast.LENGTH_SHORT).show();
+            return true;
+        } else if (id == R.id.action_share) {
+            Toast.makeText(getActivity(), "공유하겠습니다.", Toast.LENGTH_SHORT).show();
+
+            mProductShareBottomSheetDialog = new BottomSheetDialog(getActivity());
+            View mShareBottomSheetView = getLayoutInflater(getArguments())
+                    .inflate(R.layout.bottom_sheet_product_share, null);
+            mProductShareBottomSheetDialog.setContentView(mShareBottomSheetView);
+
+            mProductShareImageButton1 = (ImageButton) mShareBottomSheetView
+                    .findViewById(R.id.bottom_sheet_product_share_button1);
+            mProductShareImageButton2 = (ImageButton) mShareBottomSheetView
+                    .findViewById(R.id.bottom_sheet_product_share_button2);
+            mProductShareImageButton3 = (ImageButton) mShareBottomSheetView
+                    .findViewById(R.id.bottom_sheet_product_share_button3);
+
+            mProductShareImageButton1.setOnClickListener(this);
+            mProductShareImageButton2.setOnClickListener(this);
+            mProductShareImageButton3.setOnClickListener(this);
+            mProductShareBottomSheetDialog.show();
+            return true;
+        }
+
+//        if (id == R.id.action_search) {
+//            startActivity(SearchActivity.newIntent(getApplicationContext()));
+//            return true;
+//        } else if (id == R.id.action_home) {
+//            startActivity(MainActivity.newIntent(getApplicationContext()));
+//            return true;
+//        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 }

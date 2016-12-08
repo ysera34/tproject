@@ -75,7 +75,6 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
     private Button mProductSortAvgButton;
     private Button mProductSortLatestButton;
 
-
     public static ProductListFragment newInstance() {
 
         ProductListFragment fragment = new ProductListFragment();
@@ -223,7 +222,6 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
                 break;
         }
     }
-
 
     private void setupAdapter() {
         if (isAdded()) {
