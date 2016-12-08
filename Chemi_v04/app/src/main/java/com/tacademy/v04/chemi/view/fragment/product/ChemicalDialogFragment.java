@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.text.format.DateFormat;
@@ -42,6 +43,13 @@ public class ChemicalDialogFragment extends DialogFragment {
     private TextView mChemicalDialogDangerousGradeTextView;
     private TextView mChemicalDialogMixPurposeTextView;
 
+    private ImageView[] mChemicalDialogPrecautionImageView;
+    private int[] mImageViewIds;
+    private TextView[] mChemicalDialogBodyTitleTextView;
+    private int[] mTitleTextViewIds;
+    private TextView[] mChemicalDialogBodyDescTextView;
+    private int[] mDescTextViewIds;
+
     public static ChemicalDialogFragment newInstance() {
 
         ChemicalDialogFragment fragment = new ChemicalDialogFragment();
@@ -57,6 +65,14 @@ public class ChemicalDialogFragment extends DialogFragment {
         return fragment;
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mChemicalDialogPrecautionImageView = new ImageView[6];
+        mChemicalDialogBodyTitleTextView = new TextView[6];
+        mChemicalDialogBodyDescTextView = new TextView[6];
+    }
+
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -64,7 +80,7 @@ public class ChemicalDialogFragment extends DialogFragment {
         UUID id = (UUID) getArguments().getSerializable(ARG_CHEMICAL);
         mChemical = ChemicalStorage.get(getActivity()).getChemical(id);
 
-        Log.i(TAG, "onCreateDialog" + mChemical.toString());
+        Log.i(TAG, "onCreateDialog " + mChemical.toString());
 
         View view = LayoutInflater.from(getActivity())
                 .inflate(R.layout.fragment_chemical_dialog, null);
@@ -83,6 +99,34 @@ public class ChemicalDialogFragment extends DialogFragment {
         mChemicalDialogDangerousGradeTextView.setText(String.valueOf(mChemical.getHazard()[0]));
         mChemicalDialogMixPurposeTextView.setText(mChemical.getMix());
 
+
+        mImageViewIds = new int[]{
+                R.id.chemical_dialog_precaution1, R.id.chemical_dialog_precaution2,
+                R.id.chemical_dialog_precaution3, R.id.chemical_dialog_precaution4,
+                R.id.chemical_dialog_precaution5, R.id.chemical_dialog_precaution6,};
+        mTitleTextViewIds = new int[]{
+                R.id.chemical_dialog_body_title1, R.id.chemical_dialog_body_title2,
+                R.id.chemical_dialog_body_title3, R.id.chemical_dialog_body_title4,
+                R.id.chemical_dialog_body_title5, R.id.chemical_dialog_body_title6,};
+        mDescTextViewIds = new int[]{
+                R.id.chemical_dialog_body_description1, R.id.chemical_dialog_body_description2,
+                R.id.chemical_dialog_body_description3, R.id.chemical_dialog_body_description4,
+                R.id.chemical_dialog_body_description5, R.id.chemical_dialog_body_description6,};
+
+        for (int i = 0; i < 6; i++) {
+            mChemicalDialogPrecautionImageView[i] = (ImageView) view.findViewById(mImageViewIds[i]);
+            mChemicalDialogBodyTitleTextView[i] = (TextView) view.findViewById(mTitleTextViewIds[i]);
+            mChemicalDialogBodyDescTextView[i] = (TextView) view.findViewById(mDescTextViewIds[i]);
+        }
+
+        for (int i = 0; i < 6; i++) {
+            mChemicalDialogPrecautionImageView[i].setImageDrawable(
+                    getResources().getDrawable(mChemical.getEffects().get(i).getImageId()));
+            mChemicalDialogBodyTitleTextView[i].setText(mChemical.getEffects().get(i).getConstitutionName());
+            mChemicalDialogBodyTitleTextView[i].setTextColor(
+                    getResources().getColor(mChemical.getEffects().get(i).getFontColorId()));
+            mChemicalDialogBodyDescTextView[i].setText(mChemical.getEffects().get(i).getDescription());
+        }
 
         mBuilder = new AlertDialog.Builder(getActivity())
                 .setView(view)

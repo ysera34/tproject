@@ -51,10 +51,8 @@ public class EffectStorage {
         mEffects = effects;
     }
 
-
     // index, constitutionId from 1
     public void setEffect(int constitutionId, String description) {
-
 
         Effect effect = new Effect();
         effect.setConstitutionId(constitutionId);
@@ -62,9 +60,11 @@ public class EffectStorage {
         if (description.equals("0")) {
             effect.setDescription(effect.getConstitutionName() + " " + mConstitutionNullDescription);
             effect.setImageId(mPrecautionImageIdArr[(constitutionId * 2) - 2]);
+            effect.setFontColorId(R.color.chemical_dialog_precaution_off_name_font_color);
         } else {
             effect.setDescription(description);
             effect.setImageId(mPrecautionImageIdArr[(constitutionId * 2) - 1]);
+            effect.setFontColorId(R.color.chemical_dialog_precaution_on_name_font_color);
 //            switch (constitutionId) {
 //                case 1 :
 //                    break;

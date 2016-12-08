@@ -9,6 +9,7 @@ public class Effect {
     private int mId;
     private int mConstitutionId;
     private int mImageId;
+    private int mFontColorId;
     private String mConstitutionName;
     private String mDescription;
     private String mContent;
@@ -35,6 +36,14 @@ public class Effect {
 
     public void setImageId(int imageId) {
         mImageId = imageId;
+    }
+
+    public int getFontColorId() {
+        return mFontColorId;
+    }
+
+    public void setFontColorId(int fontColorId) {
+        mFontColorId = fontColorId;
     }
 
     public String getConstitutionName() {
@@ -67,6 +76,7 @@ public class Effect {
                 "mId=" + mId +
                 ", mConstitutionId=" + mConstitutionId +
                 ", mImageId=" + mImageId +
+                ", mFontColorId=" + mFontColorId +
                 ", mConstitutionName='" + mConstitutionName + '\'' +
                 ", mDescription='" + mDescription + '\'' +
                 ", mContent='" + mContent + '\'' +

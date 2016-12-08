@@ -222,12 +222,12 @@
 
                 <TextView
                     android:id="@+id/chemical_dialog_body_title2"
-                    android:text="안구"
+                    android:text=""
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="13sp"
                     android:textStyle="bold"
-                    android:textColor="@color/chemical_dialog_precaution_on_name_font_color"
+                    android:textColor="@color/chemical_dialog_precaution_off_name_font_color"
                     android:gravity="bottom"/>
 
                 <TextView
@@ -326,7 +326,7 @@
 
                 <TextView
                     android:id="@+id/chemical_dialog_body_title4"
-                    android:text="구강"
+                    android:text=""
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="13sp"
