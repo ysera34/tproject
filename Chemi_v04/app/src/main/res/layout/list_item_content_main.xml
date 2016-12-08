@@ -55,7 +55,7 @@
 
                     <TextView
                         android:id="@+id/list_item_content_main_content_title"
-                        android:layout_width="match_parent"
+                        android:layout_width="212dp"
                         android:layout_height="match_parent"
                         android:maxLines="2"
                         android:textStyle="bold"

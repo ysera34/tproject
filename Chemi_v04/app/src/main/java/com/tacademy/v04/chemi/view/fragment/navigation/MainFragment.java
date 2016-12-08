@@ -21,10 +21,13 @@ import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.tacademy.v04.chemi.R;
+import com.tacademy.v04.chemi.common.Common;
 import com.tacademy.v04.chemi.model.Content;
 import com.tacademy.v04.chemi.model.ContentMainStorage;
+import com.tacademy.v04.chemi.view.activity.MainActivity;
 import com.tacademy.v04.chemi.view.activity.content.ContentActivity;
 import com.tacademy.v04.chemi.view.custom.ProgressDialog;
 import com.viewpagerindicator.CirclePageIndicator;
@@ -48,7 +51,6 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     private PageIndicator mPageIndicator;
     private CirclePageIndicator mCircleIndicator;
 
-    private int mBannerIndex;
     private int mImageBannerArray[];
 
     Animation mImageAnimationLeftIn;
@@ -104,6 +106,8 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         mPageIndicator = mCircleIndicator;
         mCircleIndicator.setViewPager(mImageBannerViewPager);
         mCircleIndicator.setSnap(true);
+
+
 
         (view.findViewById(R.id.prev_button)).setOnClickListener(this);
         (view.findViewById(R.id.next_button)).setOnClickListener(this);
@@ -219,12 +223,30 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         }
 
         @Override
-        public Object instantiateItem(ViewGroup container, int position) {
+        public Object instantiateItem(ViewGroup container, final int position) {
 //            return super.instantiateItem(container, position);
             LayoutInflater mLayoutInflater = LayoutInflater.from(container.getContext());
             View view = mLayoutInflater.inflate(R.layout.view_pager_item_main, container, false);
             ImageView imageView = (ImageView) view.findViewById(R.id.view_pager_item_main_image_view);
             imageView.setImageResource(mImageBannerArray[position]);
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent;
+                    switch (position) {
+                        case 0 :
+                            intent = MainActivity.newIntent(getActivity(), Common.REQUEST_NAVIGATION_FAQ);
+                            startActivity(intent);
+                            break;
+                        case 1 :
+                            Toast.makeText(getActivity(), "업데이트 예정입니다.", Toast.LENGTH_SHORT).show();
+                            break;
+                        case 2 :
+                            intent = MainActivity.newIntent(getActivity(), Common.REQUEST_NAVIGATION_ANALYZE_REQUEST);
+                            startActivity(intent);
+                    }
+                }
+            });
             container.addView(view);
             return view;
         }
