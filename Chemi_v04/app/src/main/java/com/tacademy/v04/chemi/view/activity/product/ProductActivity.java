@@ -58,6 +58,7 @@ public class ProductActivity extends AppBaseActivity {
 
     private CollapsingToolbarLayout mCollapsingToolbarLayout;
     private Toolbar mToolbar;
+    private TextView mProductNameCollapsingToolbarTextView;
     private TextView mProductNameToolbarTextView;
     private FloatingActionButton mFloatingActionButton;
     private ImageView mProductImageView;
@@ -110,9 +111,15 @@ public class ProductActivity extends AppBaseActivity {
 
 //        mToolbar.setTitle(R.string.title_activity_product);
 //        setTitle(R.string.title_activity_product);
+
+        mProductNameCollapsingToolbarTextView = (TextView)
+                findViewById(R.id.product_detail_product_name_collapsing_toolbar_text_view);
+        mProductNameCollapsingToolbarTextView.setText(mProduct.getName());
+        mProductNameCollapsingToolbarTextView.setSelected(true);
         mProductNameToolbarTextView = (TextView)
                 findViewById(R.id.product_detail_product_name_toolbar_text_view);
-        mProductNameToolbarTextView.setText(mProduct.getName());
+//            mProductNameToolbarTextView.setText(mProduct.getName());
+//            mProductNameToolbarTextView.setSelected(true);
 
         mCollapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
 //        mCollapsingToolbarLayout.setTitle(mProduct.getName());

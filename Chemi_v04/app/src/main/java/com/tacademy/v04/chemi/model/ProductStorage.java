@@ -84,7 +84,7 @@ public class ProductStorage {
         if (mProducts.isEmpty()) { //isEmpty()
             mProducts.add(product);
             mProductIds.add(product.getProductId());
-            Log.i(TAG + " mProducts initial add", product.toStringId());
+            Log.i(TAG + " mProducts initial add", product.toString());
 //            Log.i(TAG + " mProducts initial add", String.valueOf(product.getProductId()));
             return true;
         } else {
@@ -93,10 +93,10 @@ public class ProductStorage {
                 mProducts.add(product);
                 mProductIds.add(product.getProductId());
     //            Log.i(TAG + "mProducts.size()", String.valueOf(mProducts.size()));
-                Log.i(TAG + " mProducts add", "ProductId : " + String.valueOf(product.toStringId()));
+                Log.i(TAG + " mProducts add", "ProductId : " + String.valueOf(product.toString()));
             } else {
                 Log.i(TAG + " mProducts do not add",
-                        "already existed " + "ProductId : " + String.valueOf(product.toStringId()));
+                        "already existed " + "ProductId : " + String.valueOf(product.toString()));
 //                mProducts.set(product.getProductId()-1, product);
             }
             return true;

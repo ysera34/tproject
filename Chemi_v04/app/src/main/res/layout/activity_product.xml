@@ -54,18 +54,24 @@
                     android:src="@mipmap/ic_launcher" />
 
                 <TextView
-                    android:id="@+id/product_detail_product_name_toolbar_text_view"
+                    android:id="@+id/product_detail_product_name_collapsing_toolbar_text_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingTop="22dp"
                     android:paddingStart="45dp"
-                    android:paddingEnd="100dp"
+                    android:paddingEnd="120dp"
                     android:layout_marginTop="20dp"
                     android:textColor="@color/colorWhiteFont"
                     android:maxLines="1"
                     android:textSize="20sp"
+                    android:textStyle="bold"
                     android:text="title"
-                    android:textStyle="bold"/>
+                    android:ellipsize="marquee"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:singleLine="true"
+                    />
 
                 <LinearLayout
                     android:orientation="vertical"
@@ -151,7 +157,29 @@
                     android:layout_height="?attr/actionBarSize"
                     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
                     app:layout_scrollFlags="scroll|enterAlways"
-                    app:layout_collapseMode="pin" />
+                    app:layout_collapseMode="pin" >
+
+                    <TextView
+                        android:id="@+id/product_detail_product_name_toolbar_text_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="22dp"
+                        android:paddingStart="45dp"
+                        android:paddingEnd="120dp"
+                        android:layout_marginTop="20dp"
+                        android:textColor="@color/colorWhiteFont"
+                        android:maxLines="1"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:text="title"
+                        android:ellipsize="marquee"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:singleLine="true"
+                        />
+
+                </android.support.v7.widget.Toolbar>
 
                     <!--android:layout_margin="0dp"-->
                     <!--android:background="@color/white"-->

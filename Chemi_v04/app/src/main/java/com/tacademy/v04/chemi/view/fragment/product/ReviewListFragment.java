@@ -194,24 +194,33 @@ public class ReviewListFragment extends Fragment implements View.OnClickListener
             LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
             View view;
             if (viewType == EMPTY_VIEW) {
-                view = layoutInflater.inflate(R.layout.view_empty_review, parent,false);
+                view = layoutInflater.inflate(R.layout.view_empty_review, parent, false);
                 return new EmptyViewHolder(view);
             }
-            view = layoutInflater.inflate(R.layout.list_item_review, parent, false);
-            return new ReviewHolder(view);
+            if (viewType == SUMMERY_VIEW) {
+                view = layoutInflater.inflate(R.layout.view_review_summary, parent, false);
+                return new SummaryViewHolder(view);
+            } else if (viewType == ITEM_VIEW) {
+                view = layoutInflater.inflate(R.layout.list_item_review, parent, false);
+                return new ReviewHolder(view);
+            }
+            throw new RuntimeException("there is no type that matches thy type");
         }
 
         @Override
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
             if (holder instanceof ReviewHolder) {
-                Review review = mReviews.get(position);
+                Review review = mReviews.get(position - 1);
                 ((ReviewHolder) holder).bindReview(review);
+            } else if (holder instanceof SummaryViewHolder) {
+                SummaryViewHolder summaryViewHolder = (SummaryViewHolder) holder;
             }
+
         }
 
         @Override
         public int getItemCount() {
-            return mReviews.size() > 0 ? mReviews.size() : 1;
+            return mReviews.size() > 0 ? mReviews.size() + 1 : 1;
         }
 
         @Override
@@ -219,15 +228,28 @@ public class ReviewListFragment extends Fragment implements View.OnClickListener
             if (mReviews.size() == 0) {
                 return EMPTY_VIEW;
             }
-            return super.getItemViewType(position);
+            if (position == 0) {
+                return SUMMERY_VIEW;
+            }
+            return ITEM_VIEW;
+//            return super.getItemViewType(position);
         }
     }
 
     private static final int EMPTY_VIEW = -1;
+    private static final int SUMMERY_VIEW = 0;
+    private static final int ITEM_VIEW = 1;
 
     private class EmptyViewHolder extends RecyclerView.ViewHolder {
 
         public EmptyViewHolder(View itemView) {
+            super(itemView);
+        }
+    }
+
+    private class SummaryViewHolder extends RecyclerView.ViewHolder {
+
+        public SummaryViewHolder(View itemView) {
             super(itemView);
         }
     }
@@ -288,8 +310,6 @@ public class ReviewListFragment extends Fragment implements View.OnClickListener
 //                    .commit();
 
             requestReviewJsonObject(mReview);
-
-
         }
     }
 

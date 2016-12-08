@@ -51,7 +51,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="4"
-                    android:paddingRight="85dp">
+                    android:paddingRight="40dp">
 
                     <TextView
                         android:id="@+id/list_item_content_main_content_title"

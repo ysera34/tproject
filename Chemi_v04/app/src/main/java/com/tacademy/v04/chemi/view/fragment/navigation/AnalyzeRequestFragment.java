@@ -3,6 +3,7 @@ package com.tacademy.v04.chemi.view.fragment.navigation;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.NestedScrollView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -10,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -26,7 +26,7 @@ import java.util.ArrayList;
 
 public class AnalyzeRequestFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
-    private ScrollView mAnalyzeRequestScrollView;
+    private NestedScrollView mAnalyzeRequestScrollView;
     private Spinner mParentSpinner;
     private Spinner mChildSpinner;
     private ArrayList<ArrayList<String>> mChildSpinnerDataList;
@@ -86,7 +86,7 @@ public class AnalyzeRequestFragment extends Fragment implements AdapterView.OnIt
 //        return super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_analyze_request, container, false);
 
-        mAnalyzeRequestScrollView = (ScrollView) view.findViewById(R.id.analyze_request_scroll_view);
+        mAnalyzeRequestScrollView = (NestedScrollView) view.findViewById(R.id.analyze_request_scroll_view);
         mAnalyzeRequestScrollView.setVerticalScrollBarEnabled(false);
         mParentSpinner = (Spinner) view.findViewById(R.id.analyze_parent_category_spinner);
         mParentSpinner.setAdapter(mParentDataAdapter);
