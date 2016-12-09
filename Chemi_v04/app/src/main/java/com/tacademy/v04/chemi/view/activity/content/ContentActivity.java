@@ -22,8 +22,10 @@ public class ContentActivity extends AppNavigationActivity {
 
     private static final String EXTRA_CONTENT_ID = "com.tacademy.chemi.content_id";
     private static final String EXTRA_CONTENT_TYPE = "com.tacademy.chemi.content_type";
+    private static final String EXTRA_CONTENT_NUMBER = "com.tacademy.chemi.content_number";
 
     private int mContentType;
+    private int mContentNumber;
 
     public static Intent newIntent(Context packageContext) {
         Intent intent = new Intent(packageContext, ContentActivity.class);
@@ -36,6 +38,13 @@ public class ContentActivity extends AppNavigationActivity {
         return intent;
     }
 
+    public static Intent newIntent(Context packageContext, int contentType, int contentNumber) {
+        Intent intent = new Intent(packageContext, ContentActivity.class);
+        intent.putExtra(EXTRA_CONTENT_TYPE, contentType);
+        intent.putExtra(EXTRA_CONTENT_NUMBER, contentNumber);
+        return intent;
+    }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,12 +52,13 @@ public class ContentActivity extends AppNavigationActivity {
         mFloatingActionButton.setVisibility(View.GONE);
 
         mContentType = getIntent().getIntExtra(EXTRA_CONTENT_TYPE, 0);
+        mContentNumber = getIntent().getIntExtra(EXTRA_CONTENT_NUMBER, 0);
         Log.i(TAG, "mContentType : " + mContentType);
         FragmentManager fm = getSupportFragmentManager();
         containerFragment = fm.findFragmentById(R.id.fragment_container);
 
         if (containerFragment == null) {
-            containerFragment = ContentFragment.newInstance(mContentType);
+            containerFragment = ContentFragment.newInstance(mContentType, mContentNumber);
             fm.beginTransaction()
                     .add(R.id.fragment_container, containerFragment)
                     .commit();

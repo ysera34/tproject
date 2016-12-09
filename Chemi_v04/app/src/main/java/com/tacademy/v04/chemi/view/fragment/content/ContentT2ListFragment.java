@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.tacademy.v04.chemi.R;
 import com.tacademy.v04.chemi.model.Content;
-import com.tacademy.v04.chemi.model.ContentStorage;
+import com.tacademy.v04.chemi.model.ContentArchiveStorage;
 import com.tacademy.v04.chemi.view.activity.content.ContentActivity;
 
 import java.util.ArrayList;
@@ -49,8 +49,8 @@ public class ContentT2ListFragment extends Fragment {
         super.onCreate(savedInstanceState);
         mContentType = getArguments().getInt(ARG_CONTENT_TYPE);
 
-        ContentStorage contentStorage = ContentStorage.get(getActivity());
-        mContents = contentStorage.getTypeContents(mContentType);
+        ContentArchiveStorage contentArchiveStorage = ContentArchiveStorage.get(getActivity());
+        mContents = contentArchiveStorage.getTypeContents(mContentType);
     }
 
     @Nullable

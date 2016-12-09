@@ -11,18 +11,18 @@ import java.util.UUID;
  * Created by yoon on 2016. 11. 23..
  */
 
-public class ContentMainStorage {
+public class ContentArchiveStorage {
 
-    private static ContentMainStorage sContentMainStorage;
+    private static ContentArchiveStorage sContentArchiveStorage;
     private Context mAppContext;
 
     private ArrayList<Content> mContents;
 
-    private ContentMainStorage(Context context) {
+    private ContentArchiveStorage(Context context) {
         mAppContext = context;
         mContents = new ArrayList<>();
 
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < 30; i++) {
             Content content = new Content();
             switch (i%9) {
                 case 0 :
@@ -102,11 +102,11 @@ public class ContentMainStorage {
         }
     }
 
-    public static ContentMainStorage get(Context context) {
-        if (sContentMainStorage == null) {
-            sContentMainStorage = new ContentMainStorage(context.getApplicationContext());
+    public static ContentArchiveStorage get(Context context) {
+        if (sContentArchiveStorage == null) {
+            sContentArchiveStorage = new ContentArchiveStorage(context.getApplicationContext());
         }
-        return sContentMainStorage;
+        return sContentArchiveStorage;
     }
 
     public ArrayList<Content> getContents() {
@@ -120,5 +120,17 @@ public class ContentMainStorage {
             }
         }
         return null;
+    }
+
+    public ArrayList<Content> getTypeContents(int type) {
+
+        ArrayList<Content> contents = new ArrayList<>();
+
+        for (Content content : mContents) {
+            if (content.getContentType()==type) {
+                contents.add(content);
+            }
+        }
+        return contents;
     }
 }

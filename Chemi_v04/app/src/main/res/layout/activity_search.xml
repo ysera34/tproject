@@ -61,11 +61,11 @@
                     android:layout_width="54dp"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical">
-                    <Button
-                        android:layout_width="26dp"
-                        android:layout_height="15dp"
-                        android:layout_centerHorizontal="true"
-                        android:background="@drawable/ic_search_button"/>
+                    <!--<Button-->
+                        <!--android:layout_width="26dp"-->
+                        <!--android:layout_height="15dp"-->
+                        <!--android:layout_centerHorizontal="true"-->
+                        <!--android:background="@drawable/ic_search_button"/>-->
 
                 </RelativeLayout>
             </android.support.v7.widget.Toolbar>

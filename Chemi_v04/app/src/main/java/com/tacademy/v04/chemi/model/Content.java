@@ -16,6 +16,7 @@ public class Content {
     private int mContentImageId;
     private int mContentTypeImageId;
     private int mContentType;
+    private int mContentNumber;
 
     public Content() {
         mId = UUID.randomUUID();
@@ -78,6 +79,14 @@ public class Content {
         mContentType = contentType;
     }
 
+    public int getContentNumber() {
+        return mContentNumber;
+    }
+
+    public void setContentNumber(int contentNumber) {
+        mContentNumber = contentNumber;
+    }
+
     @Override
     public String toString() {
         return "Content{" +
@@ -88,6 +97,7 @@ public class Content {
                 ", mContentImageId=" + mContentImageId +
                 ", mContentTypeImageId=" + mContentTypeImageId +
                 ", mContentType=" + mContentType +
+                ", mContentNumber=" + mContentNumber +
                 '}';
     }
 }

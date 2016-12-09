@@ -107,8 +107,6 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         mCircleIndicator.setViewPager(mImageBannerViewPager);
         mCircleIndicator.setSnap(true);
 
-
-
         (view.findViewById(R.id.prev_button)).setOnClickListener(this);
         (view.findViewById(R.id.next_button)).setOnClickListener(this);
 
@@ -332,7 +330,8 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         @Override
         public void onClick(View view) {
 
-            Intent intent = ContentActivity.newIntent(getActivity(), mContent.getContentType());
+            Intent intent = ContentActivity.newIntent(getActivity(),
+                    mContent.getContentType(), mContent.getContentNumber());
             startActivity(intent);
 
         }
