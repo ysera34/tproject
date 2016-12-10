@@ -265,8 +265,8 @@ public class ReviewFormFragment extends Fragment implements View.OnClickListener
         }
 
         ArrayList<BottomSheetMenu> menus = new ArrayList<>();
-        menus.add(new BottomSheetMenu(R.drawable.ic_drawer_archive, R.string.bottom_sheet_menu_camera));
-        menus.add(new BottomSheetMenu(R.drawable.ic_drawer_archive, R.string.bottom_sheet_menu_gallery));
+        menus.add(new BottomSheetMenu(R.drawable.ic_camera, R.string.bottom_sheet_menu_camera));
+        menus.add(new BottomSheetMenu(R.drawable.ic_gallery, R.string.bottom_sheet_menu_gallery));
 
         BottomSheetMenuAdapter menuAdapter = new BottomSheetMenuAdapter(menus);
         menuAdapter.setOnItemClickListener(new BottomSheetMenuAdapter.OnItemClickListener() {

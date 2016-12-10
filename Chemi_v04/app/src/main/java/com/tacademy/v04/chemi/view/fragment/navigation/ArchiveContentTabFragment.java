@@ -43,9 +43,9 @@ public class ArchiveContentTabFragment extends Fragment {
         mArchiveContentListFragments = new ArrayList<>();
         mArchiveContentFragmentsTitles = new ArrayList<>();
 
-        addArchiveContentListFragment(ArchiveContentT1ListFragment.newInstance(11), "케미데스크");
-        addArchiveContentListFragment(ArchiveContentT2ListFragment.newInstance(21), "케미 PICK");
-        addArchiveContentListFragment(ArchiveContentT3ListFragment.newInstance(31), "케미 라이프");
+        addArchiveContentListFragment(ArchiveContentT1ListFragment.newInstance(1), "케미데스크");
+        addArchiveContentListFragment(ArchiveContentT2ListFragment.newInstance(2), "케미 PICK");
+        addArchiveContentListFragment(ArchiveContentT3ListFragment.newInstance(3), "케미 라이프");
     }
 
     @Nullable

@@ -7,6 +7,8 @@ import com.tacademy.v04.chemi.R;
 import java.util.ArrayList;
 import java.util.UUID;
 
+import static android.R.attr.type;
+
 /**
  * Created by yoon on 2016. 11. 23..
  */
@@ -122,12 +124,12 @@ public class ContentArchiveStorage {
         return null;
     }
 
-    public ArrayList<Content> getTypeContents(int type) {
+    public ArrayList<Content> getTypeContents(int contentType) {
 
         ArrayList<Content> contents = new ArrayList<>();
 
         for (Content content : mContents) {
-            if (content.getContentType()==type) {
+            if (content.getContentType()==contentType) {
                 contents.add(content);
             }
         }

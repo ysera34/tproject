@@ -19,6 +19,8 @@ import com.tacademy.v04.chemi.view.activity.content.ContentActivity;
 
 import java.util.ArrayList;
 
+import static android.R.attr.type;
+
 /**
  * Created by yoon on 2016. 12. 2..
  */
@@ -31,10 +33,10 @@ public class ArchiveContentT2ListFragment extends Fragment {
     private ArrayList<Content> mContents;
     int mContentType;
 
-    public static ArchiveContentT2ListFragment newInstance(int type) {
+    public static ArchiveContentT2ListFragment newInstance(int contentType) {
 
         Bundle args = new Bundle();
-        args.putSerializable(ARG_CONTENT_TYPE, type);
+        args.putSerializable(ARG_CONTENT_TYPE, contentType);
 
         ArchiveContentT2ListFragment fragment = new ArchiveContentT2ListFragment();
         fragment.setArguments(args);

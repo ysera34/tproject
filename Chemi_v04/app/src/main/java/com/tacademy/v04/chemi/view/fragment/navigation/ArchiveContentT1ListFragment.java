@@ -31,10 +31,10 @@ public class ArchiveContentT1ListFragment extends Fragment {
     private ArrayList<Content> mContents;
     int mContentType;
 
-    public static ArchiveContentT1ListFragment newInstance(int type) {
+    public static ArchiveContentT1ListFragment newInstance(int contentType) {
 
         Bundle args = new Bundle();
-        args.putSerializable(ARG_CONTENT_TYPE, type);
+        args.putSerializable(ARG_CONTENT_TYPE, contentType);
 
         ArchiveContentT1ListFragment fragment = new ArchiveContentT1ListFragment();
         fragment.setArguments(args);

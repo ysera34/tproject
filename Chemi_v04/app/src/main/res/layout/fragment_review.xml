@@ -41,7 +41,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:padding="16dp"
-                    android:layout_weight="3"
+                    android:layout_weight="2.2"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -49,7 +49,7 @@
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:layout_marginEnd="10dp"
-                        android:src="@mipmap/ic_launcher"/>
+                        android:src="@drawable/ic_account_circle_grey_24dp"/>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -108,14 +108,21 @@
                         android:gravity="center_vertical">
 
                         <TextView
-                            android:text="123"
+                            android:id="@+id/review_card_symptom_1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:padding="4dp"
+                            android:textSize="12sp"
+                            android:textColor="@color/colorPrimary"
                             android:layout_marginEnd="5dp"/>
 
                         <TextView
+                            android:id="@+id/review_card_symptom_2"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content"
+                            android:padding="4dp"
+                            android:textSize="12sp"
+                            android:textColor="@color/colorPrimary"/>
 
                     </LinearLayout>
 

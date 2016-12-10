@@ -76,8 +76,6 @@ public class ReviewListFragment extends Fragment implements View.OnClickListener
     }
 
     public ReviewListFragment() {
-//        mReviewStorage = ReviewStorage.get(getActivity());
-//        mReviews = mReviewStorage.getReviews();
     }
 
     @Override
@@ -264,6 +262,8 @@ public class ReviewListFragment extends Fragment implements View.OnClickListener
         private RatingBar mReviewCardRatingBar;
         private TextView mReviewCardUserInfoStateTextView;
         private ImageView mReviewCardPhotoImageView;
+        private TextView mReviewCardSymptomTextView1;
+        private TextView mReviewCardSymptomTextView2;
 
         private TextView mReviewPositiveContent;
         private TextView mReviewNegativeContent;
@@ -276,6 +276,8 @@ public class ReviewListFragment extends Fragment implements View.OnClickListener
             mReviewCardRatingBar = (RatingBar) itemView.findViewById(R.id.list_item_review_card_rating_bar);
             mReviewCardUserInfoStateTextView = (TextView) itemView.findViewById(R.id.list_item_review_card_user_info_state_text);
             mReviewCardPhotoImageView = (ImageView) itemView.findViewById(R.id.list_item_review_card_photo_image_view);
+            mReviewCardSymptomTextView1 = (TextView) itemView.findViewById(R.id.list_item_review_card_symptom_1);
+            mReviewCardSymptomTextView2 = (TextView) itemView.findViewById(R.id.list_item_review_card_symptom_2);
 
             mReviewPositiveContent = (TextView) itemView.findViewById(R.id.list_item_review_card_positive_content);
             mReviewNegativeContent = (TextView) itemView.findViewById(R.id.list_item_review_card_negative_content);
@@ -293,6 +295,17 @@ public class ReviewListFragment extends Fragment implements View.OnClickListener
             } else {
                 mReviewCardPhotoImageView.setImageResource(R.drawable.ic_photo_camera_border_24dp);
             }
+            mReviewCardRatingBar.setRating(mReview.getRatingValue());
+            if (mReview.getConstitution1()!=null) {
+                mReviewCardSymptomTextView1.setText(mReview.getConstitution1());
+                mReviewCardSymptomTextView1.setBackgroundResource(R.drawable.widget_oval_border_primary);
+            }
+            if (mReview.getConstitution2()!=null) {
+                mReviewCardSymptomTextView2.setText(mReview.getConstitution2());
+                mReviewCardSymptomTextView2.setBackgroundResource(R.drawable.widget_oval_border_primary);
+            }
+
+            mReviewCardSymptomTextView2.setText(mReview.getConstitution2());
 
             mReviewPositiveContent.setText(mReview.getPositiveContent());
             mReviewNegativeContent.setText(mReview.getNegativeContent());

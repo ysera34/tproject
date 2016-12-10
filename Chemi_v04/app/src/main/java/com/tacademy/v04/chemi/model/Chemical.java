@@ -19,6 +19,7 @@ public class Chemical {
     private String mAbbr;
     private String mMix;
     private int mHazard;
+    private int mMarkedIndex;
     private ArrayList<Effect> mEffects;
     private ArrayList<String> mConstitutions;
 
@@ -130,6 +131,14 @@ public class Chemical {
         mHazard = hazard;
     }
 
+    public int getMarkedIndex() {
+        return mMarkedIndex;
+    }
+
+    public void setMarkedIndex(int markedIndex) {
+        mMarkedIndex = markedIndex;
+    }
+
     public ArrayList<Effect> getEffects() {
         return mEffects;
     }
@@ -164,7 +173,8 @@ public class Chemical {
                 ", mAbbr='" + mAbbr + '\'' +
                 ", mMix='" + mMix + '\'' +
                 ", mHazard=" + mHazard +
-                ", mEffects=" + mEffects.toString() +
+                ", mMarkedIndex=" + mMarkedIndex +
+                ", mEffects=" + mEffects +
                 ", mConstitutions=" + mConstitutions +
                 '}';
     }

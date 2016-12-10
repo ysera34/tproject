@@ -32,10 +32,10 @@ public class ArchiveContentT3ListFragment extends Fragment {
     int mContentType;
 
 
-    public static ArchiveContentT3ListFragment newInstance(int type) {
+    public static ArchiveContentT3ListFragment newInstance(int contentType) {
 
         Bundle args = new Bundle();
-        args.putSerializable(ARG_CONTENT_TYPE, type);
+        args.putSerializable(ARG_CONTENT_TYPE, contentType);
 
         ArchiveContentT3ListFragment fragment = new ArchiveContentT3ListFragment();
         fragment.setArguments(args);

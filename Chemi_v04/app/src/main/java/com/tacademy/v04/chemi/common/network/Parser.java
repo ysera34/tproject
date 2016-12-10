@@ -45,6 +45,7 @@ import static com.tacademy.v04.chemi.common.network.NetworkConfig.Review.Key.REV
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.Review.Key.REVIEW_IMAGE1;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.Review.Key.REVIEW_IMAGE2;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.Review.Key.REVIEW_IMAGE3;
+import static com.tacademy.v04.chemi.common.network.NetworkConfig.Review.Key.REVIEW_IMAGE_EXIST;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.Review.Key.REVIEW_NEGATIVE;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.Review.Key.REVIEW_POSITIVE;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.Review.Key.REVIEW_RATING;
@@ -279,12 +280,14 @@ public class Parser {
                             chemical.setNameEn(chemicalObject.getString(NAMEEN));
                             chemical.setHazard(chemicalObject.getInt(HAZARD));
                             chemical.setKeyword(chemicalObject.getString(KEYWORD));
+                            chemical.setMarkedIndex(i);
                             chemicals.add(chemical);
                         }
                     }
                     product.setChemicals(chemicals);
                 }
             }
+            Log.i("parseProduct", product.toString());
         } catch (JSONException e) {
             e.printStackTrace();
             Log.w("Parse Exception", e.getMessage());
@@ -439,9 +442,29 @@ public class Parser {
                         review.setGender(reviewObject.getString(WRITER_GENDER));
                         review.setBirthYear(reviewObject.getInt(WRITER_BIRTHYEAR));
                         review.setChild(reviewObject.getInt(WRITER_CHILD));
-                        review.setRating(reviewObject.getDouble(REVIEW_RATING));
+
+                        Object ratingObject = reviewObject.get(REVIEW_RATING);
+                        float ratingf = 0.0f;
+                        if (ratingObject instanceof Integer) {
+                            ratingf = ((Integer) ratingObject).floatValue();
+                        } else if (ratingObject instanceof Double) {
+                            ratingf = ((Double) ratingObject).floatValue();
+                        } else if (ratingObject == null) {
+                            ratingf = 0.0f;
+                        }
+                        review.setRatingValue(ratingf);
+
                         review.setPositiveContent(reviewObject.getString(REVIEW_POSITIVE));
                         review.setNegativeContent(reviewObject.getString(REVIEW_NEGATIVE));
+
+                        review.getImagePaths().add(reviewObject.getString(REVIEW_IMAGE1));
+                        review.getImagePaths().add(reviewObject.getString(REVIEW_IMAGE2));
+                        review.getImagePaths().add(reviewObject.getString(REVIEW_IMAGE3));
+
+                        if (reviewObject.getInt(REVIEW_IMAGE_EXIST) == 1) {
+                            review.setPhotoCheck(true);
+                        }
+
                         review.setCreatedDate(reviewObject.getString(REVIEW_CREATED));
                         jsonArray = reviewObject.getJSONArray(WRITER_CONSTITUTIONS);
                         switch (jsonArray.length()) {
@@ -455,6 +478,7 @@ public class Parser {
                             case 0 :
                                 break;
                         }
+//                        Log.i("review parser", review.toString());
                         reviews.add(review);
                     }
                 }
@@ -509,6 +533,61 @@ public class Parser {
             Log.w("Parse Exception", e.getMessage());
         }
         return reviews;
+    }
+
+    /**
+     * /products/:product_id/reviews/:review_id
+     * @param responseObject
+     * @param review
+     * @return
+     */
+    public static Review parseReview(JSONObject responseObject, Review review) {
+
+        try {
+            String responseMessage = responseObject.getString(RESPONSE_MESSAGE);
+            if (responseMessage.equals(RESPONSE_SUCCESS)) {
+                JSONArray dataArray = responseObject.getJSONArray(RESPONSE_DATA);
+                if (dataArray != null) {
+                    JSONObject reviewObject = dataArray.getJSONObject(0);
+                    review.setReviewId(reviewObject.getInt(REVIEW_ID));
+                    review.setUserId(reviewObject.getInt(WRITER_ID));
+                    review.setName(reviewObject.getString(WRITER_NAME));
+                    review.setGender(reviewObject.getString(WRITER_GENDER));
+                    review.setBirthYear(reviewObject.getInt(WRITER_BIRTHYEAR));
+                    review.setChild(reviewObject.getInt(WRITER_CHILD));;
+
+                    Object rating = reviewObject.get(RATING);
+                    float ratingf = 0.0f;
+//                        Log.i("parseProductList rating", String.valueOf(rating));
+                    if (rating instanceof Integer) {
+                        ratingf = ((Integer) rating).floatValue();
+                    } else if (rating instanceof Double) {
+                        ratingf = ((Double) rating).floatValue();
+                    } else if (rating == null) {
+                        ratingf = 0.0f;
+                    }
+//                        Log.i("float", String.valueOf(ratingf));
+//
+                    review.setRating(ratingf);
+                    review.setPositiveContent(reviewObject.getString(REVIEW_POSITIVE));
+                    review.setNegativeContent(reviewObject.getString(REVIEW_NEGATIVE));
+//                    String imagePath1 = reviewObject.getString(REVIEW_IMAGE1);
+//                    String imagePath2 = reviewObject.getString(REVIEW_IMAGE2);
+//                    String imagePath3 = reviewObject.getString(REVIEW_IMAGE3);
+//                    review.getImagePaths().add(imagePath1);
+//                    review.getImagePaths().add(imagePath2);
+//                    review.getImagePaths().add(imagePath3);
+//                    if (!imagePath1.equals("null") || !imagePath2.equals("null") || !imagePath3.equals("null")) {
+//                        review.setPhotoCheck(true);
+//                    }
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Log.w("Parse Exception", e.getMessage());
+        }
+
+        return review;
     }
 
     /**
@@ -621,57 +700,6 @@ public class Parser {
         return products;
     }
 
-    /**
-     * /products/:product_id/reviews/:review_id
-     * @param responseObject
-     * @param review
-     * @return
-     */
-    public static Review parseReview(JSONObject responseObject, Review review) {
-
-        try {
-            String responseMessage = responseObject.getString(RESPONSE_MESSAGE);
-            if (responseMessage.equals(RESPONSE_SUCCESS)) {
-                JSONArray dataArray = responseObject.getJSONArray(RESPONSE_DATA);
-                if (dataArray != null) {
-                    JSONObject reviewObject = dataArray.getJSONObject(0);
-                    review.setReviewId(reviewObject.getInt(REVIEW_ID));
-                    review.setUserId(reviewObject.getInt(WRITER_ID));
-                    review.setName(reviewObject.getString(WRITER_NAME));
-                    review.setGender(reviewObject.getString(WRITER_GENDER));
-                    review.setBirthYear(reviewObject.getInt(WRITER_BIRTHYEAR));
-                    review.setChild(reviewObject.getInt(WRITER_CHILD));;
-
-                    Object rating = reviewObject.get(RATING);
-                    float ratingf = 0.0f;
-//                        Log.i("parseProductList rating", String.valueOf(rating));
-                    if (rating instanceof Integer) {
-                        ratingf = ((Integer) rating).floatValue();
-                    } else if (rating instanceof Double) {
-                        ratingf = ((Double) rating).floatValue();
-                    } else if (rating == null) {
-                        ratingf = 0.0f;
-                    }
-//                        Log.i("float", String.valueOf(ratingf));
-//
-                    review.setRating(ratingf);
-                    review.setPositiveContent(reviewObject.getString(REVIEW_POSITIVE));
-                    review.setNegativeContent(reviewObject.getString(REVIEW_NEGATIVE));
-                    String imagePath1 = reviewObject.getString(REVIEW_IMAGE1);
-                    String imagePath2 = reviewObject.getString(REVIEW_IMAGE2);
-                    String imagePath3 = reviewObject.getString(REVIEW_IMAGE3);
-                    review.getImagePaths().add(imagePath1);
-                    review.getImagePaths().add(imagePath2);
-                    review.getImagePaths().add(imagePath3);
-                }
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-            Log.w("Parse Exception", e.getMessage());
-        }
-
-        return review;
-    }
 }
 
 

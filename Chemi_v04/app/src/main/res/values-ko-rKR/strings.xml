@@ -354,22 +354,23 @@
     </string-array>
 
     <string name="null_effect_desc">관련 정보는 현재 충분하지 않습니다.</string>
+    <string name="action_category">category_search</string>
 
-    <string name="conid1_null_effect">피부 관련 정보는 현재 충분하지 않습니다.</string>
-    <string name="conid2_null_effect">안구 관련 정보는 현재 충분하지 않습니다.</string>
-    <string name="conid3_null_effect">호흡기 관련 정보는 현재 충분하지 않습니다.</string>
-    <string name="conid4_null_effect">구강 관련 정보는 현재 충분하지 않습니다.</string>
-    <string name="conid5_null_effect">내부장기 관련 정보는 현재 충분하지 않습니다.</string>
-    <string name="conid6_null_effect">유아, 아동 관련 정보는 현재 충분하지 않습니다.</string>
+    <!--<string name="conid1_null_effect">피부 관련 정보는 현재 충분하지 않습니다.</string>-->
+    <!--<string name="conid2_null_effect">안구 관련 정보는 현재 충분하지 않습니다.</string>-->
+    <!--<string name="conid3_null_effect">호흡기 관련 정보는 현재 충분하지 않습니다.</string>-->
+    <!--<string name="conid4_null_effect">구강 관련 정보는 현재 충분하지 않습니다.</string>-->
+    <!--<string name="conid5_null_effect">내부장기 관련 정보는 현재 충분하지 않습니다.</string>-->
+    <!--<string name="conid6_null_effect">유아, 아동 관련 정보는 현재 충분하지 않습니다.</string>-->
 
-    <string-array name="constitution_null_effect_array">
-        <item>@string/conid1_null_effect</item>
-        <item>@string/conid2_null_effect</item>
-        <item>@string/conid3_null_effect</item>
-        <item>@string/conid4_null_effect</item>
-        <item>@string/conid5_null_effect</item>
-        <item>@string/conid6_null_effect</item>
-    </string-array>
+    <!--<string-array name="constitution_null_effect_array">-->
+        <!--<item>@string/conid1_null_effect</item>-->
+        <!--<item>@string/conid2_null_effect</item>-->
+        <!--<item>@string/conid3_null_effect</item>-->
+        <!--<item>@string/conid4_null_effect</item>-->
+        <!--<item>@string/conid5_null_effect</item>-->
+        <!--<item>@string/conid6_null_effect</item>-->
+    <!--</string-array>-->
 
     <string-array name="search_popular_word_array">
         <item>친환경 소다 세제</item>

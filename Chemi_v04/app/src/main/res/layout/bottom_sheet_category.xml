@@ -265,10 +265,7 @@
                 android:id="@+id/bottom_sheet_category_section53"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/coral_candy"
-                android:textSize="10dp"
-                android:text="전체보기!"
-                android:visibility="visible"/>
+                android:background="@drawable/selector_bottom_sheet_category_xml_section11"/>
             <!--android:visibility="invisible"-->
         </LinearLayout>
 

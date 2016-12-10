@@ -73,9 +73,10 @@ public class NetworkConfig {
             public static final String REVIEW_RATING = "rating";
             public static final String REVIEW_POSITIVE = "reviewp";
             public static final String REVIEW_NEGATIVE = "reviewn";
-            public static final String REVIEW_IMAGE1 = "image1";
-            public static final String REVIEW_IMAGE2 = "image2";
-            public static final String REVIEW_IMAGE3 = "image3";
+            public static final String REVIEW_IMAGE1 = "images1";
+            public static final String REVIEW_IMAGE2 = "images2";
+            public static final String REVIEW_IMAGE3 = "images3";
+            public static final String REVIEW_IMAGE_EXIST = "imageExists";
             public static final String REVIEW_CREATED = "created";
             public static final String WRITER_CONSTITUTIONS = "constitutions";
             public static final String WRITER_CONSTITUTION = "name";

@@ -7,7 +7,7 @@ import java.util.UUID;
  * Created by yoon on 2016. 11. 20..
  */
 
-public class Review {
+public class  Review {
 
     private UUID mId;
     private int mReviewId;
@@ -68,10 +68,7 @@ public class Review {
     }
 
     public boolean isPhotoCheck() {
-        if (getImageResIdArray().size() > 0) {
-            return true;
-        }
-        return false;
+        return mPhotoCheck;
     }
 
     public void setPhotoCheck(boolean photoCheck) {

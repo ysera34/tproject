@@ -131,6 +131,7 @@
     <string name="action_send">send</string>
     <string name="request_send_data">데이터를 전송하고 있습니다.</string>
     <string name="review_form_rating_value_format">%s점</string>
+    <string name="action_category">category_search</string>
     <!-- REQUEST -->
     <!--<string name="request_product_id">%1$s</string>-->
 

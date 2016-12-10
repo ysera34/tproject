@@ -1,6 +1,7 @@
 package com.tacademy.v04.chemi.model;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.tacademy.v04.chemi.R;
 
@@ -82,6 +83,7 @@ public class EffectStorage {
         }
 //        mEffects.set(constitutionId-1, effect);
         mEffects.add(effect);
+        Log.i("setEffects", effect.toString());
 //        mEffects.indexOf()
     }
 

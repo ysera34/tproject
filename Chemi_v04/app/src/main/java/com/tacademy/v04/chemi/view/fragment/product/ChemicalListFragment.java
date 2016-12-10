@@ -176,7 +176,7 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.chemical_list_sort_button_view :
+            case R.id.chemical_list_sort_button_view:
                 mChemicalSortBottomSheetDialog = new BottomSheetDialog(getActivity());
                 View mSortBottomSheetView = getLayoutInflater(getArguments())
                         .inflate(R.layout.bottom_sheet_chemical_sort, null);
@@ -203,10 +203,13 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
             case R.id.bottom_sheet_chemical_filter_section2:
                 Toast.makeText(getActivity(), "bottom_sheet_chemical_filter_section2",
                         Toast.LENGTH_SHORT).show();
+                Collections.sort(mChemicals, mProductMarkedChemicalComparator);
                 mChemicalSortStatusTextView.setText(R.string.chemical_list_sort_notation);
+                mChemicalAdapter.addItems(mChemicals);
+                mChemicalAdapter.notifyDataSetChanged();
                 mChemicalSortBottomSheetDialog.dismiss();
                 break;
-            case R.id.list_chemical_state_expand_layout :
+            case R.id.list_chemical_state_expand_layout:
                 if (mChemicalDangerousGradeLayoutState) {
                     mChemicalDangerousGradeLayout.setVisibility(View.GONE);
                     mStateExpandTextView.setText("통계보기");
@@ -223,7 +226,7 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
     }
 
     private void setupAdapter() {
-        if(isAdded()) {
+        if (isAdded()) {
             if (mChemicalAdapter == null) {
                 mChemicalAdapter = new ChemicalAdapter(mChemicals);
                 mChemicalRecyclerView.setAdapter(mChemicalAdapter);
@@ -253,7 +256,7 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
                 ProgressDialog.show(getActivity(), getString(R.string.request_loading_data),
                         getString(R.string.load_please_wait), false, false);
 
-        JsonObjectRequest jsonObjectRequest  = new JsonObjectRequest(URL_HOST + PATH
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(URL_HOST + PATH
                 + File.separator + mProduct.getProductId(),
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -372,7 +375,7 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
                 ProgressDialog.show(getActivity(), getString(R.string.request_loading_data),
                         getString(R.string.load_please_wait), false, false);
 
-        JsonObjectRequest jsonObjectRequest  = new JsonObjectRequest(URL_HOST + NetworkConfig.Chemical.PATH
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(URL_HOST + NetworkConfig.Chemical.PATH
                 + File.separator + chemical.getChemicalId(),
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -437,11 +440,12 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
     private final static Comparator mHazardGradeDescChemicalComparator = new Comparator() {
 
         private final Collator mCollator = Collator.getInstance();
+
         @Override
         public int compare(Object o, Object t1) {
 
-            int int1 = ((Chemical)o).getHazard()[0];
-            int int2 = ((Chemical)t1).getHazard()[0];
+            int int1 = ((Chemical) o).getHazard()[0];
+            int int2 = ((Chemical) t1).getHazard()[0];
 
             String str1;
             String str2;
@@ -461,4 +465,40 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
             return mCollator.compare(str1, str2);
         }
     };
+
+    private final static Comparator mProductMarkedChemicalComparator = new Comparator() {
+
+        private final Collator mCollator = Collator.getInstance();
+
+        @Override
+        public int compare(Object o, Object t1) {
+
+            int int1 = ((Chemical) o).getMarkedIndex();
+            int int2 = ((Chemical) t1).getMarkedIndex();
+
+            String str1;
+            String str2;
+
+            if (int1 < 10) {
+                str1 = String.valueOf(int1);
+            } else {
+                str1 = "0" + String.valueOf(int1);
+            }
+
+            if (int2 < 10) {
+                str2 = String.valueOf(int2);
+            } else {
+                str2 = "0" + String.valueOf(int2);
+            }
+
+            return mCollator.compare(str1, str2);
+        }
+    };
 }
+
+//        @Override
+//        public int compare(List<String> o1, List<String> o2) {
+//            return o1.get(1).compareTo(o1.get(1));
+//        }
+//    });
+//}

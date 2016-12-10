@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +19,6 @@ import com.tacademy.v04.chemi.R;
 import com.tacademy.v04.chemi.model.Review;
 import com.tacademy.v04.chemi.model.ReviewStorage;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -40,6 +40,8 @@ public class ReviewFragment extends Fragment {
     private RatingBar mReviewCardDetailRatingBar;
     private TextView mReviewCardDetailUserInfoStateTextView;
     private ImageView mReviewCardDetailPhotoImageView;
+    private TextView mReviewCardDetailSymptomTextView1;
+    private TextView mReviewCardDetailSymptomTextView2;
     private TextView mReviewCardDetailPositiveTextView;
     private TextView mReviewCardDetailNegativeTextView;
 
@@ -71,6 +73,7 @@ public class ReviewFragment extends Fragment {
         super.onCreate(savedInstanceState);
         UUID id = (UUID) getArguments().getSerializable(ARG_REVIEW);
         mReview = ReviewStorage.get(getActivity()).getReview(id);
+        Log.i(TAG, mReview.toString());
 //        mReviewImageResIds = mReview.getImageResIdArray();
         mReviewImagePaths = mReview.getImagePaths();
     }
@@ -86,6 +89,9 @@ public class ReviewFragment extends Fragment {
         mReviewCardDetailRatingBar = (RatingBar) view.findViewById(R.id.review_card_rating_bar);
         mReviewCardDetailUserInfoStateTextView = (TextView) view.findViewById(R.id.review_card_user_info_state_text);
         mReviewCardDetailPhotoImageView = (ImageView) view.findViewById(R.id.review_card_photo_image_view);
+
+        mReviewCardDetailSymptomTextView1 = (TextView) view.findViewById(R.id.review_card_symptom_1);
+        mReviewCardDetailSymptomTextView2 = (TextView) view.findViewById(R.id.review_card_symptom_2);
 
         mReviewCardDetailPositiveTextView = (TextView)
                 view.findViewById(R.id.review_card_detail_positive_content);
@@ -125,6 +131,14 @@ public class ReviewFragment extends Fragment {
             mReviewCardDetailPhotoImageView.setImageResource(R.drawable.ic_photo_camera_border_24dp);
         }
         mReviewCardDetailRatingBar.setRating(mReview.getRatingValue());
+        if (mReview.getConstitution1()!=null) {
+            mReviewCardDetailSymptomTextView1.setText(mReview.getConstitution1());
+            mReviewCardDetailSymptomTextView1.setBackgroundResource(R.drawable.widget_oval_border_primary);
+        }
+        if (mReview.getConstitution2()!=null) {
+            mReviewCardDetailSymptomTextView2.setText(mReview.getConstitution2());
+            mReviewCardDetailSymptomTextView2.setBackgroundResource(R.drawable.widget_oval_border_primary);
+        }
 
         mReviewCardDetailPositiveTextView.setText(review.getPositiveContent());
         mReviewCardDetailNegativeTextView.setText(review.getNegativeContent());
@@ -187,7 +201,7 @@ public class ReviewFragment extends Fragment {
         public void bindReviewImage(String imagePath) {
             mImagePath = imagePath;
             Glide.with(getActivity())
-                    .load(IMAGE_URL_HOST + File.separator +  mImagePath)
+                    .load(IMAGE_URL_HOST + mImagePath)   /*+ File.separator*/
 //                    .placeholder(R.drawable.unloaded_image_holder)
                     .error(R.drawable.unloaded_image_holder)
                     .override(140, 140)
