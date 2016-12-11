@@ -55,6 +55,10 @@ public class EffectStorage {
     // index, constitutionId from 1
     public void setEffect(int constitutionId, String description) {
 
+        if (constitutionId == 1) {
+            mEffects.clear();
+        }
+
         Effect effect = new Effect();
         effect.setConstitutionId(constitutionId);
         effect.setConstitutionName(mConstitutionNameArr[constitutionId - 1]);
