@@ -1,5 +1,6 @@
 package com.tacademy.v04.chemi.view.fragment.product;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,15 +21,29 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.tacademy.v04.chemi.R;
+import com.tacademy.v04.chemi.common.network.NetworkConfig;
 import com.tacademy.v04.chemi.model.Product;
 import com.tacademy.v04.chemi.model.ProductStorage;
 import com.tacademy.v04.chemi.view.activity.MainActivity;
 
+import org.json.JSONObject;
+
+import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import static com.tacademy.v04.chemi.common.Common.REQUEST_NAVIGATION_FAQ;
+import static com.tacademy.v04.chemi.common.network.NetworkConfig.SOCKET_TIMEOUT_GET_REQ;
+import static com.tacademy.v04.chemi.common.network.NetworkConfig.URL_HOST;
 
 /**
  * Created by yoon on 2016. 11. 14..
@@ -171,7 +187,9 @@ public class ProductFragment extends Fragment implements View.OnClickListener {
             startActivity(intent);
             return true;
         } else if (id == R.id.action_archive) {
-            Toast.makeText(getActivity(), "보관함에 추가되었습니다.", Toast.LENGTH_SHORT).show();
+            requestProductFavorite();
+
+//            Toast.makeText(getActivity(), "보관함에 추가되었습니다.", Toast.LENGTH_SHORT).show();
             return true;
         } else if (id == R.id.action_share) {
             Toast.makeText(getActivity(), "공유하겠습니다.", Toast.LENGTH_SHORT).show();
@@ -204,6 +222,60 @@ public class ProductFragment extends Fragment implements View.OnClickListener {
 //        }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void requestProductFavorite() {
+
+        final ProgressDialog pDialog =
+                ProgressDialog.show(getActivity(), getString(R.string.request_loading_data),
+                        getString(R.string.load_please_wait), false, false);
+
+        Map<String, String> params = new HashMap<>();
+        params.put("userid", "3");
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST,
+                URL_HOST + NetworkConfig.Product.PATH + File.separator + mProduct.getProductId() + NetworkConfig.User.PATH,
+                new JSONObject(params),
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        pDialog.dismiss();
+                        Log.i(TAG, "onResponse : " + response.toString());
+                        Toast.makeText(getActivity(), "보관함에 추가되었습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        pDialog.dismiss();
+                        Log.w(TAG, "onErrorResponse : " + error.toString());
+                        Toast.makeText(getActivity(), "데이터 수신 중, 서버에서 문제가 발생하였습니다.",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+//                {
+//                    @Override
+//                    protected Map<String, String> getParams() throws AuthFailureError {
+//                        Map<String, String> params = new HashMap<>();
+//                        params.put("userid", "3");
+//                        return params;
+//        //                return super.getParams();
+//                }
+//
+//                    @Override
+//                    public Map<String, String> getHeaders() throws AuthFailureError {
+//                        Map<String, String> params = new HashMap<>();
+//                        params.put("content-type","application/json");
+//                        return params;
+////                        return super.getHeaders();
+//                    }
+//                };
+
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(SOCKET_TIMEOUT_GET_REQ,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        Volley.newRequestQueue(getActivity()).add(jsonObjectRequest);
     }
 
 }

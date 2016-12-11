@@ -102,4 +102,8 @@ public class NetworkConfig {
 
         }
     }
+
+    public static final class User {
+        public static final String PATH = File.separator + "users";
+    }
 }
