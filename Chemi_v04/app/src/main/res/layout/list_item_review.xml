@@ -104,7 +104,10 @@
                             android:id="@+id/list_item_review_card_symptom_1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:padding="4dp"
+                            android:paddingTop="3dp"
+                            android:paddingBottom="3dp"
+                            android:paddingStart="4dp"
+                            android:paddingEnd="4dp"
                             android:textSize="12sp"
                             android:textColor="@color/colorPrimary"
                             android:layout_marginEnd="5dp"/>
@@ -113,7 +116,10 @@
                             android:id="@+id/list_item_review_card_symptom_2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:padding="4dp"
+                            android:paddingTop="3dp"
+                            android:paddingBottom="3dp"
+                            android:paddingStart="4dp"
+                            android:paddingEnd="4dp"
                             android:textSize="12sp"
                             android:textColor="@color/colorPrimary"/>
                         

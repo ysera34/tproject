@@ -95,6 +95,7 @@
     <string name="chemical_list_sort_notation">제품 표기 순</string>
     <string name="chemical_report_subject">성분 정보의 수정을 요청합니다</string>
     <string name="send_report">성분 정보 수정 보고서</string>
+    <string name="analyze_request_product_report_subject">제품 분석 요청</string>
     <string name="chemical_report">%1$s의 정보 수정을 요청합니다.\n일시 : %2$s</string>
     <string name="request_loading_data">데이터를 가져오고 있습니다</string>
     <string name="load_please_wait">잠시만 기다려주세요...</string>
@@ -355,6 +356,7 @@
 
     <string name="null_effect_desc">관련 정보는 현재 충분하지 않습니다.</string>
     <string name="action_category">category_search</string>
+    <string name="product_report_subject">제품 분석 요청</string>
 
     <!--<string name="conid1_null_effect">피부 관련 정보는 현재 충분하지 않습니다.</string>-->
     <!--<string name="conid2_null_effect">안구 관련 정보는 현재 충분하지 않습니다.</string>-->

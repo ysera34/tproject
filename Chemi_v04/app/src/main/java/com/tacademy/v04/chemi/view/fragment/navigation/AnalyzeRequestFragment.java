@@ -1,5 +1,7 @@
 package com.tacademy.v04.chemi.view.fragment.navigation;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -24,14 +28,21 @@ import java.util.ArrayList;
  * Request Chemical of Product
  */
 
-public class AnalyzeRequestFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+public class AnalyzeRequestFragment extends Fragment
+        implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     private NestedScrollView mAnalyzeRequestScrollView;
     private Spinner mParentSpinner;
     private Spinner mChildSpinner;
+    private EditText mAnalyzeRequestProductEditText;
+    private Button mAnalyzeRequestButton;
+
     private ArrayList<ArrayList<String>> mChildSpinnerDataList;
     private ArrayAdapter<String> mParentDataAdapter;
     private ArrayAdapter<String> mChildDataAdapter;
+    int[] mStringArrayResIds;
+    private int mParentDateSelectedPosition;
+    private int mChildDateSelectedPosition;
 
     public AnalyzeRequestFragment() {
     }
@@ -56,15 +67,15 @@ public class AnalyzeRequestFragment extends Fragment implements AdapterView.OnIt
 
         mChildSpinnerDataList = new ArrayList<>();
 
-        int[] stringArrayResIds = new int[]{
+        mStringArrayResIds = new int[]{
                 R.array.analyze_request_child_category_array1, R.array.analyze_request_child_category_array2,
                 R.array.analyze_request_child_category_array3, R.array.analyze_request_child_category_array4,
                 R.array.analyze_request_child_category_array5, R.array.analyze_request_child_category_array6,
                 R.array.analyze_request_child_category_array7};
 
-        for (int i = 0; i < stringArrayResIds.length; i++) {
+        for (int i = 0; i < mStringArrayResIds.length; i++) {
             ArrayList<String> childSpinnerData = new ArrayList<>();
-            String[] childStrArr = getResources().getStringArray(stringArrayResIds[i]);
+            String[] childStrArr = getResources().getStringArray(mStringArrayResIds[i]);
             for (int j = 0; j < childStrArr.length; j++) {
                 childSpinnerData.add(childStrArr[j]);
             }
@@ -92,6 +103,21 @@ public class AnalyzeRequestFragment extends Fragment implements AdapterView.OnIt
         mParentSpinner.setAdapter(mParentDataAdapter);
         mParentSpinner.setOnItemSelectedListener(this);
         mChildSpinner = (Spinner) view.findViewById(R.id.analyze_child_category_spinner);
+        mChildSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                mChildDateSelectedPosition = i;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        mAnalyzeRequestProductEditText = (EditText) view.findViewById(R.id.analyze_detail_edit_text);
+
+        mAnalyzeRequestButton = (Button) view.findViewById(R.id.analyze_request_submit_button);
+        mAnalyzeRequestButton.setOnClickListener(this);
 
         return view;
     }
@@ -99,6 +125,26 @@ public class AnalyzeRequestFragment extends Fragment implements AdapterView.OnIt
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.analyze_request_submit_button :
+
+                Intent intent = new Intent(Intent.ACTION_SEND, Uri.fromParts(
+                        "mailto", "chemi.helper@gmail.com", null));
+//                        intent.setData(Uri.parse("mailto:chemi.helper@gmail.com"));
+                intent.setType("text/plain");
+//                        intent.putExtra(Intent.EXTRA_EMAIL, "chemi.helper@gmail.com");
+                intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"chemi.helper@gmail.com"});
+                intent.putExtra(Intent.EXTRA_TEXT, analyzeRequestProduct());
+                intent.putExtra(Intent.EXTRA_SUBJECT,
+                        getString(R.string.product_report_subject));
+                intent = Intent.createChooser(intent, getString(R.string.analyze_request_product_report_subject));
+                startActivity(intent);
+                break;
+        }
     }
 
     @Override
@@ -117,6 +163,7 @@ public class AnalyzeRequestFragment extends Fragment implements AdapterView.OnIt
             mChildDataAdapter = new ArrayAdapter<>(getActivity(),
                     R.layout.list_item_analyze_request, mChildSpinnerDataList.get(i-1));
             mChildSpinner.setAdapter(mChildDataAdapter);
+            mParentDateSelectedPosition = i;
             mChildDataAdapter.notifyDataSetChanged();
         }
     }
@@ -132,4 +179,28 @@ public class AnalyzeRequestFragment extends Fragment implements AdapterView.OnIt
             menu.findItem(R.id.action_delete).setVisible(false);
         }
     }
+
+    private String analyzeRequestProduct() {
+
+        StringBuilder report = new StringBuilder();
+        String[] childCategory = getResources().getStringArray(mStringArrayResIds[mParentDateSelectedPosition]);
+        report.append(mParentDataAdapter.getItem(mParentDateSelectedPosition));
+        report.append(", ");
+        report.append(childCategory[mChildDateSelectedPosition]);
+        report.append(" 카테고리의 ");
+        report.append(mAnalyzeRequestProductEditText.getText().toString());
+        report.append("제품에 대한 성분정보를 요청합니다.\n");
+        return report.toString();
+    }
 }
+
+
+/**
+ *
+ *
+ *
+ *
+ *
+ *
+ * */
+

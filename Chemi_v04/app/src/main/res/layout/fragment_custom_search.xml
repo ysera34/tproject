@@ -41,6 +41,7 @@
         android:layout_below="@+id/custom_search_setting_button_layout"
         android:paddingStart="50dp"
         android:paddingEnd="50dp"
+        android:layout_marginBottom="12dp"
         android:maxLines="1"
         android:gravity="center_vertical"
         android:text="모든 카테고리"
@@ -50,13 +51,13 @@
         android:background="@drawable/widget_square_border_spinner"/>
 
     <Button
+        android:visibility="gone"
         android:id="@+id/custom_search_constitution_button"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_below="@+id/custom_search_category_button"
         android:paddingStart="50dp"
         android:paddingEnd="50dp"
-        android:layout_marginTop="12dp"
         android:layout_marginBottom="12dp"
         android:maxLines="1"
         android:gravity="center_vertical"

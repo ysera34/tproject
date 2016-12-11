@@ -95,6 +95,10 @@ public class NetworkConfig {
             public static final String SEARCHED_BRAND = "brand";
             public static final String SEARCHED_MAKER = "maker";
             public static final String SEARHCED_PRODUCT_NAME = "name";
+            public static final String SEARCHED_CATEGORY_ID = "categoryid";
+            public static final String SEARCHED_TYPE = "type";
+            public static final String SEARCHED_PURPOSE = "purpose";
+            public static final String SEARCHED_IMAGE = "image";
 
         }
     }

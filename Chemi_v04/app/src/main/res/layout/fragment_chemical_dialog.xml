@@ -155,8 +155,7 @@
                 <ImageView
                     android:id="@+id/chemical_dialog_precaution1"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_chemical_dialog_precaution_1_on"/>
+                    android:layout_height="wrap_content"/>
 
             </LinearLayout>
 
@@ -311,8 +310,7 @@
                 <ImageView
                     android:id="@+id/chemical_dialog_precaution4"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_chemical_dialog_precaution_4_off"/>
+                    android:layout_height="wrap_content"/>
 
             </LinearLayout>
 

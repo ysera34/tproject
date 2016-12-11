@@ -286,7 +286,6 @@ public class SearchActivity extends AppBaseActivity
                         Toast.LENGTH_SHORT).show();
                 break;
             case R.id.bottom_sheet_category_section11 :
-
                 Toast.makeText(SearchActivity.this, "bottom_sheet_category_section11",
                         Toast.LENGTH_SHORT).show();
                 mCategoryBottomSheetDialog.dismiss();

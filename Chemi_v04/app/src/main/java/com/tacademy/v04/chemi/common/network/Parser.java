@@ -57,7 +57,11 @@ import static com.tacademy.v04.chemi.common.network.NetworkConfig.Review.Key.WRI
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.Review.Key.WRITER_ID;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.Review.Key.WRITER_NAME;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.Search.Key.SEARCHED_BRAND;
+import static com.tacademy.v04.chemi.common.network.NetworkConfig.Search.Key.SEARCHED_CATEGORY_ID;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.Search.Key.SEARCHED_ID;
+import static com.tacademy.v04.chemi.common.network.NetworkConfig.Search.Key.SEARCHED_IMAGE;
+import static com.tacademy.v04.chemi.common.network.NetworkConfig.Search.Key.SEARCHED_MAKER;
+import static com.tacademy.v04.chemi.common.network.NetworkConfig.Search.Key.SEARCHED_TYPE;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.Search.Key.SEARCH_WORD;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.Search.Key.SEARHCED_PRODUCT_NAME;
 
@@ -454,8 +458,17 @@ public class Parser {
                         }
                         review.setRatingValue(ratingf);
 
-                        review.setPositiveContent(reviewObject.getString(REVIEW_POSITIVE));
-                        review.setNegativeContent(reviewObject.getString(REVIEW_NEGATIVE));
+                        if (reviewObject.getString(REVIEW_POSITIVE).equals("null")) {
+                            review.setPositiveContent("");
+                        } else {
+                            review.setPositiveContent(reviewObject.getString(REVIEW_POSITIVE));
+                        }
+
+                        if (reviewObject.getString(REVIEW_NEGATIVE).equals("null")) {
+                            review.setNegativeContent("");
+                        } else {
+                            review.setNegativeContent(reviewObject.getString(REVIEW_NEGATIVE));
+                        }
 
                         review.getImagePaths().add(reviewObject.getString(REVIEW_IMAGE1));
                         review.getImagePaths().add(reviewObject.getString(REVIEW_IMAGE2));
@@ -569,8 +582,21 @@ public class Parser {
 //                        Log.i("float", String.valueOf(ratingf));
 //
                     review.setRating(ratingf);
-                    review.setPositiveContent(reviewObject.getString(REVIEW_POSITIVE));
-                    review.setNegativeContent(reviewObject.getString(REVIEW_NEGATIVE));
+
+//                    review.setPositiveContent(reviewObject.getString(REVIEW_POSITIVE));
+//                    review.setNegativeContent(reviewObject.getString(REVIEW_NEGATIVE));
+                    if (reviewObject.getString(REVIEW_POSITIVE).equals("null")) {
+                        review.setPositiveContent("");
+                    } else {
+                        review.setPositiveContent(reviewObject.getString(REVIEW_POSITIVE));
+                    }
+
+                    if (reviewObject.getString(REVIEW_NEGATIVE).equals("null")) {
+                        review.setNegativeContent("");
+                    } else {
+                        review.setNegativeContent(reviewObject.getString(REVIEW_NEGATIVE));
+                    }
+
 //                    String imagePath1 = reviewObject.getString(REVIEW_IMAGE1);
 //                    String imagePath2 = reviewObject.getString(REVIEW_IMAGE2);
 //                    String imagePath3 = reviewObject.getString(REVIEW_IMAGE3);
@@ -700,6 +726,50 @@ public class Parser {
         return products;
     }
 
+
+    public static ArrayList<Product> parseSearchFilterProductList(JSONObject responseObject) {
+
+        ArrayList<Product> products = new ArrayList<>();
+        try {
+            String responseMessage = responseObject.getString(RESPONSE_MESSAGE);
+            if (responseMessage.equals(RESPONSE_SUCCESS)) {
+                JSONArray dataArray = responseObject.getJSONArray(RESPONSE_DATA);
+                if (dataArray != null) {
+                    for (int i = 0; i < dataArray.length(); i++) {
+                        JSONObject productObject = (JSONObject) dataArray.get(i);
+                        Product product = new Product();
+                        product.setProductId(productObject.getInt(SEARCHED_ID));
+                        product.setCategoryId(productObject.getInt(SEARCHED_CATEGORY_ID));
+                        product.setMaker(productObject.getString(SEARCHED_MAKER));
+                        product.setBrand(productObject.getString(SEARCHED_BRAND));
+                        product.setName(productObject.getString(SEARHCED_PRODUCT_NAME));
+                        product.setType(productObject.getString(SEARCHED_TYPE));
+
+                        Object rating = productObject.get(RATING);
+                        float ratingf = 0.0f;
+//                        Log.i("parseProductList rating", String.valueOf(rating));
+                        if (rating instanceof Integer) {
+                            ratingf = ((Integer) rating).floatValue();
+                        } else if (rating instanceof Double) {
+                            ratingf = ((Double) rating).floatValue();
+                        } else if (rating == null) {
+                            ratingf = 0.0f;
+                        }
+//                        Log.i("float", String.valueOf(ratingf));
+//
+                        product.setRatingAvg(ratingf);
+                        product.setImagePath(productObject.getString(SEARCHED_IMAGE));
+//                        product.setRatingCount(productObject.getInt(RATING_COUNT));
+                        products.add(product);
+                    }
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Log.w("Parse Exception", e.getMessage());
+        }
+        return products;
+    }
 }
 
 

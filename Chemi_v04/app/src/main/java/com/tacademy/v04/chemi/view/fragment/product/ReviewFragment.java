@@ -142,6 +142,9 @@ public class ReviewFragment extends Fragment {
 
         mReviewCardDetailPositiveTextView.setText(review.getPositiveContent());
         mReviewCardDetailNegativeTextView.setText(review.getNegativeContent());
+
+        mReviewImageAdapter.addItems(mReviewImagePaths);
+        mReviewImageAdapter.notifyDataSetChanged();
     }
 
     private class ReviewImageAdapter extends RecyclerView.Adapter<ReviewImageHolder> {
@@ -154,6 +157,10 @@ public class ReviewFragment extends Fragment {
 //        }
 
         public ReviewImageAdapter(ArrayList<String> reviewImagePaths) {
+            mReviewImagePaths = reviewImagePaths;
+        }
+
+        public void addItems(ArrayList<String> reviewImagePaths) {
             mReviewImagePaths = reviewImagePaths;
         }
 
@@ -200,6 +207,7 @@ public class ReviewFragment extends Fragment {
 
         public void bindReviewImage(String imagePath) {
             mImagePath = imagePath;
+            Log.i("bindReviewImage", IMAGE_URL_HOST + mImagePath);
             Glide.with(getActivity())
                     .load(IMAGE_URL_HOST + mImagePath)   /*+ File.separator*/
 //                    .placeholder(R.drawable.unloaded_image_holder)
