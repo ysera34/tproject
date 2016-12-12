@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Chemi4</string>
+    <string name="app_name">Chemi</string>
 
     <string name="action_settings">Settings</string>
     <string name="action_search">Search</string>
@@ -133,6 +133,7 @@
     <string name="review_form_rating_value_format">%s점</string>
     <string name="action_category">category_search</string>
     <string name="product_report_subject">제품 분석 요청</string>
+    <string name="select_category_info">카테고리를 선택해주세요</string>
     <!-- REQUEST -->
     <!--<string name="request_product_id">%1$s</string>-->
 

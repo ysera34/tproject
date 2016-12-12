@@ -7,12 +7,14 @@
     android:padding="16dp">
 
     <RelativeLayout
+        android:visibility="gone"
         android:id="@+id/custom_search_setting_button_layout"
         android:layout_width="match_parent"
         android:layout_height="27dp"
         android:layout_marginBottom="16dp">
 
         <Button
+            android:visibility="invisible"
             android:id="@+id/custom_search_load_log_button"
             android:layout_width="55dp"
             android:layout_height="27dp"
@@ -23,6 +25,7 @@
             android:background="@drawable/widget_square_border_spinner"/>
 
         <Button
+            android:visibility="invisible"
             android:id="@+id/custom_search_reset_button"
             android:layout_width="55dp"
             android:layout_height="27dp"
@@ -34,21 +37,36 @@
             android:background="@drawable/widget_square_border_spinner" />
     </RelativeLayout>
 
+    <TextView
+        android:id="@+id/custom_search_category_info_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="제품 카테고리"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp"
+        android:layout_marginBottom="8dp"/>
+
     <Button
         android:id="@+id/custom_search_category_button"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_below="@+id/custom_search_setting_button_layout"
-        android:paddingStart="50dp"
-        android:paddingEnd="50dp"
+        android:layout_below="@+id/custom_search_category_info_text_view"
+        android:padding="10dp"
+        android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+        android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+        android:textAppearance="?android:attr/textAppearanceListItemSmall"
         android:layout_marginBottom="12dp"
         android:maxLines="1"
         android:gravity="center_vertical"
-        android:text="모든 카테고리"
+        android:text="@string/select_category_info"
         android:textSize="16sp"
-        android:textStyle="bold"
         android:textColor="@color/colorFontBody"
         android:background="@drawable/widget_square_border_spinner"/>
+    <!--android:textStyle="bold"-->
+    <!--android:paddingStart="50dp"-->
+    <!--android:paddingEnd="50dp"-->
 
     <Button
         android:visibility="gone"
@@ -68,6 +86,7 @@
         android:background="@drawable/widget_square_border_spinner" />
 
     <Button
+        android:visibility="gone"
         android:id="@+id/custom_search_chemical_button"
         android:layout_width="match_parent"
         android:layout_height="48dp"
@@ -81,6 +100,87 @@
         android:textStyle="bold"
         android:textColor="@color/colorFontBody"
         android:background="@drawable/widget_square_border_spinner" />
+
+    <!--  -->
+    <LinearLayout
+        android:id="@+id/chemical_include_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/custom_search_category_button"
+        android:orientation="vertical"
+        android:layout_marginBottom="16dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="포함할 성분"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:layout_marginBottom="8dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:gravity="center">
+
+            <AutoCompleteTextView
+                android:id="@+id/chemical_include_auto_complete_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+                android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+                android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                android:maxLines="1"
+                android:hint="포함할 성분의 초성을 입력해주세요"
+                android:textColor="@color/colorFontBody"
+                android:background="@drawable/widget_square_border_spinner"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/chemical_exclude_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/chemical_include_layout"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="제외할 성분"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:paddingStart="5dp"
+            android:paddingEnd="5dp"
+            android:layout_marginBottom="8dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:gravity="center">
+
+            <AutoCompleteTextView
+                android:id="@+id/chemical_exclude_auto_complete_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+                android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+                android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                android:maxLines="1"
+                android:hint="제외할 성분의 초성을 입력해주세요"
+                android:textColor="@color/colorFontBody"
+                android:background="@drawable/widget_square_border_spinner"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
     
     <RelativeLayout
         android:layout_width="match_parent"

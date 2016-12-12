@@ -1,5 +1,8 @@
 package com.tacademy.v04.chemi.view.fragment.product;
 
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
@@ -7,14 +10,45 @@ import android.support.design.widget.BottomSheetDialog;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.tacademy.v04.chemi.R;
+import com.tacademy.v04.chemi.common.network.NetworkConfig;
+import com.tacademy.v04.chemi.common.network.Parser;
+import com.tacademy.v04.chemi.model.CustomSearchStorage;
+import com.tacademy.v04.chemi.model.Product;
+import com.tacademy.v04.chemi.model.Word;
+import com.tacademy.v04.chemi.view.activity.product.ProductListActivity;
+
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+
+import static com.android.volley.Request.Method.GET;
+import static com.tacademy.v04.chemi.common.network.NetworkConfig.SOCKET_TIMEOUT_GET_REQ;
+import static com.tacademy.v04.chemi.common.network.NetworkConfig.Search.KEYWORD_PATH;
+import static com.tacademy.v04.chemi.common.network.NetworkConfig.Search.SEARCH_CATEGORY_QUERY;
+import static com.tacademy.v04.chemi.common.network.NetworkConfig.Search.SEARCH_EXCHEMICAL_QUERY;
+import static com.tacademy.v04.chemi.common.network.NetworkConfig.Search.SEARCH_FILTER_PATH;
+import static com.tacademy.v04.chemi.common.network.NetworkConfig.Search.SEARCH_INCHEMICAL_QUERY;
+import static com.tacademy.v04.chemi.common.network.NetworkConfig.Search.SEARCH_LETTER_QUERY;
+import static com.tacademy.v04.chemi.common.network.NetworkConfig.Search.SEARCH_TARGET_PRODUCT;
+import static com.tacademy.v04.chemi.common.network.NetworkConfig.URL_HOST;
 
 /**
  * Created by yoon on 2016. 11. 14..
@@ -22,6 +56,13 @@ import com.tacademy.v04.chemi.R;
 
 public class CustomSearchFragment extends Fragment
         implements View.OnClickListener {
+
+    private static final String TAG = CustomSearchFragment.class.getSimpleName();
+    public static final int INCHEMICAL_RESULT = 1001;
+    public static final int EXCHEMICAL_RESULT = 1002;
+
+    private CustomSearchStorage mCustomSearchStorage;
+    private InputMethodManager mInputMethodManager;
 
     private Button mLoadLogButton;
     private Button mResetButton;
@@ -35,6 +76,16 @@ public class CustomSearchFragment extends Fragment
     private BottomSheetDialog mCategoryBottomSheetDialog;
     private BottomSheetDialog mConstitutionBottomSheetDialog;
     private BottomSheetDialog mChemicalBottomSheetDialog;
+
+    private AutoCompleteTextView mChemicalIncludeAutoCompleteTextView;
+    private AutoCompleteTextView mChemicalExcludeAutoCompleteTextView;
+    private ArrayAdapter<String> mChemicalIncludeResultAdapter;
+    private ArrayAdapter<String> mChemicalExcludeResultAdapter;
+    private ArrayList<Word> mInchemicalResult;
+    private ArrayList<Word> mExchemicalResult;
+    private int mIncludeChemicalId;
+    private int mExcludeChemicalId;
+    private int mCategoryId;
 
     private AutoCompleteTextView mBottomSheetChemicalIncludeAutoCompleteTextView;
     private AutoCompleteTextView mBottomSheetChemicalExcludeAutoCompleteTextView;
@@ -52,7 +103,12 @@ public class CustomSearchFragment extends Fragment
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mCustomSearchStorage = CustomSearchStorage.get(getActivity());
+
         mLayoutInflater = LayoutInflater.from(getActivity());
+        mInchemicalResult = new ArrayList<>();
+        mExchemicalResult = new ArrayList<>();
+        mInputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
     }
 
     @Nullable
@@ -60,7 +116,7 @@ public class CustomSearchFragment extends Fragment
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 //        return super.onCreateView(inflater, container, savedInstanceState);
-        View view = inflater.inflate(R.layout.fragment_custom_search, container, false);
+        final View view = inflater.inflate(R.layout.fragment_custom_search, container, false);
         mLoadLogButton = (Button) view.findViewById(R.id.custom_search_load_log_button);
         mLoadLogButton.setOnClickListener(this);
         mResetButton = (Button) view.findViewById(R.id.custom_search_reset_button);
@@ -71,10 +127,59 @@ public class CustomSearchFragment extends Fragment
         mConstitutionButton.setOnClickListener(this);
         mChemicalButton = (Button) view.findViewById(R.id.custom_search_chemical_button);
         mChemicalButton.setOnClickListener(this);
+
         mSaveButton = (Button) view.findViewById(R.id.custom_search_save_log_button);
         mSaveButton.setOnClickListener(this);
         mSubmitButton = (Button) view.findViewById(R.id.custom_search_submit_button);
         mSubmitButton.setOnClickListener(this);
+
+        mChemicalIncludeAutoCompleteTextView = (AutoCompleteTextView)
+                view.findViewById(R.id.chemical_include_auto_complete_text_view);
+        mChemicalIncludeAutoCompleteTextView.setThreshold(0);
+        mChemicalIncludeAutoCompleteTextView.setSelection(mChemicalIncludeAutoCompleteTextView.getText().length());
+        mChemicalIncludeAutoCompleteTextView.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                Log.d(TAG, charSequence.toString());
+//                Toast.makeText(getActivity(), "업데이트 예정입니다.", Toast.LENGTH_SHORT).show();
+                if (charSequence.length() <= 1) {
+                    requestIncludeChemicalWordsJsonObject(view, charSequence.toString());
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        mChemicalExcludeAutoCompleteTextView = (AutoCompleteTextView)
+                view.findViewById(R.id.chemical_exclude_auto_complete_text_view);
+        mChemicalExcludeAutoCompleteTextView.addTextChangedListener(new TextWatcher() {
+            @Override
+
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                Log.d(TAG, charSequence.toString());
+//                Toast.makeText(getActivity(), "업데이트 예정입니다.", Toast.LENGTH_SHORT).show();
+                if (charSequence.length() <= 1) {
+                    requestExcludeChemicalWordsJsonObject(view, charSequence.toString());
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
 
         return view;
     }
@@ -121,7 +226,6 @@ public class CustomSearchFragment extends Fragment
                 (mBottomSheetDialog1.findViewById(R.id.bottom_sheet_category_section71)).setOnClickListener(this);
                 (mBottomSheetDialog1.findViewById(R.id.bottom_sheet_category_section72)).setOnClickListener(this);
                 (mBottomSheetDialog1.findViewById(R.id.bottom_sheet_category_section73)).setOnClickListener(this);
-                
                 
                 mCategoryBottomSheetDialog.show();
                 break;
@@ -180,14 +284,7 @@ public class CustomSearchFragment extends Fragment
                 });
                 mChemicalBottomSheetDialog.show();
 
-
                 break;
-            case R.id.custom_search_save_log_button :
-                break;
-            case R.id.custom_search_submit_button :
-                break;
-
-
 
             case R.id.bottom_sheet_category_section11 :
                 Toast.makeText(getActivity(), "bottom_sheet_category_section11",
@@ -310,9 +407,225 @@ public class CustomSearchFragment extends Fragment
                 mCategoryBottomSheetDialog.dismiss();
                 mCategoryButton.setText("콘돔");
                 break;
-            
-            
+
+            case R.id.custom_search_save_log_button :
+                break;
+            case R.id.custom_search_submit_button :
+
+//                Toast.makeText(getActivity(), "Category : " + mCategoryButton.getText().toString(), Toast.LENGTH_SHORT).show();
+
+                for (Word word : mInchemicalResult) {
+                    if (mChemicalIncludeAutoCompleteTextView.getText().toString().equals(word.getNameKO())) {
+                        mIncludeChemicalId = word.getProductId();
+                    }
+                    break;
+                }
+                Log.i(TAG, "mInchemicalId : " + mIncludeChemicalId);
+
+                for (Word word : mExchemicalResult) {
+                    if (mChemicalExcludeAutoCompleteTextView.getText().toString().equals(word.getNameKO())) {
+                        mExcludeChemicalId = word.getProductId();
+                    }
+                    break;
+                }
+                Log.i(TAG, "mExchemicalId : " + mExcludeChemicalId);
+
+                Log.i(TAG, "category id : " + mCategoryButton.getText().toString());
+
+                if (!mCategoryButton.getText().toString().equals(getString(R.string.select_category_info))) {
+                    Log.i(TAG, "category id : " + mCustomSearchStorage.getCategoryId(mCategoryButton.getText().toString()));
+                    mCategoryId = mCustomSearchStorage.getCategoryId(mCategoryButton.getText().toString());
+                }
+
+
+                if (mCategoryId!=-1) {
+                    if (mChemicalIncludeAutoCompleteTextView.getText().length()==0) {
+                        mIncludeChemicalId = 0;
+                    }
+                    if (mChemicalExcludeAutoCompleteTextView.getText().length()==0) {
+                        mExcludeChemicalId = 0;
+                    }
+
+
+                    requestCustomSearchProductJsonObject(mCategoryId, mIncludeChemicalId, mExcludeChemicalId);
+                } else {
+                    Toast.makeText(getActivity(), "카테고리를 선택해주세요.", Toast.LENGTH_SHORT).show();
+                }
+
+//                if (mIncludeChemicalId!=0 && mExcludeChemicalId==0 && mCategoryId!=-1) {
+//                    requestCustomSearchProductJsonObject(mCategoryId, mIncludeChemicalId, mExcludeChemicalId);
+//                } else if (mIncludeChemicalId==0 && mExcludeChemicalId!=0 && mCategoryId!=-1) {
+//                    requestCustomSearchProductJsonObject(mCategoryId, mIncludeChemicalId, mExcludeChemicalId);
+//                } else if (mIncludeChemicalId!=0 && mExcludeChemicalId!=0 && mCategoryId!=-1) {
+//                    requestCustomSearchProductJsonObject(mCategoryId, mIncludeChemicalId, mExcludeChemicalId);
+//                } else {
+//                    Toast.makeText(getActivity(), "입력 사항을 입력해주세요.", Toast.LENGTH_SHORT).show();
+//                }
+                break;
         }
+    }
+
+    private void requestIncludeChemicalWordsJsonObject(final View view, String query) {
+
+        String utf8Query = null;
+        try {
+            utf8Query = URLEncoder.encode(query, "utf-8");
+        } catch (UnsupportedEncodingException e) {
+            Log.w(TAG, "UnsupportedEncodingException : " + e.toString());
+        }
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(GET,
+                URL_HOST + NetworkConfig.Chemical.PATH + KEYWORD_PATH + SEARCH_LETTER_QUERY + utf8Query,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d(TAG, response.toString());
+
+                        mInchemicalResult = Parser.parseChemicalKeyword(response);
+                        ArrayList<String> inchemicalResultStrings = new ArrayList<>();
+                        for (Word word : mInchemicalResult) {
+                            inchemicalResultStrings.add(word.getNameKO());
+                        }
+
+                        mChemicalIncludeAutoCompleteTextView = (AutoCompleteTextView)
+                                view.findViewById(R.id.chemical_include_auto_complete_text_view);
+
+                        mChemicalIncludeResultAdapter = new ArrayAdapter<>(getActivity(),
+                                R.layout.list_item_searched_wordpart, inchemicalResultStrings);
+                        mChemicalIncludeAutoCompleteTextView.setThreshold(1);
+                        mChemicalIncludeAutoCompleteTextView.setAdapter(mChemicalIncludeResultAdapter);
+                        mChemicalIncludeResultAdapter.notifyDataSetChanged();
+
+                        mInputMethodManager.hideSoftInputFromWindow(mChemicalIncludeAutoCompleteTextView.getWindowToken(), 0);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.w(TAG, "onErrorResponse : " + error.toString());
+                        Toast.makeText(getActivity(), "데이터 수신 중, 서버에서 문제가 발생하였습니다.",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(SOCKET_TIMEOUT_GET_REQ,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        Volley.newRequestQueue(getActivity()).add(jsonObjectRequest);
+
+    }
+
+    private void requestExcludeChemicalWordsJsonObject(final View view, String query) {
+
+        String utf8Query = null;
+        try {
+            utf8Query = URLEncoder.encode(query, "utf-8");
+        } catch (UnsupportedEncodingException e) {
+            Log.w(TAG, "UnsupportedEncodingException : " + e.toString());
+        }
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(GET,
+                URL_HOST + NetworkConfig.Chemical.PATH + KEYWORD_PATH + SEARCH_LETTER_QUERY + utf8Query,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d(TAG, response.toString());
+
+                        mExchemicalResult = Parser.parseChemicalKeyword(response);
+                        ArrayList<String> exchemicalResultStrings = new ArrayList<>();
+                        for (Word word : mExchemicalResult) {
+                            exchemicalResultStrings.add(word.getNameKO());
+                        }
+
+                        mChemicalExcludeAutoCompleteTextView = (AutoCompleteTextView)
+                                view.findViewById(R.id.chemical_exclude_auto_complete_text_view);
+
+                        mChemicalExcludeResultAdapter = new ArrayAdapter<>(getActivity(),
+                                R.layout.list_item_searched_wordpart, exchemicalResultStrings);
+                        mChemicalExcludeAutoCompleteTextView.setThreshold(1);
+                        mChemicalExcludeAutoCompleteTextView.setAdapter(mChemicalExcludeResultAdapter);
+                        mChemicalExcludeResultAdapter.notifyDataSetChanged();
+
+                        mInputMethodManager.hideSoftInputFromWindow(mChemicalExcludeAutoCompleteTextView.getWindowToken(), 0);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.w(TAG, "onErrorResponse : " + error.toString());
+                        Toast.makeText(getActivity(), "데이터 수신 중, 서버에서 문제가 발생하였습니다.",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(SOCKET_TIMEOUT_GET_REQ,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        Volley.newRequestQueue(getActivity()).add(jsonObjectRequest);
+
+    }
+
+    private void requestCustomSearchProductJsonObject(int categoryId, int includeChemicalId, int excludeChemicalId) {
+
+        StringBuilder urlString = new StringBuilder();
+        urlString.append(URL_HOST + SEARCH_TARGET_PRODUCT + SEARCH_FILTER_PATH + SEARCH_CATEGORY_QUERY + categoryId);
+
+        if (includeChemicalId!=0) {
+            urlString.append(SEARCH_INCHEMICAL_QUERY + includeChemicalId);
+        }
+        if (excludeChemicalId!=0) {
+            urlString.append(SEARCH_EXCHEMICAL_QUERY + excludeChemicalId);
+        }
+        Log.d(TAG, "URL : " + urlString.toString());
+        final ProgressDialog pDialog =
+                ProgressDialog.show(getActivity(), getString(R.string.request_loading_data),
+                        getString(R.string.load_please_wait), false, false);
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(GET, urlString.toString(),
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        pDialog.dismiss();
+                        Log.d(TAG, response.toString());
+
+                        ArrayList<Product> products = Parser.parseCustomSearchProductList(response);
+                        Log.i(TAG, "products.size() " + products.size());
+                        ArrayList<Integer> productIds = new ArrayList<>();
+                        if (products.size() > 1) {
+                            for (int i = 0; i < products.size(); i++) {
+                                productIds.add(products.get(i).getProductId());
+                            }
+                            Intent intent = ProductListActivity.newIntent(getActivity().getApplication(), productIds);
+                            startActivity(intent);
+                            Log.i(TAG, "productIds.size() " + productIds.size());
+                        } else if (products.size() == 1) {
+                            long productId = Long.parseLong(String.valueOf(products.get(0).getProductId()));
+                            Intent intent = ProductListActivity.newIntent(getActivity().getApplication(), productId);
+                            startActivity(intent);
+                        } else {
+                            startActivity(ProductListActivity.newIntent(getContext(), 63));
+                        }
+
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        pDialog.dismiss();
+                        Log.w(TAG, "onErrorResponse : " + error.toString());
+                        Toast.makeText(getActivity(), "데이터 수신 중, 서버에서 문제가 발생하였습니다.",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(SOCKET_TIMEOUT_GET_REQ,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        Volley.newRequestQueue(getActivity()).add(jsonObjectRequest);
     }
 
 }

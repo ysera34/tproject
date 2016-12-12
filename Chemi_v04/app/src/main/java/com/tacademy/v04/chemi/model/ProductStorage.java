@@ -28,7 +28,6 @@ public class ProductStorage {
         mAppContext = appContext;
         mProducts = new ArrayList<>();
         mProductIds = new ArrayList<>();
-
     }
 
     public static ProductStorage get(Context context) {

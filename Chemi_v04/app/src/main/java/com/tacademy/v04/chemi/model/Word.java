@@ -9,6 +9,8 @@ public class Word {
     private int mProductId;
     private String mBrand;
     private String mName;
+    private String mNameKO;
+    private String mNameEN;
 
     public String getBrand() {
         return mBrand;
@@ -32,5 +34,21 @@ public class Word {
 
     public void setProductId(int productId) {
         mProductId = productId;
+    }
+
+    public String getNameKO() {
+        return mNameKO;
+    }
+
+    public void setNameKO(String nameKO) {
+        mNameKO = nameKO;
+    }
+
+    public String getNameEN() {
+        return mNameEN;
+    }
+
+    public void setNameEN(String nameEN) {
+        mNameEN = nameEN;
     }
 }

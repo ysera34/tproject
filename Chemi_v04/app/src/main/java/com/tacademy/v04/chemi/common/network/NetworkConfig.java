@@ -85,9 +85,15 @@ public class NetworkConfig {
 
     public static final class Search {
         public static final String SEARCH_TARGET_PRODUCT = File.separator + "products";
+        public static final String SEARCH_FILTER_PATH = File.separator + "searchfilters";
         public static final String SEARCH_PATH = File.separator + "search";
+        public static final String KEYWORD_PATH = File.separator + "keyword";
         public static final String SEARCH_WORDPART_QUERY = "?wordpart=";
         public static final String SEARCH_KEYWORD_QUERY = "?keyword=";
+        public static final String SEARCH_LETTER_QUERY = "?letter=";
+        public static final String SEARCH_CATEGORY_QUERY = "?categoryid=";
+        public static final String SEARCH_INCHEMICAL_QUERY = "&inchemicals=";
+        public static final String SEARCH_EXCHEMICAL_QUERY = "&exchemicals=";
 
         public static final class Key {
             public static final String SEARCH_WORD = "words";

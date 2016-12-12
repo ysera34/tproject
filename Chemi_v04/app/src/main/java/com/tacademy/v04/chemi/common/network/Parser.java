@@ -125,6 +125,60 @@ public class Parser {
     }
 
     /**
+     * /products/searchfilters?categoryid= ?inchemicals= ?exchemicals=
+     * products
+     * @param responseObject
+     * @return ArrayList<Product>
+     */
+    public static ArrayList<Product> parseCustomSearchProductList(JSONObject responseObject) {
+
+        ArrayList<Product> products = new ArrayList<>();
+        try {
+            String responseMessage = responseObject.getString(RESPONSE_MESSAGE);
+            if (responseMessage.equals(RESPONSE_SUCCESS)) {
+                JSONArray dataArray = responseObject.getJSONArray(RESPONSE_DATA);
+                if (dataArray != null) {
+                    for (int i = 0; i < dataArray.length(); i++) {
+                        JSONObject productObject = (JSONObject) dataArray.get(i);
+                        Product product = new Product();
+                        product.setProductId(productObject.getInt(PRODUCT_ID));
+                        product.setCategoryId(productObject.getInt(CATEGORY_ID));
+                        product.setMaker(productObject.getString(MAKER));
+                        product.setBrand(productObject.getString(BRAND));
+                        product.setName(productObject.getString(NAME));
+                        product.setType(productObject.getString(TYPE));
+                        product.setPurpose(productObject.getString(PURPOSE));
+//                        product.setRatingAvg((float) productObject.get(RATING));
+//                        Object rating = productObject.get(RATING);
+//                        float ratingf = 0.0f;
+////                        Log.i("parseProductList rating", String.valueOf(rating));
+//                        if (rating instanceof Integer) {
+//                            ratingf = ((Integer) rating).floatValue();
+//                        } else if (rating instanceof Double) {
+//                            ratingf = ((Double) rating).floatValue();
+//                        } else if (rating == null) {
+//                            ratingf = 0.0f;
+//                        }
+////                        Log.i("float", String.valueOf(ratingf));
+////
+//                        product.setRatingAvg(ratingf);
+
+                        product.setRatingAvg((float) productObject.getDouble(RATING));
+
+//                        product.setRatingCount(productObject.getInt(RATING_COUNT));
+                        product.setImagePath(productObject.getString(IMAGE_PATH));
+                        products.add(product);
+                    }
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Log.w("Parse Exception", e.getMessage());
+        }
+        return products;
+    }
+
+    /**
      * products
      * @param responseObject
      * @param products
@@ -728,7 +782,11 @@ public class Parser {
         return products;
     }
 
-
+    /**
+     *
+     * @param responseObject
+     * @return
+     */
     public static ArrayList<Product> parseSearchFilterProductList(JSONObject responseObject) {
 
         ArrayList<Product> products = new ArrayList<>();
@@ -773,6 +831,11 @@ public class Parser {
         return products;
     }
 
+    /**
+     * /users/:id/products
+     * @param responseObject
+     * @return
+     */
     public static ArrayList<Product> parseArchiveProductList(JSONObject responseObject) {
 
         ArrayList<Product> products = new ArrayList<>();
@@ -797,6 +860,31 @@ public class Parser {
             Log.w("Parse Exception", e.getMessage());
         }
         return products;
+    }
+
+    public static ArrayList<Word> parseChemicalKeyword(JSONObject responseObject) {
+
+        ArrayList<Word> words = new ArrayList<>();
+        try {
+            String responseMessage = responseObject.getString(RESPONSE_MESSAGE);
+            if (responseMessage.equals(RESPONSE_SUCCESS)) {
+                JSONArray dataArray = responseObject.getJSONArray(RESPONSE_DATA);
+                if (dataArray != null) {
+                    for (int i = 0; i < dataArray.length(); i++) {
+                        JSONObject chemicalWordObject = dataArray.getJSONObject(i);
+                        Word word = new Word();
+                        word.setProductId(chemicalWordObject.getInt("id"));
+                        word.setNameKO(chemicalWordObject.getString("nameko"));
+                        word.setNameEN(chemicalWordObject.getString("nameen"));
+                        words.add(word);
+                    }
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Log.w("Parse Exception", e.getMessage());
+        }
+        return words;
     }
 }
 
