@@ -73,7 +73,8 @@
         <activity
             android:name=".view.activity.product.CustomSearchActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:launchMode="singleTop">
         </activity>
         <activity
             android:name=".view.activity.product.ProductListActivity"

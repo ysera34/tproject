@@ -110,16 +110,18 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
     }
 
     public ProductListFragment() {
-        mProductStorage = ProductStorage.get(getActivity());
-        mProducts = mProductStorage.getProducts();
 
-        mProductIds = new ArrayList<>();
+
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
+        mProductStorage = ProductStorage.get(getActivity());
+        mProducts = mProductStorage.getProducts();
+
+        mProductIds = new ArrayList<>();
 
         if (getArguments() != null) {
             mCategoryId = getArguments().getInt(

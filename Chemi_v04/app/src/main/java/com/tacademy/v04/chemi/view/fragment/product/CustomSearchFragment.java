@@ -597,12 +597,12 @@ public class CustomSearchFragment extends Fragment
                             for (int i = 0; i < products.size(); i++) {
                                 productIds.add(products.get(i).getProductId());
                             }
-                            Intent intent = ProductListActivity.newIntent(getActivity().getApplication(), productIds);
+                            Intent intent = ProductListActivity.newIntent(getActivity(), productIds);
                             startActivity(intent);
                             Log.i(TAG, "productIds.size() " + productIds.size());
                         } else if (products.size() == 1) {
                             long productId = Long.parseLong(String.valueOf(products.get(0).getProductId()));
-                            Intent intent = ProductListActivity.newIntent(getActivity().getApplication(), productId);
+                            Intent intent = ProductListActivity.newIntent(getActivity(), productId);
                             startActivity(intent);
                         } else {
                             startActivity(ProductListActivity.newIntent(getContext(), 63));
