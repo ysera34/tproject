@@ -1,5 +1,6 @@
 package com.tacademy.v04.chemi.view.fragment.navigation;
 
+import android.app.ProgressDialog;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.ActionMode;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -19,12 +21,32 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.tacademy.v04.chemi.R;
+import com.tacademy.v04.chemi.common.network.NetworkConfig;
+import com.tacademy.v04.chemi.common.network.NetworkConfig.User;
+import com.tacademy.v04.chemi.common.network.Parser;
 import com.tacademy.v04.chemi.model.Product;
 import com.tacademy.v04.chemi.model.ProductArchiveStorage;
 import com.tacademy.v04.chemi.view.activity.MainActivity;
 
+import org.json.JSONObject;
+
+import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import static com.android.volley.Request.Method.GET;
+import static com.tacademy.v04.chemi.common.network.NetworkConfig.IMAGE_URL_HOST;
+import static com.tacademy.v04.chemi.common.network.NetworkConfig.SOCKET_TIMEOUT_GET_REQ;
+import static com.tacademy.v04.chemi.common.network.NetworkConfig.URL_HOST;
 
 /**
  * Created by yoon on 2016. 11. 14..
@@ -33,6 +55,7 @@ import java.util.ArrayList;
 
 public class ArchiveProductListFragment extends Fragment implements View.OnClickListener {
 
+    private static final String TAG = ArchiveProductListFragment.class.getSimpleName();
     private static final String ARCHIVE_PRODUCT = "ArchiveProduct";
 
     private RecyclerView mArchiveProductRecyclerView;
@@ -71,7 +94,7 @@ public class ArchiveProductListFragment extends Fragment implements View.OnClick
         mArchiveProductRecyclerView = (RecyclerView) view.findViewById(R.id.archive_product_recycler_view);
         mArchiveProductRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        updateUI();
+        setupAdapter();
 
         return view;
     }
@@ -79,15 +102,17 @@ public class ArchiveProductListFragment extends Fragment implements View.OnClick
     @Override
     public void onResume() {
         super.onResume();
-        updateUI();
+        requestGetProductFavorite();
     }
 
-    private void updateUI() {
+    private void setupAdapter() {
 
         if (mArchiveProductAdapter == null) {
             mArchiveProductAdapter = new ArchiveProductAdapter(mArchiveProducts);
             mArchiveProductRecyclerView.setAdapter(mArchiveProductAdapter);
         } else {
+            mArchiveProducts = mProductArchiveStorage.getArchiveProducts();
+            mArchiveProductAdapter.addItems(mArchiveProducts);
             mArchiveProductAdapter.notifyDataSetChanged();
         }
     }
@@ -163,7 +188,12 @@ public class ArchiveProductListFragment extends Fragment implements View.OnClick
 //                            Log.w("action_delete", product.getName());
 //                        }
 //                    }
+
                     mProductArchiveStorage.removeArchiveProducts(mCheckedArchiveProducts);
+                    for (Product product : mCheckedArchiveProducts) {
+                        requestPutProductFavorite(product);
+                    }
+
                     Toast.makeText(getActivity(), "선택하신 항목이 삭제되었습니다.", Toast.LENGTH_SHORT).show();
                     mode.finish();
                     return true;
@@ -187,6 +217,10 @@ public class ArchiveProductListFragment extends Fragment implements View.OnClick
         ArrayList<Product> mArchiveProducts;
 
         public ArchiveProductAdapter(ArrayList<Product> archiveProducts) {
+            mArchiveProducts = archiveProducts;
+        }
+
+        public void addItems(ArrayList<Product> archiveProducts) {
             mArchiveProducts = archiveProducts;
         }
 
@@ -250,7 +284,20 @@ public class ArchiveProductListFragment extends Fragment implements View.OnClick
 
         public void bindArchiveProduct(Product product) {
             mProduct = product;
+            Glide.with(getActivity())
+                    .load(IMAGE_URL_HOST + product.getImagePath())
+//                .placeholder(R.drawable.unloaded_image_holder)
+                    .error(R.drawable.unloaded_image_holder)
+                    .crossFade()
+                    .override(330, 220)
+                    .centerCrop()
+                    .into(mArchiveProductImageView);
+
             mArchiveProductNameTextView.setText(mProduct.getName());
+            mArchiveProductNameTextView.setSelected(true);
+
+            mArchiveProductRatingBar.setRating(mProduct.getRatingAvg());
+
             if (mActionModeActive && mProduct.isArchiveSelect()) {
                 mArchiveProductSelectImageView.setImageResource(R.drawable.ic_circle_orange_small);
             }
@@ -277,4 +324,93 @@ public class ArchiveProductListFragment extends Fragment implements View.OnClick
             }
         }
     }
+
+    private void requestGetProductFavorite() {
+
+        final ProgressDialog pDialog =
+                ProgressDialog.show(getActivity(), getString(R.string.request_loading_data),
+                        getString(R.string.load_please_wait), false, false);
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(GET,
+                URL_HOST + User.PATH + File.separator + "3" + NetworkConfig.Product.PATH,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        pDialog.dismiss();
+                        Log.i(TAG, "onResponse : " + response.toString());
+                        mProductArchiveStorage.setArchiveProducts(Parser.parseArchiveProductList(response));
+                        setupAdapter();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        pDialog.dismiss();
+                        Log.w(TAG, "onErrorResponse : " + error.toString());
+                        Toast.makeText(getActivity(), "데이터 수신 중, 서버에서 문제가 발생하였습니다.",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(SOCKET_TIMEOUT_GET_REQ,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        Volley.newRequestQueue(getActivity()).add(jsonObjectRequest);
+    }
+
+    private void requestPutProductFavorite(Product product) {
+
+        final ProgressDialog pDialog =
+                ProgressDialog.show(getActivity(), getString(R.string.request_loading_data),
+                        getString(R.string.load_please_wait), false, false);
+
+        Map<String, String> params = new HashMap<>();
+        params.put("userid", "3");
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.PUT,
+                URL_HOST + NetworkConfig.Product.PATH + File.separator + product.getProductId() + User.PATH,
+                new JSONObject(params),
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        pDialog.dismiss();
+                        Log.i(TAG, "onResponse : " + response.toString());
+                        Toast.makeText(getActivity(), "보관함에서 삭제 되었습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        pDialog.dismiss();
+                        Log.w(TAG, "onErrorResponse : " + error.toString());
+                        Toast.makeText(getActivity(), "데이터 수신 중, 서버에서 문제가 발생하였습니다.",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+//                {
+//                    @Override
+//                    protected Map<String, String> getParams() throws AuthFailureError {
+//                        Map<String, String> params = new HashMap<>();
+//                        params.put("userid", "3");
+//                        return params;
+//        //                return super.getParams();
+//                }
+//
+//                    @Override
+//                    public Map<String, String> getHeaders() throws AuthFailureError {
+//                        Map<String, String> params = new HashMap<>();
+//                        params.put("content-type","application/json");
+//                        return params;
+////                        return super.getHeaders();
+//                    }
+//                };
+
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(SOCKET_TIMEOUT_GET_REQ,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        Volley.newRequestQueue(getActivity()).add(jsonObjectRequest);
+    }
+
 }

@@ -2,8 +2,6 @@ package com.tacademy.v04.chemi.model;
 
 import android.content.Context;
 
-import com.tacademy.v04.chemi.R;
-
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -25,13 +23,13 @@ public class ProductArchiveStorage {
         /*
         sample data
          */
-        for (int i = 0; i < 10; i++) {
-            Product product = new Product();
-            product.setName("productname:" + i);
-            product.setImageResId(R.mipmap.ic_launcher);
-            product.setCategoryId((i%2 == 0) ? 11 : 12 );
-            mProducts.add(product);
-        }
+//        for (int i = 0; i < 10; i++) {
+//            Product product = new Product();
+//            product.setName("productname:" + i);
+//            product.setImageResId(R.mipmap.ic_launcher);
+//            product.setCategoryId((i%2 == 0) ? 11 : 12 );
+//            mProducts.add(product);
+//        }
 
 //        for (int i = 0; i < 10; i++) {
 //            Product product = new Product();
@@ -78,6 +76,10 @@ public class ProductArchiveStorage {
         return null;
     }
 
+    public void setArchiveProducts(ArrayList<Product> products) {
+        mProducts = products;
+    }
+
     public void removeArchiveProducts(ArrayList<Product> products) {
         for (Product product : products) {
             for (Product product1 : mProducts) {
@@ -118,4 +120,5 @@ public class ProductArchiveStorage {
 //        }
 //        return products;
 //    }
+
 }

@@ -105,5 +105,7 @@ public class NetworkConfig {
 
     public static final class User {
         public static final String PATH = File.separator + "users";
+        public static final String PRODUCT_ID = "productid";
+        public static final String PRODUCT_NAME = "productname";
     }
 }

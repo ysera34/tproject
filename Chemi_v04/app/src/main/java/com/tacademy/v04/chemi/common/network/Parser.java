@@ -2,6 +2,7 @@ package com.tacademy.v04.chemi.common.network;
 
 import android.util.Log;
 
+import com.tacademy.v04.chemi.common.network.NetworkConfig.User;
 import com.tacademy.v04.chemi.model.Chemical;
 import com.tacademy.v04.chemi.model.Effect;
 import com.tacademy.v04.chemi.model.Product;
@@ -64,6 +65,7 @@ import static com.tacademy.v04.chemi.common.network.NetworkConfig.Search.Key.SEA
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.Search.Key.SEARCHED_TYPE;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.Search.Key.SEARCH_WORD;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.Search.Key.SEARHCED_PRODUCT_NAME;
+import static com.tacademy.v04.chemi.common.network.NetworkConfig.User.PRODUCT_NAME;
 
 /**
  * Created by yoon on 2016. 11. 25..
@@ -760,6 +762,32 @@ public class Parser {
                         product.setRatingAvg(ratingf);
                         product.setImagePath(productObject.getString(SEARCHED_IMAGE));
 //                        product.setRatingCount(productObject.getInt(RATING_COUNT));
+                        products.add(product);
+                    }
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Log.w("Parse Exception", e.getMessage());
+        }
+        return products;
+    }
+
+    public static ArrayList<Product> parseArchiveProductList(JSONObject responseObject) {
+
+        ArrayList<Product> products = new ArrayList<>();
+        try {
+            String responseMessage = responseObject.getString(RESPONSE_MESSAGE);
+            if (responseMessage.equals(RESPONSE_SUCCESS)) {
+                JSONArray dataArray = responseObject.getJSONArray(RESPONSE_DATA);
+                if (dataArray != null) {
+                    for (int i = 0; i < dataArray.length(); i++) {
+                        JSONObject archiveProductObject = dataArray.getJSONObject(i);
+                        Product product = new Product();
+                        product.setProductId(archiveProductObject.getInt(User.PRODUCT_ID));
+                        product.setName(archiveProductObject.getString(PRODUCT_NAME));
+                        product.setImagePath(archiveProductObject.getString(IMAGE_PATH));
+                        product.setRatingAvg((float) archiveProductObject.getDouble(RATING));
                         products.add(product);
                     }
                 }

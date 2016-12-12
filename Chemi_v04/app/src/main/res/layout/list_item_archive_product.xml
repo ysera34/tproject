@@ -13,7 +13,7 @@
         android:layout_marginTop="4dp"
         android:layout_marginBottom="4dp"
         card_view:cardCornerRadius="2dp"
-        card_view:contentPadding="10dp">
+        card_view:contentPadding="2dp">
 
         <!--android:layout_marginStart="8dp"-->
         <!--android:layout_marginEnd="8dp"-->
@@ -24,7 +24,7 @@
             <LinearLayout
                 android:visibility="gone"
                 android:id="@+id/list_item_archive_product_select_layout"
-                android:layout_width="40dp"
+                android:layout_width="35dp"
                 android:layout_height="match_parent"
                 android:gravity="center">
 
@@ -39,13 +39,12 @@
 
             <ImageView
                 android:id="@+id/list_item_archive_product_image_view"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
+                android:layout_width="110dp"
+                android:layout_height="73dp"
                 android:layout_gravity="center"
-                android:scaleType="center"
-                android:padding="10dp"
-                android:layout_marginEnd="10dp"
-                android:src="@mipmap/ic_launcher"/>
+                android:scaleType="fitCenter"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/unloaded_image_holder"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -64,6 +63,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
+                        android:layout_marginTop="10dp"
                         android:text="제목"
                         android:textSize="16sp"
                         android:textStyle="normal"/>
@@ -73,6 +73,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         style="?android:attr/ratingBarStyleSmall"
+                        android:layout_marginTop="5dp"
                         android:layout_marginLeft="5dp"
                         android:layout_marginStart="5dp"
                         android:layout_marginRight="5dp"
@@ -93,7 +94,7 @@
                         android:id="@+id/list_item_due_date_text_view"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:gravity="center_vertical"
+                        android:gravity="top"
                         android:text="6일 남음"
                         android:textSize="14sp"
                         android:textStyle="normal"/>
