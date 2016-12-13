@@ -1,6 +1,7 @@
 package com.tacademy.v04.chemi.view.fragment.navigation;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -34,7 +35,9 @@ import com.tacademy.v04.chemi.common.network.NetworkConfig.User;
 import com.tacademy.v04.chemi.common.network.Parser;
 import com.tacademy.v04.chemi.model.Product;
 import com.tacademy.v04.chemi.model.ProductArchiveStorage;
+import com.tacademy.v04.chemi.model.ProductStorage;
 import com.tacademy.v04.chemi.view.activity.MainActivity;
+import com.tacademy.v04.chemi.view.activity.product.ProductActivity;
 
 import org.json.JSONObject;
 
@@ -45,6 +48,7 @@ import java.util.Map;
 
 import static com.android.volley.Request.Method.GET;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.IMAGE_URL_HOST;
+import static com.tacademy.v04.chemi.common.network.NetworkConfig.Product.PATH;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.SOCKET_TIMEOUT_GET_REQ;
 import static com.tacademy.v04.chemi.common.network.NetworkConfig.URL_HOST;
 
@@ -263,6 +267,7 @@ public class ArchiveProductListFragment extends Fragment implements View.OnClick
 
             mArchiveProductCardView = (CardView)
                     itemView.findViewById(R.id.list_item_archive_product_card_view);
+            mArchiveProductCardView.setOnClickListener(this);
             mArchiveProductSelectImageViewLayout =
                     itemView.findViewById(R.id.list_item_archive_product_select_layout);
             mArchiveProductSelectImageView = (ImageView)
@@ -307,6 +312,10 @@ public class ArchiveProductListFragment extends Fragment implements View.OnClick
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.list_item_archive_product_card_view :
+                    if (!mActionModeActive) {
+                        Toast.makeText(getActivity(), "no action mode click listener", Toast.LENGTH_SHORT).show();
+                        requestProductJsonObject(mProduct);
+                    }
                     if (mActionModeActive && !mProduct.isArchiveSelect()) {
                         mArchiveProductSelectImageView.setImageResource(R.drawable.ic_circle_orange_small);
                         mProduct.setArchiveSelect(true);
@@ -405,6 +414,46 @@ public class ArchiveProductListFragment extends Fragment implements View.OnClick
 ////                        return super.getHeaders();
 //                    }
 //                };
+
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(SOCKET_TIMEOUT_GET_REQ,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        Volley.newRequestQueue(getActivity()).add(jsonObjectRequest);
+    }
+
+    private void requestProductJsonObject(final Product product) {
+
+        final ProgressDialog pDialog =
+                ProgressDialog.show(getActivity(), getString(R.string.request_loading_data),
+                        getString(R.string.load_please_wait), false, false);
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(URL_HOST + PATH
+                + File.separator + product.getProductId(),
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        pDialog.dismiss();
+
+                        // have to save storage product
+//                        mProductStorage.getProduct(mProductId);
+                        Log.i(TAG,  product.toStringId());
+                        ProductStorage.get(getActivity()).setProduct(Parser.parseProduct(response, product));
+
+                        Intent intent = ProductActivity.newIntent(getActivity(),
+                                ProductStorage.get(getActivity()).getProduct(product.getProductId()).getId());
+                        startActivity(intent);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        pDialog.dismiss();
+                        Log.w(TAG, "onErrorResponse : " + error.toString());
+                        Toast.makeText(getActivity(), "데이터 수신 중, 서버에서 문제가 발생하였습니다.",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
 
         jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(SOCKET_TIMEOUT_GET_REQ,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,

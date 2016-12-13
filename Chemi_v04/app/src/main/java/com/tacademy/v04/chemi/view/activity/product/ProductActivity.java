@@ -139,8 +139,7 @@ public class ProductActivity extends AppBaseActivity {
     @Override
     public void onResume() {
         super.onResume();
-//        requestJsonObject();
-//        requestJsonObject();
+//        requestProductJsonObject();
         bindProduct(mProduct);
     }
 

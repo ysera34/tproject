@@ -110,8 +110,6 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
     }
 
     public ProductListFragment() {
-
-
     }
 
     @Override

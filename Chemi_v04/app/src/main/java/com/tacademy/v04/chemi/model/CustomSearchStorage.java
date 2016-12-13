@@ -50,7 +50,6 @@ public class CustomSearchStorage {
         mCategoryMap.put("렌즈 세척액", 71);
         mCategoryMap.put("콘돔", 73);
 
-
     }
 
     public static CustomSearchStorage get(Context context) {

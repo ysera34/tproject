@@ -135,7 +135,7 @@ public class CustomSearchFragment extends Fragment
 
         mChemicalIncludeAutoCompleteTextView = (AutoCompleteTextView)
                 view.findViewById(R.id.chemical_include_auto_complete_text_view);
-        mChemicalIncludeAutoCompleteTextView.setThreshold(0);
+        mChemicalIncludeAutoCompleteTextView.requestFocus();
         mChemicalIncludeAutoCompleteTextView.setSelection(mChemicalIncludeAutoCompleteTextView.getText().length());
         mChemicalIncludeAutoCompleteTextView.addTextChangedListener(new TextWatcher() {
             @Override
@@ -159,6 +159,7 @@ public class CustomSearchFragment extends Fragment
         });
         mChemicalExcludeAutoCompleteTextView = (AutoCompleteTextView)
                 view.findViewById(R.id.chemical_exclude_auto_complete_text_view);
+        mChemicalIncludeAutoCompleteTextView.setSelection(mChemicalIncludeAutoCompleteTextView.getText().length());
         mChemicalExcludeAutoCompleteTextView.addTextChangedListener(new TextWatcher() {
             @Override
 
@@ -487,15 +488,14 @@ public class CustomSearchFragment extends Fragment
                             inchemicalResultStrings.add(word.getNameKO());
                         }
 
-                        mChemicalIncludeAutoCompleteTextView = (AutoCompleteTextView)
-                                view.findViewById(R.id.chemical_include_auto_complete_text_view);
+//                        mChemicalIncludeAutoCompleteTextView = (AutoCompleteTextView)
+//                                view.findViewById(R.id.chemical_include_auto_complete_text_view);
 
                         mChemicalIncludeResultAdapter = new ArrayAdapter<>(getActivity(),
                                 R.layout.list_item_searched_wordpart, inchemicalResultStrings);
                         mChemicalIncludeAutoCompleteTextView.setThreshold(1);
                         mChemicalIncludeAutoCompleteTextView.setAdapter(mChemicalIncludeResultAdapter);
                         mChemicalIncludeResultAdapter.notifyDataSetChanged();
-
                         mInputMethodManager.hideSoftInputFromWindow(mChemicalIncludeAutoCompleteTextView.getWindowToken(), 0);
                     }
                 },
@@ -546,7 +546,6 @@ public class CustomSearchFragment extends Fragment
                         mChemicalExcludeAutoCompleteTextView.setThreshold(1);
                         mChemicalExcludeAutoCompleteTextView.setAdapter(mChemicalExcludeResultAdapter);
                         mChemicalExcludeResultAdapter.notifyDataSetChanged();
-
                         mInputMethodManager.hideSoftInputFromWindow(mChemicalExcludeAutoCompleteTextView.getWindowToken(), 0);
                     }
                 },

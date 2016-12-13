@@ -135,6 +135,7 @@
                 android:textAppearance="?android:attr/textAppearanceListItemSmall"
                 android:maxLines="1"
                 android:hint="포함할 성분의 초성을 입력해주세요"
+                android:completionThreshold="1"
                 android:textColor="@color/colorFontBody"
                 android:background="@drawable/widget_square_border_spinner"/>
 
@@ -174,6 +175,7 @@
                 android:textAppearance="?android:attr/textAppearanceListItemSmall"
                 android:maxLines="1"
                 android:hint="제외할 성분의 초성을 입력해주세요"
+                android:completionThreshold="1"
                 android:textColor="@color/colorFontBody"
                 android:background="@drawable/widget_square_border_spinner"/>
 
