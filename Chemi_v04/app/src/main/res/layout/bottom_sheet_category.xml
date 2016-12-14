@@ -262,6 +262,7 @@
                 android:background="@drawable/selector_bottom_sheet_category_section52"/>
 
             <Button
+                android:visibility="invisible"
                 android:id="@+id/bottom_sheet_category_section53"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

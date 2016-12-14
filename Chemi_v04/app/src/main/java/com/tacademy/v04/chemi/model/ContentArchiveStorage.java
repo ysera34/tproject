@@ -22,7 +22,7 @@ public class ContentArchiveStorage {
         mAppContext = context;
         mContents = new ArrayList<>();
 
-        for (int i = 0; i < 30; i++) {
+        for (int i = 0; i < 9; i++) {
             Content content = new Content();
             switch (i%9) {
                 case 0 :

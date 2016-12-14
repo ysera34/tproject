@@ -153,7 +153,8 @@ public class ContentT3ListFragment extends Fragment {
         @Override
         public void onClick(View view) {
 
-            Intent intent = ContentActivity.newIntent(getActivity(), mContent.getContentType());
+            Intent intent = ContentActivity.newIntent(getActivity(),
+                    mContent.getContentType(), mContent.getContentNumber());
             startActivity(intent);
 
         }
