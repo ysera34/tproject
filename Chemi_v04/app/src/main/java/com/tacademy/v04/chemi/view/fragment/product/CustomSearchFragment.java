@@ -227,8 +227,13 @@ public class CustomSearchFragment extends Fragment
                 (mBottomSheetDialog1.findViewById(R.id.bottom_sheet_category_section71)).setOnClickListener(this);
                 (mBottomSheetDialog1.findViewById(R.id.bottom_sheet_category_section72)).setOnClickListener(this);
                 (mBottomSheetDialog1.findViewById(R.id.bottom_sheet_category_section73)).setOnClickListener(this);
-                
+                (mBottomSheetDialog1.findViewById(R.id.bottom_sheet_category_close_button)).setOnClickListener(this);
                 mCategoryBottomSheetDialog.show();
+                break;
+
+            case R.id.bottom_sheet_category_close_button :
+                mCategoryBottomSheetDialog.dismiss();
+
                 break;
             case R.id.custom_search_constitution_button :
                 mConstitutionBottomSheetDialog = new BottomSheetDialog(getActivity());
@@ -416,7 +421,7 @@ public class CustomSearchFragment extends Fragment
 //                Toast.makeText(getActivity(), "Category : " + mCategoryButton.getText().toString(), Toast.LENGTH_SHORT).show();
 
                 for (Word word : mInchemicalResult) {
-                    if (mChemicalIncludeAutoCompleteTextView.getText().toString().equals(word.getNameKO())) {
+                    if (mChemicalIncludeAutoCompleteTextView.getText().toString().trim().equals(word.getNameKO())) {
                         mIncludeChemicalId = word.getProductId();
                     }
                     break;
@@ -424,7 +429,7 @@ public class CustomSearchFragment extends Fragment
                 Log.i(TAG, "mInchemicalId : " + mIncludeChemicalId);
 
                 for (Word word : mExchemicalResult) {
-                    if (mChemicalExcludeAutoCompleteTextView.getText().toString().equals(word.getNameKO())) {
+                    if (mChemicalExcludeAutoCompleteTextView.getText().toString().trim().equals(word.getNameKO())) {
                         mExcludeChemicalId = word.getProductId();
                     }
                     break;
@@ -438,7 +443,6 @@ public class CustomSearchFragment extends Fragment
                     mCategoryId = mCustomSearchStorage.getCategoryId(mCategoryButton.getText().toString());
                 }
 
-
                 if (mCategoryId!=-1) {
                     if (mChemicalIncludeAutoCompleteTextView.getText().length()==0) {
                         mIncludeChemicalId = 0;
@@ -446,7 +450,6 @@ public class CustomSearchFragment extends Fragment
                     if (mChemicalExcludeAutoCompleteTextView.getText().length()==0) {
                         mExcludeChemicalId = 0;
                     }
-
 
                     requestCustomSearchProductJsonObject(mCategoryId, mIncludeChemicalId, mExcludeChemicalId);
                 } else {

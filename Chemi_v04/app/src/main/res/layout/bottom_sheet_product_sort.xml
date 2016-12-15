@@ -19,6 +19,8 @@
             android:id="@+id/bottom_sheet_product_filter_section1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:background="@drawable/selector_bottom_sheet_product_filter_section1"/>
 
         <Button
@@ -30,6 +32,7 @@
             android:background="@drawable/selector_bottom_sheet_product_filter_section2"/>
 
         <Button
+            android:visibility="gone"
             android:id="@+id/bottom_sheet_product_filter_section3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

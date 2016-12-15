@@ -442,6 +442,7 @@ public class SearchActivity extends AppBaseActivity
         mSearchProductEditText.setSelection(mSearchProductEditText.getText().length());
         mSearchProductAutoCompleteTextView.setText(data);
         mSearchProductAutoCompleteTextView.setSelection(mSearchProductAutoCompleteTextView.getText().length());
+        requestKeywordJsonObject(mSearchProductAutoCompleteTextView.getText().toString());
     }
 
     private class SearchedResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {

@@ -346,7 +346,13 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
             mChemical = chemical;
             mChemicalTitleKoTextView.setText(mChemical.getNameKo());
             mChemicalTitleEnTextView.setText(mChemical.getNameEn());
-            mChemicalHazardTextView.setText(String.valueOf(mChemical.getHazard()[0]));
+
+            if (String.valueOf(mChemical.getHazard()[0]).equals("0")) {
+                mChemicalHazardTextView.setText("-");
+            } else {
+                mChemicalHazardTextView.setText(String.valueOf(mChemical.getHazard()[0]));
+            }
+
             mChemicalHazardImageView.setBackgroundResource(mChemical.getHazard()[1]);
             mChemicalKeywordTextView.setTextColor(getResources().getColor(mChemical.getKeywordFontColorResId()));
             mChemicalKeywordTextView.setText(mChemical.getKeyword());
