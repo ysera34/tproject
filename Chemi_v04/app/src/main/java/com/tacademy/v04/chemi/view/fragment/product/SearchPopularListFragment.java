@@ -11,11 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.tacademy.v04.chemi.R;
-import com.tacademy.v04.chemi.common.util.listener.OnPassDataListener;
 import com.tacademy.v04.chemi.common.util.decorator.SeparatorDecoration;
+import com.tacademy.v04.chemi.common.util.listener.OnPassDataListener;
 import com.tacademy.v04.chemi.model.Search;
 import com.tacademy.v04.chemi.model.SearchPopularStorage;
 
@@ -152,7 +151,7 @@ public class SearchPopularListFragment extends Fragment {
 
         @Override
         public void onClick(View view) {
-            Toast.makeText(getActivity(), mSearch.getSearchWord(), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getActivity(), mSearch.getSearchWord(), Toast.LENGTH_SHORT).show();
             mOnPassDataListener.onStringDataPass(mSearch.getSearchWord());
         }
     }

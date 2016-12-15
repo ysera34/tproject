@@ -16,7 +16,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:paddingTop="20dp">
+            android:paddingTop="22dp">
 
             <TextView
                 android:id="@+id/product_list_total_prefix"
@@ -49,20 +49,22 @@
         <LinearLayout
             android:id="@+id/product_list_sort_button_view"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="20dp"
-            android:paddingBottom="12dp">
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="3dp"
+                android:layout_marginEnd="5dp"
+                android:paddingTop="20dp"
+                android:paddingBottom="12dp"
                 android:src="@drawable/sort_image_button_status"/>
 
             <TextView
                 android:id="@+id/product_list_sort_status_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingTop="24dp"
+                android:paddingBottom="12dp"
                 android:text="@string/product_list_sort_review_total"
                 android:textSize="14sp"/>
 

@@ -170,7 +170,7 @@ public class SearchLatestListFragment extends Fragment {
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.list_item_latest_search_word :
-                    Toast.makeText(getActivity(), mSearch.getSearchWord(), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity(), mSearch.getSearchWord(), Toast.LENGTH_SHORT).show();
                     mOnPassDataListener.onStringDataPass(mSearch.getSearchWord());
                     break;
                 case R.id.list_item_clear_image_button :

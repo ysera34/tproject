@@ -47,12 +47,13 @@
                 android:id="@+id/bottom_sheet_category_section11"
                 android:text="세탁세제"
                 android:layout_width="100dp"
-                android:layout_height="30dp"
+                android:layout_height="32dp"
                 android:gravity="center"
-                android:textColorHighlight="@color/bottom_sheet_button_clickable_text_color"
-                android:textColorLink="@color/bottom_sheet_button_clickable_text_color"
+                android:textColor="@color/bottom_sheet_button_clickable_text_color"
                 android:background="@drawable/selector_bottom_sheet_category_xml_section11"/>
 
+            <!--android:textColorHighlight="@color/bottom_sheet_button_clickable_text_color"-->
+            <!--android:textColorLink="@color/bottom_sheet_button_clickable_text_color"-->
             <!--<Button-->
                 <!--android:id="@+id/bottom_sheet_category_section11"-->
                 <!--android:text="세탁세제"-->
@@ -69,16 +70,16 @@
 
             <Button
                 android:id="@+id/bottom_sheet_category_section12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="32dp"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
                 android:background="@drawable/selector_bottom_sheet_category_section12"/>
 
             <Button
                 android:id="@+id/bottom_sheet_category_section13"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="32dp"
                 android:background="@drawable/selector_bottom_sheet_category_section13"/>
 
         </LinearLayout>
@@ -102,29 +103,27 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="32dp"
             android:gravity="center">
 
             <TextView
                 android:id="@+id/bottom_sheet_category_section21"
                 android:text="식기세척세제"
                 android:layout_width="100dp"
-                android:layout_height="30dp"
+                android:layout_height="32dp"
                 android:gravity="center"
-                android:textColorHighlight="@color/bottom_sheet_button_clickable_text_color"
-                android:textColorLink="@color/bottom_sheet_button_clickable_text_color"
+                android:textColor="@color/bottom_sheet_button_clickable_text_color"
                 android:background="@drawable/selector_bottom_sheet_category"/>
 
             <TextView
                 android:id="@+id/bottom_sheet_category_section22"
                 android:text="주방세정제"
                 android:layout_width="100dp"
-                android:layout_height="30dp"
+                android:layout_height="32dp"
                 android:gravity="center"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
-                android:textColorHighlight="@color/bottom_sheet_button_clickable_text_color"
-                android:textColorLink="@color/bottom_sheet_button_clickable_text_color"
+                android:textColor="@color/bottom_sheet_button_clickable_text_color"
                 android:background="@drawable/selector_bottom_sheet_category"/>
 
             <Button
@@ -155,27 +154,27 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="32dp"
             android:gravity="center">
 
             <Button
                 android:id="@+id/bottom_sheet_category_section31"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="32dp"
                 android:background="@drawable/selector_bottom_sheet_category_section31"/>
 
             <Button
                 android:id="@+id/bottom_sheet_category_section32"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="32dp"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
                 android:background="@drawable/selector_bottom_sheet_category_section32"/>
 
             <Button
                 android:id="@+id/bottom_sheet_category_section33"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="32dp"
                 android:background="@drawable/selector_bottom_sheet_category_section33"/>
 
         </LinearLayout>
@@ -199,27 +198,27 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="32dp"
             android:gravity="center">
 
             <Button
                 android:id="@+id/bottom_sheet_category_section41"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="32dp"
                 android:background="@drawable/selector_bottom_sheet_category_section41"/>
 
             <Button
                 android:id="@+id/bottom_sheet_category_section42"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="32dp"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
                 android:background="@drawable/selector_bottom_sheet_category_section42"/>
 
             <Button
                 android:id="@+id/bottom_sheet_category_section43"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="32dp"
                 android:background="@drawable/selector_bottom_sheet_category_section23"
                 android:visibility="invisible"/>
 
@@ -244,19 +243,19 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="32dp"
             android:gravity="center">
 
             <Button
                 android:id="@+id/bottom_sheet_category_section51"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="32dp"
                 android:background="@drawable/selector_bottom_sheet_category_section51"/>
 
             <Button
                 android:id="@+id/bottom_sheet_category_section52"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="32dp"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
                 android:background="@drawable/selector_bottom_sheet_category_section52"/>
@@ -264,8 +263,8 @@
             <Button
                 android:visibility="invisible"
                 android:id="@+id/bottom_sheet_category_section53"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="32dp"
                 android:background="@drawable/selector_bottom_sheet_category_xml_section11"/>
             <!--android:visibility="invisible"-->
         </LinearLayout>
@@ -289,27 +288,27 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="32dp"
             android:gravity="center">
 
             <Button
                 android:id="@+id/bottom_sheet_category_section61"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="32dp"
                 android:background="@drawable/selector_bottom_sheet_category_section61"/>
 
             <Button
                 android:id="@+id/bottom_sheet_category_section62"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="32dp"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
                 android:background="@drawable/selector_bottom_sheet_category_section62"/>
 
             <Button
                 android:id="@+id/bottom_sheet_category_section63"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="32dp"
                 android:background="@drawable/selector_bottom_sheet_category_section63"/>
 
         </LinearLayout>
@@ -333,27 +332,27 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="30dp"
+            android:layout_height="32dp"
             android:gravity="center">
 
             <Button
                 android:id="@+id/bottom_sheet_category_section71"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="32dp"
                 android:background="@drawable/selector_bottom_sheet_category_section71"/>
 
             <Button
                 android:id="@+id/bottom_sheet_category_section72"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="32dp"
                 android:layout_marginStart="5dp"
                 android:layout_marginEnd="5dp"
                 android:background="@drawable/selector_bottom_sheet_category_section72"/>
 
             <Button
                 android:id="@+id/bottom_sheet_category_section73"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="100dp"
+                android:layout_height="32dp"
                 android:background="@drawable/selector_bottom_sheet_category_section73"/>
 
         </LinearLayout>

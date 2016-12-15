@@ -61,7 +61,7 @@ public class ContentArchiveStorage {
                     content.setContentType(2);
                     content.setContentNumber(22);
                     content.setTitle("30대 주부님들이 가장 많이 찾아본\n제품 TOP5");
-                    content.setDescription("12월 넷째");
+                    content.setDescription("12월 넷째주");
                     content.setContentImageId(R.drawable.content_image_2201);
                     content.setContentTypeImageId(R.drawable.ic_main_banner_type2);
                     break;
@@ -77,7 +77,7 @@ public class ContentArchiveStorage {
                     content.setContentType(1);
                     content.setContentNumber(13);
                     content.setTitle("물티슈보다 독성물질 더 나온\n방향제, 환경부는 \"퇴출 안돼\"");
-                    content.setDescription("호흡기 직접 영향 주는데도... 스프레이 제품 방치하는 정");
+                    content.setDescription("호흡기 직접 영향 주는데도... 스프레이 제품 방치하는 정부");
                     content.setContentImageId(R.drawable.content_image_1301);
                     content.setContentTypeImageId(R.drawable.ic_main_banner_type1);
                     break;

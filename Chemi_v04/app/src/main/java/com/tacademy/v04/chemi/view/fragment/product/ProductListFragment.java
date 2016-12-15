@@ -403,8 +403,8 @@ public class ProductListFragment extends Fragment implements View.OnClickListene
 
         @Override
         public void onClick(View v) {
-            Toast.makeText(getActivity(),
-                    mProduct.getName() + " selected", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getActivity(),
+//                    mProduct.getName() + " selected", Toast.LENGTH_SHORT).show();
 
 //            Intent intent = new Intent(getActivity(), ProductActivity.class);
             Intent intent = ProductActivity.newIntent(getActivity(), mProduct.getId());

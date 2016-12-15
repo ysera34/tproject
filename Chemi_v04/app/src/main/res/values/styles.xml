@@ -117,8 +117,8 @@
     </style>
 
     <style name="ArchiveSubTabLayoutStyle" parent="Widget.Design.TabLayout">
-        <item name="tabPaddingStart">5dp</item>
-        <item name="tabPaddingEnd">5dp</item>
+        <item name="tabPaddingStart">4dp</item>
+        <item name="tabPaddingEnd">4dp</item>
         <item name="tabBackground">@drawable/archive_tab_border_small</item>
     </style>
 
