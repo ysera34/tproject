@@ -526,9 +526,15 @@ public class Parser {
                             review.setNegativeContent(reviewObject.getString(REVIEW_NEGATIVE));
                         }
 
-                        review.getImagePaths().add(reviewObject.getString(REVIEW_IMAGE1));
-                        review.getImagePaths().add(reviewObject.getString(REVIEW_IMAGE2));
-                        review.getImagePaths().add(reviewObject.getString(REVIEW_IMAGE3));
+                        if (!reviewObject.getString(REVIEW_IMAGE1).equals("null")) {
+                            review.getImagePaths().add(reviewObject.getString(REVIEW_IMAGE1));
+                        }
+                        if (!reviewObject.getString(REVIEW_IMAGE2).equals("null")) {
+                            review.getImagePaths().add(reviewObject.getString(REVIEW_IMAGE2));
+                        }
+                        if (!reviewObject.getString(REVIEW_IMAGE3).equals("null")) {
+                            review.getImagePaths().add(reviewObject.getString(REVIEW_IMAGE3));
+                        }
 
                         if (reviewObject.getInt(REVIEW_IMAGE_EXIST) == 1) {
                             review.setPhotoCheck(true);

@@ -19,8 +19,6 @@ import com.tacademy.v04.chemi.view.activity.content.ContentActivity;
 
 import java.util.ArrayList;
 
-import static android.R.attr.type;
-
 /**
  * Created by yoon on 2016. 12. 2..
  */
@@ -154,7 +152,8 @@ public class ArchiveContentT2ListFragment extends Fragment {
         @Override
         public void onClick(View view) {
 
-            Intent intent = ContentActivity.newIntent(getActivity(), mContent.getContentType());
+            Intent intent = ContentActivity.newIntent(getActivity(),
+                    mContent.getContentType(), mContent.getContentNumber());
             startActivity(intent);
 
         }

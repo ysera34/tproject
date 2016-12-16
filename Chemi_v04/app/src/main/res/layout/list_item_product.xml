@@ -10,8 +10,7 @@
         android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="90dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="8dp"
         card_view:contentPadding="2dp">
         <!--card_view:cardCornerRadius="2dp"-->
         <!--android:layout_marginStart="8dp"-->

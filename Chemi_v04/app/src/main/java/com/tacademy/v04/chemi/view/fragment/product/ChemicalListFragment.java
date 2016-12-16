@@ -191,8 +191,8 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
                 mChemicalSortBottomSheetDialog.show();
                 break;
             case R.id.bottom_sheet_chemical_filter_section1:
-                Toast.makeText(getActivity(), "bottom_sheet_chemical_filter_section1",
-                        Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "bottom_sheet_chemical_filter_section1",
+//                        Toast.LENGTH_SHORT).show();
                 Collections.sort(mChemicals, mHazardGradeDescChemicalComparator);
                 Collections.reverse(mChemicals);
                 mChemicalSortStatusTextView.setText(R.string.chemical_list_sort_dangerous);
@@ -201,8 +201,8 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
                 mChemicalSortBottomSheetDialog.dismiss();
                 break;
             case R.id.bottom_sheet_chemical_filter_section2:
-                Toast.makeText(getActivity(), "bottom_sheet_chemical_filter_section2",
-                        Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "bottom_sheet_chemical_filter_section2",
+//                        Toast.LENGTH_SHORT).show();
                 Collections.sort(mChemicals, mProductMarkedChemicalComparator);
                 mChemicalSortStatusTextView.setText(R.string.chemical_list_sort_notation);
                 mChemicalAdapter.addItems(mChemicals);
@@ -360,7 +360,7 @@ public class ChemicalListFragment extends Fragment implements View.OnClickListen
 
         @Override
         public void onClick(View view) {
-            Toast.makeText(getActivity(), mChemical.getNameKo(), Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getActivity(), mChemical.getNameKo(), Toast.LENGTH_SHORT).show();
             // view.setBackgroundColor(getResources().getColor(R.color.chemical_card_view_clicked_color));
 
             mDialogFragment = ChemicalDialogFragment.newInstance(mChemical.getId());

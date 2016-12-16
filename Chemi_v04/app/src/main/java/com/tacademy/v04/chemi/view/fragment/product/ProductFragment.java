@@ -182,7 +182,7 @@ public class ProductFragment extends Fragment implements View.OnClickListener {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_faq) {
-            Toast.makeText(getActivity(), "자주 묻는 질문을 삼가하세요.", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getActivity(), "자주 묻는 질문을 삼가하세요.", Toast.LENGTH_SHORT).show();
             Intent intent = MainActivity.newIntent(getActivity(), REQUEST_NAVIGATION_FAQ);
             startActivity(intent);
             return true;

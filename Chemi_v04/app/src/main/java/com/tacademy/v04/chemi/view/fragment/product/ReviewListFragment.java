@@ -296,13 +296,18 @@ public class ReviewListFragment extends Fragment implements View.OnClickListener
                 mReviewCardPhotoImageView.setImageResource(R.drawable.ic_photo_camera_border_24dp);
             }
             mReviewCardRatingBar.setRating(mReview.getRatingValue());
+
             if (mReview.getConstitution1()!=null && !mReview.getConstitution1().equals(" ")) {
                 mReviewCardSymptomTextView1.setText(mReview.getConstitution1());
                 mReviewCardSymptomTextView1.setBackgroundResource(R.drawable.widget_oval_border_primary);
+            } else {
+                mReviewCardSymptomTextView1.setVisibility(View.GONE);
             }
             if (mReview.getConstitution2()!=null && !mReview.getConstitution2().equals(" ")) {
                 mReviewCardSymptomTextView2.setText(mReview.getConstitution2());
                 mReviewCardSymptomTextView2.setBackgroundResource(R.drawable.widget_oval_border_primary);
+            } else {
+                mReviewCardSymptomTextView2.setVisibility(View.GONE);
             }
 
             mReviewCardSymptomTextView2.setText(mReview.getConstitution2());

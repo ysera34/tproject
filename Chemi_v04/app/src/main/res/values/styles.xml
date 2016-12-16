@@ -123,7 +123,7 @@
     </style>
 
     <style name="NavigationTheme" parent="AppTheme">
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">16sp</item>
         <!--<item  name="android:textStyle">bold</item>-->
         <item name="android:listPreferredItemHeight">54dp</item>
         <item name="android:listPreferredItemHeightLarge">54dp</item>
