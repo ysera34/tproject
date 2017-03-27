@@ -1,25 +1,27 @@
 <resources>
-    <string name="app_name">Chemi</string>
+    <string name="app_name">케미</string>
 
-    <string name="action_settings">Settings</string>
-    <string name="action_search">Search</string>
-    <string name="action_archive">Archive</string>
-    <string name="action_share">Share</string>
-    <string name="drawer_open">Open</string>
-    <string name="drawer_close">Close</string>
+    <string name="action_settings">설정</string>
+    <string name="action_search">검색</string>
+    <string name="action_archive">보관함</string>
+    <string name="action_home">홈</string>
+    <string name="action_send">리뷰 작성</string>
+    <string name="action_share">공유</string>
+    <string name="drawer_open">열림</string>
+    <string name="drawer_close">닫힘</string>
 
-    <string name="nav_item_custom_search">Custom Search</string>
-    <string name="nav_item_contents">Contents</string>
-    <string name="nav_item_archive">Archive</string>
-    <string name="nav_item_reviews">Reviews</string>
-    <string name="nav_item_custom_search_log">Custom Search Log</string>
-    <string name="nav_item_analyze_request">Request to Analyze</string>
-    <string name="nav_item_notifications">Notifications</string>
-    <string name="nav_item_faq">FAQ</string>
-    <string name="nav_item_settings">Settings</string>
+    <string name="nav_item_custom_search">맞춤검색</string>
+    <string name="nav_item_contents">컨텐츠</string>
+    <string name="nav_item_archive">보관함</string>
+    <string name="nav_item_reviews">작성한 리뷰 관리</string>
+    <string name="nav_item_custom_search_log">지난 맞춤 검색 기록</string>
+    <string name="nav_item_analyze_request">제품 분석 요청</string>
+    <string name="nav_item_notifications">공지사항</string>
+    <string name="nav_item_faq">자주 묻는 질문</string>
+    <string name="nav_item_settings">설정</string>
 
-    <string name="nav_item_login">LOGIN</string>
-    <string name="nav_item_logout">LOGOUT</string>
+    <string name="nav_item_login">로그인</string>
+    <string name="nav_item_logout">로그아웃</string>
 
     <!-- navigation drawer item labels  -->
     <string-array name="nav_drawer_labels">
@@ -35,86 +37,85 @@
         <item>@string/nav_item_login</item>
     </string-array>
 
-    <string name="fragment_title_main">Main</string>
-    <string name="fragment_title_custom_search">Custom Search</string>
-    <string name="fragment_title_contents">Contents</string>
-    <string name="fragment_title_archive">Archive</string>
-    <string name="fragment_title_reviews">Reviews</string>
-    <string name="fragment_title_custom_search_log">Custom Search Log</string>
-    <string name="fragment_title_analyze_request">Request to Analyze</string>
-    <string name="fragment_title_notifications">Notifications</string>
-    <string name="fragment_title_faq">FAQ</string>
-    <string name="fragment_title_settings">Settings</string>
-    <string name="fragment_title_login">LOGIN</string>
+    <string name="fragment_title_main">메인</string>
+    <string name="fragment_title_custom_search">맞춤검색</string>
+    <string name="fragment_title_contents">컨텐츠</string>
+    <string name="fragment_title_archive">보관함</string>
+    <string name="fragment_title_reviews">작성한 리뷰 관리</string>
+    <string name="fragment_title_custom_search_log">지난 맞춤 검색 기록</string>
+    <string name="fragment_title_analyze_request">제품 분석 요청</string>
+    <string name="fragment_title_notifications">공지사항</string>
+    <string name="fragment_title_faq">자주 묻는 질문</string>
+    <string name="fragment_title_settings">설정</string>
+    <string name="fragment_title_login">로그인</string>
 
-    <string name="search_hint">search product here</string>
-    <string name="search_result">search result</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="title_activity_search">SearchActivity</string>
-    <string name="title_activity_product_list">Products List</string>
-    <string name="title_activity_product">Product Details</string>
-    <string name="title_activity_review">Review</string>
+    <string name="search_hint">상품명, 브랜드명으로 검색하세요</string>
+    <string name="search_result">검색 결과</string>
+    <string name="title_activity_main">메인</string>
+    <string name="title_activity_search">제품 검색</string>
+    <string name="title_activity_product_list">제품 목록</string>
+    <string name="title_activity_product">제품 상세</string>
+    <string name="title_activity_review">리뷰</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_open">네비게이션 메뉴 열기</string>
+    <string name="navigation_drawer_close">네비게이션 메뉴 닫기</string>
 
-    <string name="action_example">Example action</string>
-    <string name="action_home">Home</string>
-    <string name="show_all_product_button_text">show product</string>
-    <string name="list_total">total : %s</string>
-    <string name="list_total_prefix">total : </string>
-    <string name="list_total_suffix"> </string>
+    <string name="show_all_product_button_text">전체보기</string>
+    <string name="list_total">전체 %s개</string>
+    <string name="list_total_prefix">전체 </string>
+    <string name="list_total_suffix">개</string>
     <string name="list_total_default">0</string>
-    <string name="product_brand_name_format">[%1$s]</string>
-    <string name="product_detail_chemical_list_name">Chemical</string>
-    <string name="product_detail_review_list_name">Review</string>
-    <string name="product_rating_value_format">%1$s / 5</string>
+    <string name="product_detail_chemical_list_name">성분</string>
+    <string name="product_detail_review_list_name">리뷰</string>
 
-    <string name="product_list_sort_review_total">Reviews</string>
-    <string name="product_list_sort_review_rating_avg">Ratings</string>
-    <string name="product_list_sort_latest_release">Latest</string>
+    <string name="product_list_sort_review_total">리뷰 많은 순</string>
+    <string name="product_list_sort_review_rating_avg">평점 순</string>
+    <string name="product_list_sort_latest_release">최신 출시 순</string>
 
-    <string name="product_popular_list_name">Popular</string>
-    <string name="product_latest_list_name">Latest</string>
+    <string name="product_popular_list_name">인기 검색어</string>
+    <string name="product_latest_list_name">최근 검색어</string>
     <string name="nav_header_user_symptom">%1$s / %2$s / %3$s</string>
-    <string name="user_nickname">user_nickname</string>
-    <string name="category_title">category title</string>
-    <string name="category_section1">Laundry</string>
-    <string name="category_section2">Kitchen</string>
-    <string name="category_section3">Living</string>
-    <string name="category_section4">Air Freshener</string>
-    <string name="category_section5">Baby Products</string>
-    <string name="category_section6">Female Products</string>
-    <string name="category_section7">et cetera</string>
-    <string name="product_list_category_no_exist">Not Exist</string>
-    <string name="product_list_no_exist">Do not exist product</string>
-    <string name="return_to_search_activity">Return</string>
-    <string name="remove_search_word_info_message">Your search history has been deleted.\nYour search history has been deleted.</string>
-    <string name="empty_latest_search_info">You have no recent searches.</string>
-    <string name="chemical_composition_title">Chemical Composition</string>
-    <string name="chemical_composition_info">Chemical Composition</string>
-    <string name="archive_product_tab_title">Products</string>
-    <string name="archive_content_tab_title">Contents</string>
+    <string name="user_nickname">사용자 닉네임</string>
+    <string name="category_title">카테고리</string>
+    <string name="category_section1">세탁</string>
+    <string name="category_section2">주방</string>
+    <string name="category_section3">욕실</string>
+    <string name="category_section4">방향 / 청정</string>
+    <string name="category_section5">유아 / 아동</string>
+    <string name="category_section6">여성</string>
+    <string name="category_section7">기타</string>
+    <string name="product_list_category_no_exist">카테고리와 일치하는 상품이 존재하지 않습니다</string>
+    <string name="product_list_no_exist">검색하신 제품이 없습니다.</string>
+    <string name="return_to_search_activity">돌아가기</string>
+    <string name="remove_search_word_info_message">검색기록이 삭제되었습니다.</string>
+    <string name="empty_latest_search_info">최근 검색어 내역이 없습니다</string>
+    <string name="chemical_composition_title">성분 구성</string>
+    <string name="chemical_composition_info">성분 정보</string>
+    <string name="archive_product_tab_title">제품</string>
+    <string name="archive_content_tab_title">컨텐츠</string>
     <string name="archive_product_delete_number">(%s)</string>
-    <string name="archive_product_list_delete_text">Delete</string>
-    <string name="archive_product_list_complete_text">Complete</string>
-    <string name="chemical_list_sort_dangerous">Dangerous</string>
-    <string name="chemical_list_sort_notation">Notations</string>
-    <string name="chemical_report_subject">Request modification of chemical information</string>
-    <string name="send_report">send chemical report</string>
-    <string name="chemical_report">Request modification of %1$s information.\nDate Time : %2$s</string>
-    <string name="request_loading_data">Loading Data</string>
-    <string name="load_please_wait">Please wait...</string>
-    <string name="list_item_product_review_rating_count">(%s)</string>
-    <string name="chemical_dangerous_grade_format">%s</string>
-    <string name="review_card_user_symptom">%1$s / %2$s년생/ %3$s</string>
-    <string name="empty_product_reivews_info">empty reviews</string>
-    <string name="chemical_hazard_circle_transition_name">chemical_hazard_circle</string>
+    <string name="archive_product_list_delete_text">삭제</string>
+    <string name="archive_product_list_complete_text">완료</string>
+    <string name="chemical_list_sort_dangerous">위험도 순</string>
+    <string name="chemical_list_sort_notation">제품 표기 순</string>
+    <string name="chemical_report_subject">성분 정보의 수정을 요청합니다</string>
+    <string name="send_report">성분 정보 수정 보고서</string>
+    <string name="analyze_request_product_report_subject">제품 분석 요청</string>
+    <string name="chemical_report">%1$s 성분에 대한 정보가 부정확하여 수정을 요청합니다.\n일시 : %2$s</string>
+    <string name="request_loading_data">데이터를 가져오고 있습니다</string>
+    <string name="load_please_wait">잠시만 기다려주세요...</string>
+    <string name="list_item_product_review_rating_count">(%s명)</string>
+    <string name="chemical_dangerous_grade_format">%s개</string>
     <string name="review_form_string_length_form">%s / 500</string>
+    <string name="empty_product_reviews_info">상품의 리뷰가 존재하지 않습니다.</string>
+    <string name="chemical_hazard_circle_transition_name">chemical_hazard_circle</string>
     <string name="review_negative_title">아쉬워요</string>
     <string name="review_positive_title">좋아요</string>
     <string name="review_positive_hint">이 제품이 좋은 이유를 다른 사람에게도 알려주세요</string>
     <string name="review_negative_hint">이 제품이 아쉬운 이유를 다른 사람에게도 알려주세요</string>
+    <string name="review_card_user_symptom">%1$s / %2$s년생/ %3$s</string>
+    <string name="product_brand_name_format">[%1$s]</string>
+    <string name="product_rating_value_format">%1$s / 5</string>
 
     <string-array name="product_list_sort_way">
         <item>@string/product_list_sort_review_total</item>
@@ -122,20 +123,418 @@
         <item>@string/product_list_sort_latest_release</item>
     </string-array>
 
-    <string name="bottom_sheet_menu_camera">camera</string>
-    <string name="bottom_sheet_menu_gallery">gallery</string>
-    <string name="chemi_agreement1">케미 서비스를 이용해 주셔서 감사합니다.\n</string>
-    <string name="chemi_agreement2">케미 서비스를 이용해 주셔서 감사합니다.\n</string>
-    <string name="chemi_privacy_body">케미 서비스를 이용해 주셔서 감사합니다.\n</string>
+    <string name="bottom_sheet_menu_camera">카메라</string>
+    <string name="bottom_sheet_menu_gallery">갤러리</string>
+    <string name="chemi_agreement1">케미 서비스를 이용해 주셔서 감사합니다.\n
+        케미는 일상 속 화학제품의 성분을 분석하여 제품의 안정성 정보를 제공하고, 여러분이 직접 리뷰를 남기고 또 다른 사용자의 리뷰를 본 후 원하는 제품을 선택 하실 수 이쏟록 지원하고 있습니다.
+        케미는 앞으로도 소비자의 건강을 위한 유용한 콘텐츠와 정보 및 서비스를 제공해드리고자 합니다.\n
+        케미를 더 가깝게 느끼실 수 있도록 딱딱하고 어려운 내용이 아닌 쉽고 친숙한 느낌의 이용 약관을 마련하였으니, 시간을 내어 읽어 주시면 여러분과 케미가 더욱 더 가까운 사이가 뒬 수 있을 것이라고 생각합니다.
+    </string>
+    <string name="chemi_agreement2" formatted="false">
+        1. 각종 제조사의 화학제품 주성분을 공신력 있는 기관 및 출처(미국 비영리 단체 EWG, 대한 피부과 의사회,
+        식품의약품안전처)를 기반으로 분석한 결과\n
+        2. 대상자의 체질과 유해성분제외, 유익성분포함\n
+        3. 화학제품 리뷰 작성 및 조회 서비스\n
+        4. 화학성분, 건강에 관한 각종 콘텐츠 및 정보\n
+        5. 서비스의 운영과 관련한 광고 대행 서비스\n
+        6. 기타 케미가 추가 개발하거나 다른 회사와의 제휴계약 등을 통해 제공하는 일체의 서비스\n
+        \n
+        \n
+        (이하 생략)
+        \n
+        \n
+        여러분은 스마트폰의 어플리케이션 스토어에서 케미를 설치하여 위와 같은 서비스를 이용할 수 있습니다.
+        그런데 케미의 서비스는 지속적으로 업데이트 될 예정이며,
+        더욱 더 여러분과 맞는 화학제품을 고르실 수 있도록 다양한 서비스를 제공할 계획이기 때문에 서비스의 자세한 내용을 약관을 통해 시시각각 알려드릴 수는 없습니다.
+        이러한 점을 이해해 주시길 바라며, 추후에 개발될 다양한 서비스는 어플리케이션 스토어, 서비스 내 공지사항을 통해 안내할 예정이오니 언제든지 확인하여 주시기 바랍니다.\n
+
+        본 약관 또는 케미 서비스와 관련하여서는 대한민국의 법률이 적용됩니다.\n
+        \n
+        \n
+        공고일자 : 2016년 12월 16일\n
+        시행일자 : 2016년 12월 16일\n
+        \n
+
+    </string>
+    <string name="chemi_privacy_body">
+        저희 케미에게 있어서 여러분의 개인정보를 안전하게 취급하는 일은 가장 중요한 일 중에 하나입니다. 케미가 취급하는
+        여러분의 개인정보는 서비스의 원활한 제공을 위하여 여러분이 동의한 목적과 범위 내에서만 이용됩니다. 법령에 의
+        하거나 여러분이 별도로 동의하지 않는 한 케미가 여러분의 개인정보를 제3자에게 제공하는 일은 절대로 없으므로
+        안심하고 서비스를 사용해 주시면 감사하겠습니다. 개인정보 취급방침에 수정이 있는 경우에는 여러분이 언제든지 그
+        내용과 이유를 쉽게 알 수 있도록 공지사항을 통하여 알려 드리겠습니다. 무엇보다도 소중한 여러분의 개인정보는 더 나은
+        서비스를 제공하기 위해 활용됩니다. 케미는 서비스의 원활한 제공과 더욱 더 발전된 이용자 경험을 드리기 위해
+        필요한 최소한의 개인정보를 수집합니다.
+    </string>
+
+    <string-array name="faq_header_list">
+        <item>@string/faq_header_1</item>
+        <item>@string/faq_header_2</item>
+        <item>@string/faq_header_3</item>
+        <item>@string/faq_header_4</item>
+        <item>@string/faq_header_5</item>
+        <item>@string/faq_header_6</item>
+        <item>@string/faq_header_7</item>
+        <item>@string/faq_header_8</item>
+    </string-array>
+
+    <string name="faq_header_1">Q1. 화학 성분 정보의 출처는 어디인가요?</string>
+    <string name="faq_header_2">Q2. 제품에 포함된 화학물질 성분의 함량은 알 수 없나요?</string>
+    <string name="faq_header_3">Q3. 케미를 통해 제공되는 성분정보를 제품의 종합적 안전성을 판단하는 절대적 기준으로
+        활용할 수 있나요?</string>
+    <string name="faq_header_4">Q4. 그렇다면 케미를 통해 제공되는 성분정보는 이용자에게 어떤 의미를 가지나요?</string>
+    <string name="faq_header_5">Q5. EWG 스킨딥 등급은 무엇인가요?</string>
+    <string name="faq_header_6">Q6. 식품의약품안전처 데이터는 무엇인가요?</string>
+    <string name="faq_header_7">Q7. 안전보건관리공단 데이터는 무엇인가요?</string>
+    <string name="faq_header_8">Q8. 케미의 성분정보는 어떤 과정을 거쳐 등록되나요?</string>
+
+    <string-array name="faq_body_list">
+        <item>@string/faq_body_1</item>
+        <item>@string/faq_body_2</item>
+        <item>@string/faq_body_3</item>
+        <item>@string/faq_body_4</item>
+        <item>@string/faq_body_5</item>
+        <item>@string/faq_body_6</item>
+        <item>@string/faq_body_7</item>
+        <item>@string/faq_body_8</item>
+    </string-array>
+
+    <string name="faq_body_1">
+         케미에서 제공되는 화학 성분 정보는 다음의 자료만을 인용합니다.\n
+          1) EWG(Enviromental Working Group) : Skin Deep 위험등급\n
+          2) 식품의약품안전처 : 알레르기 주의 성분, 기능성 성분\n
+          3) 안전보건관리공단: 화학물질의 건강유해성 및 독성 정보
+    </string>
+    <string name="faq_body_2">
+        현행 약사법에 따라 제조사는 해당 화학제품 제조에 사용된 주요 성분을 용기나 포장 및 첨부 문서에 기재해야 합니다.
+        하지만 개별 성분의 함량을 표시할 의무는 규정하지 않고 있습니다.\n
+        \n
+        케미는 주성분 표시제에 따라 공개된 주성분 정보만을 제공하고 있으며, 함량은 각 제조사의 기밀이기 때문에 확인할 수 없는 점,
+        케미 이용에 참고하여 주시기 바랍니다.\n
+        \n
+        제품 화면에서 구성성분이 나열되는 순서는 함량을 고려하지 않은 순서입니다. 기본 설정으로\n
+        1)EWG Skin Deep 위험등급에 따른 순서와 2)제품용기 표기에 따른 순서를 제공해 드립니다.\n
+        \n
+
+    </string>
+    <string name="faq_body_3">
+         그렇지 않습니다.\n\n
+         그 이유는 다음과 같습니다.\n\n
+         1) 케미는 개별 성분의 함량에 관한 정보를 제공하지 않습니다.\n\n
+          개별성분의 종합적 유해성은 성분의 실제 함량이 반드시 고려되어야 합니다. 유해물질로 분류된 성분도 함량에 따라 인체에 미치는 결과적 영향이 천차만별로 달라질 수 있습니다. 케미에서 제공되는 정보는 개별성분의 함량에 따른 안전도를 제공되지 않습니다.\n\n
+         2) 제품의 용도와 목적에 따라 유해성분이 불가피하게 포함되는 제품도 있습니다.\n\n
+          제품의 용도와 목적에 따라 특정 유해성분이 불가피하게 포함될 수 있습니다. 가령 살충제의 경우 살충성분이 반드시 들어가야 하며 소독제의 경우 살균성분이 포함되어야 합니다. 인체에 유해할 수있는 성분이 포함되었다는 사실만으로는 제품의 안전도를 단정할 수 없고 제품의 용도와 성분의 배합목적이 종합적으로 고려되어야 합니다.\n\n
+         3) 제품의 사용법에 따라 사용자에게 미치는 유해성의 정도가 달라질 수 있습니다.\n\n
+          유해성분이 일체 포함되지 않은 제품도 정해진 용법과 용량을 지켜서 사용하지 않으면 인체에 유해한 결과를 초래할 수 있습니다.\n\n
+          반면 유해성분을 포함하고 있는 제품도 정해진 용법과 용량을 지켜 사용한다면 인체에 아무런 영향을 끼치지 않을 수 있습니다.\n\n
+          제품의 목적과 사용법 등 많은 변수들이 제품의 실제 인체영향을 결정하기 때문에 케미의 정보만으로 제품의 최종적 안전성을 예측할 수 없습니다.\n\n
+    </string>
+    <string name="faq_body_4">
+        케미는 개별 성분에 대해 지금까지 밝혀진 과학적 자료만을 전달해드립니다.\n\n
+        제품에 대한 종합적인 판단은 케미에서 제공하는 성분정보 뿐만 아니라 여러 가지 요소를 종합적으로 고려하여 내려주시길 바랍니다. 케미에서 제공되는 정보는 제품에 대한 판단요소 중 하나로서 활용하시길 권장하며 제품구매 및 사용에 대한 최종적인 결정과 선택은 이용자의 몫임을 알려드립니다.\n\n
+        케미는 관련 법과 제도의 범위 안에서 소비자에게 보다 많은 정보를 제공할 수 있도록 끊임없이 노력하겠습니다.\n
+        \n
+    </string>
+    <string name="faq_body_5">
+        EWG는 Environment Working Group의 약자로 안전한 성분을 대안으로 제시하는 미국의 비영리 환경시민단체를 뜻합니다. 2억 5000여 개의 연구 조사 결과를 통해 1~10까지 성분안전도 등급을 설정하였습니다.\n\n
+        EWG등급은 EWG가 연구한 각 성분의 안전도 등급입니다.\n
+        현재 케미의 요약정보에서는 0등급(회색-등급 미정), 1~2등급(초록-낮은 위험), 3~6등급(주황-보통 위험), 7~10등급(빨강-높은위험)을 기준으로 제품 성분의 등급별 비중을 아이콘을 통해 보여드리고있습니다.\n\n
+        EWG등급은 각 성분에 대한 안전도를 판단하는 데 있어 가장 중요하고 공신력 있는 척도라고 할 수 있습니다.
+    </string>
+    <string name="faq_body_6" formatted="false">
+        식품의약품안전처(이하 식약처) 데이터는 식약처에서 고시한 ‘화장품 알러지 성분’을 기준으로 하였습니다.\n\n
+        해당 성분들은 착향제 구성성분 중 알레르기 유발 가능성이 있어, 식약처가 기재 및 표시를 권장한 성분입니다. 해당 성분 목록은 다음과 같습니다.\n\n1.아밀신남알\n2.벤질알코올\n3.신나밀알코올\n4.시트랄\n5.유제놀\n6.하이드록시시트로넬알\n7.이소유제놀\n8.아밀신나밀알코올\n9.벤질살리실레이트\n10.신남알\n11.쿠마린\n12.제라니올\n13.하이드록시이소헥실3-시이클로헥센카복스알데하이드\n14.아니스에탄올\n15.벤질신나메이트\n16.파네솔\n17.부틸페닐메칠프로피오날\n18.리날룰\n19.벤질벤조에이트\n20.시트로넬롤\n21.헥실신남알\n22.리모넨\n23.메칠2-옥티노에이트\n24.알파-이소메칠이오논\n25.참나무이끼추출물\n26.나무이끼추출물\n
+        \n
+        단, 사용 후 세척되는 제품은 0.01%이상, 사용 후 세척되는 제품 이외의 화장품은 0.001%이상 함유하는 경우에 한한다.\n
+        \n
+    </string>
+    <string name="faq_body_7" formatted="false">
+        저희가 제공하는 화학물질 안전성 정보의 대부분은 고용노동부 산하 산업재해예방 안전보건공단에서 공개한 물질안전보건자료(MSDS)를 인용합니다.
+        물질안전보건자료(MaterialSafety Data Sheets, MSDS)란 원래, 근로자의 알권리를 보장하기 위한 제도로 화학물질 또는 화학물질을 함유한 제제의 &quot;명칭,
+        유해성·위험성, 물리화학적 특성, 누출 사고시의 대처방법&quot; 등을 설명해 주는 자료로서, 소비자가 의약품을 구입하면 그 성분 및 함량, 효능, 부작용 등을 알려주는 설명서가 있듯이 화학제품의 안전한 사용을 위한 정보자료라고 정의할 수 있습니다.
+        케미는 이 중 일반 소비자가 알아두면 좋을 만한 정보만을 추려내어 정리해서 보여드립니다. 소비자는 화학물질의 유해성·위험성 등에 대한 정보를 알게 됨으로써 의도치 않은 부작용을 미연에 방지할 수 있습니다.\n
+        \n
+    </string>
+    <string name="faq_body_8" formatted="false">
+        케미에 등록되는 모든 정보는 공정하고 중립적인 제공을 위해 다음과 같은 원칙을 준수하여 등록됩니다.\n
+        \n
+        1. 케미에 등록되는 제품의 주성분은 1)제품 1,2차 포장물에 기재된 주 성분 목록과 2)홈페이지에 게시된 제품의 주 성분 목록을 기준으로 한다.\n
+        \n
+        2. 성분 데이터베이스는 EWG(Environmental Working Group), 식품의약품안전처, 안전보건관리공단의 데이터만을 인용한다.\n
+        \n
+        3.‘EWG등급’ 기재는 EWG Skin Deep 사이트 (http://ewg.org/skindeep/) 의 데이터베이스를 기준으로 한다.\n
+        \n
+        4. 알레르기 주의 성분 기재는 식품의약품 안전처의 화장품 알러지 성분목록을 기준으로 한다.\n
+        \n
+        5. 인체 카테고리별 유해성 정보 기재는 안전보건관리공단의 화학물질안전정보를 기준으로 한다.\n
+        \n
+        6. 1~5원칙에 해당하는 데이터는 정당한 근거가 없는 외부의 압력이나 요청에 의한 임의 수정을 금지한다.\n
+        \n
+        7. 1~5원칙에 해당하는 데이터의 수정은 1)본래 출처의 데이터가 수정되었을 경우와 2)현 기재 상태의 오기로 인한 사용자들의 요청에 의해서만 변경 가능하다.
+        단 2)현 기재 상태의 오기로 인한 사용자들의 요청에 의한 경우 데이터 수정 진행 시 요청사항에 대한 근거자료를 확보해 놓는다.\n
+        \n
+        8. 1~7의 원칙을 케미 모든 시스템 운영에서 일관적으로 적용하여 준수한다.\n
+        \n
+    </string>
+
+    <string-array name="notify_header_list">
+        <item>@string/notify_header_1</item>
+        <item>@string/notify_header_2</item>
+        <item>@string/notify_header_3</item>
+        <item>@string/notify_header_4</item>
+        <item>@string/notify_header_5</item>
+        <item>@string/notify_header_6</item>
+        <item>@string/notify_header_7</item>
+    </string-array>
+
+    <string name="notify_header_1">[공지] 케미v2.2.4 업데이트</string>
+    <string name="notify_header_2">[공지] 제품 분석 요청 시간 변경 안내</string>
+    <string name="notify_header_3">[공지] 서버 안정화로 인한 접속 불가 시간 안내</string>
+    <string name="notify_header_4">[공지] 케미 개인정보취급방침 안내</string>
+    <string name="notify_header_5">[공지] 케미 문의하기 시스템 점검 안내</string>
+    <string name="notify_header_6">[공지] 지난 밤 일시적 서버 다운에 관한 안내</string>
+    <string name="notify_header_7">[공지] 케미 v2.4.1 업데이트</string>
+
+    <string-array name="notify_body_list">
+        <item>@string/notify_body_1</item>
+        <item>@string/notify_body_2</item>
+        <item>@string/notify_body_3</item>
+        <item>@string/notify_body_4</item>
+        <item>@string/notify_body_5</item>
+        <item>@string/notify_body_6</item>
+        <item>@string/notify_body_7</item>
+    </string-array>
+
+    <string name="notify_body_1">
+        안녕하세요 케미에서 알려드립니다. 안드로이드 케미 앱의 새로운 버전이 업데이트 되었습니다.\n
+        \n
+        [케미 v2.4.2 업데이트]\n
+        \n
+        - 물질성분 정보 포인트 및 명도 조절\n
+        \n
+        - 이전 검색조건 불러오기 개선\n
+        \n
+        - 지난검색어 기록 관리 개선\n
+        \n
+        - 기타 오류 수정 및 개선사항 반영\n
+        \n
+        케미를 이용해주시는 여러분께 더 좋은 서비스로 보답하고자 케미의 직원 모두 앞으로도 성실히 노력하겠습니다. 감사합니다.\n
+        \n
+        오늘도 열일하고 있는 케미 드림.\n
+    </string>
+    <string name="notify_body_2">
+        안녕하세요, 케미 입니다. 지난 달 제품 분석 서비스가 시작된 이래로 정말 많은 이용자 여러분들이 사랑해주셨습니다.
+        그 성원에 힘입어 케미팀도 기쁜 마음으로 요청 받은 제품을 열심히 분석하고 그에 대한 정보를 등록하고 있습니다!
+        여러분의 뜨거운 성원에 보답하고자 더 많은 요청을 접수할 수 있도록 저희 케미팀에서는 제품 분석 요청 시간을 연장하기로 결정하였습니다.
+        변경된 제품 분석 요청 시간을 다음과 같이 안내해드립니다.\n
+        \n
+        변경 전 시간 : 저녁 6시~자정\n
+        변경된 시간 : 낮 12시~자정\n
+        \n
+        이제 낮에도 무엇이든 궁금한 제품이 있다면 케미팀으로 제품 분석 요청을 보내주세요!\n
+        \n
+        케미는 여러분과 함께 더 건강한 사회를 만들기 위해 언제나 여러분의 의견에 귀 기울이고자 합니다.\n
+        \n
+        그러니 궁금한 사항이나 의견이 있으신 분은 언제든 주저하지 마시고 ‘문의하기’를 통해 케미팀으로 의견을 보내주세요\n
+        \n
+        언제든 여러분의 이야기를 들을 준비가 되어있는 케미 드림.\n
+
+    </string>
+    <string name="notify_body_3">
+        안녕하세요, 케미 입니다. 어제 눈이 많이 온 이후로 오늘 길이 꽁꽁 얼어 붙어 많이 미끄럽던데 다들 넘어지시지는 않으셨나요?
+        빙판길에서 자칫 잘못 넘어지면 크게 다칠 수 있으니 오늘 같은 날은 더욱 조심하세요!\n
+        \n
+        오늘은 여러분께 서버 안정화 작업으로 인해 접속이 불가능한 시간에 대한 안내를 드리고자 합니다.
+        케미는 이용자 여러분께 더욱 편리한 검색을 제공하기 위해 1월 28일 서버 안정화 작업을 하고자 합니다.
+        이에 따라 28일 새벽 1시부터 6시까지 케미 접속이 제한됨을 안내드립니다.
+        케미 이용자 여러분의 더욱 빠르고 편리한 검색을 위해 새벽동안 신속하게 안정화 작업을 마치도록 하겠습니다.\n
+        \n
+        케미를 이용해주시는 여러분께 더 좋은 서비스로 보답하고자 케미의 직원 모두 앞으로도 성실히 노력하겠습니다. 감사합니다.\n
+        \n
+        오늘도 열일하고 있는 케미 드림.\n
+
+    </string>
+    <string name="notify_body_4">
+        안녕하세요, 케미 입니다. 케미의 개인정보취급이 아래와 같이 개정되어 안내 드리니, 이용에 참고하여 주시기 바랍니다.\n
+        \n
+        1. 개정 주요 내용:\n
+        \n
+        - 개정 정보통신망법(2016.9.23. 시행)에 따른 용어 수정\n
+        \n
+        - 개인정보의 수집·이용 목적 항목 수정\n
+        \n
+        - 권익침해 구제기관 추가\n
+        \n
+        2. 개정 시행일자 : 2017년 1월 1일\n
+        \n
+        이에 대한 상세한 개정내용은 웹사이트의 공지사항을 확인해주세요! 변경된 개인정보취급방침 내용에 대한 기타 문의사항이 있으신 경우 언제든 ‘문의하기’를 통해 케미로 문의하여 주세요.:)
+        더욱 편리하고안정적인 서비스로 여러분의 성원에 보답하는 케미가 되도록 하겠습니다. 감사합니다.\n
+        \n
+        케미 올림.\n
+
+    </string>
+    <string name="notify_body_5">
+        안녕하세요, 케미 입니다. 여러분께서 케미에 보내주시는 애정이 많아지는 만큼 케미로 도착하는 문의사항도 나날이 정말 다양해지고 많아지고 있습니다.
+        이에 따라 더욱 빠르고 편리하게 문의사항을 처리하기위해 케미의 문의하기 시스템 점검이 진행됩니다.
+        문의하기의 안정성 확보를 통해 여러분의 문의에 더욱 빠르게 대답해드리기 위해 실시하는 작업이므로 많은 양해를 부탁드립니다.
+        문의하기 시스템 점검은 30일 09시부터 17시까지 8시간이 소요될 것으로 예상되며, 해당 시간 동안에는 문의하기의 이용이 불가능하니 유의하시기 바랍니다.
+        시스템 점검 시간동안 부득이하게 문의를 받을 수 없게 되는 점에 대해 사과를 드리며, 빠른 점검을 통해 다시 찾아 뵙도록 하겠습니다! 감사합니다.\n
+        \n
+        케미 올림.\n
+
+    </string>
+    <string name="notify_body_6">
+        안녕하세요, 케미 입니다. 지난 밤 갑작스러운 서버 다운으로 케미 이용에 불편을 겪으신 이용자 여러분께 죄송하다는 말씀을 전합니다.
+        서버의 일시적인 이상으로 약 1시간 가량 케미 접속에 문제가 발생하였고,
+        문제 발생을 접한 후 가능한 가장 빠른 시간 내에 서버 복구를 완료하였으나 어쩔 수 없이 접속 불가한 시간이 발생했던 점에 대하여 다시 한번 사과 드립니다.
+        케미는 다시는 이런 사태가 발생하지 않도록 새벽동안 서버 업그레이드를 시행하였습니다.
+        업그레이드 된 서버로 검색 속도를 개선하였고 더욱 안정적인 서비스를 제공할 것을 약속드립니다.
+        앞으로 이용자 여러분들의 편의를 위하여 더욱 노력하는 케미가 되도록 최선을 다하겠습니다. 감사합니다.\n
+        \n
+        죄송한 마음을 담아 케미 올림.\n
+    </string>
+    <string name="notify_body_7">
+        안녕하세요 케미에서 알려드립니다.\n
+        \n
+        안드로이드 케미 앱의 새로운 버전이 업데이트 되었습니다.\n
+        \n
+        [케미 v2.4.1 업데이트]\n
+        \n
+        - 운전 중 조작이 간편한, 원터치 모드 제공\n
+        \n
+        - 홈&gt;마이페이지&gt;즐겨찾기&gt;상품,콘텐츠 지원\n
+        \n
+        - 실시간 인기검색어 차트 개선\n
+        \n
+        - 기타 오류 수정 및 개선사항 반영\n
+        \n
+        케미 팀은 더욱 편리하고 안정적인 서비스로 고객님의 성원에 보답하겠습니다.\n
+        \n
+        감사합니다.\n
+
+    </string>
+
+
+
+    <string name="slide_title_11">상품명과 브랜드 명으로</string>
+    <string name="slide_title_12">쉽게 성분 검색.</string>
+    <string name="slide_title_21">현명한 소비자를 위한</string>
+    <string name="slide_title_22">생생한 컨텐츠.</string>
+    <string name="slide_title_31">나와 비슷한 체질을</string>
+    <string name="slide_title_32">가진 사람의 선택을 확인.</string>
+    <string name="slide_title_41">일상 속 화학제품</string>
+    <string name="slide_title_42">안전성 알리미. 케미.</string>
+
+    <string name="slide_next">다음</string>
+    <string name="slide_skip">넘기기</string>
+    <string name="slide_start">시작</string>
     <string name="analyze_request_child_spinner_initial_data">상위 카테고리를 먼저 선택하세요.</string>
-    <string name="action_send">send</string>
     <string name="request_send_data">데이터를 전송하고 있습니다.</string>
-    <string name="review_form_rating_value_format">%s점</string>
+    <string name="review_form_rating_value_format">0점</string>
+
+    <string-array name="analyze_request_parent_category_array">
+        <item>상위 카테고리 선택</item>
+        <item>세탁</item>
+        <item>주방</item>
+        <item>욕실</item>
+        <item>방향 / 청정</item>
+        <item>유아 / 아동</item>
+        <item>여성</item>
+        <item>기타</item>
+    </string-array>
+
+    <string-array name="analyze_request_child_category_array1">
+        <item>하위 카테고리 선택</item>
+        <item>세탁세제</item>
+        <item>섬유유연제</item>
+        <item>표백제</item>
+    </string-array>
+
+    <string-array name="analyze_request_child_category_array2">
+        <item>하위 카테고리 선택</item>
+        <item>주방세제</item>
+        <item>주방 세정제</item>
+        <item>식기 세척기용</item>
+    </string-array>
+
+    <string-array name="analyze_request_child_category_array3">
+        <item>하위 카테고리 선택</item>
+        <item>헤어</item>
+        <item>바디 / 세안</item>
+        <item>욕실 세정제</item>
+    </string-array>
+
+    <string-array name="analyze_request_child_category_array4">
+        <item>하위 카테고리 선택</item>
+        <item>섬유 탈취제</item>
+        <item>방향제</item>
+    </string-array>
+
+    <string-array name="analyze_request_child_category_array5">
+        <item>하위 카테고리 선택</item>
+        <item>유아용 기저귀</item>
+        <item>유아용 물티슈</item>
+    </string-array>
+
+    <string-array name="analyze_request_child_category_array6">
+        <item>하위 카테고리 선택</item>
+        <item>생리대</item>
+        <item>여성 청결제</item>
+        <item>성인용 기저귀</item>
+    </string-array>
+
+    <string-array name="analyze_request_child_category_array7">
+        <item>하위 카테고리 선택</item>
+        <item>물티슈</item>
+        <item>렌즈 세척액</item>
+        <item>콘돔</item>
+    </string-array>
+
+    <!-- chemical effect null info string -->
+    <string name="conid1_name">피부 </string>
+    <string name="conid2_name">안구 </string>
+    <string name="conid3_name">호흡기 </string>
+    <string name="conid4_name">구강 </string>
+    <string name="conid5_name">내부장기 </string>
+    <string name="conid6_name">유아, 아동 </string>
+
+    <string-array name="conid_name_array">
+        <item>@string/conid1_name</item>
+        <item>@string/conid2_name</item>
+        <item>@string/conid3_name</item>
+        <item>@string/conid4_name</item>
+        <item>@string/conid5_name</item>
+        <item>@string/conid6_name</item>
+    </string-array>
+
+    <string name="null_effect_desc">관련 정보는 현재 충분하지 않습니다.</string>
     <string name="action_category">category_search</string>
     <string name="product_report_subject">제품 분석 요청</string>
     <string name="select_category_info">카테고리를 선택해주세요</string>
-    <!-- REQUEST -->
-    <!--<string name="request_product_id">%1$s</string>-->
 
+    <!--<string name="conid1_null_effect">피부 관련 정보는 현재 충분하지 않습니다.</string>-->
+    <!--<string name="conid2_null_effect">안구 관련 정보는 현재 충분하지 않습니다.</string>-->
+    <!--<string name="conid3_null_effect">호흡기 관련 정보는 현재 충분하지 않습니다.</string>-->
+    <!--<string name="conid4_null_effect">구강 관련 정보는 현재 충분하지 않습니다.</string>-->
+    <!--<string name="conid5_null_effect">내부장기 관련 정보는 현재 충분하지 않습니다.</string>-->
+    <!--<string name="conid6_null_effect">유아, 아동 관련 정보는 현재 충분하지 않습니다.</string>-->
 
+    <!--<string-array name="constitution_null_effect_array">-->
+    <!--<item>@string/conid1_null_effect</item>-->
+    <!--<item>@string/conid2_null_effect</item>-->
+    <!--<item>@string/conid3_null_effect</item>-->
+    <!--<item>@string/conid4_null_effect</item>-->
+    <!--<item>@string/conid5_null_effect</item>-->
+    <!--<item>@string/conid6_null_effect</item>-->
+    <!--</string-array>-->
+
+    <string-array name="search_popular_word_array">
+        <item>친환경 소다 세제</item>
+        <item>사라야 세제 젤</item>
+        <item>카카오프렌즈 섬유향수 어피치</item>
+        <item>디펜드 스타일언더웨어</item>
+        <item>이마트 알로에 바디워시</item>
+        <item>하기스 팬티형</item>
+        <item>유한락스 주방청소용</item>
+        <item>아토마일드 프리미엄</item>
+    </string-array>
 </resources>

@@ -37,53 +37,53 @@
         android:layout_below="@+id/intro_slider4_header_layout"
         android:layout_centerHorizontal="true" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="212dp"
-        android:orientation="vertical"
-        android:layout_alignParentBottom="true"
-        android:background="@color/colorWhiteBackground"
-        android:paddingTop="18dp"
-        android:paddingBottom="18dp"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp">
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="212dp"-->
+        <!--android:orientation="vertical"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:background="@color/colorWhiteBackground"-->
+        <!--android:paddingTop="18dp"-->
+        <!--android:paddingBottom="18dp"-->
+        <!--android:paddingStart="16dp"-->
+        <!--android:paddingEnd="16dp">-->
 
-        <Button
-            android:id="@+id/intro_slide_look_button"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:gravity="center"
-            android:text="로그인 없이 둘러보기"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@color/colorPrimary"
-            android:background="@drawable/widget_square_border_primary" />
+        <!--<Button-->
+            <!--android:id="@+id/intro_slide_look_button"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="48dp"-->
+            <!--android:gravity="center"-->
+            <!--android:text="로그인 없이 둘러보기"-->
+            <!--android:textSize="16sp"-->
+            <!--android:textStyle="bold"-->
+            <!--android:textColor="@color/colorPrimary"-->
+            <!--android:background="@drawable/widget_square_border_primary" />-->
 
-        <Button
-            android:id="@+id/intro_slide_login_button"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:gravity="center"
-            android:text="로그인"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@color/colorPrimary"
-            android:background="@drawable/widget_square_border_primary" />
+        <!--<Button-->
+            <!--android:id="@+id/intro_slide_login_button"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="48dp"-->
+            <!--android:layout_marginTop="16dp"-->
+            <!--android:layout_marginBottom="16dp"-->
+            <!--android:gravity="center"-->
+            <!--android:text="로그인"-->
+            <!--android:textSize="16sp"-->
+            <!--android:textStyle="bold"-->
+            <!--android:textColor="@color/colorPrimary"-->
+            <!--android:background="@drawable/widget_square_border_primary" />-->
 
-        <Button
-            android:id="@+id/intro_slide_sign_in_button"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:gravity="center"
-            android:text="회원가입"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@color/colorPrimary"
-            android:background="@drawable/widget_square_border_primary" />
+        <!--<Button-->
+            <!--android:id="@+id/intro_slide_sign_in_button"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="48dp"-->
+            <!--android:gravity="center"-->
+            <!--android:text="회원가입"-->
+            <!--android:textSize="16sp"-->
+            <!--android:textStyle="bold"-->
+            <!--android:textColor="@color/colorPrimary"-->
+            <!--android:background="@drawable/widget_square_border_primary" />-->
 
 
-    </LinearLayout>
+    <!--</LinearLayout>-->
 
 </RelativeLayout>

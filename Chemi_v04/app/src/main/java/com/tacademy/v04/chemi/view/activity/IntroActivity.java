@@ -60,7 +60,7 @@ public class IntroActivity extends AppBaseActivity implements View.OnClickListen
 
         mLayouts = new int[]{
                 R.layout.view_intro_slider1, R.layout.view_intro_slider2,
-                R.layout.view_intro_slider3, R.layout.view_intro_slider4};
+                R.layout.view_intro_slider3, /*R.layout.view_intro_slider4*/};
 
         changeStatusBarColor();
 
@@ -114,10 +114,12 @@ public class IntroActivity extends AppBaseActivity implements View.OnClickListen
 //            indicateViewPager(position);
 
             if (position == mLayouts.length - 1) {
-//                mNextButton.setText(getString(R.string.slide_start));
-                mNextButton.setVisibility(View.GONE);
-                mSkipButton.setVisibility(View.GONE);
-                mCircleIndicator.setVisibility(View.GONE);
+                mNextButton.setVisibility(View.VISIBLE);
+                mCircleIndicator.setVisibility(View.VISIBLE);
+                mNextButton.setText(getString(R.string.slide_start));
+//                mNextButton.setVisibility(View.GONE);
+//                mSkipButton.setVisibility(View.GONE);
+//                mCircleIndicator.setVisibility(View.GONE);
 
             } else {
                 mNextButton.setText(getString(R.string.slide_next));

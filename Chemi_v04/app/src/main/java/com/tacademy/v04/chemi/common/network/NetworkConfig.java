@@ -8,7 +8,8 @@ import java.io.File;
 
 public class NetworkConfig {
 
-    public static final String URL_HOST = "http://52.78.226.188:3000";
+//    public static final String URL_HOST = "http://52.78.226.188:3000";
+    public static final String URL_HOST = "http://develop.inframincer.org:3000";
     public static final String IMAGE_URL_HOST = "https://s3.ap-northeast-2.amazonaws.com/chemistaticfiles";
     public static final String RESPONSE_MESSAGE = "message";
     public static final String RESPONSE_SUCCESS = "success";

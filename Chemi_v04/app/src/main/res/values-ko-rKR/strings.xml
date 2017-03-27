@@ -4,6 +4,8 @@
     <string name="action_settings">설정</string>
     <string name="action_search">검색</string>
     <string name="action_archive">보관함</string>
+    <string name="action_home">홈</string>
+    <string name="action_send">리뷰 작성</string>
     <string name="action_share">공유</string>
     <string name="drawer_open">열림</string>
     <string name="drawer_close">닫힘</string>
@@ -47,6 +49,7 @@
     <string name="fragment_title_settings">설정</string>
     <string name="fragment_title_login">로그인</string>
 
+    <string name="search_hint">상품명, 브랜드명으로 검색하세요</string>
     <string name="search_result">검색 결과</string>
     <string name="title_activity_main">메인</string>
     <string name="title_activity_search">제품 검색</string>
@@ -54,7 +57,9 @@
     <string name="title_activity_product">제품 상세</string>
     <string name="title_activity_review">리뷰</string>
 
-    <string name="search_hint">상품명, 브랜드명으로 검색하세요</string>
+    <string name="navigation_drawer_open">네비게이션 메뉴 열기</string>
+    <string name="navigation_drawer_close">네비게이션 메뉴 닫기</string>
+
     <string name="show_all_product_button_text">전체보기</string>
     <string name="list_total">전체 %s개</string>
     <string name="list_total_prefix">전체 </string>
@@ -101,12 +106,16 @@
     <string name="load_please_wait">잠시만 기다려주세요...</string>
     <string name="list_item_product_review_rating_count">(%s명)</string>
     <string name="chemical_dangerous_grade_format">%s개</string>
-    <string name="empty_product_reivews_info">상품의 리뷰가 존재하지 않습니다.</string>
+    <string name="review_form_string_length_form">%s / 500</string>
+    <string name="empty_product_reviews_info">상품의 리뷰가 존재하지 않습니다.</string>
     <string name="chemical_hazard_circle_transition_name">chemical_hazard_circle</string>
     <string name="review_negative_title">아쉬워요</string>
     <string name="review_positive_title">좋아요</string>
     <string name="review_positive_hint">이 제품이 좋은 이유를 다른 사람에게도 알려주세요</string>
     <string name="review_negative_hint">이 제품이 아쉬운 이유를 다른 사람에게도 알려주세요</string>
+    <string name="review_card_user_symptom">%1$s / %2$s년생/ %3$s</string>
+    <string name="product_brand_name_format">[%1$s]</string>
+    <string name="product_rating_value_format">%1$s / 5</string>
 
     <string-array name="product_list_sort_way">
         <item>@string/product_list_sort_review_total</item>
